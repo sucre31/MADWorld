@@ -2,12 +2,16 @@ C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\AbstractScene.cpp;C:\Us
 C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\Define.cpp;C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\x64\Debug\Define.obj
 C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\eScene.cpp;C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\x64\Debug\eScene.obj
 C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\FpsControl.cpp;C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\x64\Debug\FpsControl.obj
+C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\Image.cpp;C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\x64\Debug\Image.obj
 C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\IOnSceneChangedListener.cpp;C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\x64\Debug\IOnSceneChangedListener.obj
 C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\Keyboard.cpp;C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\x64\Debug\Keyboard.obj
 C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\Looper.cpp;C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\x64\Debug\Looper.obj
 C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\main.cpp;C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\x64\Debug\main.obj
+C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\OpeningScene.cpp;C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\x64\Debug\OpeningScene.obj
 C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\Pad.cpp;C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\x64\Debug\Pad.obj
 C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\Parameter.cpp;C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\x64\Debug\Parameter.obj
+C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\SceneLoveSong.cpp;C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\x64\Debug\SceneLoveSong.obj
 C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\Singleton.cpp;C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\x64\Debug\Singleton.obj
+C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\Sound.cpp;C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\x64\Debug\Sound.obj
 C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\SystemMain.cpp;C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\x64\Debug\SystemMain.obj
 C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\TitleScene.cpp;C:\Users\Administrator\Desktop\作業\game\MAD\MADHeaven\x64\Debug\TitleScene.obj

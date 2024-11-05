@@ -31,7 +31,8 @@ bool FpsControl::Update() {
 }
 
 void FpsControl::Draw() {
-	DrawFormatString(280, 10, GetColor(255, 255, 255), "%.1f", rFps / 25);
+	// fps•\Ž¦
+	//DrawFormatString(280, 10, GetColor(255, 255, 255), "%.1f", rFps / 25);
 }
 
 int FpsControl::getFrameRateNumber() {

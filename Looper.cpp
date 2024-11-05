@@ -1,9 +1,11 @@
 #include "Looper.h"
+#include "OpeningScene.h"
 #include "TitleScene.h"
+#include "SceneLoveSong.h"
 //#include "Error.h"
 //#include "Macro.h"
-//#include "Keyboard.h"
-//#include "Pad.h"
+#include "Keyboard.h"
+#include "Pad.h"
 //#include "Image.h"
 
 using namespace std;
@@ -16,7 +18,7 @@ Looper::Looper()
 
     Parameter parameter;
     //_fps = make_shared<FpsControl>();
-    _sceneStack.push(make_shared<TitleScene>(this, parameter)); //タイトル画面シーンを作ってpush
+    _sceneStack.push(make_shared<OpeningScene>(this, parameter)); //タイトル画面シーンを作ってpush
     _fps = new FpsControl();
     //GameManager::getIns()->setFpsIns(_fps);
 }
@@ -28,8 +30,8 @@ bool Looper::loop() const
     //SetDrawScreen(Image::getIns()->getScreenHandle());
     ClearDrawScreen();
 
-    //Keyboard::getIns()->update();   //キーボードの更新
-    //Pad::getIns()->update();        //ジョイパッドの更新
+    Keyboard::getIns()->update();   //キーボードの更新
+    Pad::getIns()->update();        //ジョイパッドの更新
     _sceneStack.top()->update();    //スタックのトップのシーンを更新
     _sceneStack.top()->draw();      //スタックのトップのシーンを描画
     _fps->Update();
@@ -55,15 +57,17 @@ void Looper::onSceneChanged(const eScene scene, const Parameter& parameter, cons
             _sceneStack.pop();
         }
     }
-    //switch (scene) {
-    //case Title:
-    //    _sceneStack.push(make_shared<TitleScene>(this, parameter));
-    //    break;
-    //case Game:
-    //    _sceneStack.push(make_shared<GameScene>(this, parameter));
-    //    break;
+    switch (scene) {
+    case Opening:
+        _sceneStack.push(make_shared<OpeningScene>(this, parameter));
+        break;
+    case Title:
+        _sceneStack.push(make_shared<TitleScene>(this, parameter));
+        break;
+    case LoveSong:
+        _sceneStack.push(make_shared<SceneLoveSong>(this, parameter));
     //default:
     //    ERR("存在しないシーン");
     //    break;
-    //}
+    }
 }

@@ -13,12 +13,6 @@
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ソース ファイル\TitleScene">
-      <UniqueIdentifier>{216f7ade-29ef-499d-b832-7bf38172248c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\TitleScene">
-      <UniqueIdentifier>{db564484-e28f-421a-b29e-2d393ab5c75a}</UniqueIdentifier>
-    </Filter>
     <Filter Include="ソース ファイル\System">
       <UniqueIdentifier>{0dc7ec3e-aa7d-4bec-8b19-d03826372c08}</UniqueIdentifier>
     </Filter>
@@ -31,16 +25,31 @@
     <Filter Include="ヘッダー ファイル\System\Control">
       <UniqueIdentifier>{f91313a6-0b05-4475-bd38-25da79f122f9}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Scene">
+      <UniqueIdentifier>{d11d1baf-efa1-4915-8646-8f0b1e5146ab}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\TitleScene">
+      <UniqueIdentifier>{216f7ade-29ef-499d-b832-7bf38172248c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene">
+      <UniqueIdentifier>{b343f9f4-1a37-41cc-bbe5-8550ade0e48e}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\TitleScene">
+      <UniqueIdentifier>{db564484-e28f-421a-b29e-2d393ab5c75a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Resources">
+      <UniqueIdentifier>{68deff42-5547-4544-8074-45f93f3b22c7}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Resources">
+      <UniqueIdentifier>{93f9caa9-cdbc-46ef-ae97-819625b78b73}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="eScene.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="TitleScene.cpp">
-      <Filter>ソース ファイル\TitleScene</Filter>
+      <Filter>ソース ファイル\Scene\TitleScene</Filter>
     </ClCompile>
     <ClCompile Include="SystemMain.cpp">
       <Filter>ソース ファイル\System</Filter>
@@ -72,13 +81,25 @@
     <ClCompile Include="Keyboard.cpp">
       <Filter>ソース ファイル\System\Control</Filter>
     </ClCompile>
+    <ClCompile Include="OpeningScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Image.cpp">
+      <Filter>ソース ファイル\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="eScene.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneLoveSong.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="Sound.cpp">
+      <Filter>ソース ファイル\Resources</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="eScene.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="TitleScene.h">
-      <Filter>ヘッダー ファイル\TitleScene</Filter>
+      <Filter>ヘッダー ファイル\Scene\TitleScene</Filter>
     </ClInclude>
     <ClInclude Include="AbstractScene.h">
       <Filter>ヘッダー ファイル\System</Filter>
@@ -109,6 +130,21 @@
     </ClInclude>
     <ClInclude Include="Pad.h">
       <Filter>ヘッダー ファイル\System\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="OpeningScene.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Image.h">
+      <Filter>ヘッダー ファイル\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="eScene.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneLoveSong.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

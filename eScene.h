@@ -1,6 +1,7 @@
 #pragma once
 
 enum eScene {
+	Opening,
 	Title,
-	Game,
+	LoveSong,
 };
