@@ -11,6 +11,7 @@ public:
 	void load() {};
 	void release();
 	const int* getLoveSongSamples() { return loveSongSamples; }
+	const int getLoveSong() { return loveSongHandle; }
 	void loadLoveSongSamples();
 
 private:
@@ -18,5 +19,6 @@ private:
 	int myLoadSoundMem(const char*);
 	std::vector<int> sounds;
 	int loveSongSamples[8]; // ハンドル保持(動的に確保した方がいい
+	int loveSongHandle;
 };
 

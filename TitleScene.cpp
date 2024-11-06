@@ -6,7 +6,7 @@
 
 TitleScene::TitleScene(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter)
 {
-    ChangeFont("Mother3Message");
+    ChangeFont("‚µ‚Ë‚«‚á‚Õ‚µ‚å‚ñ");
     SetFontSpace(1);
     SetFontSize(36);
     SetFontThickness(1);

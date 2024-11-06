@@ -8,6 +8,7 @@ Sound::Sound() {
 @brief 特定ファイルのロード
 */
 void Sound::loadLoveSongSamples() {
+    loveSongHandle = myLoadSoundMem("Assets/Sounds/LoveSong/LoveSongDQ2.wav");
     loveSongSamples[0] = myLoadSoundMem("Assets/Sounds/LoveSong/LoveSample0.wav");
     loveSongSamples[1] = myLoadSoundMem("Assets/Sounds/LoveSong/LoveSample1.wav");
     loveSongSamples[2] = myLoadSoundMem("Assets/Sounds/LoveSong/LoveSample2.wav");

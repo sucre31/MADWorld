@@ -7,7 +7,20 @@ Image::Image()
     screenHandle = MakeScreen(Define::WIN_W, Define::WIN_H, FALSE);
 }
 
-
+/*
+@brief ふっかつのじゅもん用リソース
+*/
+void Image::loadLoveSongResources() {
+    movieGraphHandle[0] = myLoadGraph("Assets/sprites/movie/LoveMovieSmall0.avi");
+    movieGraphHandle[1] = myLoadGraph("Assets/sprites/movie/LoveMovieSmall1.avi");
+    movieGraphHandle[2] = myLoadGraph("Assets/sprites/movie/LoveMovieSmall2.avi");
+    movieGraphHandle[3] = myLoadGraph("Assets/sprites/movie/LoveMovieSmall3.avi");
+    movieGraphHandle[4] = myLoadGraph("Assets/sprites/movie/LoveMovieSmall4.avi");
+    movieGraphHandle[5] = myLoadGraph("Assets/sprites/movie/LoveMovieSmall5.avi");
+    movieGraphHandle[6] = myLoadGraph("Assets/sprites/movie/LoveMovieSmall6.avi");
+    movieGraphHandle[7] = myLoadGraph("Assets/sprites/movie/LoveMovieSmall7.avi");
+    backGroundHandle = myLoadGraph("Assets/sprites/images/LoveSongBack.png");
+}
 
 /*!
 @brief 今までロードした画像を解放する

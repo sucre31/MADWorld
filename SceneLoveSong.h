@@ -10,5 +10,6 @@ public:
 private:
     int currentSoundIndex;
     void playSampleSound(int);
+    bool isMusicPlay;
 };
 
