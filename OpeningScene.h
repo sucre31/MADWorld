@@ -8,5 +8,7 @@ public:
     virtual ~OpeningScene() = default;
     void update() override;
     void draw() const override;
+private:
+    bool isStart;
 };
 

@@ -3,6 +3,7 @@
 #include "Define.h"
 #include "Keyboard.h"
 #include "Pad.h"
+#include "Sound.h"
 
 TitleScene::TitleScene(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter)
 {
@@ -30,6 +31,8 @@ void TitleScene::update()
             _implSceneChanged->onSceneChanged(eScene::LoveSong, parameter, stackClear);
         }
         else if (selectNum == 1) {
+            const bool stackClear = false;
+            _implSceneChanged->onSceneChanged(eScene::Alice, parameter, stackClear);
         }
         else if (selectNum == 2) {
         }

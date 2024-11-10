@@ -11,14 +11,18 @@ public:
 	void load() {};
 	void release();
 	const int* getLoveSongSamples() { return loveSongSamples; }
-	const int getLoveSong() { return loveSongHandle; }
+	const int* getLoveSong() { return loveSongHandle; }
 	void loadLoveSongSamples();
-
+	int loadSamples(const char*);
+	const int getTitleHandle() { return titleHandle; }
+	const int getaliceDrumHandle() { return aliceDrumHandle; }
 private:
 	int myLoadSoundMem(char*);
 	int myLoadSoundMem(const char*);
 	std::vector<int> sounds;
 	int loveSongSamples[8]; // ハンドル保持(動的に確保した方がいい
-	int loveSongHandle;
+	int loveSongHandle[2];
+	int titleHandle;
+	int aliceDrumHandle;
 };
 

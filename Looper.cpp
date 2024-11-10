@@ -2,6 +2,7 @@
 #include "OpeningScene.h"
 #include "TitleScene.h"
 #include "SceneLoveSong.h"
+#include "SceneAlice.h"
 //#include "Error.h"
 //#include "Macro.h"
 #include "Keyboard.h"
@@ -66,6 +67,10 @@ void Looper::onSceneChanged(const eScene scene, const Parameter& parameter, cons
         break;
     case LoveSong:
         _sceneStack.push(make_shared<SceneLoveSong>(this, parameter));
+        break;
+    case Alice:
+        _sceneStack.push(make_shared<SceneAlice>(this, parameter));
+        break;
     //default:
     //    ERR("ë∂ç›ÇµÇ»Ç¢ÉVÅ[Éì");
     //    break;

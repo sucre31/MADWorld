@@ -2,13 +2,21 @@
 #include "Sound.h"
 
 Sound::Sound() {
+    SetCreateSoundDataType(DX_SOUNDDATATYPE_FILE);
+    titleHandle = myLoadSoundMem("Assets/Sounds/title/title.wav");
+    aliceDrumHandle = myLoadSoundMem("Assets/Sounds/Alice/drumNBass.wav");
+    SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMNOPRESS);
 }
 
 /*
 @brief 特定ファイルのロード
 */
 void Sound::loadLoveSongSamples() {
-    loveSongHandle = myLoadSoundMem("Assets/Sounds/LoveSong/LoveSongDQ2.wav");
+    SetCreateSoundDataType(DX_SOUNDDATATYPE_FILE);
+    loveSongHandle[0] = myLoadSoundMem("Assets/Sounds/LoveSong/LoveSongDQ2.wav");
+    loveSongHandle[1] = myLoadSoundMem("Assets/Sounds/LoveSong/drumLoop.wav");
+    aliceDrumHandle = myLoadSoundMem("Assets/Sounds/Alice/drumNBass.wav");
+    SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMNOPRESS);
     loveSongSamples[0] = myLoadSoundMem("Assets/Sounds/LoveSong/LoveSample0.wav");
     loveSongSamples[1] = myLoadSoundMem("Assets/Sounds/LoveSong/LoveSample1.wav");
     loveSongSamples[2] = myLoadSoundMem("Assets/Sounds/LoveSong/LoveSample2.wav");
@@ -17,7 +25,24 @@ void Sound::loadLoveSongSamples() {
     loveSongSamples[5] = myLoadSoundMem("Assets/Sounds/LoveSong/LoveSample5.wav");
     loveSongSamples[6] = myLoadSoundMem("Assets/Sounds/LoveSong/LoveSample6.wav");
     loveSongSamples[7] = myLoadSoundMem("Assets/Sounds/LoveSong/LoveSample7.wav");
+    //loveSongSamples[0] = myLoadSoundMem("Assets/Sounds/LoveSong/han/han0.wav");
+    //loveSongSamples[1] = myLoadSoundMem("Assets/Sounds/LoveSong/han/han1.wav");
+    //loveSongSamples[2] = myLoadSoundMem("Assets/Sounds/LoveSong/han/han2.wav");
+    //loveSongSamples[3] = myLoadSoundMem("Assets/Sounds/LoveSong/han/han3.wav");
+    //loveSongSamples[4] = myLoadSoundMem("Assets/Sounds/LoveSong/han/han4.wav");
+    //loveSongSamples[5] = myLoadSoundMem("Assets/Sounds/LoveSong/han/han5.wav");
+    //loveSongSamples[6] = myLoadSoundMem("Assets/Sounds/LoveSong/han/han6.wav");
+    //loveSongSamples[7] = myLoadSoundMem("Assets/Sounds/LoveSong/han/han7.wav");
 }
+
+/*
+@brief 文字列を受け取りロード
+*/
+int Sound::loadSamples(const char* fileName) {
+    int ret = myLoadSoundMem(fileName);
+    return ret;
+}
+
 
 /*!
 @brief 今までロードした音声を解放する

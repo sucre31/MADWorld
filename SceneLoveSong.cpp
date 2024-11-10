@@ -17,6 +17,9 @@ SceneLoveSong::SceneLoveSong(IOnSceneChangedListener* impl, const Parameter& par
 
 	isMusicPlay = false;
 	currentSoundIndex = 0;
+	currentMovieIndex = 0;
+	movieTurnFlag = false;
+	musicIndex = 0;
 	strIndex = 1;
 	stringRevive = "＊";
 	Sound::getIns()->loadLoveSongSamples();
@@ -28,12 +31,38 @@ void SceneLoveSong::update()
 	if (Pad::getIns()->get(ePad::L) == 1) {
 		// 音楽再生
 		if (!isMusicPlay) {
-			PlaySoundMem(Sound::getIns()->getLoveSong(), DX_PLAYTYPE_LOOP, TRUE);
+			PlaySoundMem(Sound::getIns()->getLoveSong()[0], DX_PLAYTYPE_LOOP, TRUE);
+			musicIndex = 0;
 			isMusicPlay = true;
+			resetString();
+		}
+		else if (musicIndex == 0){
+			StopSoundMem(Sound::getIns()->getLoveSong()[musicIndex]);
+			isMusicPlay = false;
 		}
 		else {
-			StopSoundMem(Sound::getIns()->getLoveSong());
+			StopSoundMem(Sound::getIns()->getLoveSong()[musicIndex]);
+			PlaySoundMem(Sound::getIns()->getLoveSong()[0], DX_PLAYTYPE_LOOP, TRUE);
+			musicIndex = 0;
+			isMusicPlay = true;
+		}
+	}
+	if (Pad::getIns()->get(ePad::R) == 1) {
+		// 音楽再生
+		if (!isMusicPlay) {
+			PlaySoundMem(Sound::getIns()->getLoveSong()[1], DX_PLAYTYPE_LOOP, TRUE);
+			musicIndex = 1;
+			isMusicPlay = true;
+		}
+		else if (musicIndex == 1){
+			StopSoundMem(Sound::getIns()->getLoveSong()[musicIndex]);
 			isMusicPlay = false;
+		}
+		else {
+			StopSoundMem(Sound::getIns()->getLoveSong()[musicIndex]);
+			PlaySoundMem(Sound::getIns()->getLoveSong()[1], DX_PLAYTYPE_LOOP, TRUE);
+			musicIndex = 1;
+			isMusicPlay = true;
 		}
 	}
 	if (Pad::getIns()->get(ePad::down) == 1) {
@@ -43,24 +72,24 @@ void SceneLoveSong::update()
 	if (Pad::getIns()->get(ePad::left) == 1) {
 		playSampleSound(1);
 		addReviveChar("わ");
-		addReviveChar("い");
+		//addReviveChar("い");
 	}
 	if (Pad::getIns()->get(ePad::up) == 1) {
 		playSampleSound(2);
 		addReviveChar("ち");
-		addReviveChar("ゅ");
+		addReviveChar("ゆ");
 	}
 	if (Pad::getIns()->get(ePad::right) == 1) {
 		playSampleSound(3);
 		addReviveChar("き");
-		addReviveChar("ゅ");
-		addReviveChar("ん");
+		addReviveChar("ゆ");
+		//addReviveChar("ん");
 	}
 	if (Pad::getIns()->get(ePad::Y) == 1) {
 		playSampleSound(4);
 		addReviveChar("は");
-		addReviveChar("あ");
-		addReviveChar("ん");
+		//addReviveChar("あ");
+		///addReviveChar("ん");
 	}
 	if (Pad::getIns()->get(ePad::B) == 1) {
 		playSampleSound(5);
@@ -73,13 +102,13 @@ void SceneLoveSong::update()
 	if (Pad::getIns()->get(ePad::X) == 1) {
 		playSampleSound(7);
 		addReviveChar("し");
-		addReviveChar("ゃ");
+		addReviveChar("や");
 	}
 	if (Pad::getIns()->get(ePad::start) == 1) {
 		// メニューに戻る
 		Parameter parameter;
 		const bool stackClear = true;
-		StopSoundMem(Sound::getIns()->getLoveSong());
+		StopSoundMem(Sound::getIns()->getLoveSong()[musicIndex]);
 		// ここに直接書くんじゃなくて関数用意すべきかな
 		Sound::getIns()->release();
 		Image::getIns()->release();
@@ -89,10 +118,20 @@ void SceneLoveSong::update()
 
 void SceneLoveSong::playSampleSound(int num) {
 	StopSoundMem(Sound::getIns()->getLoveSongSamples()[currentSoundIndex]);
-	PlaySoundMem(Sound::getIns()->getLoveSongSamples()[num], DX_PLAYTYPE_BACK);
 	currentSoundIndex = num;
-	SeekMovieToGraph(Image::getIns()->getLoveSongMovie()[num], 0);
-	PlayMovieToGraph(Image::getIns()->getLoveSongMovie()[num]);
+	PlaySoundMem(Sound::getIns()->getLoveSongSamples()[currentSoundIndex], DX_PLAYTYPE_BACK);
+	// 対応する映像の再生
+	currentMovieIndex = num;
+	//currentMovieIndex = 4; // テスト用
+	movieTurnFlag = !movieTurnFlag;
+	if (isMusicPlay) {
+		SeekMovieToGraph(Image::getIns()->getLoveSongMovie()[currentMovieIndex], 0);
+		PlayMovieToGraph(Image::getIns()->getLoveSongMovie()[currentMovieIndex]);
+	}
+	else {
+		SeekMovieToGraph(Image::getIns()->getLoveSongLMovie()[currentMovieIndex], 0);
+		PlayMovieToGraph(Image::getIns()->getLoveSongLMovie()[currentMovieIndex]);
+	}
 }
 
 /*
@@ -122,37 +161,49 @@ void SceneLoveSong::addReviveChar(std::string mes) {
 	else {
 		stringRevive.erase(0);
 		strIndex = 1;
-		stringRevive = stringRevive.substr(0, (strIndex - 1) * 2) + mes + "＊";
+		stringRevive = stringRevive.substr(0, (strIndex - 1) * 2) + mes +"＊";
 		strIndex++;
 	}
 }
 
+void SceneLoveSong::resetString() {
+	stringRevive.erase(0);
+	strIndex = 1;
+	stringRevive = stringRevive.substr(0, (strIndex - 1) * 2) + "＊";
+}
+
+
 void SceneLoveSong::draw() const
 {
-	DrawGraph(0, 0, Image::getIns()->getLoveSongBack(), FALSE);
-	DrawGraph(400, 400, Image::getIns()->getLoveSongMovie()[currentSoundIndex], FALSE);
-	DrawString(400, 30, "ふっかつのじゅもんを いれてください", GetColor(255, 255, 255));
+	if (isMusicPlay) {
+		DrawGraph(0, 0, Image::getIns()->getLoveSongBack(), FALSE);
+		DrawRotaGraph(400 + 240, 400 + 135, 1.0, 0, Image::getIns()->getLoveSongMovie()[currentMovieIndex], FALSE, movieTurnFlag);
+		DrawString(400, 30, "ふっかつのじゅもんを いれてください", GetColor(255, 255, 255));
 
-	// じゅもん描画
-	int strLength = strIndex*2;
-	for (int i = 0; i < 5; i++) {
-		if (i == 4) {
-			if (strLength > i * 28) {
-				DrawString(454, 81 + 51 * i, stringRevive.substr(i * 28, 36).c_str(), GetColor(255, 255, 255));
-				if (strLength < (i + 1) * 28) {
-					// 文字が入っている最後の行
-					break;
+		// じゅもん描画
+		int strLength = strIndex * 2;
+		for (int i = 0; i < 5; i++) {
+			if (i == 4) {
+				if (strLength > i * 28) {
+					DrawString(454, 81 + 51 * i, stringRevive.substr(i * 28, 36).c_str(), GetColor(255, 255, 255));
+					if (strLength < (i + 1) * 28) {
+						// 文字が入っている最後の行
+						break;
+					}
+				}
+			}
+			else {
+				if (strLength > i * 28) {
+					DrawString(454, 81 + 51 * i, stringRevive.substr(i * 28, 28).c_str(), GetColor(255, 255, 255));
+					if (strLength < (i + 1) * 28) {
+						// 文字が入っている最後の行
+						break;
+					}
 				}
 			}
 		}
-		else {
-			if (strLength > i * 28) {
-				DrawString(454, 81 + 51 * i, stringRevive.substr(i * 28, 28).c_str(), GetColor(255, 255, 255));
-				if (strLength < (i + 1) * 28) {
-					// 文字が入っている最後の行
-					break;
-				}
-			}
-		}
+	}
+	else {
+		DrawRotaGraph(640, 360, 1.0, 0, Image::getIns()->getLoveSongLMovie()[currentMovieIndex], FALSE, movieTurnFlag);
 	}
 }

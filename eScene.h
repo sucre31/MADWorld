@@ -4,4 +4,5 @@ enum eScene {
 	Opening,
 	Title,
 	LoveSong,
+	Alice
 };
