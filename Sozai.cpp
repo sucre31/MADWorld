@@ -7,23 +7,21 @@
 Sozai::Sozai() {
 	x = 0;
 	y = 0;
-	enableTurn = false;
+	exRate = 1.0;
+	enableTurn = true;
 	turnFlag = false;
 }
 
 bool Sozai::update() {
-	if (Pad::getIns()->get(ePad(triggerButton)) == 1) {
-		playSample();
-	}
 	return true;
 }
 
 void Sozai::draw() const {
-	DrawRotaGraph(x, y, 1.0, 0, myGrapghHandle, FALSE, enableTurn && turnFlag);
+	DrawRotaGraph(x, y, exRate, 0, myGrapghHandle, FALSE, (enableTurn && turnFlag));
 }
 
 void Sozai::playSample() {
-	turnFlag = !turnFlag;	// îΩì]
+	turnFlag = (!turnFlag);	// îΩì]
 
 	// âπê∫èàóù
 	StopSoundMem(mySoundHandle);

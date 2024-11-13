@@ -1,13 +1,14 @@
 #include <DxLib.h>
-#include "SceneAlice.h"
+#include "SceneLightPlane.h"
 #include "Sound.h"
 #include "Image.h"
 #include "Define.h"
 #include "Keyboard.h"
 #include "Pad.h"
+#include "MIDI.h"
 
 
-SceneAlice::SceneAlice(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter)
+SceneLightPlane::SceneLightPlane(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter)
 {
 	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample0.avi", 640, 360);
 	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample1.avi", 640, 360);
@@ -35,31 +36,14 @@ SceneAlice::SceneAlice(IOnSceneChangedListener* impl, const Parameter& parameter
 	sozaiManager.setSozaiKey(7, ePad::right);
 	sozaiManager.setSozaiKey(8, ePad::B);
 	sozaiManager.setSozaiKey(9, ePad::Y);
-	isMusicPlay = false;
-	for (int i = 0; i < 10; i++) {
-		sozaiManager.setSozaiEx(i, 0.25);
-		sozaiManager.setSozaiPos(i, 160 + (i % 4) * 320, 90 + (i / 4) * 180);
-	}
-	aliceDrumHandle = Sound::getIns()->loadSamples("Assets/Sounds/Alice/drumNBass.wav");
 }
 
-void SceneAlice::update() {
+void SceneLightPlane::update() {
 	sozaiManager.update();
-	if (Pad::getIns()->get(ePad::change) == 1) {
-		if (isMusicPlay) {
-			isMusicPlay = false;
-			StopSoundMem(aliceDrumHandle);
-		}
-		else {
-			isMusicPlay = true;
-			PlaySoundMem(aliceDrumHandle, DX_PLAYTYPE_LOOP, TRUE);
-		}
-	}
 	if (Pad::getIns()->get(ePad::start) == 1) {
 		// ƒƒjƒ…[‚É–ß‚é
 		Parameter parameter;
 		const bool stackClear = true;
-		StopSoundMem(aliceDrumHandle);
 		// ‚±‚±‚É’¼Ú‘‚­‚ñ‚¶‚á‚È‚­‚ÄŠÖ”—pˆÓ‚·‚×‚«‚©‚È
 		Sound::getIns()->release();
 		Image::getIns()->release();
@@ -67,6 +51,7 @@ void SceneAlice::update() {
 	}
 }
 
-void SceneAlice::draw() const {
+void SceneLightPlane::draw() const {
 	sozaiManager.draw();
+	MIDI::getIns()->draw();
 }

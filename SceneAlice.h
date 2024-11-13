@@ -11,5 +11,7 @@ public:
 private:
     // シーンはインスタンスを管理するだけ
     SozaiManager sozaiManager;
+    int aliceDrumHandle; // クラスかする
+    bool isMusicPlay;
 };
 

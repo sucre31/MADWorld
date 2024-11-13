@@ -11,6 +11,8 @@ public:
 	void makeSozai(const char * soundFileName, const char * imageFileName);
 	void makeSozai(const char* soundFileName, const char* imageFileName, int x, int y);
 	void setSozaiKey(int sozaiNum, int padNum);
+	void setSozaiEx(int sozaiNum, double val);
+	void setSozaiPos(int sozaiNum, int valX, int valY);
 	void changeTopLayer(int sozaiId);
 private:
 	static const int limitOfSozai = 16;

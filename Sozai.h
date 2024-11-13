@@ -12,6 +12,7 @@ public:
 	void draw() const override;
 	void setPosX(int xVal) { x = xVal; }
 	void setPosY(int yVal) { y = yVal; }
+	void setExRate(double val) { exRate = val; }
 	void setSampleMovie(const char* fileName);
 	void setSampleSound(const char * fileName);
 	void playSample();
@@ -23,6 +24,7 @@ private:
 	int y;
 	int myGrapghHandle;
 	int mySoundHandle;
+	double exRate;
 	bool enableTurn;
 	bool turnFlag;
 	int triggerButton;

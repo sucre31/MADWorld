@@ -15,7 +15,6 @@ public:
 	void loadLoveSongSamples();
 	int loadSamples(const char*);
 	const int getTitleHandle() { return titleHandle; }
-	const int getaliceDrumHandle() { return aliceDrumHandle; }
 private:
 	int myLoadSoundMem(char*);
 	int myLoadSoundMem(const char*);
@@ -23,6 +22,5 @@ private:
 	int loveSongSamples[8]; // ハンドル保持(動的に確保した方がいい
 	int loveSongHandle[2];
 	int titleHandle;
-	int aliceDrumHandle;
 };
 

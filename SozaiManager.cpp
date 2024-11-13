@@ -49,6 +49,26 @@ void SozaiManager::setSozaiKey(int sozaiNum, int padNum) {
 	}
 }
 
+/*
+@brief ‘fŞ”Ô†‚ğó‚¯æ‚è”{—¦İ’è
+*/
+void SozaiManager::setSozaiEx(int sozaiNum, double val) {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->setExRate(val);
+	}
+}
+
+/*
+@brief ‘fŞ”Ô†‚ğó‚¯æ‚è”{—¦İ’è
+*/
+void SozaiManager::setSozaiPos(int sozaiNum, int valX, int valY) {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->setPosX(valX);
+		sozai[sozaiNum]->setPosY(valY);
+	}
+}
+
+
 
 void SozaiManager::changeTopLayer(int sozaiId) {
 	// è”²‚« ‚¿‚á‚ñ‚Æƒ\[ƒg‚³‚ê‚é‚æ‚¤‚É‚È‚¨‚·

@@ -4,7 +4,6 @@
 Sound::Sound() {
     SetCreateSoundDataType(DX_SOUNDDATATYPE_FILE);
     titleHandle = myLoadSoundMem("Assets/Sounds/title/title.wav");
-    aliceDrumHandle = myLoadSoundMem("Assets/Sounds/Alice/drumNBass.wav");
     SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMNOPRESS);
 }
 
@@ -12,10 +11,9 @@ Sound::Sound() {
 @brief 特定ファイルのロード
 */
 void Sound::loadLoveSongSamples() {
-    SetCreateSoundDataType(DX_SOUNDDATATYPE_FILE);
+    //SetCreateSoundDataType(DX_SOUNDDATATYPE_FILE);
     loveSongHandle[0] = myLoadSoundMem("Assets/Sounds/LoveSong/LoveSongDQ2.wav");
     loveSongHandle[1] = myLoadSoundMem("Assets/Sounds/LoveSong/drumLoop.wav");
-    aliceDrumHandle = myLoadSoundMem("Assets/Sounds/Alice/drumNBass.wav");
     SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMNOPRESS);
     loveSongSamples[0] = myLoadSoundMem("Assets/Sounds/LoveSong/LoveSample0.wav");
     loveSongSamples[1] = myLoadSoundMem("Assets/Sounds/LoveSong/LoveSample1.wav");

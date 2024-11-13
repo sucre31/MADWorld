@@ -35,6 +35,8 @@ void TitleScene::update()
             _implSceneChanged->onSceneChanged(eScene::Alice, parameter, stackClear);
         }
         else if (selectNum == 2) {
+            const bool stackClear = false;
+            _implSceneChanged->onSceneChanged(eScene::LightPlane, parameter, stackClear);
         }
         else {
             //quit
