@@ -25,16 +25,16 @@ SceneAlice::SceneAlice(IOnSceneChangedListener* impl, const Parameter& parameter
 	//sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample13.avi", 0, 0);
 	//sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample14.avi", 0, 0);
 	//sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample15.avi", 0, 0);
-	sozaiManager.setSozaiKey(0, ePad::L);
-	sozaiManager.setSozaiKey(1, ePad::down);
-	sozaiManager.setSozaiKey(2, ePad::R);
-	sozaiManager.setSozaiKey(3, ePad::left);
-	sozaiManager.setSozaiKey(4, ePad::A);
-	sozaiManager.setSozaiKey(5, ePad::up);
-	sozaiManager.setSozaiKey(6, ePad::X);
-	sozaiManager.setSozaiKey(7, ePad::right);
-	sozaiManager.setSozaiKey(8, ePad::B);
-	sozaiManager.setSozaiKey(9, ePad::Y);
+	sozaiManager.setSozaiKey(0, ePad::L, 0);
+	sozaiManager.setSozaiKey(1, ePad::down, 0);
+	sozaiManager.setSozaiKey(2, ePad::R, 0);
+	sozaiManager.setSozaiKey(3, ePad::left, 0);
+	sozaiManager.setSozaiKey(4, ePad::A, 0);
+	sozaiManager.setSozaiKey(5, ePad::up, 0);
+	sozaiManager.setSozaiKey(6, ePad::X, 0);
+	sozaiManager.setSozaiKey(7, ePad::right, 0);
+	sozaiManager.setSozaiKey(8, ePad::B, 0);
+	sozaiManager.setSozaiKey(9, ePad::Y, 0);
 	isMusicPlay = false;
 	for (int i = 0; i < 10; i++) {
 		sozaiManager.setSozaiEx(i, 0.25);

@@ -61,19 +61,17 @@ void MIDI::update() {
 		unsigned char status = (dwResPara1 & 0x000000ff);
 		unsigned char velocity = (dwResPara1 & 0x00ff0000) >> 16;
 		unsigned char note = (dwResPara1 & 0x0000ff00) >> 8;
-		for (int i = eMidi::A_0; i <= eMidi::C_8; i++) {
-			if (_midi[i] > 0) {
-				// 押され続けてるなら増加
-				if (_midi[i] < 255) {
-					_midi[i]++;
-				}
-			}
-			if (status == 0x90 && note == i && velocity > 0) {
+		// eMidi::A_0 から eMidi::C_8 の範囲内かチェックしてから処理
+		if (note >= eMidi::A_0 && note <= eMidi::C_8) {
+			int i = note;  // 配列のインデックスと一致するように note を直接使用
+
+			if (status == 0x90 && velocity > 0) {
+				// ノートオン (キーが押された) として 1 にセット
 				_midi[i] = 1;
 				printfDx("%d が押されました\n", i);
 			}
-			else if (status == 0x80 && note == i || (status == 0x90 && note == i && velocity == 0)) {
-				// 離された判定
+			else if (status == 0x80 || (status == 0x90 && velocity == 0)) {
+				// ノートオフまたはノートオン（ベロシティ0）で離されたと見なす
 				_midi[i] = 0;
 			}
 		}

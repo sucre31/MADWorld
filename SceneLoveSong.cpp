@@ -4,6 +4,7 @@
 #include "Define.h"
 #include "Keyboard.h"
 #include "Pad.h"
+#include "MIDI.h"
 #include "SceneLoveSong.h"
 
 
@@ -24,6 +25,7 @@ SceneLoveSong::SceneLoveSong(IOnSceneChangedListener* impl, const Parameter& par
 	stringRevive = "–";
 	Sound::getIns()->loadLoveSongSamples();
 	Image::getIns()->loadLoveSongResources();
+	MIDI::getIns()->openMidi(0, 0);
 }
 
 void SceneLoveSong::update()
@@ -65,46 +67,48 @@ void SceneLoveSong::update()
 			isMusicPlay = true;
 		}
 	}
-	if (Pad::getIns()->get(ePad::down) == 1) {
+	if (MIDI::getIns()->get(eMidi::D_4) == 1) {
 		playSampleSound(0);
 		addReviveChar("‚Ï");
 	}
-	if (Pad::getIns()->get(ePad::left) == 1) {
+	if (MIDI::getIns()->get(eMidi::E_4) == 1) {
 		playSampleSound(1);
 		addReviveChar("‚í");
 		//addReviveChar("‚¢");
 	}
-	if (Pad::getIns()->get(ePad::up) == 1) {
+	if (MIDI::getIns()->get(eMidi::F_S4) == 1) {
 		playSampleSound(2);
 		addReviveChar("‚¿");
 		addReviveChar("‚ä");
 	}
-	if (Pad::getIns()->get(ePad::right) == 1) {
+	if (MIDI::getIns()->get(eMidi::G_4) == 1) {
 		playSampleSound(3);
 		addReviveChar("‚«");
 		addReviveChar("‚ä");
 		//addReviveChar("‚ñ");
 	}
-	if (Pad::getIns()->get(ePad::Y) == 1) {
+	if (MIDI::getIns()->get(eMidi::A_4) == 1) {
 		playSampleSound(4);
 		addReviveChar("‚Í");
 		//addReviveChar("‚ ");
 		///addReviveChar("‚ñ");
 	}
-	if (Pad::getIns()->get(ePad::B) == 1) {
+	if (MIDI::getIns()->get(eMidi::A_S4) == 1) {
 		playSampleSound(5);
 		addReviveChar("‚¨");
 	}
-	if (Pad::getIns()->get(ePad::A) == 1) {
+	if (MIDI::getIns()->get(eMidi::B_4) == 1) {
 		playSampleSound(6);
 		addReviveChar("‚ª");
 	}
-	if (Pad::getIns()->get(ePad::X) == 1) {
+	if (MIDI::getIns()->get(eMidi::C_5) == 1) {
 		playSampleSound(7);
 		addReviveChar("‚µ");
 		addReviveChar("‚â");
 	}
 	if (Pad::getIns()->get(ePad::start) == 1) {
+		MIDI::getIns()->closeMidi(0);
+		clsDx();
 		// ƒƒjƒ…[‚É–ß‚é
 		Parameter parameter;
 		const bool stackClear = true;

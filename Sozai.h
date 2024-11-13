@@ -15,25 +15,34 @@ public:
 	void setExRate(double val) { exRate = val; }
 	void setSampleMovie(const char* fileName);
 	void setSampleSound(const char * fileName);
-	void playSample();
-	void setTriggerButton(int padEnum);
-	void setTriggerMidi(int midiEnum);
-	int getTriggerButton() { return (int)triggerButton; };
-	int getTriggerMidi() { return (int)triggerMidi; };
-	bool isVaildButtonInput() { return isValidButton; }
-	bool isVaildMidiInput() { return isValidMidi; }
+	void playSample(int);
+	void setTriggerPad(int padEnum, int indexNum);
+	void setTriggerMidi(int midiEnum, int indexNum);
+	int getTriggerPad(int num) { return triggerPad[num]; };
+	int getTriggerMidi(int num) { return triggerMidi[num]; };
+	int getValidPadNum() { return validPadNum; }
+	int getValidMidiNum() { return validMidiNum; }
+	int getPadSoundIndex(int num) { return padSoundIndex[num]; }
+	int getMidiSoundIndex(int num) { return midiSoundIndex[num]; }
 private:
+	static const int maxSozai = 88;
 	int myId;	// managerクラスの管理番号
 	int x;
 	int y;
 	int myGrapghHandle;
-	int mySoundHandle;
+	int mySoundHandle[maxSozai];
+	int validSoundNum;
+	int curSoundIndex;						// 再生中の音ハンドル
+	static const int maxPadSozai = 16;
+	static const int maxMidiSozai = 88;
 	double exRate;
 	bool enableTurn;
 	bool turnFlag;
-	int triggerButton;
-	bool isValidButton;
-	int triggerMidi;
-	bool isValidMidi;
+	int triggerPad[maxPadSozai];// 動的に作った方が良いなぁ
+	int padSoundIndex[maxPadSozai];
+	int validPadNum;
+	int triggerMidi[maxMidiSozai];
+	int midiSoundIndex[maxMidiSozai];
+	int validMidiNum;
 };
 

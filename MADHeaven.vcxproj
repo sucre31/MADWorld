@@ -140,6 +140,7 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AbstractScene.cpp" />
+    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Define.cpp" />
     <ClCompile Include="eScene.cpp" />
     <ClCompile Include="FpsControl.cpp" />
@@ -165,6 +166,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractScene.h" />
+    <ClInclude Include="BackGround.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="eScene.h" />
     <ClInclude Include="FpsControl.h" />

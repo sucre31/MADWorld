@@ -1,6 +1,8 @@
 #pragma once
 #include "AbstractScene.h"
 #include "SozaiManager.h"
+#include "BackGround.h"
+
 class SceneLightPlane : public AbstractScene
 {
 public:
@@ -11,5 +13,6 @@ public:
 private:
     // シーンはインスタンスを管理するだけ
     SozaiManager sozaiManager;
+    BackGround backGround;
 };
 

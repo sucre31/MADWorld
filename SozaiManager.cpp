@@ -1,3 +1,4 @@
+#include <Dxlib.h>
 #include "SozaiManager.h"
 
 SozaiManager::SozaiManager() {
@@ -40,22 +41,26 @@ void SozaiManager::makeSozai(const char* soundFileName, const char* imageFileNam
 	}
 }
 
+void SozaiManager::addSound(int sozaiNum, const char* soundFileName) {
+	sozai[sozaiNum]->setSampleSound(soundFileName);
+}
+
 /*
 @brief 素材番号を受け取りキーをバインド
 */
-void SozaiManager::setSozaiKey(int sozaiNum, int padNum) {
+void SozaiManager::setSozaiKey(int sozaiNum, int padNum, int soundIndex) {
 	if (sozaiNum < validSozaiNum) {
-		sozai[sozaiNum]->setTriggerButton(padNum);
+		sozai[sozaiNum]->setTriggerPad(padNum, soundIndex);
 	}
 }
 
 /*
 @brief 素材番号を受け取りMIDIキーをバインド
 */
-void SozaiManager::setSozaiMidiKey(int sozaiNum, int midiNum) {
+void SozaiManager::setSozaiMidiKey(int sozaiNum, int midiNum, int soundIndex) {
 	// 複数キーバインドできるようにしたい　音程変更のみなら
 	if (sozaiNum < validSozaiNum) {
-		sozai[sozaiNum]->setTriggerMidi(midiNum);
+		sozai[sozaiNum]->setTriggerMidi(midiNum, soundIndex);
 	}
 }
 
@@ -87,13 +92,17 @@ void SozaiManager::changeTopLayer(int sozaiId) {
 
 bool SozaiManager::update() {
 	for (int i = 0; i < validSozaiNum; i++ ) {
-		if (sozai[i]->isVaildButtonInput() && Pad::getIns()->get(ePad(sozai[i]->getTriggerButton())) == 1) {
-			sozai[i]->playSample();
-			changeTopLayer(i);
+		for (int j = 0; j < sozai[i]->getValidPadNum(); j++) {
+			if (Pad::getIns()->get(ePad(sozai[i]->getTriggerPad(j))) == 1) {
+				sozai[i]->playSample(sozai[i]->getPadSoundIndex(j));
+				changeTopLayer(i);
+			}
 		}
-		if (sozai[i]->isVaildMidiInput() &&  MIDI::getIns()->get(eMidi(sozai[i]->getTriggerMidi())) == 1) {
-			sozai[i]->playSample();
-			changeTopLayer(i);
+		for (int j = 0; j < sozai[i]->getValidMidiNum(); j++) {
+			if (MIDI::getIns()->get(eMidi(sozai[i]->getTriggerMidi(j))) == 1) {
+				sozai[i]->playSample(sozai[i]->getMidiSoundIndex(j));
+				changeTopLayer(i);
+			}
 		}
 		sozai[i]->update();
 	}

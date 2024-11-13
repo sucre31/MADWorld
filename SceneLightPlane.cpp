@@ -15,40 +15,45 @@ SceneLightPlane::SceneLightPlane(IOnSceneChangedListener* impl, const Parameter&
 	SetFontSize(20);
 	SetFontThickness(1);
 
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample0.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample1.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample2.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample3.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample4.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample5.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample6.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample7.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample8.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample9.avi", 640, 360);
-	//sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample10.avi", 0, 0);
-	//sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample11.avi", 0, 0);
-	//sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample12.avi", 0, 0);
-	//sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample13.avi", 0, 0);
-	//sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample14.avi", 0, 0);
-	//sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample15.avi", 0, 0);
-	sozaiManager.setSozaiMidiKey(0, eMidi::C_3);
-	sozaiManager.setSozaiMidiKey(1, eMidi::C_S3);
-	sozaiManager.setSozaiMidiKey(2, eMidi::D_3);
-	sozaiManager.setSozaiMidiKey(3, eMidi::D_S4);
-	sozaiManager.setSozaiMidiKey(4, eMidi::E_4);
-	sozaiManager.setSozaiMidiKey(5, eMidi::F_4);
-	sozaiManager.setSozaiMidiKey(6, eMidi::F_S4);
-	sozaiManager.setSozaiMidiKey(7, eMidi::G_4);
-	sozaiManager.setSozaiMidiKey(8, eMidi::G_S4);
-	sozaiManager.setSozaiMidiKey(9, eMidi::A_4);
+	// ‘fŞ‚Ì“Ç‚İ‚İ‚Æİ’è
+	sozaiManager.makeSozai("Assets/Sounds/lightPlane/mikotoC_4.wav", "Assets/sprites/images/mikoto.png", 640, 360);
+	sozaiManager.setSozaiMidiKey(0, eMidi::C_4, 0);
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoC_S4.wav");
+	sozaiManager.setSozaiMidiKey(0, eMidi::C_S4, 1);
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoD_4.wav");
+	sozaiManager.setSozaiMidiKey(0, eMidi::D_4, 2);
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoD_S4.wav");
+	sozaiManager.setSozaiMidiKey(0, eMidi::D_S4, 3);
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoE_4.wav");
+	sozaiManager.setSozaiMidiKey(0, eMidi::E_4, 4);
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoF_4.wav");
+	sozaiManager.setSozaiMidiKey(0, eMidi::F_4, 5);
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoF_S4.wav");
+	sozaiManager.setSozaiMidiKey(0, eMidi::F_S4, 6);
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoG_4.wav");
+	sozaiManager.setSozaiMidiKey(0, eMidi::G_4, 7);
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoG_S4.wav");
+	sozaiManager.setSozaiMidiKey(0, eMidi::G_S4, 8);
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoA_4.wav");
+	sozaiManager.setSozaiMidiKey(0, eMidi::A_4, 9);
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoA_S4.wav");
+	sozaiManager.setSozaiMidiKey(0, eMidi::A_S4, 10);
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoB_4.wav");
+	sozaiManager.setSozaiMidiKey(0, eMidi::B_4, 11);
+	sozaiManager.setSozaiEx(0, 0.4);
+	sozaiManager.setSozaiPos(0, 640, 360);
 
 	MIDI::getIns()->openMidi(0 , 0);
+
+	// ”wŒi‚Ìİ’è
+	backGround.loadBackImage("Assets/Sprites/images/lightPlaneBack.png");
 }
 
 void SceneLightPlane::update() {
 	sozaiManager.update();
 	if (Pad::getIns()->get(ePad::start) == 1) {
 		MIDI::getIns()->closeMidi(0);
+		clsDx();
 		// ƒƒjƒ…[‚É–ß‚é
 		Parameter parameter;
 		const bool stackClear = true;
@@ -60,6 +65,7 @@ void SceneLightPlane::update() {
 }
 
 void SceneLightPlane::draw() const {
+	backGround.draw();
 	sozaiManager.draw();
 	MIDI::getIns()->draw();
 }
