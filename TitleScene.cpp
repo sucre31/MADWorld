@@ -3,10 +3,11 @@
 #include "Define.h"
 #include "Keyboard.h"
 #include "Pad.h"
+#include "Sound.h"
 
 TitleScene::TitleScene(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter)
 {
-    ChangeFont("Mother3Message");
+    ChangeFont("‚µ‚Ë‚«‚á‚Õ‚µ‚å‚ñ");
     SetFontSpace(1);
     SetFontSize(36);
     SetFontThickness(1);
@@ -30,8 +31,12 @@ void TitleScene::update()
             _implSceneChanged->onSceneChanged(eScene::LoveSong, parameter, stackClear);
         }
         else if (selectNum == 1) {
+            const bool stackClear = false;
+            _implSceneChanged->onSceneChanged(eScene::Alice, parameter, stackClear);
         }
         else if (selectNum == 2) {
+            const bool stackClear = false;
+            _implSceneChanged->onSceneChanged(eScene::LightPlane, parameter, stackClear);
         }
         else {
             //quit

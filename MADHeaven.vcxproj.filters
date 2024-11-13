@@ -43,6 +43,24 @@
     <Filter Include="ヘッダー ファイル\Resources">
       <UniqueIdentifier>{93f9caa9-cdbc-46ef-ae97-819625b78b73}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Scene\SceneLoveSong">
+      <UniqueIdentifier>{ce7e7249-c1ca-453d-9a52-ed08429b4762}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\SceneLovesong">
+      <UniqueIdentifier>{bed47839-97df-41b8-8fbd-effe0e1efa92}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\Scene\SceneAlice">
+      <UniqueIdentifier>{b063ac5f-19a7-4bf2-ace8-32aa240113af}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\SceneAlice">
+      <UniqueIdentifier>{48919319-6782-428b-96d6-612ad47aa99b}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject">
+      <UniqueIdentifier>{036fad70-f011-45d8-8470-e51ce0192084}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\GameObject">
+      <UniqueIdentifier>{3caecee3-78c4-4724-aca1-bf865ec7b347}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -72,9 +90,6 @@
     <ClCompile Include="Looper.cpp">
       <Filter>ソース ファイル\System</Filter>
     </ClCompile>
-    <ClCompile Include="Singleton.cpp">
-      <Filter>ソース ファイル</Filter>
-    </ClCompile>
     <ClCompile Include="Pad.cpp">
       <Filter>ソース ファイル\System\Control</Filter>
     </ClCompile>
@@ -90,11 +105,35 @@
     <ClCompile Include="eScene.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="SceneLoveSong.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
-    </ClCompile>
     <ClCompile Include="Sound.cpp">
       <Filter>ソース ファイル\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Singleton.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneLoveSong.cpp">
+      <Filter>ソース ファイル\Scene\SceneLoveSong</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneAlice.cpp">
+      <Filter>ソース ファイル\Scene\SceneAlice</Filter>
+    </ClCompile>
+    <ClCompile Include="SozaiManager.cpp">
+      <Filter>ソース ファイル\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="Sozai.cpp">
+      <Filter>ソース ファイル\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="GameObject.cpp">
+      <Filter>ソース ファイル\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="MIDI.cpp">
+      <Filter>ソース ファイル\System\Control</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneLightPlane.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="BackGround.cpp">
+      <Filter>ソース ファイル\GameObject</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -122,9 +161,6 @@
     <ClInclude Include="Parameter.h">
       <Filter>ヘッダー ファイル\System</Filter>
     </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>ヘッダー ファイル</Filter>
-    </ClInclude>
     <ClInclude Include="Keyboard.h">
       <Filter>ヘッダー ファイル\System\Control</Filter>
     </ClInclude>
@@ -140,11 +176,35 @@
     <ClInclude Include="eScene.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
+    <ClInclude Include="Sound.h">
+      <Filter>ヘッダー ファイル\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Singleton.h">
+      <Filter>ヘッダー ファイル\System</Filter>
+    </ClInclude>
     <ClInclude Include="SceneLoveSong.h">
+      <Filter>ヘッダー ファイル\Scene\SceneLovesong</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneAlice.h">
+      <Filter>ヘッダー ファイル\Scene\SceneAlice</Filter>
+    </ClInclude>
+    <ClInclude Include="SozaiManager.h">
+      <Filter>ヘッダー ファイル\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="Sozai.h">
+      <Filter>ヘッダー ファイル\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="GameObject.h">
+      <Filter>ヘッダー ファイル\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="MIDI.h">
+      <Filter>ヘッダー ファイル\System\Control</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneLightPlane.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
-    <ClInclude Include="Sound.h">
-      <Filter>ヘッダー ファイル</Filter>
+    <ClInclude Include="BackGround.h">
+      <Filter>ヘッダー ファイル\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

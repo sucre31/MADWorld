@@ -2,10 +2,13 @@
 #include "OpeningScene.h"
 #include "TitleScene.h"
 #include "SceneLoveSong.h"
+#include "SceneAlice.h"
+#include "SceneLightPlane.h"
 //#include "Error.h"
 //#include "Macro.h"
 #include "Keyboard.h"
 #include "Pad.h"
+#include "MIDI.h"
 //#include "Image.h"
 
 using namespace std;
@@ -32,6 +35,7 @@ bool Looper::loop() const
 
     Keyboard::getIns()->update();   //キーボードの更新
     Pad::getIns()->update();        //ジョイパッドの更新
+    MIDI::getIns()->update();
     _sceneStack.top()->update();    //スタックのトップのシーンを更新
     _sceneStack.top()->draw();      //スタックのトップのシーンを描画
     _fps->Update();
@@ -66,6 +70,13 @@ void Looper::onSceneChanged(const eScene scene, const Parameter& parameter, cons
         break;
     case LoveSong:
         _sceneStack.push(make_shared<SceneLoveSong>(this, parameter));
+        break;
+    case Alice:
+        _sceneStack.push(make_shared<SceneAlice>(this, parameter));
+        break;
+    case LightPlane:
+        _sceneStack.push(make_shared<SceneLightPlane>(this, parameter));
+        break;
     //default:
     //    ERR("存在しないシーン");
     //    break;

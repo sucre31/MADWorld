@@ -140,38 +140,52 @@
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="AbstractScene.cpp" />
+    <ClCompile Include="BackGround.cpp" />
     <ClCompile Include="Define.cpp" />
     <ClCompile Include="eScene.cpp" />
     <ClCompile Include="FpsControl.cpp" />
+    <ClCompile Include="GameObject.cpp" />
     <ClCompile Include="Image.cpp" />
     <ClCompile Include="IOnSceneChangedListener.cpp" />
     <ClCompile Include="Keyboard.cpp" />
     <ClCompile Include="Looper.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="MIDI.cpp" />
     <ClCompile Include="OpeningScene.cpp" />
     <ClCompile Include="Pad.cpp" />
     <ClCompile Include="Parameter.cpp" />
+    <ClCompile Include="SceneAlice.cpp" />
+    <ClCompile Include="SceneLightPlane.cpp" />
     <ClCompile Include="SceneLoveSong.cpp" />
     <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="Sound.cpp" />
+    <ClCompile Include="Sozai.cpp" />
+    <ClCompile Include="SozaiManager.cpp" />
     <ClCompile Include="SystemMain.cpp" />
     <ClCompile Include="TitleScene.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractScene.h" />
+    <ClInclude Include="BackGround.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="eScene.h" />
     <ClInclude Include="FpsControl.h" />
+    <ClInclude Include="GameObject.h" />
     <ClInclude Include="Image.h" />
     <ClInclude Include="IOnSceneChangedListener.h" />
     <ClInclude Include="Keyboard.h" />
     <ClInclude Include="Looper.h" />
+    <ClInclude Include="MIDI.h" />
     <ClInclude Include="OpeningScene.h" />
     <ClInclude Include="Pad.h" />
     <ClInclude Include="Parameter.h" />
+    <ClInclude Include="SceneAlice.h" />
+    <ClInclude Include="SceneLightPlane.h" />
     <ClInclude Include="SceneLoveSong.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Sound.h" />
+    <ClInclude Include="Sozai.h" />
+    <ClInclude Include="SozaiManager.h" />
     <ClInclude Include="SystemMain.h" />
     <ClInclude Include="TitleScene.h" />
   </ItemGroup>
