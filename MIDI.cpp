@@ -127,3 +127,11 @@ void CALLBACK MIDI::MidiInProc(HMIDIIN hMidiIn, UINT MidiMsg, DWORD dwInstance, 
 		break;
 	}
 }
+
+/*!
+@brief 渡されたMIDIキー番号の入力フレーム数を返す
+*/
+int MIDI::get(eMidi eID) const
+{
+	return _midi[eID];
+}

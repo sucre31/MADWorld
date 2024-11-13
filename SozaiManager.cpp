@@ -50,6 +50,16 @@ void SozaiManager::setSozaiKey(int sozaiNum, int padNum) {
 }
 
 /*
+@brief 素材番号を受け取りMIDIキーをバインド
+*/
+void SozaiManager::setSozaiMidiKey(int sozaiNum, int midiNum) {
+	// 複数キーバインドできるようにしたい　音程変更のみなら
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->setTriggerMidi(midiNum);
+	}
+}
+
+/*
 @brief 素材番号を受け取り倍率設定
 */
 void SozaiManager::setSozaiEx(int sozaiNum, double val) {
@@ -77,7 +87,11 @@ void SozaiManager::changeTopLayer(int sozaiId) {
 
 bool SozaiManager::update() {
 	for (int i = 0; i < validSozaiNum; i++ ) {
-		if (Pad::getIns()->get(ePad(sozai[i]->getTriggerButton())) == 1) {
+		if (sozai[i]->isVaildButtonInput() && Pad::getIns()->get(ePad(sozai[i]->getTriggerButton())) == 1) {
+			sozai[i]->playSample();
+			changeTopLayer(i);
+		}
+		if (sozai[i]->isVaildMidiInput() &&  MIDI::getIns()->get(eMidi(sozai[i]->getTriggerMidi())) == 1) {
 			sozai[i]->playSample();
 			changeTopLayer(i);
 		}

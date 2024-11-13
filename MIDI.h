@@ -42,8 +42,7 @@ private:
 	static DWORD dwResPara2;
 	static bool  MidiInFlag;
 	// とりあえずいくつかのキーを監視
-	const static int MIDI_KEY_NUM = 109; // 255?
-	std::array<int, MIDI_KEY_NUM> _idArray;  //どのボタンがどのボタンに割り当たっているかを示す
+	const static int MIDI_KEY_NUM = 256; // 255?
 	std::array<int, MIDI_KEY_NUM> _midi;      //16ボタンのpad入力状態格納
 	int tmpNote;
 
@@ -54,5 +53,6 @@ public:
 	void closeMidi(int);
 	void update();
 	void draw();
+	int get(eMidi eID) const;
 };
 

@@ -1,5 +1,6 @@
 #pragma once
 #include "Sozai.h"
+#include "MIDI.h"
 
 class SozaiManager : GameObject
 {
@@ -11,6 +12,7 @@ public:
 	void makeSozai(const char * soundFileName, const char * imageFileName);
 	void makeSozai(const char* soundFileName, const char* imageFileName, int x, int y);
 	void setSozaiKey(int sozaiNum, int padNum);
+	void setSozaiMidiKey(int sozaiNum, int padNum);
 	void setSozaiEx(int sozaiNum, double val);
 	void setSozaiPos(int sozaiNum, int valX, int valY);
 	void changeTopLayer(int sozaiId);

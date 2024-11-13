@@ -10,6 +10,10 @@ Sozai::Sozai() {
 	exRate = 1.0;
 	enableTurn = true;
 	turnFlag = false;
+	triggerButton = 0;
+	triggerMidi = 0;
+	isValidButton = false;
+	isValidMidi = false;
 }
 
 bool Sozai::update() {
@@ -19,6 +23,17 @@ bool Sozai::update() {
 void Sozai::draw() const {
 	DrawRotaGraph(x, y, exRate, 0, myGrapghHandle, FALSE, (enableTurn && turnFlag));
 }
+
+void Sozai::setTriggerButton(int padEnum) {
+	triggerButton = padEnum;
+	isValidButton = true;
+}
+
+void Sozai::setTriggerMidi(int midiEnum) {
+	triggerMidi = midiEnum;
+	isValidMidi = true;
+}
+
 
 void Sozai::playSample() {
 	turnFlag = (!turnFlag);	// ”½“]

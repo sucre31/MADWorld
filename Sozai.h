@@ -16,8 +16,12 @@ public:
 	void setSampleMovie(const char* fileName);
 	void setSampleSound(const char * fileName);
 	void playSample();
-	void setTriggerButton(int padEnum) { triggerButton = padEnum; }
+	void setTriggerButton(int padEnum);
+	void setTriggerMidi(int midiEnum);
 	int getTriggerButton() { return (int)triggerButton; };
+	int getTriggerMidi() { return (int)triggerMidi; };
+	bool isVaildButtonInput() { return isValidButton; }
+	bool isVaildMidiInput() { return isValidMidi; }
 private:
 	int myId;	// managerƒNƒ‰ƒX‚ÌŠÇ—”Ô†
 	int x;
@@ -28,5 +32,8 @@ private:
 	bool enableTurn;
 	bool turnFlag;
 	int triggerButton;
+	bool isValidButton;
+	int triggerMidi;
+	bool isValidMidi;
 };
 

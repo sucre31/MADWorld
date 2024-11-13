@@ -31,16 +31,16 @@ SceneLightPlane::SceneLightPlane(IOnSceneChangedListener* impl, const Parameter&
 	//sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample13.avi", 0, 0);
 	//sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample14.avi", 0, 0);
 	//sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample15.avi", 0, 0);
-	sozaiManager.setSozaiKey(0, ePad::L);
-	sozaiManager.setSozaiKey(1, ePad::down);
-	sozaiManager.setSozaiKey(2, ePad::R);
-	sozaiManager.setSozaiKey(3, ePad::left);
-	sozaiManager.setSozaiKey(4, ePad::A);
-	sozaiManager.setSozaiKey(5, ePad::up);
-	sozaiManager.setSozaiKey(6, ePad::X);
-	sozaiManager.setSozaiKey(7, ePad::right);
-	sozaiManager.setSozaiKey(8, ePad::B);
-	sozaiManager.setSozaiKey(9, ePad::Y);
+	sozaiManager.setSozaiMidiKey(0, eMidi::C_3);
+	sozaiManager.setSozaiMidiKey(1, eMidi::C_S3);
+	sozaiManager.setSozaiMidiKey(2, eMidi::D_3);
+	sozaiManager.setSozaiMidiKey(3, eMidi::D_S4);
+	sozaiManager.setSozaiMidiKey(4, eMidi::E_4);
+	sozaiManager.setSozaiMidiKey(5, eMidi::F_4);
+	sozaiManager.setSozaiMidiKey(6, eMidi::F_S4);
+	sozaiManager.setSozaiMidiKey(7, eMidi::G_4);
+	sozaiManager.setSozaiMidiKey(8, eMidi::G_S4);
+	sozaiManager.setSozaiMidiKey(9, eMidi::A_4);
 
 	MIDI::getIns()->openMidi(0 , 0);
 }
