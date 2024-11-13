@@ -16,7 +16,18 @@ SceneLightPlane::SceneLightPlane(IOnSceneChangedListener* impl, const Parameter&
 	SetFontThickness(1);
 
 	// ëfçﬁÇÃì«Ç›çûÇ›Ç∆ê›íË
-	sozaiManager.makeSozai("Assets/Sounds/lightPlane/mikotoF_31.wav", "Assets/sprites/images/mikoto.png", 640, 360);
+	sozaiManager.makeSozai("Assets/Sounds/lightPlane/mikotoF_S2.wav", "Assets/sprites/images/mikoto.png", 640, 360);
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoG_2.wav");
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoG_S2.wav");
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoA_2.wav");
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoA_S2.wav");
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoB_2.wav");
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoC_3.wav");
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoC_S3.wav");
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoD_3.wav");
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoD_S3.wav");
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoE_3.wav");
+	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoF_3.wav");
 	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoF_S3.wav");
 	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoG_3.wav");
 	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoG_S3.wav");
@@ -35,22 +46,10 @@ SceneLightPlane::SceneLightPlane(IOnSceneChangedListener* impl, const Parameter&
 	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoA_4.wav");
 	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoA_S4.wav");
 	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoB_4.wav");
-	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoC_5.wav");
-	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoC_S5.wav");
-	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoD_5.wav");
-	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoD_S5.wav");
-	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoE_5.wav");
-	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoF_5.wav");
-	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoF_S5.wav");
-	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoG_5.wav");
-	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoG_S5.wav");
-	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoA_5.wav");
-	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoA_S5.wav");
-	sozaiManager.addSound(0, "Assets/Sounds/lightPlane/mikotoB_5.wav");
 
 
-	for (int i = 0; i < 51; i++) {
-		sozaiManager.setSozaiMidiKey(0, eMidi((int)eMidi::F_3 + i), i);
+	for (int i = 0; i < 31; i++) {
+		sozaiManager.setSozaiMidiKey(0, eMidi((int)eMidi::F_S3 + i), i);
 	}
 
 	sozaiManager.makeSozai("Assets/Sounds/lightPlane/mikotoA_1.wav", "Assets/sprites/images/mikoto.png", 640, 360);
@@ -81,9 +80,12 @@ SceneLightPlane::SceneLightPlane(IOnSceneChangedListener* impl, const Parameter&
 
 	sozaiManager.setSozaiEx(0, 0.4);
 	sozaiManager.setSozaiPos(0, 800, 300);
+	sozaiManager.setMultiSound(0, true);
 
 	sozaiManager.setSozaiEx(1, 0.2);
 	sozaiManager.setSozaiPos(1, 280, 580);
+	sozaiManager.setMultiSound(1, true);
+
 
 	MIDI::getIns()->openMidi(0 , 0);
 

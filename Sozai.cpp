@@ -15,6 +15,7 @@ Sozai::Sozai() {
 		mySoundHandle[i] = -1;
 		padSoundIndex[i] = 0;
 		midiSoundIndex[i] = 0;
+		isSoundPlay[i] = false;
 	}
 	for (int i = 0; i < maxPadSozai; i++) {
 		triggerPad[i] = 0;
@@ -27,12 +28,14 @@ Sozai::Sozai() {
 	validMidiNum = 0;
 	curSoundIndex = -1;
 	curTriggerMidi = 0;
+	enableMultiSound = false;
 }
 
 bool Sozai::update() {
-	if (MIDI::getIns()->get(eMidi(curTriggerMidi)) == 0) {
-		if (curSoundIndex != -1) {
-			StopSoundMem(mySoundHandle[curSoundIndex]);
+	for (int i = 0; i < validMidiNum; i++) {
+		int tmpMidiKey = triggerMidi[i];
+		if (MIDI::getIns()->get(eMidi(tmpMidiKey)) == 0) {
+			StopSoundMem(mySoundHandle[midiSoundIndex[i]]);
 		}
 	}
 	return true;
@@ -66,11 +69,21 @@ void Sozai::setTriggerMidi(int midiEnum, int soundIndexNum) {
 }
 
 
-void Sozai::playSample(int soundIndex) {
+/*
+@brief midiかpadか判定しサウンドをならす あんまいいコードじゃないかも
+*/
+void Sozai::playSample(int sampleNum, bool isMidi) {
+	int soundIndex;
+	if (isMidi) {
+		soundIndex = getMidiSoundIndex(sampleNum);
+	}
+	else {
+		soundIndex = getPadSoundIndex(sampleNum);
+	}
 	turnFlag = (!turnFlag);	// 反転
 
 	// 音声処理
-	if (curSoundIndex != -1) {
+	if (curSoundIndex != -1 && !enableMultiSound) {
 		StopSoundMem(mySoundHandle[curSoundIndex]);
 	}
 	if (soundIndex >= 0 && soundIndex < maxSozai) {	// 配列の範囲内かチェック

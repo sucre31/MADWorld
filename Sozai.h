@@ -15,7 +15,7 @@ public:
 	void setExRate(double val) { exRate = val; }
 	void setSampleMovie(const char* fileName);
 	void setSampleSound(const char * fileName);
-	void playSample(int);
+	void playSample(int, bool);
 	void setTriggerPad(int padEnum, int indexNum);
 	void setTriggerMidi(int midiEnum, int indexNum);
 	int getTriggerPad(int num) { return triggerPad[num]; };
@@ -25,6 +25,7 @@ public:
 	int getPadSoundIndex(int num) { return padSoundIndex[num]; }
 	int getMidiSoundIndex(int num) { return midiSoundIndex[num]; }
 	void setCurTriggerMidi(int num) { curTriggerMidi = num; }
+	void setMultiSound(bool flag) { enableMultiSound = flag; }
 private:
 	static const int maxSozai = 88;
 	int myId;	// managerƒNƒ‰ƒX‚ÌŠÇ—”Ô†
@@ -46,5 +47,7 @@ private:
 	int triggerMidi[maxMidiSozai];
 	int midiSoundIndex[maxMidiSozai];
 	int validMidiNum;
+	bool enableMultiSound;
+	bool isSoundPlay[maxSozai];
 };
 
