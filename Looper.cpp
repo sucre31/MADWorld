@@ -8,6 +8,7 @@
 //#include "Macro.h"
 #include "Keyboard.h"
 #include "Pad.h"
+#include "MIDI.h"
 //#include "Image.h"
 
 using namespace std;
@@ -34,6 +35,7 @@ bool Looper::loop() const
 
     Keyboard::getIns()->update();   //キーボードの更新
     Pad::getIns()->update();        //ジョイパッドの更新
+    MIDI::getIns()->update();
     _sceneStack.top()->update();    //スタックのトップのシーンを更新
     _sceneStack.top()->draw();      //スタックのトップのシーンを描画
     _fps->Update();

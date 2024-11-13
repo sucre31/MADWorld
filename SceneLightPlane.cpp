@@ -10,6 +10,11 @@
 
 SceneLightPlane::SceneLightPlane(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter)
 {
+	ChangeFont("meiryo");
+	SetFontSpace(3);
+	SetFontSize(20);
+	SetFontThickness(1);
+
 	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample0.avi", 640, 360);
 	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample1.avi", 640, 360);
 	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample2.avi", 640, 360);
@@ -36,11 +41,14 @@ SceneLightPlane::SceneLightPlane(IOnSceneChangedListener* impl, const Parameter&
 	sozaiManager.setSozaiKey(7, ePad::right);
 	sozaiManager.setSozaiKey(8, ePad::B);
 	sozaiManager.setSozaiKey(9, ePad::Y);
+
+	MIDI::getIns()->openMidi(0 , 0);
 }
 
 void SceneLightPlane::update() {
 	sozaiManager.update();
 	if (Pad::getIns()->get(ePad::start) == 1) {
+		MIDI::getIns()->closeMidi(0);
 		// ƒƒjƒ…[‚É–ß‚é
 		Parameter parameter;
 		const bool stackClear = true;
