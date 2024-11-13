@@ -24,6 +24,7 @@ public:
 	int getValidMidiNum() { return validMidiNum; }
 	int getPadSoundIndex(int num) { return padSoundIndex[num]; }
 	int getMidiSoundIndex(int num) { return midiSoundIndex[num]; }
+	void setCurTriggerMidi(int num) { curTriggerMidi = num; }
 private:
 	static const int maxSozai = 88;
 	int myId;	// managerクラスの管理番号
@@ -33,6 +34,7 @@ private:
 	int mySoundHandle[maxSozai];
 	int validSoundNum;
 	int curSoundIndex;						// 再生中の音ハンドル
+	int curTriggerMidi;						// 再生中の音を鳴らしたキー
 	static const int maxPadSozai = 16;
 	static const int maxMidiSozai = 88;
 	double exRate;

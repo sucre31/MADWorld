@@ -68,7 +68,7 @@ void MIDI::update() {
 			if (status == 0x90 && velocity > 0) {
 				// ノートオン (キーが押された) として 1 にセット
 				_midi[i] = 1;
-				printfDx("%d が押されました\n", i);
+				//printfDx("%d が押されました\n", i);
 			}
 			else if (status == 0x80 || (status == 0x90 && velocity == 0)) {
 				// ノートオフまたはノートオン（ベロシティ0）で離されたと見なす
@@ -94,7 +94,7 @@ void MIDI::draw() {
 	unsigned int Color;
 	Color = GetColor(255, 255, 255);
 	if (isGetInfoSucces) {
-		DrawFormatString(0, 700, Color, "%s", midiininformation.szPname);
+		//DrawFormatString(0, 700, Color, "%s", midiininformation.szPname);
 	}
 	//DrawFormatString(0, 0, Color, "note = %u\n", tmpNote);
 }

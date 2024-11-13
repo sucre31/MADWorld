@@ -100,6 +100,7 @@ bool SozaiManager::update() {
 		}
 		for (int j = 0; j < sozai[i]->getValidMidiNum(); j++) {
 			if (MIDI::getIns()->get(eMidi(sozai[i]->getTriggerMidi(j))) == 1) {
+				sozai[i]->setCurTriggerMidi(sozai[i]->getTriggerMidi(j));
 				sozai[i]->playSample(sozai[i]->getMidiSoundIndex(j));
 				changeTopLayer(i);
 			}

@@ -3,6 +3,7 @@
 #include "Sozai.h"
 #include "Sound.h"
 #include "Pad.h"
+#include "MIDI.h"
 
 Sozai::Sozai() {
 	x = 0;
@@ -25,9 +26,15 @@ Sozai::Sozai() {
 	validPadNum = 0;
 	validMidiNum = 0;
 	curSoundIndex = -1;
+	curTriggerMidi = 0;
 }
 
 bool Sozai::update() {
+	if (MIDI::getIns()->get(eMidi(curTriggerMidi)) == 0) {
+		if (curSoundIndex != -1) {
+			StopSoundMem(mySoundHandle[curSoundIndex]);
+		}
+	}
 	return true;
 }
 
