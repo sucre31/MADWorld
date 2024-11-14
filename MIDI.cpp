@@ -52,7 +52,7 @@ void MIDI::closeMidi(int midiIndex){
 }
 
 void MIDI::update() {
-	for (int i = eMidi::A_0; i < eMidi::C_8; i++) {
+	for (int i = eMidi::C_0; i < eMidi::C_8; i++) {
 		if (_midi[i] > 0) {
 			// 押され続けてるなら増加
 			if (_midi[i] < 255) {
@@ -68,7 +68,7 @@ void MIDI::update() {
 		unsigned char velocity = (tmpMidiMes.para1 & 0x00ff0000) >> 16;
 		unsigned char note = (tmpMidiMes.para1 & 0x0000ff00) >> 8;
 		// eMidi::A_0 から eMidi::C_8 の範囲内かチェックしてから処理
-		if (note >= eMidi::A_0 && note <= eMidi::C_8) {
+		if (note >= eMidi::C_0 && note <= eMidi::C_8) {
 			int i = note;  // 配列のインデックスと一致するように note を直接使用
 
 			if (status == 0x90 && velocity > 0) {

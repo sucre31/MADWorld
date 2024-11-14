@@ -83,9 +83,18 @@ void SozaiManager::setSozaiPos(int sozaiNum, int valX, int valY) {
 	}
 }
 
+/*
+@brief •¡”‰¹‚ğ‚È‚ç‚·‚±‚Æ‚ğ‹–‰Â‚·‚é‚©
+*/
 void SozaiManager::setMultiSound(int sozaiNum, bool flag) {
 	if (sozaiNum < validSozaiNum) {
 		sozai[sozaiNum]->setMultiSound(flag);
+	}
+}
+
+void SozaiManager::setDrumFlag(int sozaiNum, bool flag) {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->setIsDrum(flag);
 	}
 }
 
@@ -105,7 +114,6 @@ bool SozaiManager::update() {
 		}
 		for (int j = 0; j < sozai[i]->getValidMidiNum(); j++) {
 			if (MIDI::getIns()->get(eMidi(sozai[i]->getTriggerMidi(j))) == 1) {
-				sozai[i]->setCurTriggerMidi(sozai[i]->getTriggerMidi(j));
 				sozai[i]->playSample(j, true);
 				changeTopLayer(i);
 			}

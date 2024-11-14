@@ -24,30 +24,35 @@ public:
 	int getValidMidiNum() { return validMidiNum; }
 	int getPadSoundIndex(int num) { return padSoundIndex[num]; }
 	int getMidiSoundIndex(int num) { return midiSoundIndex[num]; }
-	void setCurTriggerMidi(int num) { curTriggerMidi = num; }
 	void setMultiSound(bool flag) { enableMultiSound = flag; }
+	void setIsDrum(bool flag) { isDrum = flag; }
 private:
 	static const int maxSozai = 88;
-	int myId;	// managerクラスの管理番号
-	int x;
-	int y;
-	int myGrapghHandle;
-	int mySoundHandle[maxSozai];
-	int validSoundNum;
-	int curSoundIndex;						// 再生中の音ハンドル
-	int curTriggerMidi;						// 再生中の音を鳴らしたキー
 	static const int maxPadSozai = 16;
 	static const int maxMidiSozai = 88;
+	int myId;								// managerクラスの管理番号
+	int x;
+	int y;
+	int transX;
+	int transY;
 	double exRate;
+	int myGrapghHandle;
+	int mySoundHandle[maxSozai];
 	bool enableTurn;
 	bool turnFlag;
-	int triggerPad[maxPadSozai];// 動的に作った方が良いなぁ あとクラス分けるべきかも
+	int validSoundNum;
+	int curSoundIndex;						// 再生中の音ハンドル
+	int numOfPlayingSound;					// 再生中の音の数
+	int triggerPad[maxPadSozai];			// 動的に作った方が良いなぁ あとクラス分けるべきかも
 	int padSoundIndex[maxPadSozai];
+	bool isPadSoundPlay[maxMidiSozai];
 	int validPadNum;
 	int triggerMidi[maxMidiSozai];
 	int midiSoundIndex[maxMidiSozai];
+	bool isMidiSoundPlay[maxMidiSozai];
 	int validMidiNum;
 	bool enableMultiSound;
-	bool isSoundPlay[maxSozai];
+	int prevTime;
+	bool isDrum;							// 再生を止めなくする
 };
 

@@ -8,6 +8,8 @@
 Sozai::Sozai() {
 	x = 0;
 	y = 0;
+	transX = 198;
+	transY = 0;
 	exRate = 1.0;
 	enableTurn = true;
 	turnFlag = false;
@@ -15,7 +17,8 @@ Sozai::Sozai() {
 		mySoundHandle[i] = -1;
 		padSoundIndex[i] = 0;
 		midiSoundIndex[i] = 0;
-		isSoundPlay[i] = false;
+		isPadSoundPlay[i] = false;
+		isMidiSoundPlay[i] = false;
 	}
 	for (int i = 0; i < maxPadSozai; i++) {
 		triggerPad[i] = 0;
@@ -27,22 +30,43 @@ Sozai::Sozai() {
 	validPadNum = 0;
 	validMidiNum = 0;
 	curSoundIndex = -1;
-	curTriggerMidi = 0;
 	enableMultiSound = false;
+	prevTime = GetNowCount();
+	numOfPlayingSound = 0;
+	isDrum = false;
 }
 
 bool Sozai::update() {
+	for (int i = 0; i < validPadNum; i++) {
+		int tmpPadKey = triggerPad[i];
+		if (isPadSoundPlay[i] == true && MIDI::getIns()->get(eMidi(tmpPadKey)) == 0) {
+			StopSoundMem(mySoundHandle[midiSoundIndex[i]]);
+			numOfPlayingSound--;
+			isPadSoundPlay[i] = false;
+		}
+	}
 	for (int i = 0; i < validMidiNum; i++) {
 		int tmpMidiKey = triggerMidi[i];
-		if (MIDI::getIns()->get(eMidi(tmpMidiKey)) == 0) {
-			StopSoundMem(mySoundHandle[midiSoundIndex[i]]);
+		if (isMidiSoundPlay[i] == true &&  MIDI::getIns()->get(eMidi(tmpMidiKey)) == 0) {
+			if (isDrum == false) {
+				StopSoundMem(mySoundHandle[midiSoundIndex[i]]);
+			}
+			numOfPlayingSound--;
+			isMidiSoundPlay[i] = false;
 		}
 	}
 	return true;
 }
 
 void Sozai::draw() const {
-	DrawRotaGraph(x, y, exRate, 0, myGrapghHandle, FALSE, (enableTurn && turnFlag));
+	if (enableMultiSound) {
+		for (int i = 0; i < numOfPlayingSound; i++) {
+			DrawRotaGraph(x + transX * (numOfPlayingSound - 1 - i), y + transY * (numOfPlayingSound - 1 - i), exRate, 0, myGrapghHandle, FALSE, (enableTurn && turnFlag));
+		}
+	}
+	else {
+		DrawRotaGraph(x, y, exRate, 0, myGrapghHandle, FALSE, (enableTurn && turnFlag));
+	}
 }
 
 
@@ -80,7 +104,13 @@ void Sozai::playSample(int sampleNum, bool isMidi) {
 	else {
 		soundIndex = getPadSoundIndex(sampleNum);
 	}
-	turnFlag = (!turnFlag);	// ”½“]
+
+	// ˜A‘±‚Å‰¹‚ª‚È‚Á‚½‚Æ‚«(BPMŠî€‚Å˜a‰¹”»’è‚µ‚½•û‚ª‚¢‚¢‚©‚à)
+	int tmpTime = GetNowCount();
+	if (tmpTime - prevTime > 30) {
+		turnFlag = (!turnFlag);	// ”½“]
+	}
+	prevTime = tmpTime;
 
 	// ‰¹ºˆ—
 	if (curSoundIndex != -1 && !enableMultiSound) {
@@ -90,6 +120,13 @@ void Sozai::playSample(int sampleNum, bool isMidi) {
 		if (mySoundHandle[soundIndex] != -1) {
 			curSoundIndex = soundIndex;
 			PlaySoundMem(mySoundHandle[curSoundIndex], DX_PLAYTYPE_BACK);
+			numOfPlayingSound++;
+			if (isMidi == true) {
+				isMidiSoundPlay[sampleNum] = true;
+			}
+			else {
+				isPadSoundPlay[sampleNum] = true;
+			}
 		}
 	}
 	// ‰f‘œ‚à‰æ‘œ‚Ì˜A”Ô‚Æ‚µ‚Äˆ—‚Å‚«‚é‚æ‚¤‚É©–³‘Ê‚ª‚È‚¢)
