@@ -17,6 +17,8 @@ public:
 	void setSozaiPos(int sozaiNum, int valX, int valY);
 	void addSound(int sozaiNum, const char* soundFileName);
 	void changeTopLayer(int sozaiId);
+	void setMultiSound(int sozaiId, bool flag);
+	void setDrumFlag(int, bool);
 private:
 	static const int limitOfSozai = 16;
 	int validSozaiNum;

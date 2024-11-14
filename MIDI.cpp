@@ -2,11 +2,7 @@
 #include <string>
 #include "MIDI.h"
 
-UINT MIDI::uiResMidiMsg = 0;
-DWORD MIDI::dwResPara1 = 0;
-DWORD MIDI::dwResPara2 = 0;
-bool MIDI::MidiInFlag = false;
-
+std::queue<MidiMessage> MIDI::midiQueue;
 
 MIDI::MIDI() 
 	: numMidiDevices(0), isGetInfoSucces(false) {
@@ -56,13 +52,23 @@ void MIDI::closeMidi(int midiIndex){
 }
 
 void MIDI::update() {
-	if (MidiInFlag) {
+	for (int i = eMidi::C_0; i < eMidi::C_8; i++) {
+		if (_midi[i] > 0) {
+			// 押され続けてるなら増加
+			if (_midi[i] < 255) {
+				_midi[i]++;
+			}
+		}
+	}
+	if (midiQueue.size() > 0) {
 		//MIDIの入力状態を取得(dwResPara1にいろいろはいってる
-		unsigned char status = (dwResPara1 & 0x000000ff);
-		unsigned char velocity = (dwResPara1 & 0x00ff0000) >> 16;
-		unsigned char note = (dwResPara1 & 0x0000ff00) >> 8;
+		MidiMessage tmpMidiMes = midiQueue.front();
+		midiQueue.pop();
+		unsigned char status = (tmpMidiMes.para1 & 0x000000ff);
+		unsigned char velocity = (tmpMidiMes.para1 & 0x00ff0000) >> 16;
+		unsigned char note = (tmpMidiMes.para1 & 0x0000ff00) >> 8;
 		// eMidi::A_0 から eMidi::C_8 の範囲内かチェックしてから処理
-		if (note >= eMidi::A_0 && note <= eMidi::C_8) {
+		if (note >= eMidi::C_0 && note <= eMidi::C_8) {
 			int i = note;  // 配列のインデックスと一致するように note を直接使用
 
 			if (status == 0x90 && velocity > 0) {
@@ -73,17 +79,7 @@ void MIDI::update() {
 			else if (status == 0x80 || (status == 0x90 && velocity == 0)) {
 				// ノートオフまたはノートオン（ベロシティ0）で離されたと見なす
 				_midi[i] = 0;
-			}
-		}
-		MidiInFlag = false;
-	}
-	else {
-		for (int i = eMidi::A_0; i < eMidi::C_8; i++) {
-			if (_midi[i] > 0) {
-				// 押され続けてるなら増加
-				if (_midi[i] < 255) {
-					_midi[i]++;
-				}
+				//printfDx("%d が離されました\n", i);
 			}
 		}
 	}
@@ -108,10 +104,7 @@ void CALLBACK MIDI::MidiInProc(HMIDIIN hMidiIn, UINT MidiMsg, DWORD dwInstance, 
 	case MIM_CLOSE:
 		break;
 	case MIM_DATA:
-		uiResMidiMsg = MidiMsg;
-		dwResPara1 = dwPara1;
-		dwResPara2 = dwPara2;
-		MidiInFlag = true;
+		midiQueue.push({ MidiMsg, dwPara1, dwPara2 });
 		break;
 	case MIM_LONGDATA:
 		break;
