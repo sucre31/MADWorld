@@ -41,7 +41,7 @@ private:
 	double exRate;
 	bool enableTurn;
 	bool turnFlag;
-	int triggerPad[maxPadSozai];// 動的に作った方が良いなぁ
+	int triggerPad[maxPadSozai];// 動的に作った方が良いなぁ あとクラス分けるべきかも
 	int padSoundIndex[maxPadSozai];
 	int validPadNum;
 	int triggerMidi[maxMidiSozai];

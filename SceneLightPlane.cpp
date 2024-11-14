@@ -106,6 +106,9 @@ void SceneLightPlane::update() {
 		Image::getIns()->release();
 		_implSceneChanged->onSceneChanged(eScene::Title, parameter, stackClear);
 	}
+	if (Pad::getIns()->get(ePad::L) == 1) {
+		clsDx();
+	}
 }
 
 void SceneLightPlane::draw() const {
