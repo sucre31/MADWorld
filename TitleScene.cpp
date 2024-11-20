@@ -27,16 +27,16 @@ void TitleScene::update()
     if (Pad::getIns()->get(ePad::A) == 1) {
         Parameter parameter;
         if (selectNum == 0) {
-            const bool stackClear = false;
-            _implSceneChanged->onSceneChanged(eScene::LoveSong, parameter, stackClear);
+            const bool stackClear = true;
+            _implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, stackClear);
         }
         else if (selectNum == 1) {
-            const bool stackClear = false;
+            const bool stackClear = true;
             _implSceneChanged->onSceneChanged(eScene::Alice, parameter, stackClear);
         }
         else if (selectNum == 2) {
-            const bool stackClear = false;
-            _implSceneChanged->onSceneChanged(eScene::LightPlane, parameter, stackClear);
+            const bool stackClear = true;
+            _implSceneChanged->onSceneChanged(eScene::Option, parameter, stackClear);
         }
         else {
             //quit

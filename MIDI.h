@@ -3,6 +3,7 @@
 #include <mmsystem.h>
 #include <string>
 #include <array>
+#include <queue>
 #pragma comment(lib, "winmm.lib")
 #include "Singleton.h"
 
@@ -26,6 +27,13 @@ enum eMidi {
 	C_8 = 108
 };
 
+struct MidiMessage {
+	UINT msg;
+	DWORD para1;
+	DWORD para2;
+};
+
+
 class MIDI final : public Singleton<MIDI>
 {
 private:
@@ -37,14 +45,12 @@ private:
 	MIDIINCAPS midiininformation;
 	bool isGetInfoSucces;
 	static void CALLBACK MidiInProc(HMIDIIN hMidiIn, UINT MidiMsg, DWORD dwInstance, DWORD dwPara1, DWORD dwPara2);
-	static UINT uiResMidiMsg;
-	static DWORD dwResPara1;
-	static DWORD dwResPara2;
-	static bool  MidiInFlag;
 	// とりあえずいくつかのキーを監視
 	const static int MIDI_KEY_NUM = 256; // 255?
-	std::array<int, MIDI_KEY_NUM> _midi;      //16ボタンのpad入力状態格納
+	std::array<int, MIDI_KEY_NUM> _midi;      //16ボタンのpad入力状態格納 複数のMIDIデバイスがあるなら自動(設定可能にすべき)でマージ
 	int tmpNote;
+
+	static std::queue<MidiMessage> midiQueue;
 
 public:
 	MIDI();
@@ -53,6 +59,7 @@ public:
 	void closeMidi(int);
 	void update();
 	void draw();
+	TCHAR* getMidiInfo();
 	int get(eMidi eID) const;
 };
 

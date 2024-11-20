@@ -1,8 +1,9 @@
 #include "Dxlib.h"
+#include "Define.h"
 #include "BackGround.h"
 
 BackGround::BackGround() {
-
+	exRate = 1.0;
 }
 
 void BackGround::loadBackImage(const char* imageFileName) {
@@ -14,5 +15,5 @@ bool BackGround::update() {
 }
 
 void BackGround::draw() const {
-	DrawRotaGraph(640, 360, (2.0 / 3.0), 0, backGroundHandle, FALSE, FALSE);
+	DrawRotaGraph(Define::WIN_W / 2, Define::WIN_H / 2, exRate, 0, backGroundHandle, FALSE, FALSE);
 }

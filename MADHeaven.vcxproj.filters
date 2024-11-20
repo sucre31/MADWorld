@@ -61,13 +61,16 @@
     <Filter Include="ヘッダー ファイル\GameObject">
       <UniqueIdentifier>{3caecee3-78c4-4724-aca1-bf865ec7b347}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Scene\SceneMainMenu">
+      <UniqueIdentifier>{990e0ebb-cc14-4cbf-aaeb-79439c542ecd}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\SceneMainMenu">
+      <UniqueIdentifier>{4e80c6fa-3192-438c-8d1c-5ac9c02bee4a}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
       <Filter>ソース ファイル</Filter>
-    </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>ソース ファイル\Scene\TitleScene</Filter>
     </ClCompile>
     <ClCompile Include="SystemMain.cpp">
       <Filter>ソース ファイル\System</Filter>
@@ -111,12 +114,6 @@
     <ClCompile Include="Singleton.cpp">
       <Filter>ソース ファイル\System</Filter>
     </ClCompile>
-    <ClCompile Include="SceneLoveSong.cpp">
-      <Filter>ソース ファイル\Scene\SceneLoveSong</Filter>
-    </ClCompile>
-    <ClCompile Include="SceneAlice.cpp">
-      <Filter>ソース ファイル\Scene\SceneAlice</Filter>
-    </ClCompile>
     <ClCompile Include="SozaiManager.cpp">
       <Filter>ソース ファイル\GameObject</Filter>
     </ClCompile>
@@ -134,6 +131,24 @@
     </ClCompile>
     <ClCompile Include="BackGround.cpp">
       <Filter>ソース ファイル\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneOption.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="cursor.cpp">
+      <Filter>ソース ファイル\GameObject</Filter>
+    </ClCompile>
+    <ClCompile Include="TitleScene.cpp">
+      <Filter>ソース ファイル\Scene\TitleScene</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneAlice.cpp">
+      <Filter>ソース ファイル\Scene\SceneAlice</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneLoveSong.cpp">
+      <Filter>ソース ファイル\Scene\SceneLoveSong</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneMainMenu.cpp">
+      <Filter>ソース ファイル\Scene\SceneMainMenu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -204,6 +219,15 @@
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
     <ClInclude Include="BackGround.h">
+      <Filter>ヘッダー ファイル\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneOption.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneMainMenu.h">
+      <Filter>ヘッダー ファイル\Scene\SceneMainMenu</Filter>
+    </ClInclude>
+    <ClInclude Include="cursor.h">
       <Filter>ヘッダー ファイル\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
