@@ -45,7 +45,7 @@ SceneLightPlane::SceneLightPlane(IOnSceneChangedListener* impl, const Parameter&
 			sozaiManager.addSound(1, (sonyaFile + std::to_string(i + 1) + ".wav").c_str());
 		}
 	}
-	for (int i = 0; i < 48; i++) {
+	for (int i = 0; i < 34; i++) {
 		if (i >= 10) {
 			sozaiManager.setSozaiMidiKey(1, eMidi((int)eMidi::C_0 + i), i);
 		}
@@ -88,10 +88,13 @@ SceneLightPlane::SceneLightPlane(IOnSceneChangedListener* impl, const Parameter&
 	sozaiManager.setMultiSound(4, false);
 	sozaiManager.setDrumFlag(4, true);
 
-	MIDI::getIns()->openMidi(0 , 0);
+	// midiÇÃìoò^
+	MIDI::getIns()->openMidi(0, 0);
+	MIDI::getIns()->openMidi(1 ,1);
 
 	// îwåiÇÃê›íË
 	backGround.loadBackImage("Assets/Sprites/images/lightPlaneBack.png");
+	backGround.setExRate(2.0 / 3.0);
 }
 
 void SceneLightPlane::update() {

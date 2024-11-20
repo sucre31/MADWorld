@@ -47,7 +47,7 @@ private:
 	static void CALLBACK MidiInProc(HMIDIIN hMidiIn, UINT MidiMsg, DWORD dwInstance, DWORD dwPara1, DWORD dwPara2);
 	// とりあえずいくつかのキーを監視
 	const static int MIDI_KEY_NUM = 256; // 255?
-	std::array<int, MIDI_KEY_NUM> _midi;      //16ボタンのpad入力状態格納
+	std::array<int, MIDI_KEY_NUM> _midi;      //16ボタンのpad入力状態格納 複数のMIDIデバイスがあるなら自動(設定可能にすべき)でマージ
 	int tmpNote;
 
 	static std::queue<MidiMessage> midiQueue;
@@ -59,6 +59,7 @@ public:
 	void closeMidi(int);
 	void update();
 	void draw();
+	TCHAR* getMidiInfo();
 	int get(eMidi eID) const;
 };
 

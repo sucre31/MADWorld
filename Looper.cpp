@@ -1,9 +1,11 @@
 #include "Looper.h"
 #include "OpeningScene.h"
 #include "TitleScene.h"
+#include "SceneOption.h"
 #include "SceneLoveSong.h"
 #include "SceneAlice.h"
 #include "SceneLightPlane.h"
+#include "SceneMainMenu.h"
 //#include "Error.h"
 //#include "Macro.h"
 #include "Keyboard.h"
@@ -67,6 +69,12 @@ void Looper::onSceneChanged(const eScene scene, const Parameter& parameter, cons
         break;
     case Title:
         _sceneStack.push(make_shared<TitleScene>(this, parameter));
+        break;
+    case Option:
+        _sceneStack.push(make_shared<SceneOption>(this, parameter));
+        break;
+    case MainMenu:
+        _sceneStack.push(make_shared<SceneMainMenu>(this, parameter));
         break;
     case LoveSong:
         _sceneStack.push(make_shared<SceneLoveSong>(this, parameter));
