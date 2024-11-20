@@ -10,7 +10,9 @@ public:
 	bool update() override;
 	void draw() const override;
 	void loadBackImage(const char* imageFileName);
+	void setExRate(double rate) { exRate = rate; };
 private:
 	int backGroundHandle;
+	double exRate;
 };
 

@@ -36,7 +36,7 @@ void MIDI::openMidi(UINT devid, int midiIndex) {
 		printfDx("Cannot regist MIDI input device %d\n", midiIndex);
 	}
 	//MIDI Inputデバイスの情報
-	midiresult = midiInGetDevCaps(0u, &midiininformation, sizeof(MIDIINCAPS));
+	midiresult = midiInGetDevCaps(devid, &midiininformation, sizeof(MIDIINCAPS));
 	if (midiresult != MMSYSERR_NOERROR) {
 		isGetInfoSucces = false;
 	}
@@ -94,6 +94,14 @@ void MIDI::draw() {
 	}
 	//DrawFormatString(0, 0, Color, "note = %u\n", tmpNote);
 }
+
+/*
+@brief 最後に開いたmidiデバイスの名前を取得
+*/
+TCHAR* MIDI::getMidiInfo() {
+	return midiininformation.szPname;
+}
+
 
 void CALLBACK MIDI::MidiInProc(HMIDIIN hMidiIn, UINT MidiMsg, DWORD dwInstance, DWORD dwPara1, DWORD dwPara2){
 	switch (MidiMsg){
