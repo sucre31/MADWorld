@@ -8,7 +8,9 @@ public:
 	void plusPos(double x, double y);
 	bool update() override;
 	void draw() const override;
-	void loadCurorImage(const char* imageFileName);
+	void loadCursorImage(const char* imageFileName);
+	int getCursorPosX() { return posX; }
+	int getCursorPosY() { return posY; }
 private:
 	int myGraphHandle;
 	double posX;

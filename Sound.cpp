@@ -11,7 +11,7 @@ Sound::Sound() {
 @brief 特定ファイルのロード
 */
 void Sound::loadLoveSongSamples() {
-    //SetCreateSoundDataType(DX_SOUNDDATATYPE_FILE);
+    SetCreateSoundDataType(DX_SOUNDDATATYPE_FILE);
     loveSongHandle[0] = myLoadSoundMem("Assets/Sounds/LoveSong/LoveSongDQ2.wav");
     loveSongHandle[1] = myLoadSoundMem("Assets/Sounds/LoveSong/drumLoop.wav");
     SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMNOPRESS);

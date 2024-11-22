@@ -67,41 +67,41 @@ void SceneLoveSong::update()
 			isMusicPlay = true;
 		}
 	}
-	if (MIDI::getIns()->get(eMidi::D_4) == 1) {
+	if (Pad::getIns()->get(ePad::down) == 1) {
 		playSampleSound(0);
 		addReviveChar("‚Ï");
 	}
-	if (MIDI::getIns()->get(eMidi::E_4) == 1) {
+	if (Pad::getIns()->get(ePad::left) == 1) {
 		playSampleSound(1);
 		addReviveChar("‚í");
 		//addReviveChar("‚¢");
 	}
-	if (MIDI::getIns()->get(eMidi::F_S4) == 1) {
+	if (Pad::getIns()->get(ePad::up) == 1) {
 		playSampleSound(2);
 		addReviveChar("‚¿");
 		addReviveChar("‚ä");
 	}
-	if (MIDI::getIns()->get(eMidi::G_4) == 1) {
+	if (Pad::getIns()->get(ePad::right) == 1) {
 		playSampleSound(3);
 		addReviveChar("‚«");
 		addReviveChar("‚ä");
 		//addReviveChar("‚ñ");
 	}
-	if (MIDI::getIns()->get(eMidi::A_4) == 1) {
+	if (Pad::getIns()->get(ePad::Y) == 1) {
 		playSampleSound(4);
 		addReviveChar("‚Í");
 		//addReviveChar("‚ ");
 		///addReviveChar("‚ñ");
 	}
-	if (MIDI::getIns()->get(eMidi::A_S4) == 1) {
+	if (Pad::getIns()->get(ePad::B) == 1) {
 		playSampleSound(5);
 		addReviveChar("‚¨");
 	}
-	if (MIDI::getIns()->get(eMidi::B_4) == 1) {
+	if (Pad::getIns()->get(ePad::A) == 1) {
 		playSampleSound(6);
 		addReviveChar("‚ª");
 	}
-	if (MIDI::getIns()->get(eMidi::C_5) == 1) {
+	if (Pad::getIns()->get(ePad::X) == 1) {
 		playSampleSound(7);
 		addReviveChar("‚µ");
 		addReviveChar("‚â");
@@ -116,7 +116,7 @@ void SceneLoveSong::update()
 		// ‚±‚±‚É’¼Ú‘‚­‚ñ‚¶‚á‚È‚­‚ÄŠÖ”—pˆÓ‚·‚×‚«‚©‚È
 		Sound::getIns()->release();
 		Image::getIns()->release();
-		_implSceneChanged->onSceneChanged(eScene::Title, parameter, stackClear);
+		_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, stackClear);
 	}
 }
 

@@ -11,4 +11,5 @@ public:
 private:
     int selectNum;
     int cursorY;
+    int musicHandle;
 };

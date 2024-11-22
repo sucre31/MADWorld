@@ -16,7 +16,7 @@ void cursor::draw() const {
 	DrawRotaGraph((int)(posX + 16), (int)(posY + 16), 1.0, 0.0, myGraphHandle, true, false);
 }
 
-void cursor::loadCurorImage(const char* imageFileName) {
+void cursor::loadCursorImage(const char* imageFileName) {
 	myGraphHandle = Image::getIns()->loadSamples(imageFileName);
 }
 

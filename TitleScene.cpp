@@ -12,6 +12,10 @@ TitleScene::TitleScene(IOnSceneChangedListener* impl, const Parameter& parameter
     SetFontSize(36);
     SetFontThickness(1);
     selectNum = 0;
+    SetCreateSoundDataType(DX_SOUNDDATATYPE_FILE);
+    musicHandle = Sound::getIns()->loadSamples("Assets/Sounds/Menu/Menu1.wav");
+    SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMNOPRESS);
+    PlaySoundMem(musicHandle, DX_PLAYTYPE_LOOP, TRUE);
 }
 
 void TitleScene::update()
@@ -27,14 +31,17 @@ void TitleScene::update()
     if (Pad::getIns()->get(ePad::A) == 1) {
         Parameter parameter;
         if (selectNum == 0) {
+            StopSoundMem(musicHandle);
             const bool stackClear = true;
             _implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, stackClear);
         }
         else if (selectNum == 1) {
+            StopSoundMem(musicHandle);
             const bool stackClear = true;
             _implSceneChanged->onSceneChanged(eScene::Alice, parameter, stackClear);
         }
         else if (selectNum == 2) {
+            StopSoundMem(musicHandle);
             const bool stackClear = true;
             _implSceneChanged->onSceneChanged(eScene::Option, parameter, stackClear);
         }
