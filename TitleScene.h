@@ -9,6 +9,10 @@ public:
     void update() override;
     void draw() const override;
 private:
+    int SEHandle[3];
     int selectNum;
     int cursorY;
+    int musicHandle;
+    int titleGraphHandle;
+    int buttonHandle[8];
 };

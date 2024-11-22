@@ -19,6 +19,7 @@ bool SystemMain::initialize() const
 	const int COLOR_BIT = 32;					//色のbit数。通常32で良いが軽くするなら16にする
 	SetGraphMode(Define::WIN_W * Define::WIN_EX, Define::WIN_H * Define::WIN_EX, COLOR_BIT);		//ゲーム画面の解像度を設定する
 	SetWindowIconID(101);						//アイコン設定
+	SetMouseDispFlag(TRUE);					// カーソル表示
 	if (DxLib_Init()) {							//DXライブラリ初期化処理
 		return false;							//異常終了したら即座にやめる
 	}

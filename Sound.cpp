@@ -2,16 +2,13 @@
 #include "Sound.h"
 
 Sound::Sound() {
-    SetCreateSoundDataType(DX_SOUNDDATATYPE_FILE);
-    titleHandle = myLoadSoundMem("Assets/Sounds/title/title.wav");
-    SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMNOPRESS);
 }
 
 /*
 @brief 特定ファイルのロード
 */
 void Sound::loadLoveSongSamples() {
-    //SetCreateSoundDataType(DX_SOUNDDATATYPE_FILE);
+    SetCreateSoundDataType(DX_SOUNDDATATYPE_FILE);
     loveSongHandle[0] = myLoadSoundMem("Assets/Sounds/LoveSong/LoveSongDQ2.wav");
     loveSongHandle[1] = myLoadSoundMem("Assets/Sounds/LoveSong/drumLoop.wav");
     SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMNOPRESS);

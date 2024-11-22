@@ -67,6 +67,12 @@
     <Filter Include="ヘッダー ファイル\Scene\SceneMainMenu">
       <UniqueIdentifier>{4e80c6fa-3192-438c-8d1c-5ac9c02bee4a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ヘッダー ファイル\GameObject\menu">
+      <UniqueIdentifier>{720ac6c3-188c-40ee-a0be-cbc97af0bd21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\GameObject\menu">
+      <UniqueIdentifier>{5fcb1dd6-f23f-4b2c-88c2-336ca2cf2ddf}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -135,9 +141,6 @@
     <ClCompile Include="SceneOption.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
-    <ClCompile Include="cursor.cpp">
-      <Filter>ソース ファイル\GameObject</Filter>
-    </ClCompile>
     <ClCompile Include="TitleScene.cpp">
       <Filter>ソース ファイル\Scene\TitleScene</Filter>
     </ClCompile>
@@ -149,6 +152,12 @@
     </ClCompile>
     <ClCompile Include="SceneMainMenu.cpp">
       <Filter>ソース ファイル\Scene\SceneMainMenu</Filter>
+    </ClCompile>
+    <ClCompile Include="gameIcon.cpp">
+      <Filter>ソース ファイル\GameObject\menu</Filter>
+    </ClCompile>
+    <ClCompile Include="cursor.cpp">
+      <Filter>ソース ファイル\GameObject\menu</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -228,7 +237,10 @@
       <Filter>ヘッダー ファイル\Scene\SceneMainMenu</Filter>
     </ClInclude>
     <ClInclude Include="cursor.h">
-      <Filter>ヘッダー ファイル\GameObject</Filter>
+      <Filter>ヘッダー ファイル\GameObject\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="gameIcon.h">
+      <Filter>ヘッダー ファイル\GameObject\menu</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

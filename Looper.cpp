@@ -11,7 +11,8 @@
 #include "Keyboard.h"
 #include "Pad.h"
 #include "MIDI.h"
-//#include "Image.h"
+#include "Image.h"
+#include "Sound.h"
 
 using namespace std;
 
@@ -58,6 +59,7 @@ bool Looper::loop() const
 */
 void Looper::onSceneChanged(const eScene scene, const Parameter& parameter, const bool stackClear)
 {
+
     if (stackClear) {
         while (!_sceneStack.empty()) {
             _sceneStack.pop();

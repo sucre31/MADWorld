@@ -63,7 +63,7 @@ void SceneAlice::update() {
 		// ‚±‚±‚É’¼Ú‘‚­‚ñ‚¶‚á‚È‚­‚ÄŠÖ”—pˆÓ‚·‚×‚«‚©‚È
 		Sound::getIns()->release();
 		Image::getIns()->release();
-		_implSceneChanged->onSceneChanged(eScene::Title, parameter, stackClear);
+		_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, stackClear);
 	}
 }
 

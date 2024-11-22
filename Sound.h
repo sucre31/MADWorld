@@ -14,7 +14,6 @@ public:
 	const int* getLoveSong() { return loveSongHandle; }
 	void loadLoveSongSamples();
 	int loadSamples(const char*);
-	const int getTitleHandle() { return titleHandle; }
 private:
 	int myLoadSoundMem(char*);
 	int myLoadSoundMem(const char*);
