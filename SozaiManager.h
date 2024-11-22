@@ -19,6 +19,7 @@ public:
 	void changeTopLayer(int sozaiId);
 	void setMultiSound(int sozaiId, bool flag);
 	void setDrumFlag(int, bool);
+	void setPadReleaseStop(int, bool);
 private:
 	static const int limitOfSozai = 16;
 	int validSozaiNum;

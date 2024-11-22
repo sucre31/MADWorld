@@ -34,15 +34,33 @@ TitleScene::TitleScene(IOnSceneChangedListener* impl, const Parameter& parameter
 
 void TitleScene::update()
 {
-    if (Pad::getIns()->get(ePad::up) == 1) {
-        PlaySoundMem(SEHandle[0], DX_PLAYTYPE_BACK, TRUE);
-        selectNum = (selectNum + 3) % 4;
-        return;
+    int tmpPadUp = Pad::getIns()->get(ePad::up);
+    int tmpPadDown = Pad::getIns()->get(ePad::down);
+    if (tmpPadUp >= 1) {
+        if (tmpPadUp == 1 || (GetNowCount() - keyUpTime > 100 && tmpPadUp != 1)) {
+            PlaySoundMem(SEHandle[0], DX_PLAYTYPE_BACK, TRUE);
+            selectNum = (selectNum + 3) % 4;
+            if (tmpPadUp == 1) {
+                keyUpTime = GetNowCount() + 500;
+            }
+            else {
+                keyUpTime = GetNowCount();
+            }
+            return;
+        }
     }
-    if (Pad::getIns()->get(ePad::down) == 1) {
-        PlaySoundMem(SEHandle[0], DX_PLAYTYPE_BACK, TRUE);
-        selectNum = ++selectNum % 4;
-        return;
+    if (tmpPadDown >= 1) {
+        if (tmpPadDown == 1 || (GetNowCount() - keyDownTime > 100 && tmpPadDown != 1)) {
+            PlaySoundMem(SEHandle[0], DX_PLAYTYPE_BACK, TRUE);
+            selectNum = ++selectNum % 4;
+            if (tmpPadDown == 1) {
+                keyDownTime = GetNowCount() + 500;
+            }
+            else {
+                keyDownTime = GetNowCount();
+            }
+            return;
+        }
     }
     if (Pad::getIns()->get(ePad::A) == 1) {
         Parameter parameter;
@@ -56,7 +74,7 @@ void TitleScene::update()
             PlaySoundMem(SEHandle[1], DX_PLAYTYPE_BACK, TRUE);
             StopSoundMem(musicHandle);
             const bool stackClear = true;
-            _implSceneChanged->onSceneChanged(eScene::Alice, parameter, stackClear);
+            _implSceneChanged->onSceneChanged(eScene::Dontaco, parameter, stackClear);
         }
         else if (selectNum == 2) {
             PlaySoundMem(SEHandle[1], DX_PLAYTYPE_BACK, TRUE);
@@ -96,10 +114,10 @@ void TitleScene::draw() const
     DrawGraph(0, 0, titleGraphHandle, FALSE);
     for (int i = 0; i < 4; i++) {
         if (selectNum == i) {
-            DrawGraph(650, 260 + 120 * i, buttonHandle[i * 2 + 1], TRUE);
+            DrawGraph(650 , 260 + 120 * i, buttonHandle[i * 2 + 1], TRUE);
         }
         else {
-            DrawGraph(650, 260 + 120 * i, buttonHandle[i * 2], TRUE);
+            DrawGraph(650 + 100, 260 + 120 * i, buttonHandle[i * 2], TRUE);
         }
     }
     switch (selectNum) {

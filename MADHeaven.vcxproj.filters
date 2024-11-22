@@ -159,6 +159,9 @@
     <ClCompile Include="cursor.cpp">
       <Filter>ソース ファイル\GameObject\menu</Filter>
     </ClCompile>
+    <ClCompile Include="SceneDontaco.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleScene.h">
@@ -241,6 +244,9 @@
     </ClInclude>
     <ClInclude Include="gameIcon.h">
       <Filter>ヘッダー ファイル\GameObject\menu</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneDontaco.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

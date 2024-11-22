@@ -6,6 +6,7 @@
 #include "SceneAlice.h"
 #include "SceneLightPlane.h"
 #include "SceneMainMenu.h"
+#include "SceneDontaco.h"
 //#include "Error.h"
 //#include "Macro.h"
 #include "Keyboard.h"
@@ -86,6 +87,9 @@ void Looper::onSceneChanged(const eScene scene, const Parameter& parameter, cons
         break;
     case LightPlane:
         _sceneStack.push(make_shared<SceneLightPlane>(this, parameter));
+        break;
+    case Dontaco:
+        _sceneStack.push(make_shared<SceneDontaco>(this, parameter));
         break;
     //default:
     //    ERR("ë∂ç›ÇµÇ»Ç¢ÉVÅ[Éì");

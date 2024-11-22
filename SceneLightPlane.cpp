@@ -101,6 +101,7 @@ void SceneLightPlane::update() {
 	sozaiManager.update();
 	if (Pad::getIns()->get(ePad::start) == 1) {
 		MIDI::getIns()->closeMidi(0);
+		MIDI::getIns()->closeMidi(1);
 		clsDx();
 		// ƒƒjƒ…[‚É–ß‚é
 		Parameter parameter;

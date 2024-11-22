@@ -19,5 +19,6 @@ private:
     BackGround backGround;
     int musicHandle;
     gameIcon icon[iconNum];
+    LONGLONG  prevTime;
 };
 

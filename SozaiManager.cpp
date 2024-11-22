@@ -92,9 +92,21 @@ void SozaiManager::setMultiSound(int sozaiNum, bool flag) {
 	}
 }
 
+/*
+@brief ドラム用にmidiのオフ情報を無視する
+*/
 void SozaiManager::setDrumFlag(int sozaiNum, bool flag) {
 	if (sozaiNum < validSozaiNum) {
 		sozai[sozaiNum]->setIsDrum(flag);
+	}
+}
+
+/*
+@brief ドラム用にmidiのオフ情報を無視する
+*/
+void SozaiManager::setPadReleaseStop(int sozaiNum, bool flag) {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->setPadReleaseStop(flag);
 	}
 }
 

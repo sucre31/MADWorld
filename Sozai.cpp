@@ -5,7 +5,7 @@
 #include "Pad.h"
 #include "MIDI.h"
 
-Sozai::Sozai() {
+Sozai::Sozai() :enablePadPlayStop(false) {
 	x = 0;
 	y = 0;
 	transX = 198;
@@ -39,8 +39,8 @@ Sozai::Sozai() {
 bool Sozai::update() {
 	for (int i = 0; i < validPadNum; i++) {
 		int tmpPadKey = triggerPad[i];
-		if (isPadSoundPlay[i] == true && MIDI::getIns()->get(eMidi(tmpPadKey)) == 0) {
-			StopSoundMem(mySoundHandle[midiSoundIndex[i]]);
+		if (isPadSoundPlay[i] == true && Pad::getIns()->get(ePad(tmpPadKey)) == 0 && enablePadPlayStop) {
+			StopSoundMem(mySoundHandle[padSoundIndex[i]]);
 			numOfPlayingSound--;
 			isPadSoundPlay[i] = false;
 		}

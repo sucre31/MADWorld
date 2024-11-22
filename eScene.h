@@ -7,5 +7,6 @@ enum eScene {
 	MainMenu,
 	LoveSong,
 	Alice,
-	LightPlane
+	LightPlane,
+	Dontaco
 };

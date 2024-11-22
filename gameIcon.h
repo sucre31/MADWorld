@@ -22,5 +22,6 @@ private:
 	int thumbnailHandle;
 	double thumbnailRate;
 	bool isCursorOn;
+
 };
 

@@ -157,6 +157,7 @@
     <ClCompile Include="Pad.cpp" />
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="SceneAlice.cpp" />
+    <ClCompile Include="SceneDontaco.cpp" />
     <ClCompile Include="SceneLightPlane.cpp" />
     <ClCompile Include="SceneLoveSong.cpp" />
     <ClCompile Include="SceneMainMenu.cpp" />
@@ -186,6 +187,7 @@
     <ClInclude Include="Pad.h" />
     <ClInclude Include="Parameter.h" />
     <ClInclude Include="SceneAlice.h" />
+    <ClInclude Include="SceneDontaco.h" />
     <ClInclude Include="SceneLightPlane.h" />
     <ClInclude Include="SceneLoveSong.h" />
     <ClInclude Include="SceneMainMenu.h" />

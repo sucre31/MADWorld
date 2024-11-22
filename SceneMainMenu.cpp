@@ -3,6 +3,7 @@
 #include "Sound.h"
 #include "Image.h"
 #include "Pad.h"
+#include "FpsControl.h"
 
 SceneMainMenu::SceneMainMenu(IOnSceneChangedListener* impl, const Parameter& parameter) : validIconNum(0) , selectIconNo(-1), AbstractScene(impl, parameter)
 {
@@ -23,14 +24,18 @@ SceneMainMenu::SceneMainMenu(IOnSceneChangedListener* impl, const Parameter& par
 		validIconNum++;
 	}
 	SetMouseDispFlag(FALSE);	// カーソル非表示
+	prevTime = GetNowHiPerformanceCount();
 }
 
 void SceneMainMenu::update()
 {
-	double speedRate = 2.0;
 	int cursorX, cursorY;
+	LONGLONG curTime = GetNowHiPerformanceCount();
+	LONGLONG deltaTime = curTime - prevTime;
+	prevTime = curTime;
 	cursorX = cursorIns.getCursorPosX();
 	cursorY = cursorIns.getCursorPosY();
+	double speedRate = 2.0 * (deltaTime / 500);
 	selectIconNo = -1;
 	bool isHit;
 
@@ -43,7 +48,7 @@ void SceneMainMenu::update()
 
 
 	if (Pad::getIns()->get(ePad::Y) >= 1) {
-		speedRate = 3.0;
+		speedRate = 3.0 * (deltaTime / 500);
 	}
 	if (Pad::getIns()->get(ePad::A) >= 1) {
 		// アイコンあればシーンチェンジ

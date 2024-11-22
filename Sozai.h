@@ -26,6 +26,7 @@ public:
 	int getMidiSoundIndex(int num) { return midiSoundIndex[num]; }
 	void setMultiSound(bool flag) { enableMultiSound = flag; }
 	void setIsDrum(bool flag) { isDrum = flag; }
+	void setPadReleaseStop(bool flag) { enablePadPlayStop = flag; }
 private:
 	static const int maxSozai = 88;
 	static const int maxPadSozai = 16;
@@ -54,5 +55,6 @@ private:
 	bool enableMultiSound;
 	int prevTime;
 	bool isDrum;							// Ä¶‚ğ~‚ß‚È‚­‚·‚é
+	bool enablePadPlayStop;					// ƒL[‚©‚çw‚ğ—£‚µ‚Ä‚àÄ¶’â~
 };
 

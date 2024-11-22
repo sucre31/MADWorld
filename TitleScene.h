@@ -15,4 +15,6 @@ private:
     int musicHandle;
     int titleGraphHandle;
     int buttonHandle[8];
+    int keyUpTime;
+    int keyDownTime;
 };
