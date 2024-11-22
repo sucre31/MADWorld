@@ -2,9 +2,6 @@
 #include "Sound.h"
 
 Sound::Sound() {
-    SetCreateSoundDataType(DX_SOUNDDATATYPE_FILE);
-    titleHandle = myLoadSoundMem("Assets/Sounds/title/title.wav");
-    SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMNOPRESS);
 }
 
 /*

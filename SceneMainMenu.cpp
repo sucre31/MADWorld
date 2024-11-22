@@ -22,6 +22,7 @@ SceneMainMenu::SceneMainMenu(IOnSceneChangedListener* impl, const Parameter& par
 		icon[i].enableIconFunc(true);
 		validIconNum++;
 	}
+	SetMouseDispFlag(FALSE);	// カーソル非表示
 }
 
 void SceneMainMenu::update()
@@ -48,6 +49,7 @@ void SceneMainMenu::update()
 		// アイコンあればシーンチェンジ
 		int sceneNum = getIconScene(selectIconNo);
 		if (sceneNum != -1) {
+			SetMouseDispFlag(TRUE);
 			Parameter parameter;
 			StopSoundMem(musicHandle);
 			const bool stackClear = true;
@@ -56,6 +58,7 @@ void SceneMainMenu::update()
 	}
 	if (Pad::getIns()->get(ePad::B) == 1) {
 		StopSoundMem(musicHandle);
+		SetMouseDispFlag(TRUE);
 		Parameter parameter;
 		const bool stackClear = false;
 		_implSceneChanged->onSceneChanged(eScene::Title, parameter, stackClear);

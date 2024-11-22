@@ -9,6 +9,9 @@ public:
     void update() override;
     void draw() const override;
 private:
+    int musicHandle;
+    int SEHandle;
     bool isStart;
+    int titleGraphHandle;
 };
 
