@@ -13,7 +13,7 @@ public:
 	void setPosX(int xVal) { x = xVal; }
 	void setPosY(int yVal) { y = yVal; }
 	void setExRate(double val) { exRate = val; }
-	void setSampleMovie(const char* fileName);
+	void addSprite(const char* fileName);
 	void setSampleSound(const char * fileName);
 	void playSample(int, bool);
 	void setTriggerPad(int padEnum, int indexNum);
@@ -27,17 +27,22 @@ public:
 	void setMultiSound(bool flag) { enableMultiSound = flag; }
 	void setIsDrum(bool flag) { isDrum = flag; }
 	void setPadReleaseStop(bool flag) { enablePadPlayStop = flag; }
+	void setUseMovie(bool flag) { isMovie = flag; }
+	void setUseTurn(bool flag) { enableTurn = flag; }
 private:
 	static const int maxSozai = 88;
 	static const int maxPadSozai = 16;
 	static const int maxMidiSozai = 88;
+	static const int maxSpriteNum = 10;
 	int myId;								// managerクラスの管理番号
 	int x;
 	int y;
 	int transX;
 	int transY;
 	double exRate;
-	int myGrapghHandle;
+	int myGrapghHandle[maxSpriteNum];				
+	int validGraphNum;
+	int curGraphNum;
 	int mySoundHandle[maxSozai];
 	bool enableTurn;
 	bool turnFlag;
@@ -56,5 +61,10 @@ private:
 	int prevTime;
 	bool isDrum;							// 再生を止めなくする
 	bool enablePadPlayStop;					// キーから指を離しても再生停止
+	bool isMovie;
+	bool spritePlay;						// 映像再生
+	int AnimeNum;							// 現在のスプライトの再生番号 
+	int timeForAnime;
+	int playRate;							// 映像再生速度(ミリ秒？)
 };
 

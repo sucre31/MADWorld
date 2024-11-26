@@ -17,7 +17,7 @@ void SozaiManager::makeSozai(const char* soundFileName, const char* imageFileNam
 		sozai[sozaiNum] = new Sozai();
 		validSozaiNum++;
 		sozai[sozaiNum]->setSampleSound(soundFileName);
-		sozai[sozaiNum]->setSampleMovie(imageFileName);
+		sozai[sozaiNum]->addSprite(imageFileName);
 	}
 }
 
@@ -33,7 +33,7 @@ void SozaiManager::makeSozai(const char* soundFileName, const char* imageFileNam
 		int sozaiNum = validSozaiNum;
 		sozai[sozaiNum] = new Sozai();
 		sozai[sozaiNum]->setSampleSound(soundFileName);
-		sozai[sozaiNum]->setSampleMovie(imageFileName);
+		sozai[sozaiNum]->addSprite(imageFileName);
 		sozai[sozaiNum]->setPosX(x);
 		sozai[sozaiNum]->setPosY(y);
 		sozai[sozaiNum]->setMyId(validSozaiNum);
@@ -43,6 +43,10 @@ void SozaiManager::makeSozai(const char* soundFileName, const char* imageFileNam
 
 void SozaiManager::addSound(int sozaiNum, const char* soundFileName) {
 	sozai[sozaiNum]->setSampleSound(soundFileName);
+}
+
+void SozaiManager::addSprites(int sozaiNum, const char* soundFileName) {
+	sozai[sozaiNum]->addSprite(soundFileName);
 }
 
 /*
@@ -107,6 +111,21 @@ void SozaiManager::setDrumFlag(int sozaiNum, bool flag) {
 void SozaiManager::setPadReleaseStop(int sozaiNum, bool flag) {
 	if (sozaiNum < validSozaiNum) {
 		sozai[sozaiNum]->setPadReleaseStop(flag);
+	}
+}
+
+/*
+@brief “®‰æ‚©‰æ‘œ‚Ì˜A”Ô‚©Žw’è
+*/
+void SozaiManager::setMovieFlag(int sozaiNum, bool flag) {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->setUseMovie(flag);
+	}
+}
+
+void SozaiManager::setReverseFlag(int sozaiNum, bool flag) {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->setUseTurn(flag);
 	}
 }
 

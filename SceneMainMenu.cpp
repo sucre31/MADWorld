@@ -97,7 +97,7 @@ void SceneMainMenu::draw() const
 int SceneMainMenu::getIconScene(int iconNum) {
 	switch (iconNum) {
 	case 0:
-		return -1;
+		return eScene::Sonya;
 	case 1:
 		return eScene::LoveSong;
 	case 2:

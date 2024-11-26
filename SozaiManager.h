@@ -16,10 +16,13 @@ public:
 	void setSozaiEx(int sozaiNum, double val);
 	void setSozaiPos(int sozaiNum, int valX, int valY);
 	void addSound(int sozaiNum, const char* soundFileName);
+	void addSprites(int sozaiNum, const char* soundFileName);
 	void changeTopLayer(int sozaiId);
 	void setMultiSound(int sozaiId, bool flag);
 	void setDrumFlag(int, bool);
 	void setPadReleaseStop(int, bool);
+	void setMovieFlag(int, bool);
+	void setReverseFlag(int, bool);
 private:
 	static const int limitOfSozai = 16;
 	int validSozaiNum;

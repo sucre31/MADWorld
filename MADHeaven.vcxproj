@@ -168,6 +168,7 @@
     <ClCompile Include="SozaiManager.cpp" />
     <ClCompile Include="SystemMain.cpp" />
     <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="VsSonya.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractScene.h" />
@@ -198,6 +199,7 @@
     <ClInclude Include="SozaiManager.h" />
     <ClInclude Include="SystemMain.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="VsSonya.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

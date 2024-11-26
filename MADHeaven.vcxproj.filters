@@ -162,6 +162,9 @@
     <ClCompile Include="SceneDontaco.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="VsSonya.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleScene.h">
@@ -246,6 +249,9 @@
       <Filter>ヘッダー ファイル\GameObject\menu</Filter>
     </ClInclude>
     <ClInclude Include="SceneDontaco.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="VsSonya.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
     </ClInclude>
   </ItemGroup>

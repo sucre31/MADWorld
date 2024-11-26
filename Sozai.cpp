@@ -5,7 +5,7 @@
 #include "Pad.h"
 #include "MIDI.h"
 
-Sozai::Sozai() :enablePadPlayStop(false) {
+Sozai::Sozai() :validGraphNum(0), enablePadPlayStop(false) {
 	x = 0;
 	y = 0;
 	transX = 198;
@@ -33,10 +33,21 @@ Sozai::Sozai() :enablePadPlayStop(false) {
 	enableMultiSound = false;
 	prevTime = GetNowCount();
 	numOfPlayingSound = 0;
+	curGraphNum = 0;
 	isDrum = false;
+	isMovie = false;
+	spritePlay = false;
+	playRate = 83;
 }
 
 bool Sozai::update() {
+	if (spritePlay) {
+		curGraphNum = ( GetNowCount() - timeForAnime ) / playRate;
+		if (curGraphNum >= validGraphNum) {
+			curGraphNum = validGraphNum - 1;
+			spritePlay = false;
+		}
+	}
 	for (int i = 0; i < validPadNum; i++) {
 		int tmpPadKey = triggerPad[i];
 		if (isPadSoundPlay[i] == true && Pad::getIns()->get(ePad(tmpPadKey)) == 0 && enablePadPlayStop) {
@@ -61,11 +72,11 @@ bool Sozai::update() {
 void Sozai::draw() const {
 	if (enableMultiSound) {
 		for (int i = 0; i < numOfPlayingSound; i++) {
-			DrawRotaGraph(x + transX * (numOfPlayingSound - 1 - i), y + transY * (numOfPlayingSound - 1 - i), exRate, 0, myGrapghHandle, FALSE, (enableTurn && turnFlag));
+			DrawRotaGraph(x + transX * (numOfPlayingSound - 1 - i), y + transY * (numOfPlayingSound - 1 - i), exRate, 0, myGrapghHandle[curGraphNum], TRUE, (enableTurn && turnFlag));
 		}
 	}
 	else {
-		DrawRotaGraph(x, y, exRate, 0, myGrapghHandle, FALSE, (enableTurn && turnFlag));
+		DrawRotaGraph(x, y, exRate, 0, myGrapghHandle[curGraphNum], TRUE, (enableTurn && turnFlag));
 	}
 }
 
@@ -129,13 +140,27 @@ void Sozai::playSample(int sampleNum, bool isMidi) {
 			}
 		}
 	}
+
 	// 映像も画像の連番として処理できるように←無駄がない)
-	SeekMovieToGraph(myGrapghHandle, 0);
-	PlayMovieToGraph(myGrapghHandle);
+	if (isMovie) {
+		SeekMovieToGraph(myGrapghHandle[0], 0);
+		PlayMovieToGraph(myGrapghHandle[0]);
+	}
+	else {
+		// 連番pngを再生する処理
+		spritePlay = true;
+		timeForAnime = GetNowCount();
+	}
 }
 
-void Sozai::setSampleMovie(const char* fileName) {
-	myGrapghHandle = Image::getIns()->loadSamples(fileName);
+/*
+@brief 連番画像を追加しアニメーション　1素材につき1動画想定
+*/
+void Sozai::addSprite(const char* fileName) {
+	if (validGraphNum < maxSpriteNum) {
+		myGrapghHandle[validGraphNum] = Image::getIns()->loadSamples(fileName);
+		validGraphNum++;
+	}
 }
 
 /*
