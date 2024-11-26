@@ -135,6 +135,13 @@ void SozaiManager::changeTopLayer(int sozaiId) {
 	SozaiLayerIndex[0] = sozaiId;
 }
 
+void SozaiManager::changePos(int sozaiNum, double valX, double valY) {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->setPosX(sozai[sozaiNum]->getPosX() + valX);
+		sozai[sozaiNum]->setPosY(sozai[sozaiNum]->getPosY() + valY);
+	}
+}
+
 bool SozaiManager::update() {
 	for (int i = 0; i < validSozaiNum; i++ ) {
 		for (int j = 0; j < sozai[i]->getValidPadNum(); j++) {

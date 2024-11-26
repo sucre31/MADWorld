@@ -32,10 +32,14 @@ void SceneMainMenu::update()
 	int cursorX, cursorY;
 	LONGLONG curTime = GetNowHiPerformanceCount();
 	LONGLONG deltaTime = curTime - prevTime;
-	prevTime = curTime;
+	bool move = false;
+	if (prevTime > 100) {
+		move = true;
+		prevTime = curTime;
+	}
 	cursorX = cursorIns.getCursorPosX();
 	cursorY = cursorIns.getCursorPosY();
-	double speedRate = 2.0 * (deltaTime / 500);
+	double speedRate = 2.0;
 	selectIconNo = -1;
 	bool isHit;
 
@@ -48,7 +52,7 @@ void SceneMainMenu::update()
 
 
 	if (Pad::getIns()->get(ePad::Y) >= 1) {
-		speedRate = 3.0 * (deltaTime / 500);
+		speedRate = 3.0;
 	}
 	if (Pad::getIns()->get(ePad::A) >= 1) {
 		// アイコンあればシーンチェンジ
@@ -68,17 +72,19 @@ void SceneMainMenu::update()
 		const bool stackClear = false;
 		_implSceneChanged->onSceneChanged(eScene::Title, parameter, stackClear);
 	}
-    if (Pad::getIns()->get(ePad::up) >= 1) {
-		cursorIns.plusPos(0, -0.1 * speedRate);
-    }
-	if (Pad::getIns()->get(ePad::down) >= 1) {
-		cursorIns.plusPos(0, 0.1 * speedRate);
-	}
-	if (Pad::getIns()->get(ePad::right) >= 1) {
-		cursorIns.plusPos(0.1 * speedRate, 0);
-	}
-	if (Pad::getIns()->get(ePad::left) >= 1) {
-		cursorIns.plusPos(-0.1 * speedRate, 0);
+	if (move) {
+		if (Pad::getIns()->get(ePad::up) >= 1) {
+			cursorIns.plusPos(0, -0.1 * speedRate);
+		}
+		if (Pad::getIns()->get(ePad::down) >= 1) {
+			cursorIns.plusPos(0, 0.1 * speedRate);
+		}
+		if (Pad::getIns()->get(ePad::right) >= 1) {
+			cursorIns.plusPos(0.1 * speedRate, 0);
+		}
+		if (Pad::getIns()->get(ePad::left) >= 1) {
+			cursorIns.plusPos(-0.1 * speedRate, 0);
+		}
 	}
 }
 

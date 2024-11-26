@@ -11,5 +11,6 @@ public:
 private:
 	int shiwakeMasterHandle;
 	SozaiManager sozaiManager;
+	LONGLONG prevTime;
 };
 

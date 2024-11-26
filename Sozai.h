@@ -10,8 +10,8 @@ public:
 	void setMyId(int id) { myId = id; }
 	bool update() override;
 	void draw() const override;
-	void setPosX(int xVal) { x = xVal; }
-	void setPosY(int yVal) { y = yVal; }
+	void setPosX(double xVal) { x = xVal; }
+	void setPosY(double yVal) { y = yVal; }
 	void setExRate(double val) { exRate = val; }
 	void addSprite(const char* fileName);
 	void setSampleSound(const char * fileName);
@@ -24,6 +24,8 @@ public:
 	int getValidMidiNum() { return validMidiNum; }
 	int getPadSoundIndex(int num) { return padSoundIndex[num]; }
 	int getMidiSoundIndex(int num) { return midiSoundIndex[num]; }
+	double getPosX() { return x; }
+	double getPosY() { return y; }
 	void setMultiSound(bool flag) { enableMultiSound = flag; }
 	void setIsDrum(bool flag) { isDrum = flag; }
 	void setPadReleaseStop(bool flag) { enablePadPlayStop = flag; }
@@ -35,8 +37,8 @@ private:
 	static const int maxMidiSozai = 88;
 	static const int maxSpriteNum = 10;
 	int myId;								// managerÉNÉâÉXÇÃä«óùî‘çÜ
-	int x;
-	int y;
+	double x;
+	double y;
 	int transX;
 	int transY;
 	double exRate;

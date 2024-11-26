@@ -9,8 +9,8 @@ public:
 	bool update() override;
 	void draw() const override;
 	void loadCursorImage(const char* imageFileName);
-	int getCursorPosX() { return posX; }
-	int getCursorPosY() { return posY; }
+	double getCursorPosX() { return posX; }
+	double getCursorPosY() { return posY; }
 private:
 	int myGraphHandle;
 	double posX;

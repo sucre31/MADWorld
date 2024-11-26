@@ -23,6 +23,7 @@ public:
 	void setPadReleaseStop(int, bool);
 	void setMovieFlag(int, bool);
 	void setReverseFlag(int, bool);
+	void changePos(int , double valX, double valY);
 private:
 	static const int limitOfSozai = 16;
 	int validSozaiNum;
