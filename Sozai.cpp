@@ -38,6 +38,7 @@ Sozai::Sozai() :validGraphNum(0), enablePadPlayStop(false) {
 	isMovie = false;
 	spritePlay = false;
 	playRate = 83;
+	enableMultiGraph = false;
 }
 
 bool Sozai::update() {
@@ -73,7 +74,7 @@ bool Sozai::update() {
 }
 
 void Sozai::draw() const {
-	if (enableMultiSound) {
+	if (enableMultiGraph) {
 		for (int i = 0; i < numOfPlayingSound; i++) {
 			DrawRotaGraph(x + transX * (numOfPlayingSound - 1 - i), y + transY * (numOfPlayingSound - 1 - i), exRate, 0, myGrapghHandle[curGraphNum], TRUE, (enableTurn && turnFlag));
 		}
@@ -145,6 +146,40 @@ void Sozai::playSample(int sampleNum, bool isMidi) {
 	}
 
 	// 映像も画像の連番として処理できるように←無駄がない)
+	if (isMovie) {
+		SeekMovieToGraph(myGrapghHandle[0], 0);
+		PlayMovieToGraph(myGrapghHandle[0]);
+	}
+	else {
+		// 連番pngを再生する処理
+		spritePlay = true;
+		timeForAnime = GetNowCount() - playRate; // 1フレーム進めたいからプレイレート減算してるけどバグあるかも
+	}
+}
+
+/*
+@brief 素材番号を直接指定して鳴らす
+*/
+void Sozai::playWithSoundIndex(int soundIndex) {
+	// 連続で音がなったとき(BPM基準で和音判定した方がいいかも)
+	int tmpTime = GetNowCount();
+	if (tmpTime - prevTime > 30) {
+		turnFlag = (!turnFlag);	// 反転
+	}
+	prevTime = tmpTime;
+
+	// 音声処理
+	if (curSoundIndex != -1 && !enableMultiSound) {
+		StopSoundMem(mySoundHandle[curSoundIndex]);
+	}
+	if (soundIndex >= 0 && soundIndex < maxSozai) {	// 配列の範囲内かチェック
+		if (mySoundHandle[soundIndex] != -1) {
+			curSoundIndex = soundIndex;
+			PlaySoundMem(mySoundHandle[curSoundIndex], DX_PLAYTYPE_BACK);
+			numOfPlayingSound++;
+			// playSampleと違って何番の音がなってるかとかは保持できてない
+		}
+	}
 	if (isMovie) {
 		SeekMovieToGraph(myGrapghHandle[0], 0);
 		PlayMovieToGraph(myGrapghHandle[0]);

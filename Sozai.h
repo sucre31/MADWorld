@@ -16,6 +16,7 @@ public:
 	void addSprite(const char* fileName);
 	void setSampleSound(const char * fileName);
 	void playSample(int, bool);
+	void playWithSoundIndex(int);
 	void setTriggerPad(int padEnum, int indexNum);
 	void setTriggerMidi(int midiEnum, int indexNum);
 	int getTriggerPad(int num) { return triggerPad[num]; };
@@ -27,6 +28,7 @@ public:
 	double getPosX() { return x; }
 	double getPosY() { return y; }
 	void setMultiSound(bool flag) { enableMultiSound = flag; }
+	void setMultiGraph(bool flag) { enableMultiGraph = flag; }
 	void setIsDrum(bool flag) { isDrum = flag; }
 	void setPadReleaseStop(bool flag) { enablePadPlayStop = flag; }
 	void setUseMovie(bool flag) { isMovie = flag; }
@@ -51,7 +53,7 @@ private:
 	int validSoundNum;
 	int curSoundIndex;						// 再生中の音ハンドル
 	int numOfPlayingSound;					// 再生中の音の数
-	int triggerPad[maxPadSozai];			// 動的に作った方が良いなぁ あとクラス分けるべきかも
+	int triggerPad[maxPadSozai];			// 動的に作った方が良いな あとクラス分けるべきかも
 	int padSoundIndex[maxPadSozai];
 	bool isPadSoundPlay[maxMidiSozai];
 	int validPadNum;
@@ -60,6 +62,7 @@ private:
 	bool isMidiSoundPlay[maxMidiSozai];
 	int validMidiNum;
 	bool enableMultiSound;
+	bool enableMultiGraph;
 	int prevTime;
 	bool isDrum;							// 再生を止めなくする
 	bool enablePadPlayStop;					// キーから指を離しても再生停止

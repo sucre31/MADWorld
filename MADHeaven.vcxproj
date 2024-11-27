@@ -164,6 +164,7 @@
     <ClCompile Include="SceneOption.cpp" />
     <ClCompile Include="sideBlank.cpp" />
     <ClCompile Include="Singleton.cpp" />
+    <ClCompile Include="snowBall.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sozai.cpp" />
     <ClCompile Include="SozaiManager.cpp" />
@@ -196,6 +197,7 @@
     <ClInclude Include="SceneOption.h" />
     <ClInclude Include="sideBlank.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="snowBall.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Sozai.h" />
     <ClInclude Include="SozaiManager.h" />

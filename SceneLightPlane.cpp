@@ -73,6 +73,7 @@ SceneLightPlane::SceneLightPlane(IOnSceneChangedListener* impl, const Parameter&
 	sozaiManager.setSozaiEx(2, 0.1);
 	sozaiManager.setSozaiPos(2, 780, 580);
 	sozaiManager.setMultiSound(2, true);
+	sozaiManager.setMultiGraph(2, true);
 
 	sozaiManager.makeSozai("Assets/Sounds/lightPlane/sonya/kick2.wav", "Assets/sprites/movie/sonya/kick.avi", 640, 360);
 	sozaiManager.setSozaiMidiKey(3, eMidi((int)eMidi::C_0), 0);

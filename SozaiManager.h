@@ -11,6 +11,7 @@ public:
 	void draw() const override;
 	void makeSozai(const char * soundFileName, const char * imageFileName);
 	void makeSozai(const char* soundFileName, const char* imageFileName, int x, int y);
+	void playSozai(int, int);
 	void setSozaiKey(int sozaiNum, int padNum, int soundIndex);
 	void setSozaiMidiKey(int sozaiNum, int padNum, int soundIndex);
 	void setSozaiEx(int sozaiNum, double val);
@@ -19,11 +20,13 @@ public:
 	void addSprites(int sozaiNum, const char* soundFileName);
 	void changeTopLayer(int sozaiId);
 	void setMultiSound(int sozaiId, bool flag);
+	void setMultiGraph(int sozaiId, bool flag);
 	void setDrumFlag(int, bool);
 	void setPadReleaseStop(int, bool);
 	void setMovieFlag(int, bool);
 	void setReverseFlag(int, bool);
 	void changePos(int , double valX, double valY);
+	void drawSozai(int) const;
 private:
 	static const int limitOfSozai = 16;
 	int validSozaiNum;

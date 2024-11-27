@@ -50,6 +50,15 @@ void SozaiManager::addSprites(int sozaiNum, const char* soundFileName) {
 }
 
 /*
+@brief 素材を直接ならす
+*/
+void SozaiManager::playSozai(int sozaiNum, int soundIndex) {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->playWithSoundIndex(soundIndex);
+	}
+}
+
+/*
 @brief 素材番号を受け取りキーをバインド
 */
 void SozaiManager::setSozaiKey(int sozaiNum, int padNum, int soundIndex) {
@@ -93,6 +102,15 @@ void SozaiManager::setSozaiPos(int sozaiNum, int valX, int valY) {
 void SozaiManager::setMultiSound(int sozaiNum, bool flag) {
 	if (sozaiNum < validSozaiNum) {
 		sozai[sozaiNum]->setMultiSound(flag);
+	}
+}
+
+/*
+@brief 画像が複数出てくる YTPMV用
+*/
+void SozaiManager::setMultiGraph(int sozaiNum, bool flag) {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->setMultiGraph(flag);
 	}
 }
 
@@ -167,4 +185,10 @@ void SozaiManager::draw() const {
 	}
 	// 手抜き
 	sozai[SozaiLayerIndex[0]]->draw();
+}
+
+void SozaiManager::drawSozai(int sozaiNum) const {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->draw();
+	}
 }
