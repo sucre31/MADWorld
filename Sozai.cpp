@@ -43,6 +43,9 @@ Sozai::Sozai() :validGraphNum(0), enablePadPlayStop(false) {
 bool Sozai::update() {
 	if (spritePlay) {
 		curGraphNum = ( GetNowCount() - timeForAnime ) / playRate;
+		if (curGraphNum < 0) {
+			curGraphNum = 0;
+		}
 		if (curGraphNum >= validGraphNum) {
 			curGraphNum = validGraphNum - 1;
 			spritePlay = false;
@@ -87,7 +90,7 @@ void Sozai::draw() const {
 void Sozai::setTriggerPad(int padEnum, int soundIndexNum) {
 	if (validPadNum < maxPadSozai) {
 		triggerPad[validPadNum] = padEnum;
-		midiSoundIndex[validPadNum] = soundIndexNum;
+		padSoundIndex[validPadNum] = soundIndexNum;
 		validPadNum++;
 	}
 }
@@ -149,7 +152,7 @@ void Sozai::playSample(int sampleNum, bool isMidi) {
 	else {
 		// 連番pngを再生する処理
 		spritePlay = true;
-		timeForAnime = GetNowCount();
+		timeForAnime = GetNowCount() - playRate; // 1フレーム進めたいからプレイレート減算してるけどバグあるかも
 	}
 }
 

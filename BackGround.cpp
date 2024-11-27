@@ -15,5 +15,5 @@ bool BackGround::update() {
 }
 
 void BackGround::draw() const {
-	DrawRotaGraph(Define::WIN_W / 2, Define::WIN_H / 2, exRate, 0, backGroundHandle, FALSE, FALSE);
+	DrawRotaGraph(Define::WIN_W / 2, Define::WIN_H / 2, exRate, 0, backGroundHandle, TRUE, FALSE);
 }

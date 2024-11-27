@@ -88,6 +88,11 @@ SceneLightPlane::SceneLightPlane(IOnSceneChangedListener* impl, const Parameter&
 	sozaiManager.setMultiSound(4, false);
 	sozaiManager.setDrumFlag(4, true);
 
+	// “®‰æÄ¶‚ğg—p
+	for (int i = 0; i < 5; i++) {
+		sozaiManager.setMovieFlag(i, true);
+	}
+
 	// midi‚Ì“o˜^
 	MIDI::getIns()->openMidi(0, 0);
 	MIDI::getIns()->openMidi(1 ,1);

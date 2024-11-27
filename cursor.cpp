@@ -4,8 +4,8 @@
 #include "Define.h"
 
 cursor::cursor() {
-	posX = Define::WIN_W / 2;
-	posY = Define::WIN_H / 2;
+	posX = Define::WIN_W / 2.0;
+	posY = Define::WIN_H / 2.0;
 }
 
 bool cursor::update() {

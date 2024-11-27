@@ -162,6 +162,7 @@
     <ClCompile Include="SceneLoveSong.cpp" />
     <ClCompile Include="SceneMainMenu.cpp" />
     <ClCompile Include="SceneOption.cpp" />
+    <ClCompile Include="sideBlank.cpp" />
     <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sozai.cpp" />
@@ -193,6 +194,7 @@
     <ClInclude Include="SceneLoveSong.h" />
     <ClInclude Include="SceneMainMenu.h" />
     <ClInclude Include="SceneOption.h" />
+    <ClInclude Include="sideBlank.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Sozai.h" />
