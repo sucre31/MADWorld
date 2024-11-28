@@ -16,6 +16,7 @@ private:
 	LONGLONG hitTime;
 	int SEHandle;
 	int snowBallGraph;
+	int snowBallBreakGraph;
 	bool hitChecked;
 	int snowState;			// 0:とんでる　1:ヒット　2:破壊アニメ 3:消滅
 };

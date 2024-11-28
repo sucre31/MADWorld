@@ -177,6 +177,9 @@
     <ClCompile Include="snowBall.cpp">
       <Filter>ソース ファイル\Scene\SceneSonya</Filter>
     </ClCompile>
+    <ClCompile Include="BPMManager.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleScene.h">
@@ -271,6 +274,9 @@
     </ClInclude>
     <ClInclude Include="snowBall.h">
       <Filter>ヘッダー ファイル\Scene\SceneSonya</Filter>
+    </ClInclude>
+    <ClInclude Include="BPMManager.h">
+      <Filter>ヘッダー ファイル\System</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

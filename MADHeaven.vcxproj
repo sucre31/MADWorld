@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="AbstractScene.cpp" />
     <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="BPMManager.cpp" />
     <ClCompile Include="cursor.cpp" />
     <ClCompile Include="Define.cpp" />
     <ClCompile Include="eScene.cpp" />
@@ -175,6 +176,7 @@
   <ItemGroup>
     <ClInclude Include="AbstractScene.h" />
     <ClInclude Include="BackGround.h" />
+    <ClInclude Include="BPMManager.h" />
     <ClInclude Include="cursor.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="eScene.h" />
