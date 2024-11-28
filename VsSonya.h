@@ -41,5 +41,9 @@ private:
 	int tmp16Beat;						// 1¬ß16beat
 	bool beatChanged;
 	std::vector<launch> launchList;
+	int score;
+	const int MaxScore = 73;
+	LONGLONG prevAvoidTime;					// ˜A‘±‚Å‰ñ”ğ‚³‚¹‚È‚¢
+	bool avoidFlag;
 };
 

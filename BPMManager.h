@@ -10,6 +10,7 @@ public:
 	void startMusic();
 	double getCurrentBeatNum();
 	LONGLONG getTargetBeatTime(double);
+	LONGLONG getOneBeatTime() { return 60000000 / bpm; }
 private:
 	double bpm;
 	LONGLONG BGMStartTime;

@@ -31,6 +31,7 @@ VsSonya::VsSonya(IOnSceneChangedListener* impl, const Parameter& parameter) : Ab
 	sozaiManager.setMultiSound(0, true);
 
 	sozaiManager.makeSozai("Assets/Sounds/sonya/tto.wav", "Assets/Sprites/images/sonya/sonya/sonya0.png", Define::WIN_W * 1 / 4, Define::WIN_H * 3 / 4 - 40);
+	sozaiManager.addSound(1, "Assets/Sounds/sonya/sonyaHit.wav");
 	//sozaiManager.addSprites(1, "Assets/Sprites/images/sonya/sonya/sonya1.png");
 	sozaiManager.addSprites(1, "Assets/Sprites/images/sonya/sonya/sonya2.png");
 	sozaiManager.addSprites(1, "Assets/Sprites/images/sonya/sonya/sonya3.png");
@@ -39,7 +40,7 @@ VsSonya::VsSonya(IOnSceneChangedListener* impl, const Parameter& parameter) : Ab
 	sozaiManager.addSprites(1, "Assets/Sprites/images/sonya/sonya/sonya5.png");
 	sozaiManager.addSprites(1, "Assets/Sprites/images/sonya/sonya/sonya0.png");
 	sozaiManager.setReverseFlag(1, false);
-	sozaiManager.setSozaiKey(1, ePad::A, 0);
+	//sozaiManager.setSozaiKey(1, ePad::A, 0);
 	sozaiManager.setSozaiEx(1, 0.75);
 
 	// 背景の設定
@@ -127,11 +128,16 @@ VsSonya::VsSonya(IOnSceneChangedListener* impl, const Parameter& parameter) : Ab
 	addSnowLaunch(724, 2);
 	addSnowLaunch(728, 2);
 
+	prevAvoidTime = 0;
+
 	prevTime = GetNowHiPerformanceCount();
 
 	showBar = true;
 	tmp16Beat = 0;
 	beatChanged = false;
+	avoidFlag = false;
+
+	score = 0;
 }
 
 void VsSonya::update() {
@@ -150,6 +156,7 @@ void VsSonya::update() {
 	}
 
 	if (Pad::getIns()->get(ePad::R) == 1) {
+		// 左右の黒枠非表示
 		showBar = !showBar;
 	}
 
@@ -173,17 +180,44 @@ void VsSonya::update() {
 
 	for (int i = 0; i < snowBallPtr.size(); i++) {
 		snowBallPtr[i]->update();
-		if (snowBallPtr[i]->getState() == 1) {
-			// 雪玉hit
-			sozaiManager.playSozai(1, 0);
-			snowBallPtr[i]->setState(2);
+		if (snowBallPtr[i]->getState() == stateSnow::CHECK) {
+			// 回避タイミング
+			if (Pad::getIns()->get(ePad::A) == 1 && avoidFlag == false) {
+				// 回避成功
+				snowBallPtr[i]->setState(stateSnow::AVOID);
+			}
 		}
-		if (snowBallPtr[i]->getState() == 3) {
+		if (snowBallPtr[i]->getState() == stateSnow::SONYAHIT) {
+			// 雪玉ソーニャhit
+			sozaiManager.playSozai(1, 1);
+			snowBallPtr[i]->setState(stateSnow::DESTROY);
+		}
+		if (snowBallPtr[i]->getState() == stateSnow::WALLHIT) {
+			// 雪玉壁hit
+			snowBallPtr[i]->setState(stateSnow::DESTROY);
+			score++; // 内部得点加算
+		}
+		if (snowBallPtr[i]->getState() == stateSnow::KILL) {
 			// 雪玉消滅
-			snowBallPtr.erase(snowBallPtr.begin() + i);
+			snowBallPtr.erase(snowBallPtr.begin() + i);	// 重いらしい
 			i--;
 		}
 	}
+
+	// 回避
+	if (Pad::getIns()->get(ePad::A) == 1) {
+		if (avoidFlag == false) {
+			prevAvoidTime = curTime;
+			sozaiManager.playSozai(1, 0);
+			avoidFlag = true;
+		}
+	}
+
+	if (curTime - prevAvoidTime > bpmManager.getOneBeatTime() / 2) {
+		avoidFlag = false;
+	}
+
+	sideBarL.setState(9 * (score / 73.0));
 }
 
 /*
@@ -226,5 +260,5 @@ void VsSonya::draw() const{
 		sideBarL.draw();
 		sideBarR.draw();
 	}
-
+	DrawFormatString(0,0, GetColor(255, 190, 0), "SCORE:%d", score);
 }

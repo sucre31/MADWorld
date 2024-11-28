@@ -7,7 +7,10 @@ public:
 	~sideBlank() = default;
 	bool update() override;
 	void draw() const override;
+	void setState(int state);
 public:
-	int imageHandle;
+	static const int imageNum = 9;
+	int imageHandle[imageNum];
+	int breakState;
 };
 

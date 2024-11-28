@@ -1,5 +1,16 @@
 #pragma once
 #include "GameObject.h"
+
+enum stateSnow {
+	FLYING,
+	CHECK,
+	SONYAHIT,
+	AVOID,
+	WALLHIT,
+	DESTROY,
+	KILL
+};
+
 class snowBall : public GameObject
 {
 public:
@@ -17,7 +28,7 @@ private:
 	int SEHandle;
 	int snowBallGraph;
 	int snowBallBreakGraph;
-	bool hitChecked;
-	int snowState;			// 0:とんでる　1:ヒット　2:破壊アニメ 3:消滅
+	int snowState;			// 0:とんでる　1:許容タイミング　2:ソーニャヒット 3:回避成功 4:壁ヒット 5:破壊アニメ 6:消滅
+	const int marginTime = 50000;	// 許容時間
 };
 
