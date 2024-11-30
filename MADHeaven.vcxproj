@@ -163,6 +163,7 @@
     <ClCompile Include="SceneLoveSong.cpp" />
     <ClCompile Include="SceneMainMenu.cpp" />
     <ClCompile Include="SceneOption.cpp" />
+    <ClCompile Include="SceneStarguitar.cpp" />
     <ClCompile Include="sideBlank.cpp" />
     <ClCompile Include="Singleton.cpp" />
     <ClCompile Include="snowBall.cpp" />
@@ -197,6 +198,7 @@
     <ClInclude Include="SceneLoveSong.h" />
     <ClInclude Include="SceneMainMenu.h" />
     <ClInclude Include="SceneOption.h" />
+    <ClInclude Include="SceneStarguitar.h" />
     <ClInclude Include="sideBlank.h" />
     <ClInclude Include="Singleton.h" />
     <ClInclude Include="snowBall.h" />

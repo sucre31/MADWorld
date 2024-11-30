@@ -37,7 +37,7 @@ private:
 	static const int maxSozai = 88;
 	static const int maxPadSozai = 16;
 	static const int maxMidiSozai = 88;
-	static const int maxSpriteNum = 10;
+	static const int maxSpriteNum = 30;
 	int myId;								// managerƒNƒ‰ƒX‚ÌŠÇ—”Ô†
 	double x;
 	double y;

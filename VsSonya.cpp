@@ -217,7 +217,7 @@ void VsSonya::update() {
 		avoidFlag = false;
 	}
 
-	sideBarL.setState(9 * (score / 73.0));
+	sideBarL.setState(9 * (score / 73.0 + ((73 / 9.0) / 73 / 2) ) );
 }
 
 /*

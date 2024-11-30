@@ -18,8 +18,10 @@ SceneMainMenu::SceneMainMenu(IOnSceneChangedListener* impl, const Parameter& par
 	icon[1].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail2.png");
 	icon[2].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail3.png");
 	icon[3].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail4.png");
-	for (int i = 0; i < 4; i++) {
-		icon[i].setPos(130, 160 + i * 133);
+	icon[3].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail4.png");
+	icon[4].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail5.png");
+	for (int i = 0; i < iconNum; i++) {
+		icon[i].setPos(130 + 240 * (i / 4), 160 + (i % 4) * 133);
 		icon[i].enableIconFunc(true);
 		validIconNum++;
 	}
@@ -58,7 +60,7 @@ void SceneMainMenu::update()
 		// アイコンあればシーンチェンジ
 		int sceneNum = getIconScene(selectIconNo);
 		if (sceneNum != -1) {
-			SetMouseDispFlag(TRUE);
+			//SetMouseDispFlag(TRUE);
 			Parameter parameter;
 			StopSoundMem(musicHandle);
 			const bool stackClear = true;
@@ -67,7 +69,7 @@ void SceneMainMenu::update()
 	}
 	if (Pad::getIns()->get(ePad::B) == 1) {
 		StopSoundMem(musicHandle);
-		SetMouseDispFlag(TRUE);
+		//SetMouseDispFlag(TRUE);
 		Parameter parameter;
 		const bool stackClear = false;
 		_implSceneChanged->onSceneChanged(eScene::Title, parameter, stackClear);
@@ -110,6 +112,8 @@ int SceneMainMenu::getIconScene(int iconNum) {
 		return eScene::LightPlane;
 	case 3:
 		return eScene::Alice;
+	case 4:
+		return eScene::Starguitar;
 	default:
 		return -1;
 	}

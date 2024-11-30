@@ -9,5 +9,6 @@ enum eScene {
 	Alice,
 	LightPlane,
 	Dontaco,
-	Sonya
+	Sonya,
+	Starguitar
 };
