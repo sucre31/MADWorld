@@ -17,7 +17,7 @@ void SozaiManager::makeSozai(const char* soundFileName, const char* imageFileNam
 		sozai[sozaiNum] = new Sozai();
 		validSozaiNum++;
 		sozai[sozaiNum]->setSampleSound(soundFileName);
-		sozai[sozaiNum]->setSampleMovie(imageFileName);
+		sozai[sozaiNum]->addSprite(imageFileName);
 	}
 }
 
@@ -33,7 +33,7 @@ void SozaiManager::makeSozai(const char* soundFileName, const char* imageFileNam
 		int sozaiNum = validSozaiNum;
 		sozai[sozaiNum] = new Sozai();
 		sozai[sozaiNum]->setSampleSound(soundFileName);
-		sozai[sozaiNum]->setSampleMovie(imageFileName);
+		sozai[sozaiNum]->addSprite(imageFileName);
 		sozai[sozaiNum]->setPosX(x);
 		sozai[sozaiNum]->setPosY(y);
 		sozai[sozaiNum]->setMyId(validSozaiNum);
@@ -43,6 +43,19 @@ void SozaiManager::makeSozai(const char* soundFileName, const char* imageFileNam
 
 void SozaiManager::addSound(int sozaiNum, const char* soundFileName) {
 	sozai[sozaiNum]->setSampleSound(soundFileName);
+}
+
+void SozaiManager::addSprites(int sozaiNum, const char* soundFileName) {
+	sozai[sozaiNum]->addSprite(soundFileName);
+}
+
+/*
+@brief 素材を直接ならす
+*/
+void SozaiManager::playSozai(int sozaiNum, int soundIndex) {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->playWithSoundIndex(soundIndex);
+	}
 }
 
 /*
@@ -93,6 +106,15 @@ void SozaiManager::setMultiSound(int sozaiNum, bool flag) {
 }
 
 /*
+@brief 画像が複数出てくる YTPMV用
+*/
+void SozaiManager::setMultiGraph(int sozaiNum, bool flag) {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->setMultiGraph(flag);
+	}
+}
+
+/*
 @brief ドラム用にmidiのオフ情報を無視する
 */
 void SozaiManager::setDrumFlag(int sozaiNum, bool flag) {
@@ -110,10 +132,41 @@ void SozaiManager::setPadReleaseStop(int sozaiNum, bool flag) {
 	}
 }
 
+/*
+@brief 動画か画像の連番か指定
+*/
+void SozaiManager::setMovieFlag(int sozaiNum, bool flag) {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->setUseMovie(flag);
+	}
+}
+
+void SozaiManager::setReverseFlag(int sozaiNum, bool flag) {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->setUseTurn(flag);
+	}
+}
+
+/*
+@brief 素材の再生速度変更
+*/
+void SozaiManager::setPlayRate(int sozaiNum, int rateVal) {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->setPlayRate(rateVal);
+	}
+}
+
 
 void SozaiManager::changeTopLayer(int sozaiId) {
 	// 手抜き ちゃんとソートされるようになおす
 	SozaiLayerIndex[0] = sozaiId;
+}
+
+void SozaiManager::changePos(int sozaiNum, double valX, double valY) {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->setPosX(sozai[sozaiNum]->getPosX() + valX);
+		sozai[sozaiNum]->setPosY(sozai[sozaiNum]->getPosY() + valY);
+	}
 }
 
 bool SozaiManager::update() {
@@ -141,4 +194,10 @@ void SozaiManager::draw() const {
 	}
 	// 手抜き
 	sozai[SozaiLayerIndex[0]]->draw();
+}
+
+void SozaiManager::drawSozai(int sozaiNum) const {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->draw();
+	}
 }

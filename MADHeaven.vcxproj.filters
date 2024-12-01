@@ -73,6 +73,12 @@
     <Filter Include="ソース ファイル\GameObject\menu">
       <UniqueIdentifier>{5fcb1dd6-f23f-4b2c-88c2-336ca2cf2ddf}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Scene\SceneSonya">
+      <UniqueIdentifier>{0456a2be-8544-4e17-9b06-e6fbefa11e0c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\SceneSonya">
+      <UniqueIdentifier>{38e21e7b-b75e-41be-abcf-8f491a0060ef}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -162,6 +168,24 @@
     <ClCompile Include="SceneDontaco.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="VsSonya.cpp">
+      <Filter>ソース ファイル\Scene\SceneSonya</Filter>
+    </ClCompile>
+    <ClCompile Include="sideBlank.cpp">
+      <Filter>ソース ファイル\Scene\SceneSonya</Filter>
+    </ClCompile>
+    <ClCompile Include="snowBall.cpp">
+      <Filter>ソース ファイル\Scene\SceneSonya</Filter>
+    </ClCompile>
+    <ClCompile Include="BPMManager.cpp">
+      <Filter>ソース ファイル\System</Filter>
+    </ClCompile>
+    <ClCompile Include="SceneStarguitar.cpp">
+      <Filter>ソース ファイル\Scene</Filter>
+    </ClCompile>
+    <ClCompile Include="StarguitarDrums.cpp">
+      <Filter>ソース ファイル\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleScene.h">
@@ -247,6 +271,24 @@
     </ClInclude>
     <ClInclude Include="SceneDontaco.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="VsSonya.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSonya</Filter>
+    </ClInclude>
+    <ClInclude Include="sideBlank.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSonya</Filter>
+    </ClInclude>
+    <ClInclude Include="snowBall.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSonya</Filter>
+    </ClInclude>
+    <ClInclude Include="BPMManager.h">
+      <Filter>ヘッダー ファイル\System</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneStarguitar.h">
+      <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="StarguitarDrums.h">
+      <Filter>ヘッダー ファイル\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

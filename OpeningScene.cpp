@@ -7,6 +7,7 @@
 
 OpeningScene::OpeningScene(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter)
 {
+    SetMouseDispFlag(FALSE); // カーソル非表示
     ChangeFont("AR Pゴシック体S");
     SetFontSpace(1);
     SetFontSize(50);

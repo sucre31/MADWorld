@@ -141,6 +141,7 @@
   <ItemGroup>
     <ClCompile Include="AbstractScene.cpp" />
     <ClCompile Include="BackGround.cpp" />
+    <ClCompile Include="BPMManager.cpp" />
     <ClCompile Include="cursor.cpp" />
     <ClCompile Include="Define.cpp" />
     <ClCompile Include="eScene.cpp" />
@@ -162,16 +163,22 @@
     <ClCompile Include="SceneLoveSong.cpp" />
     <ClCompile Include="SceneMainMenu.cpp" />
     <ClCompile Include="SceneOption.cpp" />
+    <ClCompile Include="SceneStarguitar.cpp" />
+    <ClCompile Include="sideBlank.cpp" />
     <ClCompile Include="Singleton.cpp" />
+    <ClCompile Include="snowBall.cpp" />
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sozai.cpp" />
     <ClCompile Include="SozaiManager.cpp" />
+    <ClCompile Include="StarguitarDrums.cpp" />
     <ClCompile Include="SystemMain.cpp" />
     <ClCompile Include="TitleScene.cpp" />
+    <ClCompile Include="VsSonya.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AbstractScene.h" />
     <ClInclude Include="BackGround.h" />
+    <ClInclude Include="BPMManager.h" />
     <ClInclude Include="cursor.h" />
     <ClInclude Include="Define.h" />
     <ClInclude Include="eScene.h" />
@@ -192,12 +199,17 @@
     <ClInclude Include="SceneLoveSong.h" />
     <ClInclude Include="SceneMainMenu.h" />
     <ClInclude Include="SceneOption.h" />
+    <ClInclude Include="SceneStarguitar.h" />
+    <ClInclude Include="sideBlank.h" />
     <ClInclude Include="Singleton.h" />
+    <ClInclude Include="snowBall.h" />
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Sozai.h" />
     <ClInclude Include="SozaiManager.h" />
+    <ClInclude Include="StarguitarDrums.h" />
     <ClInclude Include="SystemMain.h" />
     <ClInclude Include="TitleScene.h" />
+    <ClInclude Include="VsSonya.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

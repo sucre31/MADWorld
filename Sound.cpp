@@ -38,6 +38,16 @@ int Sound::loadSamples(const char* fileName) {
     return ret;
 }
 
+/*
+@brief 文字列を受け取りロード
+*/
+int Sound::loadBGM(const char* fileName) {
+    SetCreateSoundDataType(DX_SOUNDDATATYPE_FILE);
+    int ret = myLoadSoundMem(fileName);
+    SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMNOPRESS);
+    return ret;
+}
+
 
 /*!
 @brief 今までロードした音声を解放する

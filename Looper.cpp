@@ -7,6 +7,8 @@
 #include "SceneLightPlane.h"
 #include "SceneMainMenu.h"
 #include "SceneDontaco.h"
+#include "VsSonya.h"
+#include "SceneStarguitar.h"
 //#include "Error.h"
 //#include "Macro.h"
 #include "Keyboard.h"
@@ -90,6 +92,12 @@ void Looper::onSceneChanged(const eScene scene, const Parameter& parameter, cons
         break;
     case Dontaco:
         _sceneStack.push(make_shared<SceneDontaco>(this, parameter));
+        break;
+    case Sonya:
+        _sceneStack.push(make_shared<VsSonya>(this, parameter));
+        break;
+    case Starguitar:
+        _sceneStack.push(make_shared<SceneStarguitar>(this, parameter));
         break;
     //default:
     //    ERR("ë∂ç›ÇµÇ»Ç¢ÉVÅ[Éì");

@@ -18,8 +18,10 @@ SceneMainMenu::SceneMainMenu(IOnSceneChangedListener* impl, const Parameter& par
 	icon[1].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail2.png");
 	icon[2].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail3.png");
 	icon[3].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail4.png");
-	for (int i = 0; i < 4; i++) {
-		icon[i].setPos(130, 160 + i * 133);
+	icon[3].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail4.png");
+	icon[4].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail5.png");
+	for (int i = 0; i < iconNum; i++) {
+		icon[i].setPos(130 + 240 * (i / 4), 160 + (i % 4) * 133);
 		icon[i].enableIconFunc(true);
 		validIconNum++;
 	}
@@ -32,10 +34,14 @@ void SceneMainMenu::update()
 	int cursorX, cursorY;
 	LONGLONG curTime = GetNowHiPerformanceCount();
 	LONGLONG deltaTime = curTime - prevTime;
-	prevTime = curTime;
+	bool move = false;
+	if (deltaTime >= 16670) {
+		move = true;
+		prevTime = curTime;
+	}
 	cursorX = cursorIns.getCursorPosX();
 	cursorY = cursorIns.getCursorPosY();
-	double speedRate = 2.0 * (deltaTime / 500);
+	double speedRate = 3.0;
 	selectIconNo = -1;
 	bool isHit;
 
@@ -48,13 +54,13 @@ void SceneMainMenu::update()
 
 
 	if (Pad::getIns()->get(ePad::Y) >= 1) {
-		speedRate = 3.0 * (deltaTime / 500);
+		speedRate = 5.0;
 	}
 	if (Pad::getIns()->get(ePad::A) >= 1) {
 		// アイコンあればシーンチェンジ
 		int sceneNum = getIconScene(selectIconNo);
 		if (sceneNum != -1) {
-			SetMouseDispFlag(TRUE);
+			//SetMouseDispFlag(TRUE);
 			Parameter parameter;
 			StopSoundMem(musicHandle);
 			const bool stackClear = true;
@@ -63,22 +69,24 @@ void SceneMainMenu::update()
 	}
 	if (Pad::getIns()->get(ePad::B) == 1) {
 		StopSoundMem(musicHandle);
-		SetMouseDispFlag(TRUE);
+		//SetMouseDispFlag(TRUE);
 		Parameter parameter;
 		const bool stackClear = false;
 		_implSceneChanged->onSceneChanged(eScene::Title, parameter, stackClear);
 	}
-    if (Pad::getIns()->get(ePad::up) >= 1) {
-		cursorIns.plusPos(0, -0.1 * speedRate);
-    }
-	if (Pad::getIns()->get(ePad::down) >= 1) {
-		cursorIns.plusPos(0, 0.1 * speedRate);
-	}
-	if (Pad::getIns()->get(ePad::right) >= 1) {
-		cursorIns.plusPos(0.1 * speedRate, 0);
-	}
-	if (Pad::getIns()->get(ePad::left) >= 1) {
-		cursorIns.plusPos(-0.1 * speedRate, 0);
+	if (move) {
+		if (Pad::getIns()->get(ePad::up) >= 1) {
+			cursorIns.plusPos(0, -1 * speedRate);
+		}
+		if (Pad::getIns()->get(ePad::down) >= 1) {
+			cursorIns.plusPos(0, 1 * speedRate);
+		}
+		if (Pad::getIns()->get(ePad::right) >= 1) {
+			cursorIns.plusPos(1 * speedRate, 0);
+		}
+		if (Pad::getIns()->get(ePad::left) >= 1) {
+			cursorIns.plusPos(-1 * speedRate, 0);
+		}
 	}
 }
 
@@ -97,13 +105,15 @@ void SceneMainMenu::draw() const
 int SceneMainMenu::getIconScene(int iconNum) {
 	switch (iconNum) {
 	case 0:
-		return -1;
+		return eScene::Sonya;
 	case 1:
 		return eScene::LoveSong;
 	case 2:
 		return eScene::LightPlane;
 	case 3:
 		return eScene::Alice;
+	case 4:
+		return eScene::Starguitar;
 	default:
 		return -1;
 	}
