@@ -1,6 +1,7 @@
 #pragma once
 #include "AbstractScene.h"
 #include "SozaiManager.h"
+#include "StarguitarDrums.h"
 #include "BackGround.h"
 
 class SceneStarguitar : public AbstractScene
@@ -13,5 +14,6 @@ public:
 private:
 	SozaiManager sozaiManager;
 	BackGround backGround;
+	StarguitarDrums starguitarDrums;
 };
 

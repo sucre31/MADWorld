@@ -1,4 +1,5 @@
 #pragma once
+#include <vector>
 #include "GameObject.h"
 #include "Pad.h"
 
@@ -33,6 +34,8 @@ public:
 	void setPadReleaseStop(bool flag) { enablePadPlayStop = flag; }
 	void setUseMovie(bool flag) { isMovie = flag; }
 	void setUseTurn(bool flag) { enableTurn = flag; }
+	void setPlayRate(int rate) { playRate = rate; }
+	void setEnableMultiMovie(bool flag) { enableMultiSprite = flag; }
 private:
 	static const int maxSozai = 88;
 	static const int maxPadSozai = 16;
@@ -46,7 +49,7 @@ private:
 	double exRate;
 	int myGrapghHandle[maxSpriteNum];				
 	int validGraphNum;
-	int curGraphNum;
+	std::vector<int> curGraphNum;
 	int mySoundHandle[maxSozai];
 	bool enableTurn;
 	bool turnFlag;
@@ -67,9 +70,8 @@ private:
 	bool isDrum;							// 再生を止めなくする
 	bool enablePadPlayStop;					// キーから指を離しても再生停止
 	bool isMovie;
-	bool spritePlay;						// 映像再生
-	int AnimeNum;							// 現在のスプライトの再生番号 
-	int timeForAnime;
+	std::vector<int> timeForAnime;
 	int playRate;							// 映像再生速度(ミリ秒？)
+	bool enableMultiSprite;					// 自身の映像を終わるまで描画
 };
 

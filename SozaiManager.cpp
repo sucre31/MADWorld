@@ -147,6 +147,15 @@ void SozaiManager::setReverseFlag(int sozaiNum, bool flag) {
 	}
 }
 
+/*
+@brief 素材の再生速度変更
+*/
+void SozaiManager::setPlayRate(int sozaiNum, int rateVal) {
+	if (sozaiNum < validSozaiNum) {
+		sozai[sozaiNum]->setPlayRate(rateVal);
+	}
+}
+
 
 void SozaiManager::changeTopLayer(int sozaiId) {
 	// 手抜き ちゃんとソートされるようになおす

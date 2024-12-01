@@ -260,5 +260,5 @@ void VsSonya::draw() const{
 		sideBarL.draw();
 		sideBarR.draw();
 	}
-	DrawFormatString(0,0, GetColor(255, 190, 0), "SCORE:%d", score);
+	//DrawFormatString(0,0, GetColor(255, 190, 0), "SCORE:%d", score);
 }

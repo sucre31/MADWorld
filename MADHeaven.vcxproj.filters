@@ -183,6 +183,9 @@
     <ClCompile Include="SceneStarguitar.cpp">
       <Filter>ソース ファイル\Scene</Filter>
     </ClCompile>
+    <ClCompile Include="StarguitarDrums.cpp">
+      <Filter>ソース ファイル\GameObject</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleScene.h">
@@ -283,6 +286,9 @@
     </ClInclude>
     <ClInclude Include="SceneStarguitar.h">
       <Filter>ヘッダー ファイル\Scene</Filter>
+    </ClInclude>
+    <ClInclude Include="StarguitarDrums.h">
+      <Filter>ヘッダー ファイル\GameObject</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

@@ -25,6 +25,7 @@ public:
 	void setPadReleaseStop(int, bool);
 	void setMovieFlag(int, bool);
 	void setReverseFlag(int, bool);
+	void setPlayRate(int, int);
 	void changePos(int , double valX, double valY);
 	void drawSozai(int) const;
 private:

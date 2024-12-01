@@ -170,6 +170,7 @@
     <ClCompile Include="Sound.cpp" />
     <ClCompile Include="Sozai.cpp" />
     <ClCompile Include="SozaiManager.cpp" />
+    <ClCompile Include="StarguitarDrums.cpp" />
     <ClCompile Include="SystemMain.cpp" />
     <ClCompile Include="TitleScene.cpp" />
     <ClCompile Include="VsSonya.cpp" />
@@ -205,6 +206,7 @@
     <ClInclude Include="Sound.h" />
     <ClInclude Include="Sozai.h" />
     <ClInclude Include="SozaiManager.h" />
+    <ClInclude Include="StarguitarDrums.h" />
     <ClInclude Include="SystemMain.h" />
     <ClInclude Include="TitleScene.h" />
     <ClInclude Include="VsSonya.h" />

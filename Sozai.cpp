@@ -33,23 +33,26 @@ Sozai::Sozai() :validGraphNum(0), enablePadPlayStop(false) {
 	enableMultiSound = false;
 	prevTime = GetNowCount();
 	numOfPlayingSound = 0;
-	curGraphNum = 0;
 	isDrum = false;
 	isMovie = false;
-	spritePlay = false;
 	playRate = 83;
 	enableMultiGraph = false;
+	enableMultiSprite = false;
 }
 
 bool Sozai::update() {
-	if (spritePlay) {
-		curGraphNum = ( GetNowCount() - timeForAnime ) / playRate;
-		if (curGraphNum < 0) {
-			curGraphNum = 0;
-		}
-		if (curGraphNum >= validGraphNum) {
-			curGraphNum = validGraphNum - 1;
-			spritePlay = false;
+	if (timeForAnime.size() != 0) {
+		for (int i = 0; i < timeForAnime.size(); i++) {
+			curGraphNum[i] = (GetNowCount() - timeForAnime[i]) / playRate;
+			if (curGraphNum[i] < 0) {
+				curGraphNum[i] = 0;
+			}
+			if (curGraphNum[i] >= validGraphNum) {
+				// 再生終了
+				timeForAnime.erase(timeForAnime.begin() + i);
+				curGraphNum.erase(curGraphNum.begin() + i);
+				i--;
+			}
 		}
 	}
 	for (int i = 0; i < validPadNum; i++) {
@@ -76,14 +79,29 @@ bool Sozai::update() {
 void Sozai::draw() const {
 	if (enableMultiGraph) {
 		for (int i = 0; i < numOfPlayingSound; i++) {
-			DrawRotaGraph(x + transX * (numOfPlayingSound - 1 - i), y + transY * (numOfPlayingSound - 1 - i), exRate, 0, myGrapghHandle[curGraphNum], TRUE, (enableTurn && turnFlag));
+			// 映像を追加した都合で1枚絵しかだせてない
+			DrawRotaGraph(x + transX * (numOfPlayingSound - 1 - i), y + transY * (numOfPlayingSound - 1 - i), exRate, 0, myGrapghHandle[0], TRUE, (enableTurn && turnFlag));
+		}
+	}
+	else if (enableMultiSprite) {
+		if (curGraphNum.size() != 0) {
+			for (int i = 0; i < curGraphNum.size(); i++) {
+				DrawRotaGraph(x, y, exRate, 0, myGrapghHandle[curGraphNum[i]], TRUE, (enableTurn && turnFlag));
+			}
+		}
+		else {
+			DrawRotaGraph(x, y, exRate, 0, myGrapghHandle[0], TRUE, (enableTurn && turnFlag));
 		}
 	}
 	else {
-		DrawRotaGraph(x, y, exRate, 0, myGrapghHandle[curGraphNum], TRUE, (enableTurn && turnFlag));
+		if (curGraphNum.size() != 0) {
+			DrawRotaGraph(x, y, exRate, 0, myGrapghHandle[curGraphNum.back()], TRUE, (enableTurn && turnFlag));
+		}
+		else {
+			DrawRotaGraph(x, y, exRate, 0, myGrapghHandle[0], TRUE, (enableTurn && turnFlag));
+		}
 	}
 }
-
 
 /*
 @brief コントローラーのキーと素材のペアを追加
@@ -152,8 +170,9 @@ void Sozai::playSample(int sampleNum, bool isMidi) {
 	}
 	else {
 		// 連番pngを再生する処理
-		spritePlay = true;
-		timeForAnime = GetNowCount() - playRate; // 1フレーム進めたいからプレイレート減算してるけどバグあるかも
+		int startTime = GetNowCount() - playRate; // 1フレーム進めたいからプレイレート減算してるけどバグあるかも
+		timeForAnime.push_back(startTime);
+		curGraphNum.push_back(0);
 	}
 }
 
@@ -186,8 +205,9 @@ void Sozai::playWithSoundIndex(int soundIndex) {
 	}
 	else {
 		// 連番pngを再生する処理
-		spritePlay = true;
-		timeForAnime = GetNowCount() - playRate; // 1フレーム進めたいからプレイレート減算してるけどバグあるかも
+		int startTime = GetNowCount() - playRate; // 1フレーム進めたいからプレイレート減算してるけどバグあるかも
+		timeForAnime.push_back(startTime);
+		curGraphNum.push_back(0);
 	}
 }
 
