@@ -9,10 +9,6 @@
 
 
 VsSonya::VsSonya(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter) {
-	shiwakeMasterHandle = shiwakeMasterHandle = Sound::getIns()->loadBGM("Assets/Sounds/sonya/shiwakeMaster.wav");
-	PlaySoundMem(shiwakeMasterHandle, DX_PLAYTYPE_LOOP, TRUE);
-	bpmManager.setBpm(160);
-	bpmManager.startMusic();
 
 
 	sozaiManager.makeSozai("Assets/Sounds/sonya/hey.wav", "Assets/Sprites/images/sonya/yasuna/yasuna0.png", Define::WIN_W * 3 / 4, Define::WIN_H * 3 / 4 - 40);
@@ -138,6 +134,11 @@ VsSonya::VsSonya(IOnSceneChangedListener* impl, const Parameter& parameter) : Ab
 	avoidFlag = false;
 
 	score = 0;
+
+	shiwakeMasterHandle = shiwakeMasterHandle = Sound::getIns()->loadBGM("Assets/Sounds/sonya/shiwakeMaster.wav");
+	PlaySoundMem(shiwakeMasterHandle, DX_PLAYTYPE_LOOP, TRUE);
+	bpmManager.setBpm(160);
+	bpmManager.startMusic();
 }
 
 void VsSonya::update() {

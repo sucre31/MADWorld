@@ -10,13 +10,16 @@ StarguitarDrums::StarguitarDrums() {
 	}
 
 	sozai[1].setSampleSound("Assets/sounds/Starguitar/snea2.wav");
-	sozai[1].addSprite("Assets/sounds/Starguitar/snea.wav");
 	std::string sneaB = "Assets/Sprites/images/starguitar/sneaB/sneaB";
-	for (int i = 1; i < 30; i++) {
+	for (int i = 0; i < 30; i++) {
 		sozai[1].addSprite((sneaB + std::to_string(i) + ".png").c_str());
 	}
 
 	sozai[2].setSampleSound("Assets/sounds/Starguitar/kick.wav");
+	std::string kick = "Assets/Sprites/images/starguitar/kick/kick";
+	for (int i = 0; i < 98; i++) {
+		sozai[2].addSprite((kick + std::to_string(i) + ".png").c_str());
+	}
 
 	for (int i = 0; i < drumNum; i++) {
 		sozai[i].setUseTurn(false);
@@ -44,7 +47,7 @@ bool StarguitarDrums::update() {
 }
 
 void StarguitarDrums::draw() const {
-	for (int i = 0; i < drumNum; i++) {
-		sozai[i].draw();
-	}
+	sozai[2].draw();
+	sozai[1].draw();
+	sozai[0].draw();
 }

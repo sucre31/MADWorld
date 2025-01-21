@@ -5,7 +5,7 @@
 #include "Pad.h"
 #include "MIDI.h"
 
-Sozai::Sozai() :validGraphNum(0), enablePadPlayStop(false) {
+Sozai::Sozai() :enablePadPlayStop(false) {
 	x = 0;
 	y = 0;
 	transX = 198;
@@ -47,7 +47,7 @@ bool Sozai::update() {
 			if (curGraphNum[i] < 0) {
 				curGraphNum[i] = 0;
 			}
-			if (curGraphNum[i] >= validGraphNum) {
+			if (curGraphNum[i] >= myGrapghHandle.size()) {
 				// 再生終了
 				timeForAnime.erase(timeForAnime.begin() + i);
 				curGraphNum.erase(curGraphNum.begin() + i);
@@ -215,10 +215,8 @@ void Sozai::playWithSoundIndex(int soundIndex) {
 @brief 連番画像を追加しアニメーション　1素材につき1動画想定
 */
 void Sozai::addSprite(const char* fileName) {
-	if (validGraphNum < maxSpriteNum) {
-		myGrapghHandle[validGraphNum] = Image::getIns()->loadSamples(fileName);
-		validGraphNum++;
-	}
+	int handle = Image::getIns()->loadSamples(fileName);
+	myGrapghHandle.push_back(handle);
 }
 
 /*

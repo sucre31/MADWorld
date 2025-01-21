@@ -15,6 +15,7 @@ OpeningScene::OpeningScene(IOnSceneChangedListener* impl, const Parameter& param
     ChangeFontType(DX_FONTTYPE_ANTIALIASING_4X4);
     SetCreateSoundDataType(DX_SOUNDDATATYPE_FILE);
     musicHandle = Sound::getIns()->loadSamples("Assets/Sounds/title/title.wav");
+    ChangeVolumeSoundMem(200 ,musicHandle);     // ‰¹—Ê•ÏX
     SEHandle = Sound::getIns()->loadSamples("Assets/Sounds/GrandSE/start.wav");
     SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMNOPRESS);
     PlaySoundMem(musicHandle, DX_PLAYTYPE_LOOP, TRUE);

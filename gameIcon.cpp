@@ -20,7 +20,13 @@ bool gameIcon::update() {
 
 void gameIcon::draw() const{
 	if (enableIcon) {
-		DrawRotaGraph(posX, posY, thumbnailRate, 0.0, thumbnailHandle, FALSE, isCursorOn);
+		if (isCursorOn) {
+			unsigned int hitColor = GetColor(255, 0, 0);
+			int boxPosX1 = posX - defaultHitW / 2;
+			int boxPosY1 = posY - defaultHitH / 2;
+			DrawBox(boxPosX1 - 3, boxPosY1 - 3, boxPosX1 + defaultHitW + 3, boxPosY1 + defaultHitH + 3, hitColor, TRUE);
+		}
+		DrawRotaGraph(posX, posY, thumbnailRate, 0.0, thumbnailHandle, FALSE, FALSE);
 	}
 }
 

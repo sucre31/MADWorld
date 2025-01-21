@@ -40,15 +40,13 @@ private:
 	static const int maxSozai = 88;
 	static const int maxPadSozai = 16;
 	static const int maxMidiSozai = 88;
-	static const int maxSpriteNum = 30;
 	int myId;								// managerƒNƒ‰ƒX‚ÌŠÇ—”Ô†
 	double x;
 	double y;
 	int transX;
 	int transY;
 	double exRate;
-	int myGrapghHandle[maxSpriteNum];				
-	int validGraphNum;
+	std::vector<int> myGrapghHandle;				
 	std::vector<int> curGraphNum;
 	int mySoundHandle[maxSozai];
 	bool enableTurn;

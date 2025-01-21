@@ -14,8 +14,10 @@ public:
 	bool checkCursorHit(int x, int y);
 private:
 	const double defaultExRate = 0.6;
-	const int defaultHitW = 192;
-	const int defaultHitH = 108;
+	const int imageWidth = 320;
+	const int imageHeight = 180;
+	const int defaultHitW = imageWidth * defaultExRate;
+	const int defaultHitH = imageHeight * defaultExRate;
 	bool enableIcon;
 	int posX;
 	int posY;
