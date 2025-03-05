@@ -87,7 +87,7 @@ void SozaiManager::setSozaiEx(int sozaiNum, double val) {
 }
 
 /*
-@brief ‘fŞ”Ô†‚ğó‚¯æ‚è”{—¦İ’è
+@brief ‘fŞ”Ô†‚ğó‚¯æ‚èˆÊ’uİ’è
 */
 void SozaiManager::setSozaiPos(int sozaiNum, int valX, int valY) {
 	if (sozaiNum < validSozaiNum) {

@@ -22,7 +22,7 @@ public:
 	void setTriggerMidi(int midiEnum, int indexNum);
 	int getTriggerPad(int num) { return triggerPad[num]; };
 	int getTriggerMidi(int num) { return triggerMidi[num]; };
-	int getValidPadNum() { return validPadNum; }
+	int getValidPadNum() { return triggerPad.size(); }
 	int getValidMidiNum() { return validMidiNum; }
 	int getPadSoundIndex(int num) { return padSoundIndex[num]; }
 	int getMidiSoundIndex(int num) { return midiSoundIndex[num]; }
@@ -38,7 +38,6 @@ public:
 	void setEnableMultiMovie(bool flag) { enableMultiSprite = flag; }
 private:
 	static const int maxSozai = 88;
-	static const int maxPadSozai = 16;
 	static const int maxMidiSozai = 88;
 	int myId;								// managerクラスの管理番号
 	double x;
@@ -54,10 +53,9 @@ private:
 	int validSoundNum;
 	int curSoundIndex;						// 再生中の音ハンドル
 	int numOfPlayingSound;					// 再生中の音の数
-	int triggerPad[maxPadSozai];			// 動的に作った方が良いな あとクラス分けるべきかも
-	int padSoundIndex[maxPadSozai];
+	std::vector<int> triggerPad;			// 動的に作った方が良いな あとクラス分けるべきかも
+	std::vector<int> padSoundIndex;
 	bool isPadSoundPlay[maxMidiSozai];
-	int validPadNum;
 	int triggerMidi[maxMidiSozai];
 	int midiSoundIndex[maxMidiSozai];
 	bool isMidiSoundPlay[maxMidiSozai];

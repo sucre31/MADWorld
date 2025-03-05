@@ -15,19 +15,14 @@ Sozai::Sozai() :enablePadPlayStop(false) {
 	turnFlag = false;
 	for (int i = 0; i < maxSozai; i++) {
 		mySoundHandle[i] = -1;
-		padSoundIndex[i] = 0;
 		midiSoundIndex[i] = 0;
 		isPadSoundPlay[i] = false;
 		isMidiSoundPlay[i] = false;
-	}
-	for (int i = 0; i < maxPadSozai; i++) {
-		triggerPad[i] = 0;
 	}
 	for (int i = 0; i < maxMidiSozai; i++) {
 		triggerMidi[i] = 0;
 	}
 	validSoundNum = 0;
-	validPadNum = 0;
 	validMidiNum = 0;
 	curSoundIndex = -1;
 	enableMultiSound = false;
@@ -55,7 +50,7 @@ bool Sozai::update() {
 			}
 		}
 	}
-	for (int i = 0; i < validPadNum; i++) {
+	for (int i = 0; i < triggerPad.size(); i++) {
 		int tmpPadKey = triggerPad[i];
 		if (isPadSoundPlay[i] == true && Pad::getIns()->get(ePad(tmpPadKey)) == 0 && enablePadPlayStop) {
 			StopSoundMem(mySoundHandle[padSoundIndex[i]]);
@@ -107,11 +102,8 @@ void Sozai::draw() const {
 @brief コントローラーのキーと素材のペアを追加
 */
 void Sozai::setTriggerPad(int padEnum, int soundIndexNum) {
-	if (validPadNum < maxPadSozai) {
-		triggerPad[validPadNum] = padEnum;
-		padSoundIndex[validPadNum] = soundIndexNum;
-		validPadNum++;
-	}
+	triggerPad.push_back(padEnum);
+	padSoundIndex.push_back(soundIndexNum);
 }
 
 /*

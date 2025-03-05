@@ -11,5 +11,8 @@ public:
 private:
 	int daftHandle; // ‚Æ‚è‚ ‚¦‚¸
 	SozaiManager sozaiManager;
+	int sampleSetNum;
+	void setSample(int);
+	void resetSample();
 };
 
