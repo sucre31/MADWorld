@@ -13,6 +13,7 @@ public:
 	void makeSozai(const char* soundFileName, const char* imageFileName, int x, int y);
 	void playSozai(int, int);
 	void setSozaiKey(int sozaiNum, int padNum, int soundIndex);
+	void resetSozaiKey(int sozaiNum);
 	void setSozaiMidiKey(int sozaiNum, int padNum, int soundIndex);
 	void setSozaiEx(int sozaiNum, double val);
 	void setSozaiPos(int sozaiNum, int valX, int valY);
@@ -29,9 +30,8 @@ public:
 	void changePos(int , double valX, double valY);
 	void drawSozai(int) const;
 private:
-	static const int limitOfSozai = 16;
 	int validSozaiNum;
-	Sozai* sozai[limitOfSozai]; // shared_ptrにする
-	int SozaiLayerIndex[limitOfSozai]; // 更新順を保持する
+	std::vector<Sozai*> sozai; // shared_ptrにする
+	std::vector<int> SozaiLayerIndex; // 更新順を保持する
 };
 

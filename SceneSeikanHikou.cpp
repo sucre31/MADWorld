@@ -9,8 +9,7 @@ SceneSeikanHikou::SceneSeikanHikou(IOnSceneChangedListener* impl, const Paramete
 	// 素材の読み込み
 	daftHandle = Sound::getIns()->loadSamples("Assets/Sounds/SeikanHikou/DaftLoop.wav");
 	std::string rankaFile = "Assets/Sprites/movie/ranka/ranka";
-	//sozaiManager.makeSozai("", "Assets/Sprites/movie/ranka/ranka01.avi", 640, 360);
-	for (int i = 1; i < 26; i++) {
+	for (int i = 1; i < 25; i++) {
 		if (i < 10) {
 			sozaiManager.makeSozai("", (rankaFile + "0" + std::to_string(i) + ".avi").c_str(), 640, 360);
 		}
@@ -20,12 +19,13 @@ SceneSeikanHikou::SceneSeikanHikou(IOnSceneChangedListener* impl, const Paramete
 		sozaiManager.setSozaiEx(i - 1, (2.0/3.0));
 		sozaiManager.setMovieFlag(i - 1, true);
 	}
-	setSample(0);
-	for (int i = 0; i < 10; i++) {
+	for (int i = 0; i < 24; i++) {
+		sozaiManager.setReverseFlag(i, false);
 		sozaiManager.setDrumFlag(i, false);
 	}
+	setSample(0);
 
-	// とりあえずならす
+	// とりあえずドラムならす
 	ChangeVolumeSoundMem(200, daftHandle);
 	PlaySoundMem(daftHandle, DX_PLAYTYPE_LOOP, TRUE);
 }
@@ -33,11 +33,25 @@ SceneSeikanHikou::SceneSeikanHikou(IOnSceneChangedListener* impl, const Paramete
 void SceneSeikanHikou::update() {
 	sozaiManager.update();
 
-	if (Pad::getIns()->get(ePad::change) == 1) {
-		sampleSetNum = (sampleSetNum + 1) % 3;
-		setSample(sampleSetNum);
+	// コントローラーとサンプルの対応を設定
+	if (Pad::getIns()->get(ePad::L) >= 1) {
+		if (sampleSetNum != 1) {
+			sampleSetNum = 1;
+			setSample(sampleSetNum);
+		}
 	}
-
+	else if (Pad::getIns()->get(ePad::R) >= 1) {
+		if (sampleSetNum != 2) {
+			sampleSetNum = 2;
+			setSample(sampleSetNum);
+		}
+	}
+	else {
+		if (sampleSetNum != 0) {
+			sampleSetNum = 0;
+			setSample(sampleSetNum);
+		}
+	}
 	if (Pad::getIns()->get(ePad::start) == 1) {
 		// メニューに戻る
 		Parameter parameter;
@@ -55,12 +69,12 @@ void SceneSeikanHikou::draw() const {
 
 void SceneSeikanHikou::resetSample() {
 	for (int i = 0; i < 25; i++) {
-		sozaiManager.setSozaiKey(i, -1, 0);
+		sozaiManager.resetSozaiKey(i);
 	}
 }
 
 void SceneSeikanHikou::setSample(int num) {
-	//resetSample();
+	resetSample();
 	switch (num) {
 	case 0:
 		sozaiManager.setSozaiKey(0, ePad::down, 0);
@@ -71,28 +85,26 @@ void SceneSeikanHikou::setSample(int num) {
 		sozaiManager.setSozaiKey(5, ePad::X, 0);
 		sozaiManager.setSozaiKey(6, ePad::right, 0);
 		sozaiManager.setSozaiKey(7, ePad::A, 0);
-		sozaiManager.setSozaiKey(8, ePad::L, 0);
-		sozaiManager.setSozaiKey(9, ePad::R, 0);
 		break;
 	case 1:
-		sozaiManager.setSozaiKey(10, ePad::down, 0);
-		sozaiManager.setSozaiKey(11, ePad::B, 0);
-		sozaiManager.setSozaiKey(12, ePad::left, 0);
-		sozaiManager.setSozaiKey(13, ePad::Y, 0);
-		sozaiManager.setSozaiKey(14, ePad::up, 0);
-		sozaiManager.setSozaiKey(15, ePad::X, 0);
-		sozaiManager.setSozaiKey(16, ePad::right, 0);
-		sozaiManager.setSozaiKey(17, ePad::A, 0);
-		sozaiManager.setSozaiKey(18, ePad::L, 0);
-		sozaiManager.setSozaiKey(19, ePad::R, 0);
+		sozaiManager.setSozaiKey(8, ePad::down, 0);
+		sozaiManager.setSozaiKey(9, ePad::B, 0);
+		sozaiManager.setSozaiKey(10, ePad::left, 0);
+		sozaiManager.setSozaiKey(11, ePad::Y, 0);
+		sozaiManager.setSozaiKey(12, ePad::up, 0);
+		sozaiManager.setSozaiKey(13, ePad::X, 0);
+		sozaiManager.setSozaiKey(14, ePad::right, 0);
+		sozaiManager.setSozaiKey(15, ePad::A, 0);
 		break;
 	case 2:
-		sozaiManager.setSozaiKey(20, ePad::down, 0);
-		sozaiManager.setSozaiKey(21, ePad::B, 0);
-		sozaiManager.setSozaiKey(22, ePad::left, 0);
-		sozaiManager.setSozaiKey(23, ePad::Y, 0);
-		sozaiManager.setSozaiKey(24, ePad::up, 0);
-		sozaiManager.setSozaiKey(25, ePad::X, 0);
+		sozaiManager.setSozaiKey(16, ePad::down, 0);
+		sozaiManager.setSozaiKey(17, ePad::B, 0);
+		sozaiManager.setSozaiKey(18, ePad::left, 0);
+		sozaiManager.setSozaiKey(19, ePad::Y, 0);
+		sozaiManager.setSozaiKey(20, ePad::up, 0);
+		sozaiManager.setSozaiKey(21, ePad::X, 0);
+		sozaiManager.setSozaiKey(22, ePad::right, 0);
+		sozaiManager.setSozaiKey(23, ePad::A, 0);// キラッ☆
 		break;
 	}
 }

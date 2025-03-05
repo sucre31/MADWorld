@@ -9,6 +9,7 @@ public:
 	Sozai();
 	~Sozai() {};
 	void setMyId(int id) { myId = id; }
+	int getMyId() { return myId; }
 	bool update() override;
 	void draw() const override;
 	void setPosX(double xVal) { x = xVal; }
@@ -20,6 +21,7 @@ public:
 	void playWithSoundIndex(int);
 	void setTriggerPad(int padEnum, int indexNum);
 	void setTriggerMidi(int midiEnum, int indexNum);
+	void resetTriggerPad();
 	int getTriggerPad(int num) { return triggerPad[num]; };
 	int getTriggerMidi(int num) { return triggerMidi[num]; };
 	int getValidPadNum() { return triggerPad.size(); }

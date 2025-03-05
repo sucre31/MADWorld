@@ -107,6 +107,14 @@ void Sozai::setTriggerPad(int padEnum, int soundIndexNum) {
 }
 
 /*
+@brief コントローラーのキーと素材のペアを完全に削除
+*/
+void Sozai::resetTriggerPad() {
+	triggerPad.clear();
+	padSoundIndex.clear();
+}
+
+/*
 @brief MIDIのキーと素材のペアを追加
 */
 void Sozai::setTriggerMidi(int midiEnum, int soundIndexNum) {

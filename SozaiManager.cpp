@@ -2,23 +2,17 @@
 #include "SozaiManager.h"
 
 SozaiManager::SozaiManager() {
-	validSozaiNum = 0;
-	for (int i = 0; i < limitOfSozai; i++) {
-		SozaiLayerIndex[i] = i;
-	}
 }
 
 /*
 @brief 素材のインスタンス生成
 */
 void SozaiManager::makeSozai(const char* soundFileName, const char* imageFileName) {
-	if (validSozaiNum < limitOfSozai) {
-		int sozaiNum = validSozaiNum;
-		sozai[sozaiNum] = new Sozai();
-		validSozaiNum++;
-		sozai[sozaiNum]->setSampleSound(soundFileName);
-		sozai[sozaiNum]->addSprite(imageFileName);
-	}
+	sozai.push_back(new Sozai());
+	sozai.back()->setSampleSound(soundFileName);
+	sozai.back()->addSprite(imageFileName);
+	sozai.back()->setMyId(sozai.size() - 1);
+	SozaiLayerIndex.push_back(sozai.size() - 1);
 }
 
 /*
@@ -29,16 +23,13 @@ void SozaiManager::makeSozai(const char* soundFileName, const char* imageFileNam
 @param y 素材のy位置
 */
 void SozaiManager::makeSozai(const char* soundFileName, const char* imageFileName, int x, int y) {
-	if (validSozaiNum < limitOfSozai) {
-		int sozaiNum = validSozaiNum;
-		sozai[sozaiNum] = new Sozai();
-		sozai[sozaiNum]->setSampleSound(soundFileName);
-		sozai[sozaiNum]->addSprite(imageFileName);
-		sozai[sozaiNum]->setPosX(x);
-		sozai[sozaiNum]->setPosY(y);
-		sozai[sozaiNum]->setMyId(validSozaiNum);
-		validSozaiNum++;
-	}
+	sozai.push_back(new Sozai());
+	sozai.back()->setSampleSound(soundFileName);
+	sozai.back()->addSprite(imageFileName);
+	sozai.back()->setPosX(x);
+	sozai.back()->setPosY(y);
+	sozai.back()->setMyId(sozai.size() - 1);
+	SozaiLayerIndex.push_back(sozai.size() - 1);
 }
 
 void SozaiManager::addSound(int sozaiNum, const char* soundFileName) {
@@ -53,8 +44,9 @@ void SozaiManager::addSprites(int sozaiNum, const char* soundFileName) {
 @brief 素材を直接ならす
 */
 void SozaiManager::playSozai(int sozaiNum, int soundIndex) {
-	if (sozaiNum < validSozaiNum) {
+	if (sozaiNum < sozai.size()) {
 		sozai[sozaiNum]->playWithSoundIndex(soundIndex);
+		changeTopLayer(sozai[sozaiNum]->getMyId());
 	}
 }
 
@@ -62,8 +54,14 @@ void SozaiManager::playSozai(int sozaiNum, int soundIndex) {
 @brief 素材番号を受け取りキーをバインド
 */
 void SozaiManager::setSozaiKey(int sozaiNum, int padNum, int soundIndex) {
-	if (sozaiNum < validSozaiNum) {
+	if (sozaiNum < sozai.size()) {
 		sozai[sozaiNum]->setTriggerPad(padNum, soundIndex);
+	}
+}
+
+void SozaiManager::resetSozaiKey(int sozaiNum) {
+	if (sozaiNum < sozai.size()) {
+		sozai[sozaiNum]->resetTriggerPad();
 	}
 }
 
@@ -72,7 +70,7 @@ void SozaiManager::setSozaiKey(int sozaiNum, int padNum, int soundIndex) {
 */
 void SozaiManager::setSozaiMidiKey(int sozaiNum, int midiNum, int soundIndex) {
 	// 複数キーバインドできるようにしたい　音程変更のみなら
-	if (sozaiNum < validSozaiNum) {
+	if (sozaiNum < sozai.size()) {
 		sozai[sozaiNum]->setTriggerMidi(midiNum, soundIndex);
 	}
 }
@@ -81,7 +79,7 @@ void SozaiManager::setSozaiMidiKey(int sozaiNum, int midiNum, int soundIndex) {
 @brief 素材番号を受け取り倍率設定
 */
 void SozaiManager::setSozaiEx(int sozaiNum, double val) {
-	if (sozaiNum < validSozaiNum) {
+	if (sozaiNum < sozai.size()) {
 		sozai[sozaiNum]->setExRate(val);
 	}
 }
@@ -90,7 +88,7 @@ void SozaiManager::setSozaiEx(int sozaiNum, double val) {
 @brief 素材番号を受け取り位置設定
 */
 void SozaiManager::setSozaiPos(int sozaiNum, int valX, int valY) {
-	if (sozaiNum < validSozaiNum) {
+	if (sozaiNum < sozai.size()) {
 		sozai[sozaiNum]->setPosX(valX);
 		sozai[sozaiNum]->setPosY(valY);
 	}
@@ -100,7 +98,7 @@ void SozaiManager::setSozaiPos(int sozaiNum, int valX, int valY) {
 @brief 複数音をならすことを許可するか
 */
 void SozaiManager::setMultiSound(int sozaiNum, bool flag) {
-	if (sozaiNum < validSozaiNum) {
+	if (sozaiNum < sozai.size()) {
 		sozai[sozaiNum]->setMultiSound(flag);
 	}
 }
@@ -109,7 +107,7 @@ void SozaiManager::setMultiSound(int sozaiNum, bool flag) {
 @brief 画像が複数出てくる YTPMV用
 */
 void SozaiManager::setMultiGraph(int sozaiNum, bool flag) {
-	if (sozaiNum < validSozaiNum) {
+	if (sozaiNum < sozai.size()) {
 		sozai[sozaiNum]->setMultiGraph(flag);
 	}
 }
@@ -118,7 +116,7 @@ void SozaiManager::setMultiGraph(int sozaiNum, bool flag) {
 @brief ドラム用にmidiのオフ情報を無視する
 */
 void SozaiManager::setDrumFlag(int sozaiNum, bool flag) {
-	if (sozaiNum < validSozaiNum) {
+	if (sozaiNum < sozai.size()) {
 		sozai[sozaiNum]->setIsDrum(flag);
 	}
 }
@@ -127,7 +125,7 @@ void SozaiManager::setDrumFlag(int sozaiNum, bool flag) {
 @brief ドラム用にmidiのオフ情報を無視する
 */
 void SozaiManager::setPadReleaseStop(int sozaiNum, bool flag) {
-	if (sozaiNum < validSozaiNum) {
+	if (sozaiNum < sozai.size()) {
 		sozai[sozaiNum]->setPadReleaseStop(flag);
 	}
 }
@@ -136,13 +134,13 @@ void SozaiManager::setPadReleaseStop(int sozaiNum, bool flag) {
 @brief 動画か画像の連番か指定
 */
 void SozaiManager::setMovieFlag(int sozaiNum, bool flag) {
-	if (sozaiNum < validSozaiNum) {
+	if (sozaiNum < sozai.size()) {
 		sozai[sozaiNum]->setUseMovie(flag);
 	}
 }
 
 void SozaiManager::setReverseFlag(int sozaiNum, bool flag) {
-	if (sozaiNum < validSozaiNum) {
+	if (sozaiNum < sozai.size()) {
 		sozai[sozaiNum]->setUseTurn(flag);
 	}
 }
@@ -151,7 +149,7 @@ void SozaiManager::setReverseFlag(int sozaiNum, bool flag) {
 @brief 素材の再生速度変更
 */
 void SozaiManager::setPlayRate(int sozaiNum, int rateVal) {
-	if (sozaiNum < validSozaiNum) {
+	if (sozaiNum < sozai.size()) {
 		sozai[sozaiNum]->setPlayRate(rateVal);
 	}
 }
@@ -159,18 +157,20 @@ void SozaiManager::setPlayRate(int sozaiNum, int rateVal) {
 
 void SozaiManager::changeTopLayer(int sozaiId) {
 	// 手抜き ちゃんとソートされるようになおす
-	SozaiLayerIndex[0] = sozaiId;
+	if (SozaiLayerIndex.size() > 0) {
+		SozaiLayerIndex[0] = sozaiId;
+	}
 }
 
 void SozaiManager::changePos(int sozaiNum, double valX, double valY) {
-	if (sozaiNum < validSozaiNum) {
+	if (sozaiNum < sozai.size()) {
 		sozai[sozaiNum]->setPosX(sozai[sozaiNum]->getPosX() + valX);
 		sozai[sozaiNum]->setPosY(sozai[sozaiNum]->getPosY() + valY);
 	}
 }
 
 bool SozaiManager::update() {
-	for (int i = 0; i < validSozaiNum; i++ ) {
+	for (int i = 0; i < sozai.size(); i++ ) {
 		for (int j = 0; j < sozai[i]->getValidPadNum(); j++) {
 			if (Pad::getIns()->get(ePad(sozai[i]->getTriggerPad(j))) == 1) {
 				sozai[i]->playSample(j, false);
@@ -189,15 +189,17 @@ bool SozaiManager::update() {
 }
 
 void SozaiManager::draw() const {
-	for (int i = 0; i < validSozaiNum; i++) {
+	for (int i = 0; i < sozai.size(); i++) {
 		sozai[i]->draw();
 	}
 	// 手抜き
-	sozai[SozaiLayerIndex[0]]->draw();
+	if (SozaiLayerIndex.size() > 0) {
+		sozai[SozaiLayerIndex[0]]->draw();
+	}
 }
 
 void SozaiManager::drawSozai(int sozaiNum) const {
-	if (sozaiNum < validSozaiNum) {
+	if (sozaiNum < sozai.size()) {
 		sozai[sozaiNum]->draw();
 	}
 }
