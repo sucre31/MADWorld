@@ -110,13 +110,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Program Files\DxLib_VC3_23\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files\DxLib_VC3_23\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -159,10 +159,12 @@
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="SceneAlice.cpp" />
     <ClCompile Include="SceneDontaco.cpp" />
+    <ClCompile Include="SceneKajioh.cpp" />
     <ClCompile Include="SceneLightPlane.cpp" />
     <ClCompile Include="SceneLoveSong.cpp" />
     <ClCompile Include="SceneMainMenu.cpp" />
     <ClCompile Include="SceneOption.cpp" />
+    <ClCompile Include="SceneSeikanHikou.cpp" />
     <ClCompile Include="SceneStarguitar.cpp" />
     <ClCompile Include="sideBlank.cpp" />
     <ClCompile Include="Singleton.cpp" />
@@ -195,10 +197,12 @@
     <ClInclude Include="Parameter.h" />
     <ClInclude Include="SceneAlice.h" />
     <ClInclude Include="SceneDontaco.h" />
+    <ClInclude Include="SceneKajioh.h" />
     <ClInclude Include="SceneLightPlane.h" />
     <ClInclude Include="SceneLoveSong.h" />
     <ClInclude Include="SceneMainMenu.h" />
     <ClInclude Include="SceneOption.h" />
+    <ClInclude Include="SceneSeikanHikou.h" />
     <ClInclude Include="SceneStarguitar.h" />
     <ClInclude Include="sideBlank.h" />
     <ClInclude Include="Singleton.h" />

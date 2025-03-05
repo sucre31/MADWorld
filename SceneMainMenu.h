@@ -12,7 +12,7 @@ public:
     void draw() const override;
     int getIconScene(int );
 private:
-    static const int iconNum = 5;
+    static const int iconNum = 6;
     int validIconNum;
     int selectIconNo;               // -1: ‘I‘ð–³‚µ
     cursor cursorIns;

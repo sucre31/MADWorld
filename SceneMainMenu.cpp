@@ -20,6 +20,7 @@ SceneMainMenu::SceneMainMenu(IOnSceneChangedListener* impl, const Parameter& par
 	icon[3].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail4.png");
 	icon[3].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail4.png");
 	icon[4].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail5.png");
+	icon[5].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail6.png");
 	for (int i = 0; i < iconNum; i++) {
 		icon[i].setPos(130 + 240 * (i / 4), 160 + (i % 4) * 133);
 		icon[i].enableIconFunc(true);
@@ -114,6 +115,8 @@ int SceneMainMenu::getIconScene(int iconNum) {
 		return eScene::Alice;
 	case 4:
 		return eScene::Starguitar;
+	case 5:
+		return eScene::Seikan;
 	default:
 		return -1;
 	}

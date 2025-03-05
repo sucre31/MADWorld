@@ -10,5 +10,7 @@ enum eScene {
 	LightPlane,
 	Dontaco,
 	Sonya,
-	Starguitar
+	Starguitar,
+	Kajioh,
+	Seikan
 };
