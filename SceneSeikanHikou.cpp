@@ -1,3 +1,4 @@
+#include <DxLib.h>
 #include "Sound.h"
 #include "Image.h"
 #include "Pad.h"
@@ -6,14 +7,15 @@
 
 SceneSeikanHikou::SceneSeikanHikou(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter) {
 	// ‘fÞ‚Ì“Ç‚Ýž‚Ý
+	daftHandle = Sound::getIns()->loadSamples("Assets/Sounds/SeikanHikou/DaftLoop.wav");
 	std::string rankaFile = "Assets/Sprites/movie/ranka/ranka";
 	//sozaiManager.makeSozai("", "Assets/Sprites/movie/ranka/ranka01.avi", 640, 360);
-	for (int i = 1; i < 27; i++) {
+	for (int i = 1; i < 26; i++) {
 		if (i < 10) {
 			sozaiManager.makeSozai("", (rankaFile + "0" + std::to_string(i) + ".avi").c_str(), 640, 360);
 		}
 		else {
-			sozaiManager.makeSozai("", (rankaFile + std::to_string(i) + ".avi").c_str()), 640, 360;
+			sozaiManager.makeSozai("", (rankaFile + std::to_string(i) + ".avi").c_str(), 640, 360);
 		}
 		sozaiManager.setMovieFlag(i - 1, true);
 	}
@@ -30,6 +32,10 @@ SceneSeikanHikou::SceneSeikanHikou(IOnSceneChangedListener* impl, const Paramete
 	for (int i = 0; i < 10; i++) {
 		sozaiManager.setDrumFlag(i, false);
 	}
+
+	// ‚Æ‚è‚ ‚¦‚¸‚È‚ç‚·
+	ChangeVolumeSoundMem(200, daftHandle);
+	PlaySoundMem(daftHandle, DX_PLAYTYPE_LOOP, TRUE);
 }
 
 void SceneSeikanHikou::update() {
@@ -42,7 +48,7 @@ void SceneSeikanHikou::update() {
 		// ‚±‚±‚É’¼Ú‘‚­‚ñ‚¶‚á‚È‚­‚ÄŠÖ”—pˆÓ‚·‚×‚«‚©‚È
 		Sound::getIns()->release();
 		Image::getIns()->release();
-		_implSceneChanged->onSceneChanged(eScene::Title, parameter, stackClear);
+		_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, stackClear);
 	}
 }
 

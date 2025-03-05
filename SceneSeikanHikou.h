@@ -9,6 +9,7 @@ public:
 	void update() override;
 	void draw() const override;
 private:
+	int daftHandle; // ‚Æ‚è‚ ‚¦‚¸
 	SozaiManager sozaiManager;
 };
 
