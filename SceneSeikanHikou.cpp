@@ -5,7 +5,7 @@
 #include "SceneSeikanHikou.h"
 
 
-SceneSeikanHikou::SceneSeikanHikou(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter), sampleSetNum(0){
+SceneSeikanHikou::SceneSeikanHikou(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter), sampleSetNum(0), enablePause(false){
 	// 素材の読み込み
 	daftHandle = Sound::getIns()->loadSamples("Assets/Sounds/SeikanHikou/DaftLoop.wav");
 	std::string rankaFile = "Assets/Sprites/movie/ranka/ranka";
@@ -25,46 +25,74 @@ SceneSeikanHikou::SceneSeikanHikou(IOnSceneChangedListener* impl, const Paramete
 	}
 	setSample(0);
 
+	// 効果音読み込み
+	SEHandle[0] = Sound::getIns()->loadSamples("Assets/Sounds/GrandSE/pause.wav");
+	SEHandle[1] = Sound::getIns()->loadSamples("Assets/Sounds/GrandSE/cancel.wav");
+
 	// とりあえずドラムならす
 	ChangeVolumeSoundMem(200, daftHandle);
 	PlaySoundMem(daftHandle, DX_PLAYTYPE_LOOP, TRUE);
 }
 
 void SceneSeikanHikou::update() {
-	sozaiManager.update();
-
-	// コントローラーとサンプルの対応を設定
-	if (Pad::getIns()->get(ePad::L) >= 1) {
-		if (sampleSetNum != 1) {
-			sampleSetNum = 1;
-			setSample(sampleSetNum);
+	if (!enablePause) {
+		sozaiManager.update();
+		// コントローラーとサンプルの対応を設定
+		if (Pad::getIns()->get(ePad::L) >= 1) {
+			if (sampleSetNum != 1) {
+				sampleSetNum = 1;
+				setSample(sampleSetNum);
+			}
 		}
-	}
-	else if (Pad::getIns()->get(ePad::R) >= 1) {
-		if (sampleSetNum != 2) {
-			sampleSetNum = 2;
-			setSample(sampleSetNum);
+		else if (Pad::getIns()->get(ePad::R) >= 1) {
+			if (sampleSetNum != 2) {
+				sampleSetNum = 2;
+				setSample(sampleSetNum);
+			}
+		}
+		else {
+			if (sampleSetNum != 0) {
+				sampleSetNum = 0;
+				setSample(sampleSetNum);
+			}
+		}
+
+		if (Pad::getIns()->get(ePad::start) == 1) {
+			// ポーズ画面表示
+			PlaySoundMem(SEHandle[0], DX_PLAYTYPE_BACK, TRUE);
+			StopSoundMem(daftHandle);
+			enablePause = true;
+			pauseMenu.setActive();
+			pauseMenu.update();
 		}
 	}
 	else {
-		if (sampleSetNum != 0) {
-			sampleSetNum = 0;
-			setSample(sampleSetNum);
+		// ポーズメニューの処理を行う
+		pauseMenu.update();
+		if (!pauseMenu.getActive()) {
+			if (pauseMenu.getSelectCmd() == 0) {
+				// メニューへ戻る
+				PlaySoundMem(SEHandle[1], DX_PLAYTYPE_BACK, TRUE);
+				Parameter parameter;
+				const bool stackClear = true;
+				Sound::getIns()->release();
+				Image::getIns()->release();
+				_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, stackClear);
+			}
+			else {
+				// ポーズメニュー終了
+				PlaySoundMem(daftHandle, DX_PLAYTYPE_LOOP, FALSE);
+				enablePause = false;
+			}
 		}
-	}
-	if (Pad::getIns()->get(ePad::start) == 1) {
-		// メニューに戻る
-		Parameter parameter;
-		const bool stackClear = true;
-		// ここに直接書くんじゃなくて関数用意すべきかな
-		Sound::getIns()->release();
-		Image::getIns()->release();
-		_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, stackClear);
 	}
 }
 
 void SceneSeikanHikou::draw() const {
 	sozaiManager.draw();
+	if (enablePause) {
+		pauseMenu.draw();
+	}
 }
 
 void SceneSeikanHikou::resetSample() {

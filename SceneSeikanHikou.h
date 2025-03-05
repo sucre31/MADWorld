@@ -1,6 +1,8 @@
 #pragma once
-#include "AbstractScene.h"
+
 #include "SozaiManager.h"
+#include "PauseMenu.h"
+
 class SceneSeikanHikou : public AbstractScene
 {
 public:
@@ -14,5 +16,8 @@ private:
 	int sampleSetNum;
 	void setSample(int);
 	void resetSample();
+	bool enablePause;
+	int SEHandle[2];
+	PauseMenu pauseMenu;
 };
 

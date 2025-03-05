@@ -157,6 +157,7 @@
     <ClCompile Include="OpeningScene.cpp" />
     <ClCompile Include="Pad.cpp" />
     <ClCompile Include="Parameter.cpp" />
+    <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="SceneAlice.cpp" />
     <ClCompile Include="SceneDontaco.cpp" />
     <ClCompile Include="SceneKajioh.cpp" />
@@ -195,6 +196,7 @@
     <ClInclude Include="OpeningScene.h" />
     <ClInclude Include="Pad.h" />
     <ClInclude Include="Parameter.h" />
+    <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="SceneAlice.h" />
     <ClInclude Include="SceneDontaco.h" />
     <ClInclude Include="SceneKajioh.h" />
