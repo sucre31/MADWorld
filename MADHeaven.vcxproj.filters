@@ -79,6 +79,12 @@
     <Filter Include="ヘッダー ファイル\Scene\SceneSonya">
       <UniqueIdentifier>{38e21e7b-b75e-41be-abcf-8f491a0060ef}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\Scene\SceneSnippet">
+      <UniqueIdentifier>{8f3505db-50bc-41af-bdf1-1119951eb75a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ヘッダー ファイル\Scene\SceneSnippet">
+      <UniqueIdentifier>{bd213f21-f1b2-467a-b6b1-e9f13590f60f}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -195,6 +201,51 @@
     <ClCompile Include="PauseMenu.cpp">
       <Filter>ソース ファイル\GameObject</Filter>
     </ClCompile>
+    <ClCompile Include="SceneSnippet.cpp">
+      <Filter>ソース ファイル\Scene\SceneSnippet</Filter>
+    </ClCompile>
+    <ClCompile Include="EnemyManager.cpp">
+      <Filter>ソース ファイル\Scene\SceneSnippet</Filter>
+    </ClCompile>
+    <ClCompile Include="Enemy.cpp">
+      <Filter>ソース ファイル\Scene\SceneSnippet</Filter>
+    </ClCompile>
+    <ClCompile Include="SnippetGameManager.cpp">
+      <Filter>ソース ファイル\Scene\SceneSnippet</Filter>
+    </ClCompile>
+    <ClCompile Include="BackImage.cpp">
+      <Filter>ソース ファイル\Scene\SceneSnippet</Filter>
+    </ClCompile>
+    <ClCompile Include="BeatManager.cpp">
+      <Filter>ソース ファイル\Scene\SceneSnippet</Filter>
+    </ClCompile>
+    <ClCompile Include="Character.cpp">
+      <Filter>ソース ファイル\Scene\SceneSnippet</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageBeat.cpp">
+      <Filter>ソース ファイル\Scene\SceneSnippet</Filter>
+    </ClCompile>
+    <ClCompile Include="DamageCharacter.cpp">
+      <Filter>ソース ファイル\Scene\SceneSnippet</Filter>
+    </ClCompile>
+    <ClCompile Include="Instrument.cpp">
+      <Filter>ソース ファイル\Scene\SceneSnippet</Filter>
+    </ClCompile>
+    <ClCompile Include="MessageWindow.cpp">
+      <Filter>ソース ファイル\Scene\SceneSnippet</Filter>
+    </ClCompile>
+    <ClCompile Include="PlayerCharacter.cpp">
+      <Filter>ソース ファイル\Scene\SceneSnippet</Filter>
+    </ClCompile>
+    <ClCompile Include="StatusWindow.cpp">
+      <Filter>ソース ファイル\Scene\SceneSnippet</Filter>
+    </ClCompile>
+    <ClCompile Include="SnippetSound.cpp">
+      <Filter>ソース ファイル\Scene\SceneSnippet</Filter>
+    </ClCompile>
+    <ClCompile Include="SnippetImage.cpp">
+      <Filter>ソース ファイル\Scene\SceneSnippet</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="TitleScene.h">
@@ -307,6 +358,51 @@
     </ClInclude>
     <ClInclude Include="PauseMenu.h">
       <Filter>ヘッダー ファイル\GameObject</Filter>
+    </ClInclude>
+    <ClInclude Include="SceneSnippet.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSnippet</Filter>
+    </ClInclude>
+    <ClInclude Include="EnemyManager.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSnippet</Filter>
+    </ClInclude>
+    <ClInclude Include="Enemy.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSnippet</Filter>
+    </ClInclude>
+    <ClInclude Include="SnippetGameManager.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSnippet</Filter>
+    </ClInclude>
+    <ClInclude Include="BackImage.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSnippet</Filter>
+    </ClInclude>
+    <ClInclude Include="BeatManager.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSnippet</Filter>
+    </ClInclude>
+    <ClInclude Include="Character.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSnippet</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageBeat.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSnippet</Filter>
+    </ClInclude>
+    <ClInclude Include="DamageCharacter.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSnippet</Filter>
+    </ClInclude>
+    <ClInclude Include="Instrument.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSnippet</Filter>
+    </ClInclude>
+    <ClInclude Include="MessageWindow.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSnippet</Filter>
+    </ClInclude>
+    <ClInclude Include="PlayerCharacter.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSnippet</Filter>
+    </ClInclude>
+    <ClInclude Include="StatusWindow.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSnippet</Filter>
+    </ClInclude>
+    <ClInclude Include="SnippetSound.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSnippet</Filter>
+    </ClInclude>
+    <ClInclude Include="SnippetImage.h">
+      <Filter>ヘッダー ファイル\Scene\SceneSnippet</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

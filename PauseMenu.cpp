@@ -25,6 +25,12 @@ bool PauseMenu::update(){
 		}
 	}
 
+	if (Pad::getIns()->get(ePad::start) == 1) {
+		// ポーズ解除
+		selectCmd = 1;
+		activeMenu = false;
+	}
+
 	if (Pad::getIns()->get(ePad::A) == 1) {
 		// コマンドを確定させる
 		activeMenu = false;

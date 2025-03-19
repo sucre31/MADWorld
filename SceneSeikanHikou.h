@@ -17,6 +17,7 @@ private:
 	void setSample(int);
 	void resetSample();
 	bool enablePause;
+	bool playBGM;
 	int SEHandle[2];
 	PauseMenu pauseMenu;
 };

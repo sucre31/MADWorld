@@ -2,8 +2,9 @@
 
 #include <math.h>
 #include "DxLib.h"
+#include "Singleton.h"
 
-class FpsControl {
+class FpsControl final : public Singleton<FpsControl> {
 	int mStartTime;         //測定開始時刻
 	int mCount;             //カウンタ
 	float mFps;             //瞬間のfps

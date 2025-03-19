@@ -12,5 +12,6 @@ enum eScene {
 	Sonya,
 	Starguitar,
 	Kajioh,
-	Seikan
+	Seikan,
+	Snippet
 };

@@ -30,13 +30,25 @@ SceneSeikanHikou::SceneSeikanHikou(IOnSceneChangedListener* impl, const Paramete
 	SEHandle[1] = Sound::getIns()->loadSamples("Assets/Sounds/GrandSE/cancel.wav");
 
 	// とりあえずドラムならす
-	ChangeVolumeSoundMem(200, daftHandle);
+	ChangeVolumeSoundMem(255, daftHandle);
+	playBGM = true;
 	PlaySoundMem(daftHandle, DX_PLAYTYPE_LOOP, TRUE);
 }
 
 void SceneSeikanHikou::update() {
 	if (!enablePause) {
 		sozaiManager.update();
+		if (Pad::getIns()->get(ePad::change) == 1) {
+			if (playBGM) {
+				playBGM = false;
+				StopSoundMem(daftHandle);
+			}
+			else {
+				playBGM = true;
+				PlaySoundMem(daftHandle, DX_PLAYTYPE_LOOP, TRUE);
+			}
+		}
+
 		// コントローラーとサンプルの対応を設定
 		if (Pad::getIns()->get(ePad::L) >= 1) {
 			if (sampleSetNum != 1) {
@@ -63,7 +75,7 @@ void SceneSeikanHikou::update() {
 			StopSoundMem(daftHandle);
 			enablePause = true;
 			pauseMenu.setActive();
-			pauseMenu.update();
+			//pauseMenu.update();		普遍的なポーズの導入の仕方考えた方がいい
 		}
 	}
 	else {
