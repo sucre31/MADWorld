@@ -1,7 +1,7 @@
 #pragma once
-#include "AbstractScene.h"
-#include "MusicManager.h"
-#include "SozaiManager.h"
+#include "System/AbstractScene.h"
+#include "Common/GameObject/MusicManager.h"
+#include "Common/GameObject/SozaiManager.h"
 class SceneLoveSong : public AbstractScene
 {
 public:

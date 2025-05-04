@@ -1,9 +1,10 @@
 #pragma once
+#include <Dxlib.h>
 #include <vector>
 #include <memory>
-#include "AbstractScene.h"
-#include "SozaiManager.h"
-#include "BackGround.h"
+#include "System/AbstractScene.h"
+#include "Common/GameObject/SozaiManager.h"
+#include "Common/GameObject/BackGround.h"
 #include "sideBlank.h"
 #include "snowBall.h"
 #include "BPMManager.h"

@@ -1,5 +1,5 @@
 #include "MusicManager.h"
-#include "Sound.h"
+#include "Common/Sound.h"
 #include <DxLib.h>
 #include <iostream>
 

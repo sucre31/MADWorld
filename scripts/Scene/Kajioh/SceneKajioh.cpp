@@ -1,7 +1,7 @@
 #include "SceneKajioh.h"
-#include "Sound.h"
-#include "Image.h"
-#include "Pad.h"
+#include "Common/Sound.h"
+#include "Common/Image.h"
+#include "System/Pad.h"
 
 SceneKajioh::SceneKajioh(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter) {
 

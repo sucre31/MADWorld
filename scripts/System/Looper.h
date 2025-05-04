@@ -2,10 +2,10 @@
 
 #include <stack>
 #include <memory>
-#include "AbstractScene.h"
-#include "IOnSceneChangedListener.h"
-#include "FpsControl.h"
-#include "Define.h"
+#include "System/AbstractScene.h"
+#include "System/IOnSceneChangedListener.h"
+#include "System/FpsControl.h"
+#include "System/Define.h"
 
 class Looper final : public IOnSceneChangedListener
 {

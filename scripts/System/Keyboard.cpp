@@ -1,5 +1,5 @@
 #include <DxLib.h>
-#include "Keyboard.h"
+#include "System/Keyboard.h"
 
 
 bool Keyboard::update() {

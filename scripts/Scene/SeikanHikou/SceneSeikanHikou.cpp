@@ -1,7 +1,7 @@
 #include <DxLib.h>
-#include "Sound.h"
-#include "Image.h"
-#include "Pad.h"
+#include "Common/Sound.h"
+#include "Common/Image.h"
+#include "System/Pad.h"
 #include "SceneSeikanHikou.h"
 
 

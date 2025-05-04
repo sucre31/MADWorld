@@ -1,6 +1,6 @@
 #include "RealTimeSequencer.h"
 #include "DxLib.h"
-#include "SozaiManager.h"
+#include "Common/GameObject/SozaiManager.h"
 
 RealTimeSequencer::RealTimeSequencer()
 	: loopLength(0), startTimeMs(0), playing(false), metronomeEnabled(false), metronomeSoundIndex(0) {

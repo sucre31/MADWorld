@@ -1,7 +1,7 @@
 #pragma once
-
-#include "SozaiManager.h"
-#include "PauseMenu.h"
+#include "System/AbstractScene.h"
+#include "Common/GameObject/SozaiManager.h"
+#include "Common/GameObject/PauseMenu.h"
 
 class SceneSeikanHikou : public AbstractScene
 {

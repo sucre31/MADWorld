@@ -1,6 +1,6 @@
 #pragma once
-#include "AbstractScene.h"
-#include "SozaiManager.h"
+#include "System/AbstractScene.h"
+#include "Common/GameObject/SozaiManager.h"
 class SceneDontaco : public AbstractScene
 {
 public:

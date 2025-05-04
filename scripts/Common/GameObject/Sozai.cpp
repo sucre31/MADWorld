@@ -1,9 +1,9 @@
 #include <Dxlib.h>
-#include "Image.h"
+#include "Common/Image.h"
 #include "Sozai.h"
-#include "Sound.h"
-#include "Pad.h"
-#include "MIDI.h"
+#include "Common/Sound.h"
+#include "System/Pad.h"
+#include "System/MIDI.h"
 
 Sozai::Sozai() :enablePadPlayStop(false) {
 	x = 0;

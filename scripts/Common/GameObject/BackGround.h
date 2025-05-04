@@ -1,6 +1,6 @@
 #pragma once
 #include "GameObject.h"
-#include "Image.h"
+#include "Common/Image.h"
 
 class BackGround : public GameObject
 {

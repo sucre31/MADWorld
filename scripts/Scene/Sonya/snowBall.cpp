@@ -1,7 +1,7 @@
 #include <Dxlib.h>
 #include "snowBall.h"
-#include "Image.h"
-#include "Sound.h"
+#include "Common/Image.h"
+#include "Common/Sound.h"
 
 snowBall::snowBall() {
 	snowBallGraph = Image::getIns()->loadSamples("Assets/Sprites/images/sonya/snowBall.png");

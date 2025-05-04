@@ -1,9 +1,9 @@
 #include <Dxlib.h>
 #include "Enemy.h"
-#include "Image.h"
-#include "Pad.h"
-#include "Define.h"
-#include "Sound.h"
+#include "Common/Image.h"
+#include "System/Pad.h"
+#include "System/Define.h"
+#include "Common/Sound.h"
 #include "SnippetGameManager.h"
 
 Enemy::Enemy(int x, int y, std::shared_ptr<SnippetImage> image, std::shared_ptr<SnippetGameManager> gameManager) {

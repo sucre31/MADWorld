@@ -1,5 +1,5 @@
 #include "Dxlib.h"
-#include "Define.h"
+#include "System/Define.h"
 #include "BackGround.h"
 
 BackGround::BackGround() {

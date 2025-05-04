@@ -1,5 +1,5 @@
 #pragma once
-#include "GameObject.h"
+#include "Common/GameObject/GameObject.h"
 class cursor : public GameObject
 {
 public:

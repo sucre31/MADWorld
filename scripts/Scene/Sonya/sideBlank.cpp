@@ -1,6 +1,6 @@
 #include <Dxlib.h>
 #include "sideBlank.h"
-#include "Image.h"
+#include "Common/Image.h"
 
 sideBlank::sideBlank(): breakState(0) {
 	posX = 0;

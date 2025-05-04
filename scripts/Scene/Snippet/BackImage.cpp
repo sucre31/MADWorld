@@ -1,7 +1,7 @@
 #include <Dxlib.h>
 
 #include "BackImage.h"
-#include "Define.h"
+#include "System/Define.h"
 #include "SnippetGameManager.h"
 
 BackImage::BackImage() {

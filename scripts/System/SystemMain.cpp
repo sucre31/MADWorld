@@ -1,7 +1,7 @@
 #include <DxLib.h>
-#include "SystemMain.h"
-#include "Define.h"
-#include "Looper.h"
+#include "System/SystemMain.h"
+#include "System/Define.h"
+#include "System/Looper.h"
 
 /*!
 * @brief DXƒ‰ƒCƒuƒ‰ƒŠ‚âƒQ[ƒ€‚Ì‰Šúˆ—

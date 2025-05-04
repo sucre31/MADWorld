@@ -1,9 +1,9 @@
 #include <DxLib.h>
 #include "SceneMainMenu.h"
-#include "Sound.h"
-#include "Image.h"
-#include "Pad.h"
-#include "FpsControl.h"
+#include "Common/Sound.h"
+#include "Common/Image.h"
+#include "System/Pad.h"
+#include "System/FpsControl.h"
 
 SceneMainMenu::SceneMainMenu(IOnSceneChangedListener* impl, const Parameter& parameter) : validIconNum(0) , selectIconNo(-1), AbstractScene(impl, parameter)
 {
@@ -44,7 +44,7 @@ void SceneMainMenu::update()
 	}
 	cursorX = cursorIns.getCursorPosX();
 	cursorY = cursorIns.getCursorPosY();
-	double speedRate = 3.0;
+	double speedRate = 5.0;
 	selectIconNo = -1;
 	bool isHit;
 
@@ -57,7 +57,7 @@ void SceneMainMenu::update()
 
 
 	if (Pad::getIns()->get(ePad::Y) >= 1) {
-		speedRate = 5.0;
+		speedRate = 8.0;
 	}
 	if (Pad::getIns()->get(ePad::A) >= 1) {
 		// アイコンあればシーンチェンジ

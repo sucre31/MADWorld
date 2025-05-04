@@ -2,8 +2,8 @@
 
 #include <string>
 #include <Dxlib.h>
-#include "Image.h"
-#include "GameObject.h"
+#include "Common/Image.h"
+#include "Common/GameObject/GameObject.h"
 #include "SnippetGameManager.h"
 
 using namespace std;

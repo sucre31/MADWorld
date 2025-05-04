@@ -1,10 +1,10 @@
 #include <DxLib.h>
-#include "Sound.h"
-#include "Image.h"
-#include "Define.h"
-#include "Keyboard.h"
-#include "Pad.h"
-#include "MIDI.h"
+#include "Common/Sound.h"
+#include "Common/Image.h"
+#include "System/Define.h"
+#include "System/Keyboard.h"
+#include "System/Pad.h"
+#include "System/MIDI.h"
 #include "SceneLoveSong.h"
 
 

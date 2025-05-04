@@ -1,7 +1,7 @@
 #include <Dxlib.h>
-#include "Image.h"
+#include "Common/Image.h"
 #include "cursor.h"
-#include "Define.h"
+#include "System/Define.h"
 
 cursor::cursor() {
 	posX = Define::WIN_W / 2.0;

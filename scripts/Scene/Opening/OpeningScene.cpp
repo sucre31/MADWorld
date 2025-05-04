@@ -1,8 +1,8 @@
 #include <DxLib.h>
-#include "Pad.h"
+#include "System/Pad.h"
 #include "OpeningScene.h"
-#include "Sound.h"
-#include "Image.h"
+#include "Common/Sound.h"
+#include "Common/Image.h"
 
 
 OpeningScene::OpeningScene(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter)

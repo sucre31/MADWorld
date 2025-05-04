@@ -1,7 +1,7 @@
 #include "SceneDontaco.h"
-#include "Sound.h"
-#include "Image.h"
-#include "Pad.h"
+#include "Common/Sound.h"
+#include "Common/Image.h"
+#include "System/Pad.h"
 
 SceneDontaco::SceneDontaco(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter) {
 	sozaiManager.makeSozai("Assets/Sounds/dontaco/don.wav", "Assets/Sprites/images/dontaco/dontacos.png", 640, 360);

@@ -1,6 +1,6 @@
 #include <Dxlib.h>
 #include "gameIcon.h"
-#include "Image.h"
+#include "Common/Image.h"
 
 gameIcon::gameIcon() :isCursorOn(false), thumbnailRate(defaultExRate), enableIcon(false) {
 }

@@ -1,8 +1,9 @@
 #include "SceneSnippet.h"
+#include "System/AbstractScene.h"
 #include "SnippetGameManager.h"
-#include "Sound.h"
-#include "Pad.h"
-#include "Define.h"
+#include "Common/Sound.h"
+#include "System/Pad.h"
+#include "System/Define.h"
 
 using namespace std;
 

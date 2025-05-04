@@ -1,7 +1,7 @@
 #pragma once
-#include "AbstractScene.h"
-#include "SozaiManager.h"
-#include "BackGround.h"
+#include "System/AbstractScene.h"
+#include "Common/GameObject/SozaiManager.h"
+#include "Common/GameObject/BackGround.h"
 
 class SceneLightPlane : public AbstractScene
 {

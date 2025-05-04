@@ -1,6 +1,6 @@
 #include<Dxlib.h>
 #include <string>
-#include "MIDI.h"
+#include "System/MIDI.h"
 
 std::queue<MidiMessage> MIDI::midiQueue;
 

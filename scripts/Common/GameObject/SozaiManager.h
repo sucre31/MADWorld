@@ -1,6 +1,7 @@
 #pragma once
-#include "Sozai.h"
-#include "MIDI.h"
+#include "Common/GameObject/GameObject.h"
+#include "Common/GameObject/Sozai.h"
+#include "System/MIDI.h"
 
 class SozaiManager : GameObject
 {

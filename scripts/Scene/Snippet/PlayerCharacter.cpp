@@ -1,8 +1,8 @@
 #include <Dxlib.h>
 
 #include "PlayerCharacter.h"
-#include "Pad.h"
-#include "Sound.h"
+#include "System/Pad.h"
+#include "Common/Sound.h"
 
 PlayerCharacter::PlayerCharacter() {
 	mainSoundNumber = 0;

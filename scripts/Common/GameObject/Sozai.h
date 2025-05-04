@@ -1,7 +1,7 @@
 #pragma once
 #include <vector>
 #include "GameObject.h"
-#include "Pad.h"
+#include "System/Pad.h"
 
 class Sozai : public GameObject
 {

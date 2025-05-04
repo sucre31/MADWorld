@@ -1,8 +1,8 @@
 #pragma once
 #include <vector>
 #include <Dxlib.h>
-#include "GameObject.h"
-#include "Sozai.h"
+#include "Common/GameObject/GameObject.h"
+#include "Common/GameObject/Sozai.h"
 
 // スターギター用に素材を管理する
 class StarguitarDrums : public GameObject

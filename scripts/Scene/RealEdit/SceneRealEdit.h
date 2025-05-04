@@ -1,7 +1,7 @@
 #pragma once
-#include "AbstractScene.h"
+#include "System/AbstractScene.h"
 #include "RealTimeSequencer.h"
-#include "SozaiManager.h"
+#include "Common/GameObject/SozaiManager.h"
 class SceneRealEdit : public AbstractScene
 {
 public:

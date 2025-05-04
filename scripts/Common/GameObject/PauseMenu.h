@@ -1,10 +1,10 @@
 #pragma once
-#include "AbstractScene.h"
-#include "Sound.h"
-#include "Define.h"
-#include "Image.h"
-#include "Keyboard.h"
-#include "Pad.h"
+#include "System/AbstractScene.h"
+#include "Common/Sound.h"
+#include "System/Define.h"
+#include "Common/Image.h"
+#include "System/Keyboard.h"
+#include "System/Pad.h"
 #include "GameObject.h"
 
 class PauseMenu : GameObject

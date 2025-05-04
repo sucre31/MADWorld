@@ -1,7 +1,8 @@
 #pragma once
-#include "AbstractScene.h"
+#include <DxLib.h>
+#include "System/AbstractScene.h"
 #include "cursor.h"
-#include "BackGround.h"
+#include "Common/GameObject/BackGround.h"
 #include "gameIcon.h"
 class SceneMainMenu : public AbstractScene
 {

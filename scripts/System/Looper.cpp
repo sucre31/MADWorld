@@ -1,39 +1,32 @@
-#include "Looper.h"
-#include "OpeningScene.h"
-#include "TitleScene.h"
-#include "SceneOption.h"
-#include "SceneLoveSong.h"
-#include "SceneAlice.h"
-#include "SceneLightPlane.h"
-#include "SceneMainMenu.h"
-#include "SceneDontaco.h"
-#include "VsSonya.h"
-#include "SceneStarguitar.h"
-#include "SceneKajioh.h"
-#include "SceneSeikanHikou.h"
-#include "SceneSnippet.h"
-#include "SceneRealEdit.h"
-//#include "Error.h"
-//#include "Macro.h"
-#include "Keyboard.h"
-#include "Pad.h"
-#include "MIDI.h"
-#include "Image.h"
-#include "Sound.h"
+#include "System/Looper.h"
+#include "Scene/Opening/OpeningScene.h"
+#include "Scene/Title/TitleScene.h"
+#include "Scene/Option/SceneOption.h"
+#include "Scene/LoveSong/SceneLoveSong.h"
+#include "Scene/Alice/SceneAlice.h"
+#include "Scene/LightPlane/SceneLightPlane.h"
+#include "Scene/MainMenu/SceneMainMenu.h"
+#include "Scene/Dontaco/SceneDontaco.h"
+#include "Scene/Sonya/VsSonya.h"
+#include "Scene/StarGuitar/SceneStarguitar.h"
+#include "Scene/Kajioh/SceneKajioh.h"
+#include "Scene/SeikanHikou/SceneSeikanHikou.h"
+#include "Scene/Snippet/SceneSnippet.h"
+#include "Scene/RealEdit/SceneRealEdit.h"
+#include "System/Keyboard.h"
+#include "System/Pad.h"
+#include "System/MIDI.h"
+#include "Common/Image.h"
+#include "Common/Sound.h"
 
 using namespace std;
 
 Looper::Looper()
 {
     screenRate = Define::WIN_EX;
-
-    //Image::getIns()->load();
-
     Parameter parameter;
-    //_fps = make_shared<FpsControl>();
     _sceneStack.push(make_shared<OpeningScene>(this, parameter)); //タイトル画面シーンを作ってpush
     _fps = new FpsControl();
-    //GameManager::getIns()->setFpsIns(_fps);
 }
 /*!
 @brief スタックのトップのシーンの処理をする
@@ -54,7 +47,6 @@ bool Looper::loop() const
 
     //最後に画面の倍率に合わせて描画
     SetDrawScreen(DX_SCREEN_BACK);
-    //DrawExtendGraph(0, 0, (Define::WIN_W * screenRate), (Define::WIN_H * screenRate), Image::getIns()->getScreenHandle(), FALSE);
     return true;
 }
 

@@ -1,6 +1,6 @@
 #include <Dxlib.h>
 #include "BeatManager.h"
-#include "Sound.h"
+#include "Common/Sound.h"
 
 
 BeatManager::BeatManager() {

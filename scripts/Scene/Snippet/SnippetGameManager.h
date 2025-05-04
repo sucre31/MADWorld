@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
-#include "Singleton.h"
-#include "FpsControl.h"
+#include "System/Singleton.h"
+#include "System/FpsControl.h"
 #include "SnippetGameManager.h"
 
 class SnippetGameManager

@@ -1,6 +1,6 @@
 #include <DxLib.h>
 #include "SnippetImage.h"
-#include "Define.h"
+#include "System/Define.h"
 
 SnippetImage::SnippetImage()
 {

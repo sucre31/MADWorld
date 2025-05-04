@@ -1,10 +1,10 @@
 #include <memory>
 #include <Dxlib.h>
 #include "VsSonya.h"
-#include "Sound.h"
-#include "Image.h"
-#include "Pad.h"
-#include "Define.h"
+#include "Common/Sound.h"
+#include "Common/Image.h"
+#include "System/Pad.h"
+#include "System/Define.h"
 #include "snowBall.h"
 
 

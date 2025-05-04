@@ -1,9 +1,9 @@
 #include<Dxlib.h>
 #include "SceneOption.h"
-#include "Keyboard.h"
-#include "Pad.h"
-#include "Sound.h"
-#include "MIDI.h"
+#include "System/Keyboard.h"
+#include "System/Pad.h"
+#include "Common/Sound.h"
+#include "System/MIDI.h"
 
 SceneOption::SceneOption(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter)
 {

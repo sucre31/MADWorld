@@ -1,7 +1,7 @@
 #pragma once
 
 #include <vector>
-#include "Singleton.h"
+#include "System/Singleton.h"
 
 class SnippetSound
 {

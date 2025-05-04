@@ -1,7 +1,7 @@
 #pragma once
 
 #include <memory>
-#include "AbstractScene.h"
+#include "System/AbstractScene.h"
 #include "StatusWindow.h"
 #include "BackImage.h"
 #include "Enemy.h"

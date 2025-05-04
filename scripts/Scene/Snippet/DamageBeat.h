@@ -1,7 +1,7 @@
 #pragma once
 #include <memory>
 #include <vector>
-#include "GameObject.h"
+#include "Common/GameObject/GameObject.h"
 #include "DamageCharacter.h"
 #include "SnippetGameManager.h"
 #include "SnippetImage.h"

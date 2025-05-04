@@ -1,5 +1,5 @@
 #include "DxLib.h"
-#include "SystemMain.h"
+#include "System/SystemMain.h"
 
 int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine, int nCmdShow)
 {

@@ -1,10 +1,10 @@
 #include <DxLib.h>
 #include "SceneRealEdit.h"
-#include "Sound.h"
-#include "Image.h"
-#include "Define.h"
-#include "Keyboard.h"
-#include "Pad.h"
+#include "Common/Sound.h"
+#include "Common/Image.h"
+#include "System/Define.h"
+#include "System/Keyboard.h"
+#include "System/Pad.h"
 
 SceneRealEdit::SceneRealEdit(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter) {
 	sozaiManager.makeSozai("Assets/Sounds/GrandSE/metroBeat.wav", "", 640, 360);

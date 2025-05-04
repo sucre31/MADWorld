@@ -1,7 +1,7 @@
 #include <Dxlib.h>
 #include <string>
 #include "MessageWindow.h"
-#include "Image.h"
+#include "Common/Image.h"
 #include "SnippetGameManager.h"
 
 using namespace std;

@@ -1,8 +1,8 @@
 #pragma once
-#include "AbstractScene.h"
-#include "SozaiManager.h"
+#include "System/AbstractScene.h"
+#include "Common/GameObject/SozaiManager.h"
 #include "StarguitarDrums.h"
-#include "BackGround.h"
+#include "Common/GameObject/BackGround.h"
 
 class SceneStarguitar : public AbstractScene
 {

@@ -1,6 +1,6 @@
 #include <DxLib.h>
 #include "Image.h"
-#include "Define.h"
+#include "System/Define.h"
 
 Image::Image()
 {

@@ -2,7 +2,7 @@
 
 #include <math.h>
 #include "DxLib.h"
-#include "Singleton.h"
+#include "System/Singleton.h"
 
 class FpsControl final : public Singleton<FpsControl> {
 	int mStartTime;         //‘ª’èŠJn

@@ -2,7 +2,7 @@
 
 #include "DamageBeat.h"
 #include "DamageCharacter.h"
-#include "Image.h"
+#include "Common/Image.h"
 #include "SnippetGameManager.h"
 
 DamageBeat::DamageBeat() {

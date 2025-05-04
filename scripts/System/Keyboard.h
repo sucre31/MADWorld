@@ -1,7 +1,7 @@
 #pragma once
 
 #include <array>
-#include "Singleton.h"
+#include "System/Singleton.h"
 
 class Keyboard final : public Singleton<Keyboard> {
 

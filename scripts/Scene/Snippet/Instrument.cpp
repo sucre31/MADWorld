@@ -1,6 +1,6 @@
 #include <Dxlib.h>
 #include "Instrument.h"
-#include "Sound.h"
+#include "Common/Sound.h"
 
 
 

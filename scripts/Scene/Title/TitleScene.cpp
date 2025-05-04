@@ -1,10 +1,10 @@
 #include <DxLib.h>
 #include "TitleScene.h"
-#include "Define.h"
-#include "Keyboard.h"
-#include "Pad.h"
-#include "Image.h"
-#include "Sound.h"
+#include "System/Define.h"
+#include "System/Keyboard.h"
+#include "System/Pad.h"
+#include "Common/Image.h"
+#include "Common/Sound.h"
 
 TitleScene::TitleScene(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter)
 {

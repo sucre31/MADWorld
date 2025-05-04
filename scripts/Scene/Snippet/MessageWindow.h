@@ -1,6 +1,6 @@
 #pragma once
 #include <memory>
-#include "GameObject.h"
+#include "Common/GameObject/GameObject.h"
 #include "SnippetGameManager.h"
 #include "SnippetImage.h"
 //#include "StringImage.h"

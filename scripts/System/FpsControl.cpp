@@ -1,6 +1,6 @@
 #include <math.h>
 #include "DxLib.h"
-#include "FpsControl.h"
+#include "System/FpsControl.h"
 
 void FpsControl::FpsControll_Initialize() {
 	mStartTime = GetNowCount();

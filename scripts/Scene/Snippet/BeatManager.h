@@ -2,7 +2,7 @@
 #include <Dxlib.h>
 #include <memory>
 #include "SnippetSound.h"
-#include "GameObject.h"
+#include "Common/GameObject/GameObject.h"
 
 class BeatManager : public GameObject
 {

@@ -1,7 +1,7 @@
 #include "SceneStarguitar.h"
-#include "Sound.h"
-#include "Image.h"
-#include "Define.h"
+#include "Common/Sound.h"
+#include "Common/Image.h"
+#include "System/Define.h"
 
 SceneStarguitar::SceneStarguitar(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter)
 {

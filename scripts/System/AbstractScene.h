@@ -1,6 +1,6 @@
 #pragma once
-#include "IOnSceneChangedListener.h"
-#include "Parameter.h"
+#include "System/IOnSceneChangedListener.h"
+#include "System/Parameter.h"
 
 class IOnSceneChangedListener;
 

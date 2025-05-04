@@ -5,7 +5,7 @@
 #include <array>
 #include <queue>
 #pragma comment(lib, "winmm.lib")
-#include "Singleton.h"
+#include "System/Singleton.h"
 
 enum eMidi {
 	C_0 = 12, C_S0 = 13, D_0 = 14, D_S0 = 15, E_0 = 16, F_0 = 17, F_S0 = 18, G_0 = 19,

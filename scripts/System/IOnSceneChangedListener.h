@@ -1,7 +1,7 @@
 #pragma once
-#include "eScene.h"
-#include "AbstractScene.h"
-#include "Parameter.h"
+#include "System/eScene.h"
+#include "System/AbstractScene.h"
+#include "System/Parameter.h"
 
 class IOnSceneChangedListener
 {

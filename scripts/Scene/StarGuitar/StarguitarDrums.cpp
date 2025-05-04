@@ -1,6 +1,6 @@
 #include <string>
 #include "StarguitarDrums.h"
-#include "Define.h"
+#include "System/Define.h"
 
 StarguitarDrums::StarguitarDrums() {
 	sozai[0].setSampleSound("Assets/sounds/Starguitar/snea.wav");
