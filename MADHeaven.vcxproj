@@ -70,6 +70,18 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
@@ -163,11 +175,13 @@
     <ClCompile Include="main.cpp" />
     <ClCompile Include="MessageWindow.cpp" />
     <ClCompile Include="MIDI.cpp" />
+    <ClCompile Include="MusicManager.cpp" />
     <ClCompile Include="OpeningScene.cpp" />
     <ClCompile Include="Pad.cpp" />
     <ClCompile Include="Parameter.cpp" />
     <ClCompile Include="PauseMenu.cpp" />
     <ClCompile Include="PlayerCharacter.cpp" />
+    <ClCompile Include="RealTimeSequencer.cpp" />
     <ClCompile Include="SceneAlice.cpp" />
     <ClCompile Include="SceneDontaco.cpp" />
     <ClCompile Include="SceneKajioh.cpp" />
@@ -175,6 +189,7 @@
     <ClCompile Include="SceneLoveSong.cpp" />
     <ClCompile Include="SceneMainMenu.cpp" />
     <ClCompile Include="SceneOption.cpp" />
+    <ClCompile Include="SceneRealEdit.cpp" />
     <ClCompile Include="SceneSeikanHikou.cpp" />
     <ClCompile Include="SceneSnippet.cpp" />
     <ClCompile Include="SceneStarguitar.cpp" />
@@ -217,11 +232,13 @@
     <ClInclude Include="Looper.h" />
     <ClInclude Include="MessageWindow.h" />
     <ClInclude Include="MIDI.h" />
+    <ClInclude Include="MusicManager.h" />
     <ClInclude Include="OpeningScene.h" />
     <ClInclude Include="Pad.h" />
     <ClInclude Include="Parameter.h" />
     <ClInclude Include="PauseMenu.h" />
     <ClInclude Include="PlayerCharacter.h" />
+    <ClInclude Include="RealTimeSequencer.h" />
     <ClInclude Include="SceneAlice.h" />
     <ClInclude Include="SceneDontaco.h" />
     <ClInclude Include="SceneKajioh.h" />
@@ -229,6 +246,7 @@
     <ClInclude Include="SceneLoveSong.h" />
     <ClInclude Include="SceneMainMenu.h" />
     <ClInclude Include="SceneOption.h" />
+    <ClInclude Include="SceneRealEdit.h" />
     <ClInclude Include="SceneSeikanHikou.h" />
     <ClInclude Include="SceneSnippet.h" />
     <ClInclude Include="SceneStarguitar.h" />

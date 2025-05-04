@@ -1,0 +1,15 @@
+#pragma once
+#include "AbstractScene.h"
+class SceneOption : public AbstractScene
+{
+    //MIDIé¸ÇËÇÃê›íËÇ©Ç»
+public:
+    SceneOption(IOnSceneChangedListener* impl, const Parameter& parameter);
+    virtual ~SceneOption() = default;
+    void update() override;
+    void draw() const override;
+private:
+    int midiNum;
+    TCHAR* midiInfo;
+};
+
