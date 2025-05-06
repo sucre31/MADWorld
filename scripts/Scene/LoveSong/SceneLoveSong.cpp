@@ -27,13 +27,7 @@ SceneLoveSong::SceneLoveSong(IOnSceneChangedListener* impl, const Parameter& par
 	// 画像とMIDIのロード
 	initializeResources();
 
-	noteManager.addTestNote(0, 1, 0); // bar=0, beat=1, sub=0 のノートを追加
-	noteManager.addTestNote(0, 2, 0); 
-	noteManager.addTestNote(0, 3, 0); 
-	noteManager.addTestNote(0, 4, 0); 
-	noteManager.addTestNote(4, 1, 0); 
-	noteManager.addTestNote(5, 1, 0);
-	noteManager.addTestNote(5, 2, 0);
+	noteManager.loadFromFile("Assets/Score/LoveSong/LoveSong.mhs");
 }
 
 void SceneLoveSong::initializeFont() {
@@ -45,7 +39,7 @@ void SceneLoveSong::initializeFont() {
 
 void SceneLoveSong::initializeMusic() {
 	// MusicManagerを使用して音楽をロード
-	musicManager.LoadMusic("LoveSong", "Assets/Sounds/LoveSong/LoveSongDQ2.wav");
+	musicManager.LoadMusic("LoveSong", "Assets/Sounds/LoveSong/LoveSongScore.wav");
 	musicManager.LoadMusic("DrumLoop", "Assets/Sounds/LoveSong/drumLoop.wav");
 }
 

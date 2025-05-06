@@ -37,4 +37,5 @@ private:
     int barHeightPx = 100;  // c’i‚Ì‚‚³i1¬ßj
     int startX = 100;
     int baseY = 200;
+    int noteImages[8];
 };
