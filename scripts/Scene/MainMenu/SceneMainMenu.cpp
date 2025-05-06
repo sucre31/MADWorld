@@ -2,6 +2,7 @@
 #include "SceneMainMenu.h"
 #include "Common/Sound.h"
 #include "Common/Image.h"
+#include "Common/Time.h"
 #include "System/Pad.h"
 #include "System/FpsControl.h"
 
@@ -29,22 +30,15 @@ SceneMainMenu::SceneMainMenu(IOnSceneChangedListener* impl, const Parameter& par
 		validIconNum++;
 	}
 	SetMouseDispFlag(FALSE);	// カーソル非表示
-	prevTime = GetNowHiPerformanceCount();
 }
 
 void SceneMainMenu::update()
 {
 	int cursorX, cursorY;
-	LONGLONG curTime = GetNowHiPerformanceCount();
-	LONGLONG deltaTime = curTime - prevTime;
-	bool move = false;
-	if (deltaTime >= 16670) {
-		move = true;
-		prevTime = curTime;
-	}
+	double deltaTime = Time::getIns()->getDeltaTime();
 	cursorX = cursorIns.getCursorPosX();
 	cursorY = cursorIns.getCursorPosY();
-	double speedRate = 5.0;
+	double speedRate = 300.0;
 	selectIconNo = -1;
 	bool isHit;
 
@@ -57,7 +51,7 @@ void SceneMainMenu::update()
 
 
 	if (Pad::getIns()->get(ePad::Y) >= 1) {
-		speedRate = 8.0;
+		speedRate = 500.0;
 	}
 	if (Pad::getIns()->get(ePad::A) >= 1) {
 		// アイコンあればシーンチェンジ
@@ -77,19 +71,17 @@ void SceneMainMenu::update()
 		const bool stackClear = false;
 		_implSceneChanged->onSceneChanged(eScene::Title, parameter, stackClear);
 	}
-	if (move) {
-		if (Pad::getIns()->get(ePad::up) >= 1) {
-			cursorIns.plusPos(0, -1 * speedRate);
-		}
-		if (Pad::getIns()->get(ePad::down) >= 1) {
-			cursorIns.plusPos(0, 1 * speedRate);
-		}
-		if (Pad::getIns()->get(ePad::right) >= 1) {
-			cursorIns.plusPos(1 * speedRate, 0);
-		}
-		if (Pad::getIns()->get(ePad::left) >= 1) {
-			cursorIns.plusPos(-1 * speedRate, 0);
-		}
+	if (Pad::getIns()->get(ePad::up) >= 1) {
+		cursorIns.plusPos(0, -1 * speedRate * deltaTime);
+	}
+	if (Pad::getIns()->get(ePad::down) >= 1) {
+		cursorIns.plusPos(0, 1 * speedRate * deltaTime);
+	}
+	if (Pad::getIns()->get(ePad::right) >= 1) {
+		cursorIns.plusPos(1 * speedRate * deltaTime, 0);
+	}
+	if (Pad::getIns()->get(ePad::left) >= 1) {
+		cursorIns.plusPos(-1 * speedRate * deltaTime, 0);
 	}
 }
 

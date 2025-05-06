@@ -2,6 +2,7 @@
 #include "System/AbstractScene.h"
 #include "Common/GameObject/MusicManager.h"
 #include "Common/GameObject/SozaiManager.h"
+#include "Common/GameObject/NoteManager.h"
 class SceneLoveSong : public AbstractScene
 {
 public:
@@ -21,6 +22,7 @@ private:
     void setSozaiPosPlay();    // ‘fŞ‚ÌˆÊ’uİ’è(ƒvƒŒƒCó‘Ô)
     MusicManager musicManager;
     SozaiManager sozaiManager;
+    NoteManager noteManager;
     const int strSize = 74;
     bool movieTurnFlag;
     int musicIndex;

@@ -1,6 +1,7 @@
 #include <DxLib.h>
 #include "Common/Sound.h"
 #include "Common/Image.h"
+#include "Common/Time.h"
 #include "System/Define.h"
 #include "System/Keyboard.h"
 #include "System/Pad.h"
@@ -14,7 +15,8 @@ SceneLoveSong::SceneLoveSong(IOnSceneChangedListener* impl, const Parameter& par
 	movieTurnFlag(false),
 	musicIndex(0),
 	strIndex(1),
-	stringRevive("＊")
+	stringRevive("＊"),
+	noteManager(152, 4)
 {
 	// フォント設定
 	initializeFont();
@@ -24,6 +26,14 @@ SceneLoveSong::SceneLoveSong(IOnSceneChangedListener* impl, const Parameter& par
 
 	// 画像とMIDIのロード
 	initializeResources();
+
+	noteManager.addTestNote(0, 1, 0); // bar=0, beat=1, sub=0 のノートを追加
+	noteManager.addTestNote(0, 2, 0); 
+	noteManager.addTestNote(0, 3, 0); 
+	noteManager.addTestNote(0, 4, 0); 
+	noteManager.addTestNote(4, 1, 0); 
+	noteManager.addTestNote(5, 1, 0);
+	noteManager.addTestNote(5, 2, 0);
 }
 
 void SceneLoveSong::initializeFont() {
@@ -141,10 +151,12 @@ void SceneLoveSong::setSozaiPosPlay() {
 
 void SceneLoveSong::update()
 {
+	noteManager.update();
 	sozaiManager.update();
 	if (Pad::getIns()->get(ePad::L) == 1) {
 		// 音楽再生
 		if (!isMusicPlay) {
+			noteManager.startPlay();
 			musicManager.Play("LoveSong", true);  // Play using MusicManager
 			musicIndex = 0;
 			isMusicPlay = true;
@@ -226,6 +238,7 @@ void SceneLoveSong::update()
 		Sound::getIns()->release();
 		Image::getIns()->release();
 		_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, stackClear);
+		ChangeFont("AR Pゴシック体S");
 	}
 }
 
@@ -299,4 +312,5 @@ void SceneLoveSong::draw() const
 		}
 	}
 	sozaiManager.draw();
+	noteManager.draw();
 }

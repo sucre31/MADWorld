@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="scripts\Common\GameObject\Note.cpp" />
+    <ClCompile Include="scripts\Common\GameObject\NoteManager.cpp" />
     <ClCompile Include="scripts\Common\GameObject\BackGround.cpp" />
     <ClCompile Include="scripts\Common\GameObject\GameObject.cpp" />
     <ClCompile Include="scripts\Common\GameObject\MusicManager.cpp" />
@@ -75,8 +77,11 @@
     <ClCompile Include="scripts\System\Parameter.cpp" />
     <ClCompile Include="scripts\System\Singleton.cpp" />
     <ClCompile Include="scripts\System\SystemMain.cpp" />
+    <ClCompile Include="scripts\Common\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scripts\Common\GameObject\Note.h" />
+    <ClInclude Include="scripts\Common\GameObject\NoteManager.h" />
     <ClInclude Include="scripts\Common\GameObject\BackGround.h" />
     <ClInclude Include="scripts\Common\GameObject\GameObject.h" />
     <ClInclude Include="scripts\Common\GameObject\MusicManager.h" />
@@ -132,6 +137,7 @@
     <ClInclude Include="scripts\System\Parameter.h" />
     <ClInclude Include="scripts\System\Singleton.h" />
     <ClInclude Include="scripts\System\SystemMain.h" />
+    <ClInclude Include="scripts\Common\Time.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
