@@ -24,7 +24,7 @@ public:
     // フェードアウト付き停止
     void FadeOut(int fadeTimeMs = 1000);
 
-    std::string GetNowPlaying() const;
+    int GetNowPlayingHandle() const;
 
 private:
     std::unordered_map<std::string, int> bgmHandles;

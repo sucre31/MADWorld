@@ -5,9 +5,14 @@
 #include "SceneSeikanHikou.h"
 
 
-SceneSeikanHikou::SceneSeikanHikou(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter), sampleSetNum(0), enablePause(false){
+SceneSeikanHikou::SceneSeikanHikou(IOnSceneChangedListener* impl, const Parameter& parameter)
+	: AbstractScene(impl, parameter),
+	sampleSetNum(0),
+	enablePause(false),
+	noteManager(140, 4, &sozaiManager)
+	{
 	// 素材の読み込み
-	daftHandle = Sound::getIns()->loadSamples("Assets/Sounds/SeikanHikou/DaftLoop.wav");
+	musicManager.LoadMusic("daftLoop", "Assets/Sounds/SeikanHikou/DaftLoop.wav");
 	std::string rankaFile = "Assets/Sprites/movie/ranka/ranka";
 	for (int i = 1; i < 25; i++) {
 		if (i < 10) {
@@ -30,22 +35,27 @@ SceneSeikanHikou::SceneSeikanHikou(IOnSceneChangedListener* impl, const Paramete
 	SEHandle[1] = Sound::getIns()->loadSamples("Assets/Sounds/GrandSE/cancel.wav");
 
 	// とりあえずドラムならす
-	ChangeVolumeSoundMem(255, daftHandle);
+	ChangeVolumeSoundMem(255, musicManager.GetNowPlayingHandle());
 	playBGM = true;
-	PlaySoundMem(daftHandle, DX_PLAYTYPE_LOOP, TRUE);
+	musicManager.Play("daftLoop");
+	// このハンドル渡す設計微妙すぎる
+	noteManager.setBGMHandle(musicManager.GetNowPlayingHandle());
+	noteManager.loadFromFile("Assets/Score/seikan.mhs");
+	noteManager.startPlay();
 }
 
 void SceneSeikanHikou::update() {
+	noteManager.update();
 	if (!enablePause) {
 		sozaiManager.update();
 		if (Pad::getIns()->get(ePad::change) == 1) {
 			if (playBGM) {
 				playBGM = false;
-				StopSoundMem(daftHandle);
+				musicManager.Stop();
 			}
 			else {
 				playBGM = true;
-				PlaySoundMem(daftHandle, DX_PLAYTYPE_LOOP, TRUE);
+				musicManager.Play("daftLoop");
 			}
 		}
 
@@ -72,7 +82,7 @@ void SceneSeikanHikou::update() {
 		if (Pad::getIns()->get(ePad::start) == 1) {
 			// ポーズ画面表示
 			PlaySoundMem(SEHandle[0], DX_PLAYTYPE_BACK, TRUE);
-			StopSoundMem(daftHandle);
+			musicManager.Stop();
 			enablePause = true;
 			pauseMenu.setActive();
 			//pauseMenu.update();		普遍的なポーズの導入の仕方考えた方がいい
@@ -93,7 +103,7 @@ void SceneSeikanHikou::update() {
 			}
 			else {
 				// ポーズメニュー終了
-				PlaySoundMem(daftHandle, DX_PLAYTYPE_LOOP, FALSE);
+				musicManager.Play("daftLoop");
 				enablePause = false;
 			}
 		}
@@ -105,6 +115,7 @@ void SceneSeikanHikou::draw() const {
 	if (enablePause) {
 		pauseMenu.draw();
 	}
+	noteManager.draw();
 }
 
 void SceneSeikanHikou::resetSample() {

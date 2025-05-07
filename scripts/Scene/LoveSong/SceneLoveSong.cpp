@@ -16,7 +16,7 @@ SceneLoveSong::SceneLoveSong(IOnSceneChangedListener* impl, const Parameter& par
 	musicIndex(0),
 	strIndex(1),
 	stringRevive("＊"),
-	noteManager(152, 4)
+	noteManager(152, 4, &sozaiManager)
 {
 	// フォント設定
 	initializeFont();
@@ -26,7 +26,6 @@ SceneLoveSong::SceneLoveSong(IOnSceneChangedListener* impl, const Parameter& par
 
 	// 画像とMIDIのロード
 	initializeResources();
-
 	noteManager.loadFromFile("Assets/Score/LoveSong/LoveSong.mhs");
 }
 
@@ -150,8 +149,10 @@ void SceneLoveSong::update()
 	if (Pad::getIns()->get(ePad::L) == 1) {
 		// 音楽再生
 		if (!isMusicPlay) {
+			noteManager.loadFromFile("Assets/Score/LoveSong/LoveSong.mhs"); // 再読みこみ（リセットのため）無駄が多い
 			noteManager.startPlay();
 			musicManager.Play("LoveSong", true);  // Play using MusicManager
+			noteManager.setBGMHandle(musicManager.GetNowPlayingHandle());
 			musicIndex = 0;
 			isMusicPlay = true;
 			setSozaiPosPlay();

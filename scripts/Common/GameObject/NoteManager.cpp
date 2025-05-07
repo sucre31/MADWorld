@@ -1,17 +1,21 @@
 ﻿#include <fstream>
 #include <sstream>
 #include <iostream>
+#include <thread>
 #include "NoteManager.h"
 #include <DxLib.h>
 #include "Common/Time.h"
 #include "System/Define.h"
 #include "Common/Image.h"
 
-NoteManager::NoteManager(int bpm, int beatsPerBar)
+NoteManager::NoteManager(int bpm, int beatsPerBar, SozaiManager* sozai)
     : bpm(bpm), beatsPerBar(beatsPerBar) {
     barDurationMs = (60000 * beatsPerBar) / bpm;
     barWidthPx = Define::WIN_W * 0.4;
     startX = Define::WIN_W * 0.3;
+
+    sozaiManager = sozai;
+    BGMHandle = -1;
 
     // ノート画像読み込み
     noteImages[0] = Image::getIns()->loadSamples("Assets/Sprites/images/Common/notes/down.png");
@@ -63,12 +67,35 @@ bool NoteManager::loadFromFile(const std::string& path) {
 }
 
 bool NoteManager::update() {
-    setCurrentTimeMs(Time::getIns()->getMilliseconds());
+    setCurrentTimeMs(GetSoundCurrentTime(BGMHandle));
+    updateAutoPlay();
     return true;
 }
 
+void NoteManager::updateAutoPlay() {
+    int currentMs = GetSoundCurrentTime(BGMHandle);
+
+    constexpr int lookaheadMs = 50; // 先読み時間
+    for (auto& note : notes) {
+        if (note.hit) continue;
+
+        int noteTime = note.getTimeMs(bpm, beatsPerBar);
+        int delta = noteTime - currentMs;
+
+        if (0 <= delta && delta <= lookaheadMs) {
+            note.hit = true;
+
+            // タイマーで音再生を予約
+            std::thread([delta, inputId = note.inputId, this]() {
+                std::this_thread::sleep_for(std::chrono::milliseconds(delta));
+                sozaiManager->playSozai(inputId, 0);
+                }).detach();
+        }
+    }
+}
+
 void NoteManager::draw() const {
-    int elapsedMs = currentTimeMs - startTimeMs;
+    int elapsedMs = currentTimeMs;
 
     // 1小節の時間（ms）
     int barDurationMs = (60000 * beatsPerBar) / bpm;
@@ -84,20 +111,11 @@ void NoteManager::draw() const {
         float noteRatio = beatRatio + subRatio;
 
         int noteX = startX + static_cast<int>(noteRatio * barWidthPx);
-        int noteY = baseY - static_cast<int>(elapsedMs * scrollSpeedY) + note.bar * barHeightPx;
+        int noteY = baseY - static_cast<int>(elapsedMs * scrollSpeedY) + (note.bar - 1) * barHeightPx;
 
-        // ノートの種類に応じた色分け
-        const int colors[8] = {
-            GetColor(255, 255, 255), // 0: 白
-            GetColor(255, 0, 0),     // 1: 赤
-            GetColor(0, 255, 0),     // 2: 緑
-            GetColor(0, 0, 255),     // 3: 青
-            GetColor(255, 255, 0),   // 4: 黄
-            GetColor(255, 0, 255),   // 5: マゼンタ
-            GetColor(0, 255, 255),   // 6: シアン
-            GetColor(255, 128, 0)    // 7: オレンジ
-        };
-        DrawRotaGraph(noteX, noteY, 0.5f, 0.0f, noteImages[note.inputId], TRUE);
+        if (noteY < Define::WIN_H * 0.1 || noteY > Define::WIN_H * 0.35) continue;    // 画面外は描画しない
+
+        DrawRotaGraph(noteX, noteY, 0.5f, 0.0f, noteImages[note.inputId % 8], TRUE);
     }
 
     // マーカー描画
@@ -129,11 +147,7 @@ void NoteManager::clearNotes() {
 }
 
 void NoteManager::startPlay() {
-    setStartTimeMs(Time::getIns()->getMilliseconds());
-}
-
-void NoteManager::setStartTimeMs(int time) {
-    startTimeMs = time;
+    //setStartTimeMs(Time::getIns()->getMilliseconds());
 }
 
 void NoteManager::setCurrentTimeMs(int time) {

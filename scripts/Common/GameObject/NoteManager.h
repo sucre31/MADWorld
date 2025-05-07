@@ -1,11 +1,12 @@
 #pragma once
 #include "GameObject.h"
+#include "SozaiManager.h"
 #include "Note.h"
 #include <vector>
 
 class NoteManager : public GameObject {
 public:
-    NoteManager(int bpm, int beatsPerBar);
+    NoteManager(int bpm, int beatsPerBar, SozaiManager* sozai);
 
     bool update() override;
     void draw() const override;
@@ -18,24 +19,28 @@ public:
 
     void startPlay();
 
-    void setStartTimeMs(int time);
     void setCurrentTimeMs(int time);
 
     const std::vector<Note>& getNotes() const;
 
     void addTestNote(int bar, int beat, int subdivision);
 
+    void setBGMHandle(int soundHandle) { BGMHandle = soundHandle; }
+
+    void updateAutoPlay();
+
 private:
+    SozaiManager* sozaiManager = nullptr;
     std::vector<Note> notes;
     int bpm;
     int beatsPerBar;
-    int startTimeMs = 0;
     int currentTimeMs = 0;
     int barDurationMs = 0;
     // 表示設定
     int barWidthPx = 600;   // 横幅（1小節）
-    int barHeightPx = 100;  // 縦段の高さ（1小節）
+    int barHeightPx = 70;  // 縦段の高さ（1小節）
     int startX = 100;
     int baseY = 200;
     int noteImages[8];
+    int BGMHandle;      // 再生時間確認用
 };

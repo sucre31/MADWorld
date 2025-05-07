@@ -97,6 +97,6 @@ void MusicManager::FadeOut(int fadeTimeMs) {
     }
 }
 
-std::string MusicManager::GetNowPlaying() const {
-    return currentMusicName;
+int MusicManager::GetNowPlayingHandle() const {
+    return currentHandle;
 }

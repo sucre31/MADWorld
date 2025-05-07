@@ -2,6 +2,8 @@
 #include "System/AbstractScene.h"
 #include "Common/GameObject/SozaiManager.h"
 #include "Common/GameObject/PauseMenu.h"
+#include "Common/GameObject/NoteManager.h"
+#include "Common/GameObject/MusicManager.h"
 
 class SceneSeikanHikou : public AbstractScene
 {
@@ -11,8 +13,9 @@ public:
 	void update() override;
 	void draw() const override;
 private:
-	int daftHandle; // ‚Æ‚è‚ ‚¦‚¸
 	SozaiManager sozaiManager;
+	NoteManager noteManager;
+	MusicManager musicManager;
 	int sampleSetNum;
 	void setSample(int);
 	void resetSample();
