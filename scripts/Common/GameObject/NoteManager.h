@@ -1,6 +1,7 @@
 #pragma once
 #include "GameObject.h"
 #include "SozaiManager.h"
+#include "System/PlayBackThreadPool.h"
 #include "Note.h"
 #include <vector>
 
@@ -31,16 +32,17 @@ public:
 
 private:
     SozaiManager* sozaiManager = nullptr;
+    PlaybackThreadPool playbackPool;
     std::vector<Note> notes;
     int bpm;
     int beatsPerBar;
     int currentTimeMs = 0;
     int barDurationMs = 0;
     // 表示設定
-    int barWidthPx = 600;   // 横幅（1小節）
+    int barWidthPx = 700;   // 横幅（1小節）
     int barHeightPx = 70;  // 縦段の高さ（1小節）
     int startX = 100;
-    int baseY = 200;
+    int baseY = 100;
     int noteImages[8];
     int BGMHandle;      // 再生時間確認用
 };

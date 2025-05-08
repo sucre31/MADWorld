@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="scripts\System\PlayBackThreadPool.cpp" />
     <ClCompile Include="scripts\Common\GameObject\Note.cpp" />
     <ClCompile Include="scripts\Common\GameObject\NoteManager.cpp" />
     <ClCompile Include="scripts\Common\GameObject\BackGround.cpp" />
@@ -80,6 +81,7 @@
     <ClCompile Include="scripts\Common\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scripts\System\PlayBackThreadPool.h" />
     <ClInclude Include="scripts\Common\GameObject\Note.h" />
     <ClInclude Include="scripts\Common\GameObject\NoteManager.h" />
     <ClInclude Include="scripts\Common\GameObject\BackGround.h" />

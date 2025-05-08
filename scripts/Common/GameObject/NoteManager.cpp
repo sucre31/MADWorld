@@ -9,7 +9,8 @@
 #include "Common/Image.h"
 
 NoteManager::NoteManager(int bpm, int beatsPerBar, SozaiManager* sozai)
-    : bpm(bpm), beatsPerBar(beatsPerBar) {
+    : bpm(bpm), beatsPerBar(beatsPerBar) , playbackPool(3){
+    timeBeginPeriod(1);
     barDurationMs = (60000 * beatsPerBar) / bpm;
     barWidthPx = Define::WIN_W * 0.4;
     startX = Define::WIN_W * 0.3;
@@ -71,25 +72,28 @@ bool NoteManager::update() {
     updateAutoPlay();
     return true;
 }
-
 void NoteManager::updateAutoPlay() {
+    constexpr int judgeWindowMs = 2; // 小さくすることで精度向上
     int currentMs = GetSoundCurrentTime(BGMHandle);
 
-    constexpr int lookaheadMs = 50; // 先読み時間
+    auto now = std::chrono::steady_clock::now();
+
     for (auto& note : notes) {
         if (note.hit) continue;
 
         int noteTime = note.getTimeMs(bpm, beatsPerBar);
         int delta = noteTime - currentMs;
 
-        if (0 <= delta && delta <= lookaheadMs) {
+        if (0 <= delta && delta <= 30) { // 近い未来ならスケジュール再生
             note.hit = true;
 
-            // タイマーで音再生を予約
-            std::thread([delta, inputId = note.inputId, this]() {
-                std::this_thread::sleep_for(std::chrono::milliseconds(delta));
-                sozaiManager->playSozai(inputId, 0);
-                }).detach();
+            // スケジュール精度改善のため、time_pointを直接指定
+            playbackPool.scheduleTask(
+                now + std::chrono::milliseconds(delta),
+                [inputId = note.inputId, this]() {
+                    sozaiManager->playSozai(inputId, 0);
+                }
+            );
         }
     }
 }
@@ -113,7 +117,7 @@ void NoteManager::draw() const {
         int noteX = startX + static_cast<int>(noteRatio * barWidthPx);
         int noteY = baseY - static_cast<int>(elapsedMs * scrollSpeedY) + (note.bar - 1) * barHeightPx;
 
-        if (noteY < Define::WIN_H * 0.1 || noteY > Define::WIN_H * 0.35) continue;    // 画面外は描画しない
+        if (noteY < -64 || noteY > Define::WIN_H * 0.25) continue;    // 画面外は描画しない
 
         DrawRotaGraph(noteX, noteY, 0.5f, 0.0f, noteImages[note.inputId % 8], TRUE);
     }
