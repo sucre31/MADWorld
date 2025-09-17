@@ -73,7 +73,7 @@ bool NoteManager::update() {
     return true;
 }
 void NoteManager::updateAutoPlay() {
-    constexpr int judgeWindowMs = 2; // 小さくすることで精度向上
+    //constexpr int judgeWindowMs = 1; // 小さくすることで精度向上
     int currentMs = GetSoundCurrentTime(BGMHandle);
 
     auto now = std::chrono::steady_clock::now();

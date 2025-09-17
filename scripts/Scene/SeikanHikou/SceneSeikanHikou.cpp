@@ -16,12 +16,12 @@ SceneSeikanHikou::SceneSeikanHikou(IOnSceneChangedListener* impl, const Paramete
 	std::string rankaFile = "Assets/Sprites/movie/ranka/ranka";
 	for (int i = 1; i < 25; i++) {
 		if (i < 10) {
-			sozaiManager.makeSozai("", (rankaFile + "0" + std::to_string(i) + ".avi").c_str(), 640, 360);
+			sozaiManager.makeSozai((rankaFile + std::to_string(i - 1) + ".wav").c_str(), (rankaFile + "0" + std::to_string(i) + ".avi").c_str(), 640, 360);
 		}
 		else {
-			sozaiManager.makeSozai("", (rankaFile + std::to_string(i) + ".avi").c_str(), 640, 360);
+			sozaiManager.makeSozai((rankaFile + std::to_string(i - 1) + ".wav").c_str(), (rankaFile + std::to_string(i) + ".avi").c_str(), 640, 360);
 		}
-		sozaiManager.setSozaiEx(i - 1, (2.0/3.0));
+		sozaiManager.setSozaiEx(i - 1, (2.0 / 3.0));
 		sozaiManager.setMovieFlag(i - 1, true);
 	}
 	for (int i = 0; i < 24; i++) {
