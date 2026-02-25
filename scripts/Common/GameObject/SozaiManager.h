@@ -10,8 +10,8 @@ public:
 	~SozaiManager() = default;
 	bool update() override;
 	void draw() const override;
-	void makeSozai(const char * soundFileName, const char * imageFileName);
-	void makeSozai(const char* soundFileName, const char* imageFileName, int x, int y);
+	int makeSozai(const char * soundFileName, const char * imageFileName);
+	int makeSozai(const char* soundFileName, const char* imageFileName, int x, int y);
 	void playSozai(int, int);
 	void stopSozai(int);
 	void setSozaiKey(int sozaiNum, int padNum, int soundIndex);
@@ -31,6 +31,8 @@ public:
 	void changePos(int , double valX, double valY);
 	void drawSozai(int) const;
 	void setGroupId(int sozaiNum, int groupId);
+	int getSoundCount(int sozaiNum) const;
+	int getSozaiCount() const { return sozai.size(); }
 private:
 	int validSozaiNum;
 	std::vector<Sozai*> sozai; // shared_ptrにする

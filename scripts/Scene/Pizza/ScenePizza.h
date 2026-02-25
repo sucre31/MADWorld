@@ -13,6 +13,7 @@ public:
 	void update() override;
 	void draw() const override;
 private:
+	std::string midiToNoteName(int midi);
 	void setKey();
 	SozaiManager sozaiManager;
 	NoteManager noteManager;

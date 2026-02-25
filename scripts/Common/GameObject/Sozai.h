@@ -43,9 +43,10 @@ public:
 	void setEnableMultiMovie(bool flag) { enableMultiSprite = flag; }
 	void setGroupId(int id) { groupId = id; }
 	int getGroupId() const { return groupId; }
+	int getSoundCount() const { return validSoundNum; }
 private:
-	static const int maxSozai = 88;
-	static const int maxMidiSozai = 88;
+	static const int maxSozai = 128;
+	static const int maxMidiSozai = 128;
 	int myId;								// managerクラスの管理番号
 	double x;
 	double y;

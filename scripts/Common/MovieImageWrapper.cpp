@@ -125,6 +125,31 @@ MovieData MovieImageWrapper::load(const std::string& filePath) {
         av_packet_unref(packet);
     }
 
+    if (avcodec_send_packet(pCodecCtx, nullptr) >= 0) {
+        while (avcodec_receive_frame(pCodecCtx, pFrame) >= 0) {
+            sws_scale(swsCtx, pFrame->data, pFrame->linesize, 0, height,
+                pFrameRGB->data, pFrameRGB->linesize);
+
+            int softImg = MakeSoftImage(width, height);
+            // ピクセルデータの転送
+            for (int y = 0; y < height; y++) {
+                for (int x = 0; x < width; x++) {
+                    int base = (y * pFrameRGB->linesize[0]) + (x * 4);
+                    // FFmpeg(BGRA) -> DXLib(R, G, B, A)
+                    DrawPixelSoftImage(softImg, x, y,
+                        pFrameRGB->data[0][base + 2], // R
+                        pFrameRGB->data[0][base + 1], // G
+                        pFrameRGB->data[0][base + 0], // B
+                        pFrameRGB->data[0][base + 3]  // A
+                    );
+                }
+            }
+            int h = CreateGraphFromSoftImage(softImg);
+            if (h != -1) handles.push_back(h);
+            DeleteSoftImage(softImg);
+        }
+    }
+
     // 6. リソース解放
     av_packet_free(&packet);
     sws_freeContext(swsCtx);
