@@ -1,4 +1,4 @@
-#include <DxLib.h>
+ï»¿#include <DxLib.h>
 #include "SceneMainMenu.h"
 #include "Common/Sound.h"
 #include "Common/Image.h"
@@ -24,12 +24,13 @@ SceneMainMenu::SceneMainMenu(IOnSceneChangedListener* impl, const Parameter& par
 	icon[5].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail6.png");
 	icon[6].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail7.png");
 	icon[7].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail7.png");
+	icon[8].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail7.png");
 	for (int i = 0; i < iconNum; i++) {
 		icon[i].setPos(130 + 240 * (i / 4), 160 + (i % 4) * 133);
 		icon[i].enableIconFunc(true);
 		validIconNum++;
 	}
-	SetMouseDispFlag(FALSE);	// ƒJ[ƒ\ƒ‹”ñ•\¦
+	SetMouseDispFlag(FALSE);	// ã‚«ãƒ¼ã‚½ãƒ«éè¡¨ç¤º
 }
 
 void SceneMainMenu::update()
@@ -54,7 +55,7 @@ void SceneMainMenu::update()
 		speedRate = 500.0;
 	}
 	if (Pad::getIns()->get(ePad::A) >= 1) {
-		// ƒAƒCƒRƒ“‚ ‚ê‚ÎƒV[ƒ“ƒ`ƒFƒ“ƒW
+		// ã‚¢ã‚¤ã‚³ãƒ³ã‚ã‚Œã°ã‚·ãƒ¼ãƒ³ãƒã‚§ãƒ³ã‚¸
 		int sceneNum = getIconScene(selectIconNo);
 		if (sceneNum != -1) {
 			//SetMouseDispFlag(TRUE);
@@ -95,7 +96,7 @@ void SceneMainMenu::draw() const
 }
 
 /*
-@brief ƒAƒCƒRƒ“”Ô†‚ÆƒV[ƒ“”Ô†‚ğ‘Î‰‚³‚¹‚é
+@brief ã‚¢ã‚¤ã‚³ãƒ³ç•ªå·ã¨ã‚·ãƒ¼ãƒ³ç•ªå·ã‚’å¯¾å¿œã•ã›ã‚‹
 */
 int SceneMainMenu::getIconScene(int iconNum) {
 	switch (iconNum) {
@@ -115,6 +116,8 @@ int SceneMainMenu::getIconScene(int iconNum) {
 		return eScene::Snippet;
 	case 7:
 		return eScene::RealEdit;
+	case 8:
+		return eScene::Pizza;
 	default:
 		return -1;
 	}

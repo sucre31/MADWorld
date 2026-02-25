@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="scripts\Common\MovieImageWrapper.cpp" />
+    <ClCompile Include="scripts\Scene\Pizza\ScenePizza.cpp" />
     <ClCompile Include="scripts\System\PlayBackThreadPool.cpp" />
     <ClCompile Include="scripts\Common\GameObject\Note.cpp" />
     <ClCompile Include="scripts\Common\GameObject\NoteManager.cpp" />
@@ -81,6 +83,8 @@
     <ClCompile Include="scripts\Common\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scripts\Common\MovieImageWrapper.h" />
+    <ClInclude Include="scripts\Scene\Pizza\ScenePizza.h" />
     <ClInclude Include="scripts\System\PlayBackThreadPool.h" />
     <ClInclude Include="scripts\Common\GameObject\Note.h" />
     <ClInclude Include="scripts\Common\GameObject\NoteManager.h" />
@@ -245,13 +249,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Users\sucre\Desktop\work\game_develop\MADWorld\scripts;C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\ffmpeg-8.0.1-full_build-shared\include;C:\Users\sucre\Desktop\work\game_develop\MADWorld\scripts;C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\ffmpeg-8.0.1-full_build-shared\lib;C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 enum eScene {
 	Opening,
@@ -14,5 +14,6 @@ enum eScene {
 	Kajioh,
 	Seikan,
 	Snippet,
-	RealEdit
+	RealEdit,
+	Pizza
 };

@@ -72,28 +72,19 @@ bool NoteManager::update() {
     updateAutoPlay();
     return true;
 }
-void NoteManager::updateAutoPlay() {
-    //constexpr int judgeWindowMs = 1; // 小さくすることで精度向上
-    int currentMs = GetSoundCurrentTime(BGMHandle);
 
-    auto now = std::chrono::steady_clock::now();
+void NoteManager::updateAutoPlay() {
+    int currentMs = GetSoundCurrentTime(BGMHandle);
 
     for (auto& note : notes) {
         if (note.hit) continue;
 
         int noteTime = note.getTimeMs(bpm, beatsPerBar);
-        int delta = noteTime - currentMs;
 
-        if (0 <= delta && delta <= 30) { // 近い未来ならスケジュール再生
+        // ノーツ時刻を過ぎたら即再生
+        if (currentMs >= noteTime) {
             note.hit = true;
-
-            // スケジュール精度改善のため、time_pointを直接指定
-            playbackPool.scheduleTask(
-                now + std::chrono::milliseconds(delta),
-                [inputId = note.inputId, this]() {
-                    sozaiManager->playSozai(inputId, 0);
-                }
-            );
+            sozaiManager->playSozai(note.inputId, 0);
         }
     }
 }

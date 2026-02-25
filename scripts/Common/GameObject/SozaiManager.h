@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "Common/GameObject/GameObject.h"
 #include "Common/GameObject/Sozai.h"
 #include "System/MIDI.h"
@@ -16,7 +16,7 @@ public:
 	void stopSozai(int);
 	void setSozaiKey(int sozaiNum, int padNum, int soundIndex);
 	void resetSozaiKey(int sozaiNum);
-	void setSozaiMidiKey(int sozaiNum, int padNum, int soundIndex);
+	void setSozaiMidiKey(int sozaiNum, int midiNum, int soundIndex, int channel = 0);
 	void setSozaiEx(int sozaiNum, double val);
 	void setSozaiPos(int sozaiNum, int valX, int valY);
 	void addSound(int sozaiNum, const char* soundFileName);
@@ -26,7 +26,6 @@ public:
 	void setMultiGraph(int sozaiId, bool flag);
 	void setDrumFlag(int, bool);
 	void setPadReleaseStop(int, bool);
-	void setMovieFlag(int, bool);
 	void setReverseFlag(int, bool);
 	void setPlayRate(int, int);
 	void changePos(int , double valX, double valY);
@@ -34,7 +33,7 @@ public:
 	void setGroupId(int sozaiNum, int groupId);
 private:
 	int validSozaiNum;
-	std::vector<Sozai*> sozai; // shared_ptr‚É‚·‚é
-	std::vector<int> SozaiLayerIndex; // XV‡‚ğ•Û‚·‚é
+	std::vector<Sozai*> sozai; // shared_ptrã«ã™ã‚‹
+	std::vector<int> SozaiLayerIndex; // æ›´æ–°é †ã‚’ä¿æŒã™ã‚‹
 };
 

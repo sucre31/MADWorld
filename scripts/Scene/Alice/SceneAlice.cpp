@@ -1,4 +1,4 @@
-#include <DxLib.h>
+ï»¿#include <DxLib.h>
 #include "SceneAlice.h"
 #include "Common/Sound.h"
 #include "Common/Image.h"
@@ -38,7 +38,6 @@ SceneAlice::SceneAlice(IOnSceneChangedListener* impl, const Parameter& parameter
 	isMusicPlay = false;
 	for (int i = 0; i < 10; i++) {
 		sozaiManager.setSozaiEx(i, 0.25);
-		sozaiManager.setMovieFlag(i, true);
 		sozaiManager.setSozaiPos(i, 160 + (i % 4) * 320, 90 + (i / 4) * 180);
 	}
 	aliceDrumHandle = Sound::getIns()->loadSamples("Assets/Sounds/Alice/drumNBass.wav");
@@ -57,11 +56,11 @@ void SceneAlice::update() {
 		}
 	}
 	if (Pad::getIns()->get(ePad::start) == 1) {
-		// ƒƒjƒ…[‚É–ß‚é
+		// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«æˆ»ã‚‹
 		Parameter parameter;
 		const bool stackClear = true;
 		StopSoundMem(aliceDrumHandle);
-		// ‚±‚±‚É’¼Ú‘‚­‚ñ‚¶‚á‚È‚­‚ÄŠÖ”—pˆÓ‚·‚×‚«‚©‚È
+		// ã“ã“ã«ç›´æŽ¥æ›¸ãã‚“ã˜ã‚ƒãªãã¦é–¢æ•°ç”¨æ„ã™ã¹ãã‹ãª
 		Sound::getIns()->release();
 		Image::getIns()->release();
 		_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, stackClear);

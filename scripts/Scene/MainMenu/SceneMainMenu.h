@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <DxLib.h>
 #include "System/AbstractScene.h"
 #include "cursor.h"
@@ -13,9 +13,9 @@ public:
     void draw() const override;
     int getIconScene(int );
 private:
-    static const int iconNum = 8;
+    static const int iconNum = 9;
     int validIconNum;
-    int selectIconNo;               // -1: �I�𖳂�
+    int selectIconNo;               // -1: 選択無し
     cursor cursorIns;
     BackGround backGround;
     int musicHandle;

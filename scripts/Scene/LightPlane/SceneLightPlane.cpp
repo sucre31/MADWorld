@@ -1,4 +1,4 @@
-#include <DxLib.h>
+ï»¿#include <DxLib.h>
 #include "SceneLightPlane.h"
 #include "Common/Sound.h"
 #include "Common/Image.h"
@@ -15,7 +15,7 @@ SceneLightPlane::SceneLightPlane(IOnSceneChangedListener* impl, const Parameter&
 	SetFontSize(20);
 	SetFontThickness(1);
 
-	// ‘fŞ‚Ì“Ç‚İ‚İ‚Æİ’è
+	// ç´ æã®èª­ã¿è¾¼ã¿ã¨è¨­å®š
 	std::string yasunaFile = "Assets/Sounds/lightPlane/yasuna/yasunaRob";
 	sozaiManager.makeSozai((yasunaFile + "0" + std::to_string(1) + ".wav").c_str(), "Assets/sprites/movie/yasuna/yasunaRob.avi", 640, 360);
 	for (int i = 1; i < 48; i++) {
@@ -28,7 +28,7 @@ SceneLightPlane::SceneLightPlane(IOnSceneChangedListener* impl, const Parameter&
 	}
 	for (int i = 0; i < 48; i++) {
 		if (i >= 11) {
-			sozaiManager.setSozaiMidiKey(0, eMidi((int)eMidi::C_3 + i), i);
+			sozaiManager.setSozaiMidiKey(0, eMidi((int)eMidi::C_3 + i), i, 2);
 		}
 	}
 	sozaiManager.setSozaiEx(0, 0.4);
@@ -89,16 +89,11 @@ SceneLightPlane::SceneLightPlane(IOnSceneChangedListener* impl, const Parameter&
 	sozaiManager.setMultiSound(4, false);
 	sozaiManager.setDrumFlag(4, true);
 
-	// “®‰æÄ¶‚ğg—p
-	for (int i = 0; i < 5; i++) {
-		sozaiManager.setMovieFlag(i, true);
-	}
-
-	// midi‚Ì“o˜^
+	// midiã®ç™»éŒ²
 	MIDI::getIns()->openMidi(0, 0);
 	MIDI::getIns()->openMidi(1 ,1);
 
-	// ”wŒi‚Ìİ’è
+	// èƒŒæ™¯ã®è¨­å®š
 	backGround.loadBackImage("Assets/Sprites/images/lightPlaneBack.png");
 	backGround.setExRate(2.0 / 3.0);
 }
@@ -109,10 +104,10 @@ void SceneLightPlane::update() {
 		MIDI::getIns()->closeMidi(0);
 		MIDI::getIns()->closeMidi(1);
 		clsDx();
-		// ƒƒjƒ…[‚É–ß‚é
+		// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«æˆ»ã‚‹
 		Parameter parameter;
 		const bool stackClear = true;
-		// ‚±‚±‚É’¼Ú‘‚­‚ñ‚¶‚á‚È‚­‚ÄŠÖ”—pˆÓ‚·‚×‚«‚©‚È
+		// ã“ã“ã«ç›´æ¥æ›¸ãã‚“ã˜ã‚ƒãªãã¦é–¢æ•°ç”¨æ„ã™ã¹ãã‹ãª
 		Sound::getIns()->release();
 		Image::getIns()->release();
 		_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, stackClear);

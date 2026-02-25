@@ -1,24 +1,31 @@
+ï»¿#pragma once
 #include<Dxlib.h>
+#include <mutex>
 #include <string>
 #include "System/MIDI.h"
 
 std::queue<MidiMessage> MIDI::midiQueue;
+std::mutex midiMutex;
 
-MIDI::MIDI() 
-	: numMidiDevices(0), isGetInfoSucces(false) {
+MIDI::MIDI()
+	: isGetInfoSucces(false)
+{
 	for (int i = 0; i < midiDeviceMax; i++) {
 		midiHandle[i] = nullptr;
 	}
-	isGetInfoSucces = false;
-	for (int i = 0; i < eMidi::C_8; i++) {
-		_midi[i] = 0;
+
+	for (int note = 0; note < 128; note++) {
+		for (int ch = 0; ch < 16; ch++) {
+			_hold[note][ch] = 0;
+			_trigger[note][ch] = false;
+		}
 	}
 }
 
 /*
-@brief MIDIƒfƒoƒCƒX‚ğŠJ‚¢‚Ä“o˜^‚·‚é
-@param devid ƒfƒoƒCƒX‚Ìid
-@param midiIndex ”z—ñ‚É“o˜^‚·‚é”Ô†
+@brief MIDIãƒ‡ãƒã‚¤ã‚¹ã‚’é–‹ã„ã¦ç™»éŒ²ã™ã‚‹
+@param devid ãƒ‡ãƒã‚¤ã‚¹ã®id
+@param midiIndex é…åˆ—ã«ç™»éŒ²ã™ã‚‹ç•ªå·
 */
 void MIDI::openMidi(UINT devid, int midiIndex) {
 	if (midiIndex < midiDeviceMax) {
@@ -28,14 +35,14 @@ void MIDI::openMidi(UINT devid, int midiIndex) {
 			printfDx("Cannot open MIDI input device %d\n", devid);
 		}
 		else {
-			// MIDI“ü—Í‚ÌŠJn
+			// MIDIå…¥åŠ›ã®é–‹å§‹
 			midiInStart(midiHandle[midiIndex]);
 		}
 	}
 	else {
 		printfDx("Cannot regist MIDI input device %d\n", midiIndex);
 	}
-	//MIDI InputƒfƒoƒCƒX‚Ìî•ñ
+	//MIDI Inputãƒ‡ãƒã‚¤ã‚¹ã®æƒ…å ±
 	midiresult = midiInGetDevCaps(devid, &midiininformation, sizeof(MIDIINCAPS));
 	if (midiresult != MMSYSERR_NOERROR) {
 		isGetInfoSucces = false;
@@ -51,40 +58,56 @@ void MIDI::closeMidi(int midiIndex){
 	midiInClose(midiHandle[midiIndex]);
 }
 
-void MIDI::update() {
-	for (int i = eMidi::C_0; i < eMidi::C_8; i++) {
-		if (_midi[i] > 0) {
-			// ‰Ÿ‚³‚ê‘±‚¯‚Ä‚é‚È‚ç‘‰Á
-			if (_midi[i] < 255) {
-				_midi[i]++;
+void MIDI::update()
+{
+	// ---- ãƒˆãƒªã‚¬ãƒ¼åˆæœŸåŒ–ï¼ˆæ¯ãƒ•ãƒ¬ãƒ¼ãƒ ï¼‰----
+	for (int note = 0; note < 128; note++) {
+		for (int ch = 0; ch < 16; ch++) {
+			_trigger[note][ch] = false;
+
+			// æŠ¼ã•ã‚Œç¶šã‘ãƒ•ãƒ¬ãƒ¼ãƒ åŠ ç®—
+			if (_hold[note][ch] > 0) {
+				if (_hold[note][ch] < 255)
+					_hold[note][ch]++;
 			}
 		}
 	}
-	if (midiQueue.size() > 0) {
-		//MIDI‚Ì“ü—Íó‘Ô‚ğæ“¾(dwResPara1‚É‚¢‚ë‚¢‚ë‚Í‚¢‚Á‚Ä‚é
-		MidiMessage tmpMidiMes = midiQueue.front();
-		midiQueue.pop();
-		unsigned char status = (tmpMidiMes.para1 & 0x000000ff);
-		unsigned char velocity = (tmpMidiMes.para1 & 0x00ff0000) >> 16;
-		unsigned char note = (tmpMidiMes.para1 & 0x0000ff00) >> 8;
-		// eMidi::A_0 ‚©‚ç eMidi::C_8 ‚Ì”ÍˆÍ“à‚©ƒ`ƒFƒbƒN‚µ‚Ä‚©‚çˆ—
-		if (note >= eMidi::C_0 && note <= eMidi::C_8) {
-			int i = note;  // ”z—ñ‚ÌƒCƒ“ƒfƒbƒNƒX‚Æˆê’v‚·‚é‚æ‚¤‚É note ‚ğ’¼Úg—p
 
-			if (status == 0x90 && velocity > 0) {
-				// ƒm[ƒgƒIƒ“ (ƒL[‚ª‰Ÿ‚³‚ê‚½) ‚Æ‚µ‚Ä 1 ‚ÉƒZƒbƒg
-				_midi[i] = 1;
-				//printfDx("%d ‚ª‰Ÿ‚³‚ê‚Ü‚µ‚½\n", i);
-			}
-			else if (status == 0x80 || (status == 0x90 && velocity == 0)) {
-				// ƒm[ƒgƒIƒt‚Ü‚½‚Íƒm[ƒgƒIƒ“iƒxƒƒVƒeƒB0j‚Å—£‚³‚ê‚½‚ÆŒ©‚È‚·
-				_midi[i] = 0;
-				//printfDx("%d ‚ª—£‚³‚ê‚Ü‚µ‚½\n", i);
-			}
+	// ---- ãƒ¡ãƒƒã‚»ãƒ¼ã‚¸å‡¦ç† ----
+	while (true)
+	{
+		MidiMessage tmp;
+
+		{
+			std::lock_guard<std::mutex> lock(midiMutex);
+			if (midiQueue.empty())
+				break;
+
+			tmp = midiQueue.front();
+			midiQueue.pop();
+		}
+
+		unsigned char status = tmp.para1 & 0xFF;
+		unsigned char type = status & 0xF0;
+		unsigned char channel = status & 0x0F;
+		unsigned char note = (tmp.para1 >> 8) & 0xFF;
+		unsigned char velocity = (tmp.para1 >> 16) & 0xFF;
+
+		if (note >= 128 || channel >= 16)
+			continue;
+
+		// NOTE ON
+		if (type == 0x90 && velocity > 0) {
+			_hold[note][channel] = 1;
+			_trigger[note][channel] = true;   // â˜…ã“ã‚ŒãŒé‡è¦
+		}
+		// NOTE OFF
+		else if (type == 0x80 ||
+			(type == 0x90 && velocity == 0)) {
+			_hold[note][channel] = 0;
 		}
 	}
 }
-
 
 void MIDI::draw() {
 	unsigned int Color;
@@ -96,41 +119,46 @@ void MIDI::draw() {
 }
 
 /*
-@brief ÅŒã‚ÉŠJ‚¢‚½midiƒfƒoƒCƒX‚Ì–¼‘O‚ğæ“¾
+@brief æœ€å¾Œã«é–‹ã„ãŸmidiãƒ‡ãƒã‚¤ã‚¹ã®åå‰ã‚’å–å¾—
 */
 TCHAR* MIDI::getMidiInfo() {
 	return midiininformation.szPname;
 }
 
 
-void CALLBACK MIDI::MidiInProc(HMIDIIN hMidiIn, UINT MidiMsg, DWORD dwInstance, DWORD dwPara1, DWORD dwPara2){
-	switch (MidiMsg){
-
-	case MIM_OPEN:
-		break;
-
-	case MIM_CLOSE:
-		break;
-	case MIM_DATA:
+void CALLBACK MIDI::MidiInProc(
+	HMIDIIN,
+	UINT MidiMsg,
+	DWORD,
+	DWORD dwPara1,
+	DWORD dwPara2)
+{
+	if (MidiMsg == MIM_DATA) {
+		std::lock_guard<std::mutex> lock(midiMutex);
 		midiQueue.push({ MidiMsg, dwPara1, dwPara2 });
-		break;
-	case MIM_LONGDATA:
-		break;
-	case MIM_ERROR:
-		break;
-	case MIM_LONGERROR:
-		break;
-	case MIM_MOREDATA:
-		break;
-	default:
-		break;
 	}
 }
 
 /*!
-@brief “n‚³‚ê‚½MIDIƒL[”Ô†‚Ì“ü—ÍƒtƒŒ[ƒ€”‚ğ•Ô‚·
+@brief æ¸¡ã•ã‚ŒãŸMIDIã‚­ãƒ¼ç•ªå·ã®å…¥åŠ›ãƒ•ãƒ¬ãƒ¼ãƒ æ•°ã‚’è¿”ã™
 */
-int MIDI::get(eMidi eID) const
+int MIDI::get(int note, int channel) const
 {
-	return _midi[eID];
+	if (note < 0 || note >= 128) return 0;
+	if (channel < 0 || channel >= 16) return 0;
+	return _hold[note][channel];
+}
+
+int MIDI::get(int note) const
+{
+	if (note < 0 || note >= 128) return 0;
+	return _hold[note][0];
+}
+
+// æŠ¼ã•ã‚ŒãŸç¬é–“ï¼ˆ1ãƒ•ãƒ¬ãƒ¼ãƒ ã ã‘ trueï¼‰
+bool MIDI::isTrigger(int note, int channel) const
+{
+	if (note < 0 || note >= 128) return false;
+	if (channel < 0 || channel >= 16) return false;
+	return _trigger[note][channel];
 }

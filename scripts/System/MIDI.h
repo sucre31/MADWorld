@@ -1,4 +1,4 @@
-#pragma once
+Ôªø#pragma once
 #include <windows.h>
 #include <mmsystem.h>
 #include <string>
@@ -8,58 +8,60 @@
 #include "System/Singleton.h"
 
 enum eMidi {
-	C_0 = 12, C_S0 = 13, D_0 = 14, D_S0 = 15, E_0 = 16, F_0 = 17, F_S0 = 18, G_0 = 19,
-	G_S0 = 20, A_0 = 21, A_S0 = 22, B_0 = 23,
-	C_1 = 24, C_S1 = 25, D_1 = 26, D_S1 = 27, E_1 = 28, F_1 = 29, F_S1 = 30, G_1 = 31,
-	G_S1 = 32, A_1 = 33, A_S1 = 34, B_1 = 35,
-	C_2 = 36, C_S2 = 37, D_2 = 38, D_S2 = 39, E_2 = 40, F_2 = 41, F_S2 = 42, G_2 = 43,
-	G_S2 = 44, A_2 = 45, A_S2 = 46, B_2 = 47,
-	C_3 = 48, C_S3 = 49, D_3 = 50, D_S3 = 51, E_3 = 52, F_3 = 53, F_S3 = 54, G_3 = 55,
-	G_S3 = 56, A_3 = 57, A_S3 = 58, B_3 = 59,
-	C_4 = 60, C_S4 = 61, D_4 = 62, D_S4 = 63, E_4 = 64, F_4 = 65, F_S4 = 66, G_4 = 67,
-	G_S4 = 68, A_4 = 69, A_S4 = 70, B_4 = 71,
-	C_5 = 72, C_S5 = 73, D_5 = 74, D_S5 = 75, E_5 = 76, F_5 = 77, F_S5 = 78, G_5 = 79,
-	G_S5 = 80, A_5 = 81, A_S5 = 82, B_5 = 83,
-	C_6 = 84, C_S6 = 85, D_6 = 86, D_S6 = 87, E_6 = 88, F_6 = 89, F_S6 = 90, G_6 = 91,
-	G_S6 = 92, A_6 = 93, A_S6 = 94, B_6 = 95,
-	C_7 = 96, C_S7 = 97, D_7 = 98, D_S7 = 99, E_7 = 100, F_7 = 101, F_S7 = 102, G_7 = 103,
-	G_S7 = 104, A_7 = 105, A_S7 = 106, B_7 = 107,
-	C_8 = 108
+    C_0 = 12, C_S0, D_0, D_S0, E_0, F_0, F_S0, G_0,
+    G_S0, A_0, A_S0, B_0,
+    C_1 = 24, C_S1, D_1, D_S1, E_1, F_1, F_S1, G_1,
+    G_S1, A_1, A_S1, B_1,
+    C_2 = 36, C_S2, D_2, D_S2, E_2, F_2, F_S2, G_2,
+    G_S2, A_2, A_S2, B_2,
+    C_3 = 48, C_S3, D_3, D_S3, E_3, F_3, F_S3, G_3,
+    G_S3, A_3, A_S3, B_3,
+    C_4 = 60, C_S4, D_4, D_S4, E_4, F_4, F_S4, G_4,
+    G_S4, A_4, A_S4, B_4,
+    C_5 = 72, C_S5, D_5, D_S5, E_5, F_5, F_S5, G_5,
+    G_S5, A_5, A_S5, B_5,
+    C_6 = 84, C_S6, D_6, D_S6, E_6, F_6, F_S6, G_6,
+    G_S6, A_6, A_S6, B_6,
+    C_7 = 96, C_S7, D_7, D_S7, E_7, F_7, F_S7, G_7,
+    G_S7, A_7, A_S7, B_7,
+    C_8 = 108
 };
 
 struct MidiMessage {
-	UINT msg;
-	DWORD para1;
-	DWORD para2;
+    UINT msg;
+    DWORD para1;
+    DWORD para2;
 };
-
 
 class MIDI final : public Singleton<MIDI>
 {
 private:
-	int numMidiDevices;
-	static const int midiDeviceMax = 3;
-	UINT midiresult;
-	HMIDIIN midiHandle[midiDeviceMax];
-	MMRESULT res;
-	MIDIINCAPS midiininformation;
-	bool isGetInfoSucces;
-	static void CALLBACK MidiInProc(HMIDIIN hMidiIn, UINT MidiMsg, DWORD dwInstance, DWORD dwPara1, DWORD dwPara2);
-	// Ç∆ÇËÇ†Ç¶Ç∏Ç¢Ç≠Ç¬Ç©ÇÃÉLÅ[Çäƒéã
-	const static int MIDI_KEY_NUM = 256; // 255?
-	std::array<int, MIDI_KEY_NUM> _midi;      //16É{É^ÉìÇÃpadì¸óÕèÛë‘äiî[ ï°êîÇÃMIDIÉfÉoÉCÉXÇ™Ç†ÇÈÇ»ÇÁé©ìÆ(ê›íËâ¬î\Ç…Ç∑Ç◊Ç´)Ç≈É}Å[ÉW
-	int tmpNote;
+    static const int midiDeviceMax = 3;
 
-	static std::queue<MidiMessage> midiQueue;
+    HMIDIIN midiHandle[midiDeviceMax];
+    MMRESULT res;
+    MIDIINCAPS midiininformation;
+    UINT midiresult;
+    bool isGetInfoSucces;
 
+    static void CALLBACK MidiInProc(
+        HMIDIIN, UINT, DWORD, DWORD, DWORD);
+
+    int  _hold[128][16];        // Êäº„Åï„Çå„Å¶„ÅÑ„Çã„Éï„É¨„Éº„É†Êï∞
+    bool _trigger[128][16];     // „Åù„ÅÆ„Éï„É¨„Éº„É†„ÅßNOTE_ON„ÅåÊù•„Åü„Åã
+
+    static std::queue<MidiMessage> midiQueue;
 public:
-	MIDI();
-	~MIDI() = default;
-	void openMidi(UINT, int);
-	void closeMidi(int);
-	void update();
-	void draw();
-	TCHAR* getMidiInfo();
-	int get(eMidi eID) const;
-};
+    MIDI();
+    ~MIDI() = default;
 
+    void openMidi(UINT devid, int midiIndex);
+    void closeMidi(int midiIndex);
+    void update();
+    void draw();
+    TCHAR* getMidiInfo();
+
+    int get(int note, int channel) const;
+    int get(int note) const; // „ÉÅ„É£„É≥„Éç„É´ÁÑ°Ë¶ñÁâà
+    bool isTrigger(int note, int channel) const;
+};
