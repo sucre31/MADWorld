@@ -1,4 +1,5 @@
-﻿#include <Dxlib.h>
+﻿# include <map>
+#include <Dxlib.h>
 #include "SozaiManager.h"
 
 SozaiManager::SozaiManager() {
@@ -45,6 +46,14 @@ void SozaiManager::addSprite(int sozaiNum, const char* spriteFileName) {
 void SozaiManager::addSprite(int sozaiNum, int soundIndex, const char* fileName)
 {
 	sozai[sozaiNum]->addSprite(soundIndex, fileName);
+}
+
+void SozaiManager::setSozaiLayer(int sozaiNum, int layer)
+{
+	if (sozaiNum < sozai.size())
+	{
+		sozai[sozaiNum]->setLayer(layer);
+	}
 }
 
 /*
@@ -255,8 +264,20 @@ bool SozaiManager::update() {
 
 void SozaiManager::draw() const
 {
-	for (int id : SozaiLayerIndex) {
-		sozai[id]->draw();
+	std::map<int, std::vector<int>> layerMap;
+
+	for (int id : SozaiLayerIndex)
+	{
+		int layer = sozai[id]->getLayer();
+		layerMap[layer].push_back(id);
+	}
+
+	for (auto& layer : layerMap)
+	{
+		for (int id : layer.second)
+		{
+			sozai[id]->draw();
+		}
 	}
 }
 

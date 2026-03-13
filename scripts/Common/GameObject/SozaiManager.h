@@ -12,6 +12,7 @@ public:
 	void draw() const override;
 	int makeSozai(const char * soundFileName, const char * imageFileName);
 	int makeSozai(const char* soundFileName, const char* imageFileName, int x, int y);
+	void setSozaiLayer(int sozaiNum, int layer);
 	void playSozai(int, int);
 	void stopSozai(int);
 	void setSozaiKey(int sozaiNum, int padNum, int soundIndex);

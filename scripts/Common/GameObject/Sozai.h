@@ -18,6 +18,9 @@ public:
 	void setPosX(double xVal) { x = xVal; }
 	void setPosY(double yVal) { y = yVal; }
 
+	void setLayer(int val);
+	int getLayer() const;
+
 	void setExRate(double val) { exRate = val; }
 
 	void addSprite(const char* fileName);
@@ -73,6 +76,8 @@ private:
 
 	static const int maxSozai = 128;
 	static const int maxMidiSozai = 128;
+
+	int layer = 0;
 
 	int myId;
 

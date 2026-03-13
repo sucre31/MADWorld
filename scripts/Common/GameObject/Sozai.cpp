@@ -288,6 +288,16 @@ void Sozai::draw() const
 	}
 }
 
+void Sozai::setLayer(int val)
+{
+	layer = val;
+}
+
+int Sozai::getLayer() const
+{
+	return layer;
+}
+
 void Sozai::updatePlayingSoundCount()
 {
 	int count = 0;
