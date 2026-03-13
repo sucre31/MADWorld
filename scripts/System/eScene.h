@@ -15,5 +15,6 @@ enum eScene {
 	Seikan,
 	Snippet,
 	RealEdit,
-	Pizza
+	Pizza,
+	SecondRemix
 };

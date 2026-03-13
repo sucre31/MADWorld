@@ -9,9 +9,9 @@ ScenePizza::ScenePizza(IOnSceneChangedListener* impl, const Parameter& parameter
 	:AbstractScene(impl, parameter),
 	noteManager(140, 4, &sozaiManager)
 	{
-	sozaiManager.makeSozai("Assets/Sounds/pizza/bass.wav", "Assets/Sprites/movie/pizza/bass0.mp4", Define::WIN_W * (1.0 / 4.0), Define::WIN_H * (1.0 / 4.0));
+	sozaiManager.makeSozai("Assets/Sounds/pizza/bass.wav", "Assets/Sprites/movie/pizza/bass0.mp4", Define::WIN_W * (2.0 / 4.0), Define::WIN_H * (2.0 / 4.0));
 	sozaiManager.makeSozai("Assets/Sounds/pizza/snea.wav", "Assets/Sprites/movie/pizza/snea.mp4", Define::WIN_W * (2.0 / 4.0), Define::WIN_H * (2.0 / 4.0));
-	sozaiManager.makeSozai("Assets/Sounds/pizza/hihat.wav", "Assets/Sprites/movie/pizza/hihat.mp4", Define::WIN_W * (3.0 / 4.0), Define::WIN_H * (3.0 / 4.0));
+	sozaiManager.makeSozai("Assets/Sounds/pizza/hihat.wav", "Assets/Sprites/movie/pizza/hihat.mp4", Define::WIN_W * (2.0 / 4.0), Define::WIN_H * (2.0 / 4.0));
 	for (int i = 0; i < 3; i++) {
 		sozaiManager.setSozaiEx(i, (1.0 / 4.0));
 		sozaiManager.setReverseFlag(i, true);

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="scripts\Scene\SecondRemix\SceneSecondRemix.cpp" />
     <ClCompile Include="scripts\Common\MovieImageWrapper.cpp" />
     <ClCompile Include="scripts\Scene\Pizza\ScenePizza.cpp" />
     <ClCompile Include="scripts\System\PlayBackThreadPool.cpp" />
@@ -83,6 +84,7 @@
     <ClCompile Include="scripts\Common\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scripts\Scene\SecondRemix\SceneSecondRemix.h" />
     <ClInclude Include="scripts\Common\MovieImageWrapper.h" />
     <ClInclude Include="scripts\Scene\Pizza\ScenePizza.h" />
     <ClInclude Include="scripts\System\PlayBackThreadPool.h" />

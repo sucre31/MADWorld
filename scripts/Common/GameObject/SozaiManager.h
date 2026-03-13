@@ -20,7 +20,8 @@ public:
 	void setSozaiEx(int sozaiNum, double val);
 	void setSozaiPos(int sozaiNum, int valX, int valY);
 	void addSound(int sozaiNum, const char* soundFileName);
-	void addSprites(int sozaiNum, const char* soundFileName);
+	void addSprite(int sozaiNum, const char* soundFileName);
+	void addSprite(int sozaiNum, int soundIndex, const char* fileName);
 	void changeTopLayer(int sozaiId);
 	void setMultiSound(int sozaiId, bool flag);
 	void setMultiGraph(int sozaiId, bool flag);

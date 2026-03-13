@@ -1,4 +1,4 @@
-#include <memory>
+ï»¿#include <memory>
 #include <Dxlib.h>
 #include "VsSonya.h"
 #include "Common/Sound.h"
@@ -12,12 +12,12 @@ VsSonya::VsSonya(IOnSceneChangedListener* impl, const Parameter& parameter) : Ab
 
 
 	sozaiManager.makeSozai("Assets/Sounds/sonya/hey.wav", "Assets/Sprites/images/sonya/yasuna/yasuna0.png", Define::WIN_W * 3 / 4, Define::WIN_H * 3 / 4 - 40);
-	sozaiManager.addSprites(0, "Assets/Sprites/images/sonya/yasuna/yasuna1.png");
-	sozaiManager.addSprites(0, "Assets/Sprites/images/sonya/yasuna/yasuna2.png");
-	sozaiManager.addSprites(0, "Assets/Sprites/images/sonya/yasuna/yasuna3.png");
-	sozaiManager.addSprites(0, "Assets/Sprites/images/sonya/yasuna/yasuna4.png");
-	sozaiManager.addSprites(0, "Assets/Sprites/images/sonya/yasuna/yasuna1.png");
-	sozaiManager.addSprites(0, "Assets/Sprites/images/sonya/yasuna/yasuna0.png");
+	sozaiManager.addSprite(0, "Assets/Sprites/images/sonya/yasuna/yasuna1.png");
+	sozaiManager.addSprite(0, "Assets/Sprites/images/sonya/yasuna/yasuna2.png");
+	sozaiManager.addSprite(0, "Assets/Sprites/images/sonya/yasuna/yasuna3.png");
+	sozaiManager.addSprite(0, "Assets/Sprites/images/sonya/yasuna/yasuna4.png");
+	sozaiManager.addSprite(0, "Assets/Sprites/images/sonya/yasuna/yasuna1.png");
+	sozaiManager.addSprite(0, "Assets/Sprites/images/sonya/yasuna/yasuna0.png");
 	sozaiManager.addSound(0, "Assets/Sounds/sonya/sukiari.wav");
 	sozaiManager.addSound(0, "");
 	sozaiManager.setReverseFlag(0, false);
@@ -29,17 +29,17 @@ VsSonya::VsSonya(IOnSceneChangedListener* impl, const Parameter& parameter) : Ab
 	sozaiManager.makeSozai("Assets/Sounds/sonya/tto.wav", "Assets/Sprites/images/sonya/sonya/sonya0.png", Define::WIN_W * 1 / 4, Define::WIN_H * 3 / 4 - 40);
 	sozaiManager.addSound(1, "Assets/Sounds/sonya/sonyaHit.wav");
 	//sozaiManager.addSprites(1, "Assets/Sprites/images/sonya/sonya/sonya1.png");
-	sozaiManager.addSprites(1, "Assets/Sprites/images/sonya/sonya/sonya2.png");
-	sozaiManager.addSprites(1, "Assets/Sprites/images/sonya/sonya/sonya3.png");
-	sozaiManager.addSprites(1, "Assets/Sprites/images/sonya/sonya/sonya4.png");
-	sozaiManager.addSprites(1, "Assets/Sprites/images/sonya/sonya/sonya5.png");
-	sozaiManager.addSprites(1, "Assets/Sprites/images/sonya/sonya/sonya5.png");
-	sozaiManager.addSprites(1, "Assets/Sprites/images/sonya/sonya/sonya0.png");
+	sozaiManager.addSprite(1, "Assets/Sprites/images/sonya/sonya/sonya2.png");
+	sozaiManager.addSprite(1, "Assets/Sprites/images/sonya/sonya/sonya3.png");
+	sozaiManager.addSprite(1, "Assets/Sprites/images/sonya/sonya/sonya4.png");
+	sozaiManager.addSprite(1, "Assets/Sprites/images/sonya/sonya/sonya5.png");
+	sozaiManager.addSprite(1, "Assets/Sprites/images/sonya/sonya/sonya5.png");
+	sozaiManager.addSprite(1, "Assets/Sprites/images/sonya/sonya/sonya0.png");
 	sozaiManager.setReverseFlag(1, false);
 	//sozaiManager.setSozaiKey(1, ePad::A, 0);
 	sozaiManager.setSozaiEx(1, 0.75);
 
-	// ”wŒi‚Ìİ’è
+	// èƒŒæ™¯ã®è¨­å®š
 	sideBarR.setPosX(1120);
 	backGround[0].loadBackImage("Assets/Sprites/images/sonya/sky.png");
 	backGround[1].loadBackImage("Assets/Sprites/images/sonya/house.png");
@@ -49,7 +49,7 @@ VsSonya::VsSonya(IOnSceneChangedListener* impl, const Parameter& parameter) : Ab
 
 	debugSEHandle = Sound::getIns()->loadSamples("Assets/Sounds/sonya/tto.wav");
 
-	// •ˆ–Ê‚Ìì¬ ƒf[ƒ^ƒtƒ@ƒCƒ‹‚©‚ç“Ç‚İ‚½‚¢
+	// è­œé¢ã®ä½œæˆ ãƒ‡ãƒ¼ã‚¿ãƒ•ã‚¡ã‚¤ãƒ«ã‹ã‚‰èª­ã¿ãŸã„
 	addSnowLaunch(100, 0);
 	addSnowLaunch(116, 0);
 	addSnowLaunch(132, 0);
@@ -148,7 +148,7 @@ void VsSonya::update() {
 	sozaiManager.update();
 
 	if (Pad::getIns()->get(ePad::start) == 1) {
-		// ƒƒjƒ…[‚É–ß‚é
+		// ãƒ¡ãƒ‹ãƒ¥ãƒ¼ã«æˆ»ã‚‹
 		Parameter parameter;
 		const bool stackClear = true;
 		Sound::getIns()->release();
@@ -157,7 +157,7 @@ void VsSonya::update() {
 	}
 
 	if (Pad::getIns()->get(ePad::R) == 1) {
-		// ¶‰E‚Ì•˜g”ñ•\¦
+		// å·¦å³ã®é»’æ éè¡¨ç¤º
 		showBar = !showBar;
 	}
 
@@ -169,7 +169,7 @@ void VsSonya::update() {
 	}
 
 	if (beatChanged) {
-		// 16•ª‰¹•„‚Ì’†‚É1‰ñ‚¾‚¯ˆ—‚ğ‚·‚é‚Æ‚«
+		// 16åˆ†éŸ³ç¬¦ã®ä¸­ã«1å›ã ã‘å‡¦ç†ã‚’ã™ã‚‹ã¨ã
 		beatChanged = false;
 
 		for (int i = 0; i < launchList.size(); i++) {
@@ -182,30 +182,30 @@ void VsSonya::update() {
 	for (int i = 0; i < snowBallPtr.size(); i++) {
 		snowBallPtr[i]->update();
 		if (snowBallPtr[i]->getState() == stateSnow::CHECK) {
-			// ‰ñ”ğƒ^ƒCƒ~ƒ“ƒO
+			// å›é¿ã‚¿ã‚¤ãƒŸãƒ³ã‚°
 			if (Pad::getIns()->get(ePad::A) == 1 && avoidFlag == false) {
-				// ‰ñ”ğ¬Œ÷
+				// å›é¿æˆåŠŸ
 				snowBallPtr[i]->setState(stateSnow::AVOID);
 			}
 		}
 		if (snowBallPtr[i]->getState() == stateSnow::SONYAHIT) {
-			// á‹Êƒ\[ƒjƒƒhit
+			// é›ªç‰ã‚½ãƒ¼ãƒ‹ãƒ£hit
 			sozaiManager.playSozai(1, 1);
 			snowBallPtr[i]->setState(stateSnow::DESTROY);
 		}
 		if (snowBallPtr[i]->getState() == stateSnow::WALLHIT) {
-			// á‹Ê•Çhit
+			// é›ªç‰å£hit
 			snowBallPtr[i]->setState(stateSnow::DESTROY);
-			score++; // “à•”“¾“_‰ÁZ
+			score++; // å†…éƒ¨å¾—ç‚¹åŠ ç®—
 		}
 		if (snowBallPtr[i]->getState() == stateSnow::KILL) {
-			// á‹ÊÁ–Å
-			snowBallPtr.erase(snowBallPtr.begin() + i);	// d‚¢‚ç‚µ‚¢
+			// é›ªç‰æ¶ˆæ»…
+			snowBallPtr.erase(snowBallPtr.begin() + i);	// é‡ã„ã‚‰ã—ã„
 			i--;
 		}
 	}
 
-	// ‰ñ”ğ
+	// å›é¿
 	if (Pad::getIns()->get(ePad::A) == 1) {
 		if (avoidFlag == false) {
 			prevAvoidTime = curTime;
@@ -222,8 +222,8 @@ void VsSonya::update() {
 }
 
 /*
-@brief á‹Ê‚ÌƒCƒ“ƒXƒ^ƒ“ƒX¶¬ ‚¢‚¿‚¢‚¿ì‚ç‚¸‚Ég‚¢‚Ü‚í‚·‚×‚«‚©‚à
-@param launchType 0:ƒm[ƒ}ƒ‹ 1:Œ„‚ ‚è 2:–³Œ¾(1‚É‘±‚¯‚é)
+@brief é›ªç‰ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ç”Ÿæˆ ã„ã¡ã„ã¡ä½œã‚‰ãšã«ä½¿ã„ã¾ã‚ã™ã¹ãã‹ã‚‚
+@param launchType 0:ãƒãƒ¼ãƒãƒ« 1:éš™ã‚ã‚Š 2:ç„¡è¨€(1ã«ç¶šã‘ã‚‹)
 */
 void VsSonya::makeSnowBall(int launchType) {
 	switch (launchType) {

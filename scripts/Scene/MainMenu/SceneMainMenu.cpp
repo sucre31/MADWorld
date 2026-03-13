@@ -19,12 +19,12 @@ SceneMainMenu::SceneMainMenu(IOnSceneChangedListener* impl, const Parameter& par
 	icon[1].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail2.png");
 	icon[2].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail3.png");
 	icon[3].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail4.png");
-	icon[3].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail4.png");
 	icon[4].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail5.png");
 	icon[5].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail6.png");
 	icon[6].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail7.png");
 	icon[7].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail7.png");
-	icon[8].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail7.png");
+	icon[8].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail8.png");
+	icon[9].loadThumbnail("Assets/Sprites/images/MainMenu/thumbnail9.png");
 	for (int i = 0; i < iconNum; i++) {
 		icon[i].setPos(130 + 240 * (i / 4), 160 + (i % 4) * 133);
 		icon[i].enableIconFunc(true);
@@ -118,6 +118,8 @@ int SceneMainMenu::getIconScene(int iconNum) {
 		return eScene::RealEdit;
 	case 8:
 		return eScene::Pizza;
+	case 9:
+		return eScene::SecondRemix;
 	default:
 		return -1;
 	}

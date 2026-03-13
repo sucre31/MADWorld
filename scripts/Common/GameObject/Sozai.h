@@ -2,7 +2,7 @@
 #include <vector>
 #include "GameObject.h"
 #include "System/Pad.h"
-#include"Common/MovieImageWrapper.h"
+#include "Common/MovieImageWrapper.h"
 
 class Sozai : public GameObject
 {
@@ -11,73 +11,122 @@ public:
 	~Sozai();
 	void setMyId(int id) { myId = id; }
 	int getMyId() { return myId; }
+
 	bool update() override;
 	void draw() const override;
+
 	void setPosX(double xVal) { x = xVal; }
 	void setPosY(double yVal) { y = yVal; }
+
 	void setExRate(double val) { exRate = val; }
+
 	void addSprite(const char* fileName);
-	void setSampleSound(const char * fileName);
+	void addSprite(int soundIndex, const char* fileName);
+
+	void setSampleSound(const char* fileName);
+
 	void playSample(int, bool);
 	void playWithSoundIndex(int);
+
 	void stopSound();
+
 	void setTriggerPad(int padEnum, int indexNum);
 	void setTriggerMidi(int midiEnum, int indexNum);
 	void setTriggerMidi(int midiEnum, int midiChannel, int soundIndexNum);
+
 	void resetTriggerPad();
+
 	int getTriggerPad(int num) { return triggerPad[num]; };
 	int getTriggerMidiNote(int num) { return triggerMidiNote[num]; };
-	int getTriggerMidiChannel(int index) const {return triggerMidiChannel[index];}
+	int getTriggerMidiChannel(int index) const { return triggerMidiChannel[index]; }
+
 	int getValidPadNum() { return triggerPad.size(); }
 	int getValidMidiNum() { return validMidiNum; }
+
 	int getPadSoundIndex(int num) { return padSoundIndex[num]; }
 	int getMidiSoundIndex(int num) { return midiSoundIndex[num]; }
+
 	double getPosX() { return x; }
 	double getPosY() { return y; }
+
 	void setMultiSound(bool flag) { enableMultiSound = flag; }
 	void setMultiGraph(bool flag) { enableMultiGraph = flag; }
+
 	void setIsDrum(bool flag) { isDrum = flag; }
+
 	void setPadReleaseStop(bool flag) { enablePadPlayStop = flag; }
+
 	void setUseTurn(bool flag) { enableTurn = flag; }
+
 	void setPlayRate(int rate) { playRate = rate; }
+
 	void setEnableMultiMovie(bool flag) { enableMultiSprite = flag; }
+
 	void setGroupId(int id) { groupId = id; }
 	int getGroupId() const { return groupId; }
+
 	int getSoundCount() const { return validSoundNum; }
+
+	void updatePlayingSoundCount();
+
 private:
+
 	static const int maxSozai = 128;
 	static const int maxMidiSozai = 128;
-	int myId;								// managerクラスの管理番号
+
+	int myId;
+
 	double x;
 	double y;
+
 	int transX;
 	int transY;
+
 	double exRate;
-	std::vector<int> myGrapghHandle;				
-	std::vector<int> curGraphNum;
-	int mySoundHandle[maxSozai];
+
+	// soundIndex -> frames
+	std::vector<std::vector<int>> graphHandles;
+
+	int soundHandles[maxSozai];
+
 	bool enableTurn;
 	bool turnFlag;
+
 	int validSoundNum;
-	int curSoundIndex;						// 再生中の音ハンドル
-	int numOfPlayingSound;					// 再生中の音の数
-	std::vector<int> triggerPad;			// 動的に作った方が良いな あとクラス分けるべきかも
+	int curSoundIndex;
+	int numOfPlayingSound;
+
+	std::vector<int> triggerPad;
 	std::vector<int> padSoundIndex;
+
 	bool isPadSoundPlay[maxMidiSozai];
+
 	int triggerMidiNote[maxMidiSozai];
 	int triggerMidiChannel[maxMidiSozai];
 	int midiSoundIndex[maxMidiSozai];
+
 	bool isMidiSoundPlay[maxMidiSozai];
+
 	int validMidiNum;
+
 	bool enableMultiSound;
 	bool enableMultiGraph;
+
 	int prevTime;
-	bool isDrum;							// 再生を止めなくする
-	bool enablePadPlayStop;					// キーから指を離しても再生停止
+
+	bool isDrum;
+
+	bool enablePadPlayStop;
+
 	std::vector<int> timeForAnime;
-	int playRate;							// 映像再生速度(ミリ秒？)
-	bool enableMultiSprite;					// 自身の映像を終わるまで描画
-	int groupId = -1;						// -1は未所属グループとする
+	std::vector<int> curGraphNum;
+	std::vector<int> animeSoundIndex;
+
+	int playRate;
+
+	bool enableMultiSprite;
+
+	int groupId = -1;
+
 	MovieImageWrapper* movieWrapper;
 };
-

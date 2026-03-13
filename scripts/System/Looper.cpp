@@ -14,6 +14,7 @@
 #include "Scene/Snippet/SceneSnippet.h"
 #include "Scene/RealEdit/SceneRealEdit.h"
 #include "Scene/Pizza/ScenePizza.h"
+#include "Scene/SecondRemix/SceneSecondRemix.h"
 #include "System/Keyboard.h"
 #include "System/Pad.h"
 #include "System/MIDI.h"
@@ -112,6 +113,9 @@ void Looper::onSceneChanged(const eScene scene, const Parameter& parameter, cons
         break;
     case Pizza:
         _sceneStack.push(make_shared<ScenePizza>(this, parameter));
+        break;
+    case SecondRemix:
+        _sceneStack.push(make_shared<SceneSecondRemix>(this, parameter));
         break;
     //default:
     //    ERR("存在しないシーン");

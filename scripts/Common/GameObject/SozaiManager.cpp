@@ -38,8 +38,13 @@ void SozaiManager::addSound(int sozaiNum, const char* soundFileName) {
 	sozai[sozaiNum]->setSampleSound(soundFileName);
 }
 
-void SozaiManager::addSprites(int sozaiNum, const char* soundFileName) {
-	sozai[sozaiNum]->addSprite(soundFileName);
+void SozaiManager::addSprite(int sozaiNum, const char* spriteFileName) {
+	sozai[sozaiNum]->addSprite(spriteFileName);
+}
+
+void SozaiManager::addSprite(int sozaiNum, int soundIndex, const char* fileName)
+{
+	sozai[sozaiNum]->addSprite(soundIndex, fileName);
 }
 
 /*
@@ -74,6 +79,9 @@ void SozaiManager::stopSozai(int sozaiNum) {
 
 /*
 @brief 素材番号を受け取りキーをバインド
+@param sozaiNum 登録済みの素材番号
+@param padNum コントローラのキー番号
+@param soundIndex 再生する音のインデックス
 */
 void SozaiManager::setSozaiKey(int sozaiNum, int padNum, int soundIndex) {
 	if (sozaiNum < sozai.size()) {
@@ -202,6 +210,7 @@ int SozaiManager::getSoundCount(int sozaiNum) const {
 	}
 	return 0;
 }
+
 
 bool SozaiManager::update() {
 	// グループ停止の探索をここでしているが、大量の素材を入れた時に重くなる可能性あり。マップで管理？
