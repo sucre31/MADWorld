@@ -5,9 +5,9 @@ ObjectionManager::ObjectionManager(): sozaiManager(nullptr){
 	sozaiPads[ObjectionSound::MitsurugiIdle] = ePad::R;
 	sozaiPads[ObjectionSound::NaruhodoBass] = ePad::down;
 	sozaiPads[ObjectionSound::MitsurugiBass] = ePad::B;
-	sozaiPads[ObjectionSound::NaruhodoObjection] = ePad::left;
+	sozaiPads[ObjectionSound::NaruhodoObjection] = ePad::right;
 	sozaiPads[ObjectionSound::MitsurugiObjection] = ePad::A;
-	sozaiPads[ObjectionSound::NaruhodoHoldIt] = ePad::right;
+	sozaiPads[ObjectionSound::NaruhodoHoldIt] = ePad::left;
 	sozaiPads[ObjectionSound::MitsurugiHoldIt] = ePad::Y;
 	sozaiPads[ObjectionSound::NaruhodoTakeThat] = ePad::up;
 	sozaiPads[ObjectionSound::MitsurugiTakeThat] = ePad::X;
@@ -18,30 +18,32 @@ void ObjectionManager::setSozaiManager(SozaiManager* manager) {
 }
 
 void ObjectionManager::update() {
-	for (auto& pair : sozaiPads)
-	{
-		ObjectionSound sound = pair.first;
-		ePad pad = pair.second;
-
-		if (Pad::getIns()->get(pad) == 1)
+	if (isActive) {
+		for (auto& pair : sozaiPads)
 		{
-			switch (sound)
-			{
-			case ObjectionSound::NaruhodoIdle:
-			case ObjectionSound::NaruhodoBass:
-			case ObjectionSound::NaruhodoObjection:
-			case ObjectionSound::NaruhodoHoldIt:
-			case ObjectionSound::NaruhodoTakeThat:
-				setNaruhodoFront();
-				break;
+			ObjectionSound sound = pair.first;
+			ePad pad = pair.second;
 
-			case ObjectionSound::MitsurugiIdle:
-			case ObjectionSound::MitsurugiBass:
-			case ObjectionSound::MitsurugiObjection:
-			case ObjectionSound::MitsurugiHoldIt:
-			case ObjectionSound::MitsurugiTakeThat:
-				setMitsurugiFront();
-				break;
+			if (Pad::getIns()->get(pad) == 1)
+			{
+				switch (sound)
+				{
+				case ObjectionSound::NaruhodoIdle:
+				case ObjectionSound::NaruhodoBass:
+				case ObjectionSound::NaruhodoObjection:
+				case ObjectionSound::NaruhodoHoldIt:
+				case ObjectionSound::NaruhodoTakeThat:
+					setNaruhodoFront();
+					break;
+
+				case ObjectionSound::MitsurugiIdle:
+				case ObjectionSound::MitsurugiBass:
+				case ObjectionSound::MitsurugiObjection:
+				case ObjectionSound::MitsurugiHoldIt:
+				case ObjectionSound::MitsurugiTakeThat:
+					setMitsurugiFront();
+					break;
+				}
 			}
 		}
 	}
@@ -54,9 +56,9 @@ void ObjectionManager::draw() const {
 void ObjectionManager::initSozai() {
 	float exRate = 3.75;
 	// ナルホド
-	int naruhodoPosY = (Define::WIN_W / 2.0) + 4;
-	int naruhodoPosX = (Define::WIN_H / 2.0) - 65;
-	int naruhodoHandle = sozaiManager->makeSozai("", "Assets/Sprites/images/phoenixWright/naruhodo/idle/idle0.png", naruhodoPosY, naruhodoPosX);
+	int naruhodoPosX = (Define::WIN_W / 2.0) + 4;
+	int naruhodoPosY = (Define::WIN_H / 2.0) - 65;
+	int naruhodoHandle = sozaiManager->makeSozai("", "Assets/Sprites/images/phoenixWright/naruhodo/idle/idle0.png", naruhodoPosX, naruhodoPosY);
 	sozaiManager->addSound(naruhodoHandle, "Assets/Sounds/phoenixWright/naruhodo/objection.wav");
 	for (int i = 0; i < 12; i++) {
 		sozaiManager->addSprite(naruhodoHandle, 1, ("Assets/Sprites/images/phoenixWright/naruhodo/objection/objection" + std::to_string(i) + ".png").c_str());
@@ -106,9 +108,9 @@ void ObjectionManager::initSozai() {
 
 	// テーブル
 	int tableOffSet = 64;
-	int naruhodoTable = sozaiManager->makeSozai("", "Assets/Sprites/images/phoenixWright/others/table.png", (Define::WIN_W / 2.0), naruhodoPosX + tableOffSet);
+	int naruhodoTable = sozaiManager->makeSozai("", "Assets/Sprites/images/phoenixWright/others/table.png", (Define::WIN_W / 2.0), naruhodoPosY + tableOffSet);
 
-	int mitsurugiTable = sozaiManager->makeSozai("", "Assets/Sprites/images/phoenixWright/others/tableFlip.png", (Define::WIN_W / 2.0), naruhodoPosX + tableOffSet);
+	int mitsurugiTable = sozaiManager->makeSozai("", "Assets/Sprites/images/phoenixWright/others/tableFlip.png", (Define::WIN_W / 2.0), naruhodoPosY + tableOffSet);
 
 	// 背景
 	int naruhodoBack = sozaiManager->makeSozai("", "Assets/Sprites/images/phoenixWright/others/courtBack1.png", (Define::WIN_W / 2.0), (Define::WIN_H / 2.0));
@@ -136,7 +138,7 @@ void ObjectionManager::initSozai() {
 		sozaiManager->setReverseFlag(handle, false);
 	}
 
-	setKey();
+	setActive(false);
 }
 
 void ObjectionManager::setNaruhodoFront() {
@@ -156,6 +158,29 @@ void ObjectionManager::setMitsurugiFront() {
 	sozaiManager->setSozaiLayer(sozaiHandles[ObjectionSozai::MitsurugiTable], 4);
 }
 
+void ObjectionManager::setLayerBack() {
+	sozaiManager->setSozaiLayer(sozaiHandles[ObjectionSozai::Naruhodo], -1);
+	sozaiManager->setSozaiLayer(sozaiHandles[ObjectionSozai::NaruhodoBack], -1);
+	sozaiManager->setSozaiLayer(sozaiHandles[ObjectionSozai::NaruhodoTable], -1);
+	sozaiManager->setSozaiLayer(sozaiHandles[ObjectionSozai::Mitsurugi], -1);
+	sozaiManager->setSozaiLayer(sozaiHandles[ObjectionSozai::MitsurugiBack], -1);
+	sozaiManager->setSozaiLayer(sozaiHandles[ObjectionSozai::MitsurugiTable], -1);
+}
+
+void ObjectionManager::setActive(bool flag) {
+	if (flag) {
+		isActive = true;
+		setNaruhodoFront();
+		setKey();
+	}
+	else {
+		isActive = false;
+		resetKey();
+		setLayerBack();
+	}
+}
+
+
 void ObjectionManager::setKey() {
 	sozaiManager->setSozaiKey(sozaiHandles[ObjectionSozai::Naruhodo], sozaiPads[ObjectionSound::NaruhodoIdle], 0);
 	sozaiManager->setSozaiKey(sozaiHandles[ObjectionSozai::Naruhodo], sozaiPads[ObjectionSound::NaruhodoObjection], 1);
@@ -167,4 +192,13 @@ void ObjectionManager::setKey() {
 	sozaiManager->setSozaiKey(sozaiHandles[ObjectionSozai::Mitsurugi], sozaiPads[ObjectionSound::MitsurugiBass], 2);
 	sozaiManager->setSozaiKey(sozaiHandles[ObjectionSozai::Mitsurugi], sozaiPads[ObjectionSound::MitsurugiHoldIt], 3);
 	sozaiManager->setSozaiKey(sozaiHandles[ObjectionSozai::Mitsurugi], sozaiPads[ObjectionSound::MitsurugiTakeThat], 4);
+}
+
+void ObjectionManager::resetKey() {
+	for (auto& pair : sozaiHandles)
+	{
+		int handle = pair.second;
+
+		sozaiManager->resetSozaiKey(handle);
+	}
 }

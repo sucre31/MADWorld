@@ -38,10 +38,14 @@ public :
 	~ObjectionManager() = default;
 	void setSozaiManager(SozaiManager* sozai);
 	void initSozai();
+	void setActive(bool flag);
 private:
 	void setKey();
+	void resetKey();
 	void setNaruhodoFront();
 	void setMitsurugiFront();
+	void setLayerBack();
+	bool isActive = false; 
 	SozaiManager* sozaiManager;
 	std::unordered_map<ObjectionSozai, int> sozaiHandles;
 	std::unordered_map<ObjectionSound, ePad> sozaiPads;

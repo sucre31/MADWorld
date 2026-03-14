@@ -7,6 +7,7 @@
 #include "Common/GameObject/MusicManager.h"
 #include "Common/GameObject/BackGround.h"
 #include "ObjectionManager.h"
+#include "DonesiaManager.h"
 
 
 class SceneSecondRemix : public AbstractScene
@@ -18,7 +19,7 @@ public:
 	void draw() const override;
 private:
 	ObjectionManager objectionManager;
-	BackGround backGround[5];
+	DonesiaManager donesiaManager;
 	SozaiManager sozaiManager;
 	NoteManager noteManager;
 	MusicManager musicManager;
