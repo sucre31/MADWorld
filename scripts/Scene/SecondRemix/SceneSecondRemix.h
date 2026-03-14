@@ -6,6 +6,8 @@
 #include "Common/GameObject/NoteManager.h"
 #include "Common/GameObject/MusicManager.h"
 #include "Common/GameObject/BackGround.h"
+#include "ObjectionManager.h"
+
 
 class SceneSecondRemix : public AbstractScene
 {
@@ -15,7 +17,7 @@ public:
 	void update() override;
 	void draw() const override;
 private:
-	void setKey();
+	ObjectionManager objectionManager;
 	BackGround backGround[5];
 	SozaiManager sozaiManager;
 	NoteManager noteManager;
