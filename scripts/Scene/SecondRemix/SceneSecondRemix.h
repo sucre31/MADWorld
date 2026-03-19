@@ -8,6 +8,7 @@
 #include "Common/GameObject/BackGround.h"
 #include "ObjectionManager.h"
 #include "DonesiaManager.h"
+#include "DontacoManager.h"
 
 
 class SceneSecondRemix : public AbstractScene
@@ -20,9 +21,13 @@ public:
 private:
 	ObjectionManager objectionManager;
 	DonesiaManager donesiaManager;
+	DontacoManager dontacoManager;
 	SozaiManager sozaiManager;
 	NoteManager noteManager;
 	MusicManager musicManager;
 	PauseMenu pauseMenu;
+
+	const int sozaiManagerCount = 3; // 一時的な確認用
+	int activeManagerIndex;
 };
 

@@ -14,17 +14,48 @@ SceneSecondRemix::SceneSecondRemix(IOnSceneChangedListener* impl, const Paramete
 	donesiaManager.setSozaiManager(&sozaiManager);
 	donesiaManager.initSozai();
 	donesiaManager.setActive(false);
+
+	dontacoManager.setSozaiManager(&sozaiManager);
+	dontacoManager.initSozai();
+	dontacoManager.setActive(false);
+
+	activeManagerIndex = 0;
 }
 
 void SceneSecondRemix::update() {
+	int prevMangerIndex = activeManagerIndex;
 	if (Pad::getIns()->get(ePad::change) == 1) {
-		objectionManager.setActive(true);
-		donesiaManager.setActive(false);
+		activeManagerIndex--;
+		if (activeManagerIndex < 0) {
+			activeManagerIndex = 0;
+		}
 	}
 	if (Pad::getIns()->get(ePad::start) == 1) {
-		objectionManager.setActive(false);
-		donesiaManager.setActive(true);
+		activeManagerIndex++;
+		if (activeManagerIndex >= sozaiManagerCount) {
+			activeManagerIndex = sozaiManagerCount - 1;
+		}
 	}
+	if (prevMangerIndex != activeManagerIndex) {
+		switch (activeManagerIndex) {
+		case 0:
+			objectionManager.setActive(true);
+			donesiaManager.setActive(false);
+			dontacoManager.setActive(false);
+			break;
+		case 1:
+			objectionManager.setActive(false);
+			donesiaManager.setActive(true);
+			dontacoManager.setActive(false);
+			break;
+		case 2:
+			objectionManager.setActive(false);
+			donesiaManager.setActive(false);
+			dontacoManager.setActive(true);
+			break;
+		}
+	}
+
 	objectionManager.update();
 	donesiaManager.update();
 	sozaiManager.update();

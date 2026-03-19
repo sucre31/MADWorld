@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="scripts\Scene\SecondRemix\DontacoManager.cpp" />
     <ClCompile Include="scripts\Scene\SecondRemix\DonesiaManager.cpp" />
     <ClCompile Include="scripts\Scene\SecondRemix\ObjectionManager.cpp" />
     <ClCompile Include="scripts\Scene\SecondRemix\SceneSecondRemix.cpp" />
@@ -86,6 +87,7 @@
     <ClCompile Include="scripts\Common\Time.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scripts\Scene\SecondRemix\DontacoManager.h" />
     <ClInclude Include="scripts\Scene\SecondRemix\DonesiaManager.h" />
     <ClInclude Include="scripts\Scene\SecondRemix\ObjectionManager.h" />
     <ClInclude Include="scripts\Scene\SecondRemix\SceneSecondRemix.h" />
