@@ -255,13 +255,19 @@
     <ClCompile Include="scripts\Scene\SecondRemix\SozaiDontaco.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\Scene\SecondRemix\SonyaManager.cpp">
+    <ClCompile Include="scripts\Scene\SecondRemix\SozaiSonya.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="scripts\Common\SozaiBase.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="scripts\Scene\SecondRemix\SozaiShuzo.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Common\Online\DataBaseListener.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Common\Online\HttpClient.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -461,13 +467,19 @@
     <ClInclude Include="scripts\Scene\SecondRemix\SozaiDontaco.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\Scene\SecondRemix\SonyaManager.h">
+    <ClInclude Include="scripts\Scene\SecondRemix\SozaiSonya.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="scripts\Common\SozaiBase.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="scripts\Scene\SecondRemix\SozaiShuzo.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Common\Online\DataBaseListener.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Common\Online\HttpClient.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

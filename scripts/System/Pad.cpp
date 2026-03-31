@@ -1,4 +1,4 @@
-#include <DxLib.h>
+ï»¿#include <DxLib.h>
 #include <string>
 #include <algorithm>
 #include "System/Pad.h"
@@ -20,13 +20,15 @@ Pad::Pad()
     _idArray[ePad::Y] = 6;
     _idArray[ePad::L] = 8;
     _idArray[ePad::R] = 9;
+    _idArray[ePad::ZL] = 10;
+    _idArray[ePad::ZR] = 11;
     _idArray[ePad::start] = 13;
     _idArray[ePad::change] = 12;
 }
 
 void Pad::update() {
     int padInput;
-    padInput = GetJoypadInputState(DX_INPUT_PAD1);//ƒpƒbƒh‚Ì“ü—Íó‘Ô‚ğæ“¾
+    padInput = GetJoypadInputState(DX_INPUT_PAD1);//ãƒ‘ãƒƒãƒ‰ã®å…¥åŠ›çŠ¶æ…‹ã‚’å–å¾—
     for (int i = 0; i < 16; i++) {
         if (padInput & (1 << i)) {
             _pad[i]++;
@@ -39,7 +41,7 @@ void Pad::update() {
 }
 
 /*!
-@brief ƒpƒbƒh‚ÆA‚»‚ê‚É‘Î‰‚·‚éƒL[ƒ{[ƒh‚Ì“ü—Íó‘Ô‚ğƒ}[ƒW‚·‚é
+@brief ãƒ‘ãƒƒãƒ‰ã¨ã€ãã‚Œã«å¯¾å¿œã™ã‚‹ã‚­ãƒ¼ãƒœãƒ¼ãƒ‰ã®å…¥åŠ›çŠ¶æ…‹ã‚’ãƒãƒ¼ã‚¸ã™ã‚‹
 */
 void Pad::merge() {
     _pad[_idArray[ePad::down]] = max(_pad[_idArray[ePad::down]], Keyboard::getIns()->getPressingCount(KEY_INPUT_DOWN));
@@ -54,10 +56,12 @@ void Pad::merge() {
     _pad[_idArray[ePad::R]] = max(_pad[_idArray[ePad::R]], Keyboard::getIns()->getPressingCount(KEY_INPUT_S));
     _pad[_idArray[ePad::start]] = max(_pad[_idArray[ePad::start]], Keyboard::getIns()->getPressingCount(KEY_INPUT_RETURN));
     _pad[_idArray[ePad::change]] = max(_pad[_idArray[ePad::change]], Keyboard::getIns()->getPressingCount(KEY_INPUT_BACK));
+    _pad[_idArray[ePad::change]] = max(_pad[_idArray[ePad::ZL]], Keyboard::getIns()->getPressingCount(KEY_INPUT_Q));
+    _pad[_idArray[ePad::change]] = max(_pad[_idArray[ePad::ZR]], Keyboard::getIns()->getPressingCount(KEY_INPUT_W));
 }
 
 /*!
-@brief “n‚³‚ê‚½ƒpƒbƒhƒL[”Ô†‚Ì“ü—ÍƒtƒŒ[ƒ€”‚ğ•Ô‚·
+@brief æ¸¡ã•ã‚ŒãŸãƒ‘ãƒƒãƒ‰ã‚­ãƒ¼ç•ªå·ã®å…¥åŠ›ãƒ•ãƒ¬ãƒ¼ãƒ æ•°ã‚’è¿”ã™
 */
 int Pad::get(ePad eID) const
 {

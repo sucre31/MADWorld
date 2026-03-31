@@ -19,13 +19,13 @@ enum class SonyaSound
 	Hit
 };
 
-class SonyaManager : public SozaiBase
+class SozaiSonya : public SozaiBase
 {
 public:
-	SonyaManager();
+	SozaiSonya();
 	void update() override;
 	void draw() const override;
-	~SonyaManager() = default;
+	~SozaiSonya() = default;
 	void initSozai() override;
 private:
 	void setKey() override;

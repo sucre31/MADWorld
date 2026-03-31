@@ -19,6 +19,8 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="scripts\Common\Online\DataBaseListener.cpp" />
+    <ClCompile Include="scripts\Common\Online\HttpClient.cpp" />
     <ClCompile Include="scripts\Scene\SecondRemix\SozaiDontaco.cpp" />
     <ClCompile Include="scripts\Scene\SecondRemix\SozaiDonesia.cpp" />
     <ClCompile Include="scripts\Scene\SecondRemix\SozaiObjection.cpp" />
@@ -85,11 +87,13 @@
     <ClCompile Include="scripts\System\Singleton.cpp" />
     <ClCompile Include="scripts\System\SystemMain.cpp" />
     <ClCompile Include="scripts\Common\Time.cpp" />
-    <ClCompile Include="scripts\Scene\SecondRemix\SonyaManager.cpp" />
+    <ClCompile Include="scripts\Scene\SecondRemix\SozaiSonya.cpp" />
     <ClCompile Include="scripts\Common\SozaiBase.cpp" />
     <ClCompile Include="scripts\Scene\SecondRemix\SozaiShuzo.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scripts\Common\Online\DataBaseListener.h" />
+    <ClInclude Include="scripts\Common\Online\HttpClient.h" />
     <ClInclude Include="scripts\Scene\SecondRemix\SozaiDontaco.h" />
     <ClInclude Include="scripts\Scene\SecondRemix\SozaiDonesia.h" />
     <ClInclude Include="scripts\Scene\SecondRemix\SozaiObjection.h" />
@@ -155,7 +159,7 @@
     <ClInclude Include="scripts\System\Singleton.h" />
     <ClInclude Include="scripts\System\SystemMain.h" />
     <ClInclude Include="scripts\Common\Time.h" />
-    <ClInclude Include="scripts\Scene\SecondRemix\SonyaManager.h" />
+    <ClInclude Include="scripts\Scene\SecondRemix\SozaiSonya.h" />
     <ClInclude Include="scripts\Common\SozaiBase.h" />
     <ClInclude Include="scripts\Scene\SecondRemix\SozaiShuzo.h" />
   </ItemGroup>
@@ -261,7 +265,7 @@
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
-      <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
+      <PreprocessorDefinitions>_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Program Files\ffmpeg-8.0.1-full_build-shared\include;C:\Users\sucre\Desktop\work\game_develop\MADWorld\scripts;C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
@@ -271,6 +275,7 @@
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
       <AdditionalLibraryDirectories>C:\Program Files\ffmpeg-8.0.1-full_build-shared\lib;C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">

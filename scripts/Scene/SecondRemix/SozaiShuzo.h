@@ -1,5 +1,7 @@
 ﻿#pragma once
-#include "Common/SozaiBase.h"
+#include "Common/SozaiBase.h";
+#include "Common/Online/HttpClient.h"
+#include "System/Define.h";
 
 enum class ShuzoSozai
 {
@@ -20,6 +22,12 @@ public:
 	~SozaiShuzo() = default;
 	void initSozai() override;
 private:
+	HttpClient http;
 	void setKey() override;
+	void initializeFont();
+	int getVoteCount();
+	int fontHandle;
+	const int shoutMax = 3;
+	int shoutCount = 0;
 };
 

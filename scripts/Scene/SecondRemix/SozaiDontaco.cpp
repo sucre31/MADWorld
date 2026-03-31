@@ -67,13 +67,13 @@ void SozaiDontaco::initSozai() {
 	sozaiManager->addSound(sozaiHandles[(int)DontacoSozai::Drum], "Assets/Sounds/dontaco/Remix2/drumTacos2.wav");
 	sozaiManager->addSound(sozaiHandles[(int)DontacoSozai::Drum], "Assets/Sounds/dontaco/Remix2/drumDo.wav");
 	sozaiManager->addSound(sozaiHandles[(int)DontacoSozai::Drum], "Assets/Sounds/dontaco/Remix2/drumTa.wav");
-	sozaiManager->addSprite(sozaiHandles[(int)DontacoSozai::Drum], 1, "Assets/Sprites/movie/Dontaco/don.mp4");
-	sozaiManager->addSprite(sozaiHandles[(int)DontacoSozai::Drum], 2, "Assets/Sprites/movie/Dontaco/tacos.mp4");
-	sozaiManager->addSprite(sozaiHandles[(int)DontacoSozai::Drum], 3, "Assets/Sprites/movie/Dontaco/ta.mp4");
-	sozaiManager->addSprite(sozaiHandles[(int)DontacoSozai::Drum], 4, "Assets/Sprites/movie/Dontaco/don.mp4");
-	sozaiManager->addSprite(sozaiHandles[(int)DontacoSozai::Drum], 5, "Assets/Sprites/movie/Dontaco/tacos.mp4");
-	sozaiManager->addSprite(sozaiHandles[(int)DontacoSozai::Drum], 6, "Assets/Sprites/movie/Dontaco/don.mp4");
-	sozaiManager->addSprite(sozaiHandles[(int)DontacoSozai::Drum], 7, "Assets/Sprites/movie/Dontaco/ta.mp4");
+	sozaiManager->addSprite(sozaiHandles[(int)DontacoSozai::Drum], 1, "Assets/Sprites/movie/Dontaco/drumDon.mp4");
+	sozaiManager->addSprite(sozaiHandles[(int)DontacoSozai::Drum], 2, "Assets/Sprites/movie/Dontaco/drumTacos.mp4");
+	sozaiManager->addSprite(sozaiHandles[(int)DontacoSozai::Drum], 3, "Assets/Sprites/movie/Dontaco/drumTa.mp4");
+	sozaiManager->addSprite(sozaiHandles[(int)DontacoSozai::Drum], 4, "Assets/Sprites/movie/Dontaco/drumDon2.mp4");
+	sozaiManager->addSprite(sozaiHandles[(int)DontacoSozai::Drum], 5, "Assets/Sprites/movie/Dontaco/drumTacos2.mp4");
+	sozaiManager->addSprite(sozaiHandles[(int)DontacoSozai::Drum], 6, "Assets/Sprites/movie/Dontaco/drumDon.mp4");
+	sozaiManager->addSprite(sozaiHandles[(int)DontacoSozai::Drum], 7, "Assets/Sprites/movie/Dontaco/drumTa.mp4");
 	sozaiManager->setSozaiEx(sozaiHandles[(int)DontacoSozai::Dontacos], 2.0);
 	sozaiManager->setSozaiEx(sozaiHandles[(int)DontacoSozai::Drum], 2.0);
 

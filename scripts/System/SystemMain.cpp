@@ -1,4 +1,8 @@
 ﻿#include <DxLib.h>
+#include "System/Keyboard.h"
+//#include "firebase/app.h"
+//#include "firebase/database.h"
+//#include "Common/Online/DataBaseListener.h"
 #include "System/SystemMain.h"
 #include "System/Define.h"
 #include "System/Looper.h"
@@ -24,6 +28,16 @@ bool SystemMain::initialize() const
 		return false;							//異常終了したら即座にやめる
 	}
 	SetDrawScreen(DX_SCREEN_BACK);				//裏画面処理を設定する
+
+	//// サーバー設定
+	//firebase::AppOptions options;
+	//firebase::App* app = firebase::App::Create(options);
+	//firebase::database::Database* database = firebase::database::Database::GetInstance(app);
+	//auto db_ref = database->GetReference("game_state/score");
+
+	//DatabaseListener my_listener;
+	//db_ref.AddValueListener(&my_listener); // 監視開始
+
 	return true;
 }
 

@@ -9,7 +9,8 @@
 #include "SozaiObjection.h"
 #include "SozaiDonesia.h"
 #include "SozaiDontaco.h"
-#include "SonyaManager.h"
+#include "SozaiShuzo.h"
+#include "SozaiSonya.h"
 
 
 class SceneSecondRemix : public AbstractScene
@@ -21,10 +22,11 @@ public:
 	void draw() const override;
 private:
 	std::vector<SozaiBase*> sozaies;
-	SozaiObjection objectionManager;
-	SozaiDonesia donesiaManager;
-	SozaiDontaco dontacoManager;
-	SonyaManager sonyaManager;
+	SozaiObjection objection;
+	SozaiDonesia donesia;
+	SozaiDontaco dontaco;
+	SozaiSonya sonya;
+	SozaiShuzo shuzo;
 	SozaiManager sozaiManager;
 	NoteManager noteManager;
 	MusicManager musicManager;

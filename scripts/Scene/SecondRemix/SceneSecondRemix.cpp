@@ -9,10 +9,11 @@ SceneSecondRemix::SceneSecondRemix(IOnSceneChangedListener* impl, const Paramete
 	sozaiManager.setSozaiLayer(back, 0);
 
 	sozaies = {
-		&objectionManager,
-		&donesiaManager,
-		&dontacoManager,
-		&sonyaManager
+		&objection,
+		&donesia,
+		&dontaco,
+		&sonya,
+		&shuzo
 	};
 
 	for (auto* sozai: sozaies) {
@@ -28,18 +29,20 @@ SceneSecondRemix::SceneSecondRemix(IOnSceneChangedListener* impl, const Paramete
 	bgmName = "remix2";
 	musicManager.Play(bgmName, true);
 
+	noteManager.loadFromFile("");
+
 	prevMangerIndex = -1;
 	activeManagerIndex = 0;
 }
 
 void SceneSecondRemix::update() {
 
-	if (Pad::getIns()->get(ePad::change) >= 1 && Pad::getIns()->get(ePad::L) == 1) {
+	if (Pad::getIns()->get(ePad::ZL) == 1) {
 		activeManagerIndex--;
 		activeManagerIndex = std::clamp(activeManagerIndex, 0, (int)sozaies.size() - 1);
 	}
 
-	if (Pad::getIns()->get(ePad::change) >= 1 && Pad::getIns()->get(ePad::A) == 1) {
+	if (Pad::getIns()->get(ePad::change) >= 1 && Pad::getIns()->get(ePad::ZL) == 1) {
 		if (musicManager.IsPlaying()) {
 			musicManager.Stop();
 		}
@@ -48,7 +51,7 @@ void SceneSecondRemix::update() {
 		}
 	}
 
-	if (Pad::getIns()->get(ePad::change) >= 1 && Pad::getIns()->get(ePad::R) == 1) {
+	if (Pad::getIns()->get(ePad::ZR) == 1) {
 		activeManagerIndex++;
 		activeManagerIndex = std::clamp(activeManagerIndex, 0, (int)sozaies.size() - 1);
 	}
@@ -84,4 +87,7 @@ void SceneSecondRemix::update() {
 
 void SceneSecondRemix::draw() const{
 	sozaiManager.draw();
+	for (SozaiBase* sozai : sozaies) {
+		sozai->draw();
+	}
 }

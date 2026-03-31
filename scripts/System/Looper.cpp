@@ -15,7 +15,6 @@
 #include "Scene/RealEdit/SceneRealEdit.h"
 #include "Scene/Pizza/ScenePizza.h"
 #include "Scene/SecondRemix/SceneSecondRemix.h"
-#include "System/Keyboard.h"
 #include "System/Pad.h"
 #include "System/MIDI.h"
 #include "Common/Image.h"
@@ -38,7 +37,6 @@ Looper::Looper()
 bool Looper::loop() const
 {
     int start = GetNowCount();
-    //SetDrawScreen(Image::getIns()->getScreenHandle());
     ClearDrawScreen();
 
     Keyboard::getIns()->update();   //キーボードの更新

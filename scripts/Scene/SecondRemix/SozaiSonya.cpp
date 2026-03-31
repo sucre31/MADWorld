@@ -1,6 +1,6 @@
-﻿#include "SonyaManager.h"
+﻿#include "SozaiSonya.h"
 
-SonyaManager::SonyaManager() {
+SozaiSonya::SozaiSonya() {
 	sozaiPads[(int)SonyaSound::Hey] = ePad::A;
 	sozaiPads[(int)SonyaSound::Tto] = ePad::B;
 	sozaiPads[(int)SonyaSound::Sukiari] = ePad::MAX;
@@ -9,16 +9,16 @@ SonyaManager::SonyaManager() {
 
 
 
-void SonyaManager::update(){
+void SozaiSonya::update(){
 	if (isActive) {
 	}
 }
 
-void SonyaManager::draw() const {
+void SozaiSonya::draw() const {
 
 }
 
-void SonyaManager::initSozai() {
+void SozaiSonya::initSozai() {
 	std::string basePath = "Assets/Sprites/images/sonya/";
 
 	sozaiHandles[(int)SonyaSozai::Sonya] =
@@ -63,10 +63,9 @@ void SonyaManager::initSozai() {
 		int handle = pair.second;
 		sozaiManager->setReverseFlag(handle, false);
 	}
-	setActive(false);
 }
 
-void SonyaManager::setKey() {
+void SozaiSonya::setKey() {
 	sozaiManager->setSozaiKey(sozaiHandles[(int)SonyaSozai::Sonya], sozaiPads[(int)SonyaSound::Tto], 1);
 	sozaiManager->setSozaiKey(sozaiHandles[(int)SonyaSozai::Yasuna], sozaiPads[(int)SonyaSound::Hey], 1);
 }
