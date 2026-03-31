@@ -5,230 +5,464 @@
       <UniqueIdentifier>{4FC737F1-C7A5-4376-A066-2A32D752A2FF}</UniqueIdentifier>
       <Extensions>cpp;c;cc;cxx;c++;cppm;ixx;def;odl;idl;hpj;bat;asm;asmx</Extensions>
     </Filter>
-    <Filter Include="ヘッダー ファイル">
-      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
-      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
-    </Filter>
-    <Filter Include="リソース ファイル">
+    <Filter Include="ソース ファイル\リソース ファイル">
       <UniqueIdentifier>{67DA6AB6-F800-4c08-8B7A-83BB121AAD01}</UniqueIdentifier>
       <Extensions>rc;ico;cur;bmp;dlg;rc2;rct;bin;rgs;gif;jpg;jpeg;jpe;resx;tiff;tif;png;wav;mfcribbon-ms</Extensions>
     </Filter>
-    <Filter Include="ソース ファイル\System">
-      <UniqueIdentifier>{0dc7ec3e-aa7d-4bec-8b19-d03826372c08}</UniqueIdentifier>
+    <Filter Include="ソース ファイル\リソース ファイル\ヘッダー ファイル">
+      <UniqueIdentifier>{93995380-89BD-4b04-88EB-625FBE52EBFB}</UniqueIdentifier>
+      <Extensions>h;hh;hpp;hxx;h++;hm;inl;inc;ipp;xsd</Extensions>
     </Filter>
-    <Filter Include="ヘッダー ファイル\System">
+    <Filter Include="ソース ファイル\リソース ファイル\ヘッダー ファイル\System">
       <UniqueIdentifier>{96b14af0-2896-4702-8f8d-87200b96eff2}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\System\Control">
-      <UniqueIdentifier>{02a72f0d-c22d-4917-a49a-ad5bf577b53b}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\System\Control">
+    <Filter Include="ソース ファイル\リソース ファイル\ヘッダー ファイル\System\Control">
       <UniqueIdentifier>{f91313a6-0b05-4475-bd38-25da79f122f9}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Scene">
-      <UniqueIdentifier>{d11d1baf-efa1-4915-8646-8f0b1e5146ab}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Scene\TitleScene">
-      <UniqueIdentifier>{216f7ade-29ef-499d-b832-7bf38172248c}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Scene">
+    <Filter Include="ソース ファイル\リソース ファイル\ヘッダー ファイル\Scene">
       <UniqueIdentifier>{b343f9f4-1a37-41cc-bbe5-8550ade0e48e}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ヘッダー ファイル\Scene\TitleScene">
+    <Filter Include="ソース ファイル\リソース ファイル\ヘッダー ファイル\Scene\TitleScene">
       <UniqueIdentifier>{db564484-e28f-421a-b29e-2d393ab5c75a}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Resources">
-      <UniqueIdentifier>{68deff42-5547-4544-8074-45f93f3b22c7}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Resources">
-      <UniqueIdentifier>{93f9caa9-cdbc-46ef-ae97-819625b78b73}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Scene\SceneLoveSong">
-      <UniqueIdentifier>{ce7e7249-c1ca-453d-9a52-ed08429b4762}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Scene\SceneLovesong">
+    <Filter Include="ソース ファイル\リソース ファイル\ヘッダー ファイル\Scene\SceneLovesong">
       <UniqueIdentifier>{bed47839-97df-41b8-8fbd-effe0e1efa92}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\Scene\SceneAlice">
-      <UniqueIdentifier>{b063ac5f-19a7-4bf2-ace8-32aa240113af}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Scene\SceneAlice">
+    <Filter Include="ソース ファイル\リソース ファイル\ヘッダー ファイル\Scene\SceneAlice">
       <UniqueIdentifier>{48919319-6782-428b-96d6-612ad47aa99b}</UniqueIdentifier>
     </Filter>
-    <Filter Include="ソース ファイル\GameObject">
-      <UniqueIdentifier>{036fad70-f011-45d8-8470-e51ce0192084}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\GameObject">
-      <UniqueIdentifier>{3caecee3-78c4-4724-aca1-bf865ec7b347}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ソース ファイル\Scene\SceneMainMenu">
-      <UniqueIdentifier>{990e0ebb-cc14-4cbf-aaeb-79439c542ecd}</UniqueIdentifier>
-    </Filter>
-    <Filter Include="ヘッダー ファイル\Scene\SceneMainMenu">
+    <Filter Include="ソース ファイル\リソース ファイル\ヘッダー ファイル\Scene\SceneMainMenu">
       <UniqueIdentifier>{4e80c6fa-3192-438c-8d1c-5ac9c02bee4a}</UniqueIdentifier>
     </Filter>
+    <Filter Include="ソース ファイル\リソース ファイル\ヘッダー ファイル\Scene\SceneSonya">
+      <UniqueIdentifier>{38e21e7b-b75e-41be-abcf-8f491a0060ef}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\リソース ファイル\ヘッダー ファイル\Scene\SceneSnippet">
+      <UniqueIdentifier>{bd213f21-f1b2-467a-b6b1-e9f13590f60f}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\リソース ファイル\ヘッダー ファイル\Scene\SceneSequencer">
+      <UniqueIdentifier>{6a65acd0-ea8a-4538-baf8-b9f07a6e3e1a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\リソース ファイル\ヘッダー ファイル\Resources">
+      <UniqueIdentifier>{93f9caa9-cdbc-46ef-ae97-819625b78b73}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\リソース ファイル\ヘッダー ファイル\GameObject">
+      <UniqueIdentifier>{3caecee3-78c4-4724-aca1-bf865ec7b347}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\リソース ファイル\ヘッダー ファイル\GameObject\menu">
+      <UniqueIdentifier>{720ac6c3-188c-40ee-a0be-cbc97af0bd21}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="ソース ファイル\リソース ファイル\ヘッダー ファイル\BaseSystem">
+      <UniqueIdentifier>{72cc7743-365c-40e9-9327-0f481b2c8629}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="main.cpp">
+    <ClCompile Include="scripts\Common\Image.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SystemMain.cpp">
-      <Filter>ソース ファイル\System</Filter>
+    <ClCompile Include="scripts\Common\Sound.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Define.cpp">
-      <Filter>ソース ファイル\System</Filter>
+    <ClCompile Include="scripts\Common\GameObject\BackGround.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="FpsControl.cpp">
-      <Filter>ソース ファイル\System</Filter>
+    <ClCompile Include="scripts\Common\GameObject\GameObject.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="IOnSceneChangedListener.cpp">
-      <Filter>ソース ファイル\System</Filter>
+    <ClCompile Include="scripts\Common\GameObject\MusicManager.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="AbstractScene.cpp">
-      <Filter>ソース ファイル\System</Filter>
+    <ClCompile Include="scripts\Common\GameObject\PauseMenu.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Parameter.cpp">
-      <Filter>ソース ファイル\System</Filter>
+    <ClCompile Include="scripts\Common\GameObject\Sozai.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Looper.cpp">
-      <Filter>ソース ファイル\System</Filter>
+    <ClCompile Include="scripts\Common\GameObject\SozaiManager.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Pad.cpp">
-      <Filter>ソース ファイル\System\Control</Filter>
+    <ClCompile Include="scripts\Scene\Alice\SceneAlice.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Keyboard.cpp">
-      <Filter>ソース ファイル\System\Control</Filter>
+    <ClCompile Include="scripts\Scene\Dontaco\SceneDontaco.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="OpeningScene.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClCompile Include="scripts\Scene\Kajioh\SceneKajioh.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Image.cpp">
-      <Filter>ソース ファイル\Resources</Filter>
+    <ClCompile Include="scripts\Scene\LightPlane\SceneLightPlane.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="eScene.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClCompile Include="scripts\Scene\LoveSong\SceneLoveSong.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sound.cpp">
-      <Filter>ソース ファイル\Resources</Filter>
+    <ClCompile Include="scripts\Scene\MainMenu\cursor.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Singleton.cpp">
-      <Filter>ソース ファイル\System</Filter>
+    <ClCompile Include="scripts\Scene\MainMenu\gameIcon.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SozaiManager.cpp">
-      <Filter>ソース ファイル\GameObject</Filter>
+    <ClCompile Include="scripts\Scene\MainMenu\SceneMainMenu.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="Sozai.cpp">
-      <Filter>ソース ファイル\GameObject</Filter>
+    <ClCompile Include="scripts\Scene\Opening\OpeningScene.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="GameObject.cpp">
-      <Filter>ソース ファイル\GameObject</Filter>
+    <ClCompile Include="scripts\Scene\Option\SceneOption.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="MIDI.cpp">
-      <Filter>ソース ファイル\System\Control</Filter>
+    <ClCompile Include="scripts\Scene\RealEdit\RealTimeSequencer.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SceneLightPlane.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClCompile Include="scripts\Scene\RealEdit\SceneRealEdit.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="BackGround.cpp">
-      <Filter>ソース ファイル\GameObject</Filter>
+    <ClCompile Include="scripts\Scene\SeikanHikou\SceneSeikanHikou.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SceneOption.cpp">
-      <Filter>ソース ファイル\Scene</Filter>
+    <ClCompile Include="scripts\Scene\Snippet\BackImage.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="cursor.cpp">
-      <Filter>ソース ファイル\GameObject</Filter>
+    <ClCompile Include="scripts\Scene\Snippet\BeatManager.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="TitleScene.cpp">
-      <Filter>ソース ファイル\Scene\TitleScene</Filter>
+    <ClCompile Include="scripts\Scene\Snippet\Character.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SceneAlice.cpp">
-      <Filter>ソース ファイル\Scene\SceneAlice</Filter>
+    <ClCompile Include="scripts\Scene\Snippet\DamageBeat.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SceneLoveSong.cpp">
-      <Filter>ソース ファイル\Scene\SceneLoveSong</Filter>
+    <ClCompile Include="scripts\Scene\Snippet\DamageCharacter.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="SceneMainMenu.cpp">
-      <Filter>ソース ファイル\Scene\SceneMainMenu</Filter>
+    <ClCompile Include="scripts\Scene\Snippet\Enemy.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Snippet\EnemyManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Snippet\Instrument.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Snippet\MessageWindow.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Snippet\PlayerCharacter.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Snippet\SceneSnippet.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Snippet\SnippetGameManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Snippet\SnippetImage.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Snippet\SnippetSound.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Snippet\StatusWindow.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Sonya\BPMManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Sonya\sideBlank.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Sonya\snowBall.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Sonya\VsSonya.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\StarGuitar\SceneStarguitar.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\StarGuitar\StarguitarDrums.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Title\TitleScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\System\AbstractScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\System\Define.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\System\eScene.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\System\FpsControl.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\System\IOnSceneChangedListener.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\System\Keyboard.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\System\Looper.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\System\MIDI.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\System\Pad.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\System\Parameter.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\System\Singleton.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\System\SystemMain.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\main.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Common\Time.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Common\GameObject\NoteManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Common\GameObject\Note.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\System\PlayBackThreadPool.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Pizza\ScenePizza.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Common\MovieImageWrapper.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\SecondRemix\SceneSecondRemix.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\SecondRemix\ObjectionManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\SecondRemix\DonesiaManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\SecondRemix\DontacoManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\SecondRemix\SonyaManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Common\SozaiBase.cpp">
+      <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="TitleScene.h">
-      <Filter>ヘッダー ファイル\Scene\TitleScene</Filter>
+    <ClInclude Include="scripts\Common\Image.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="AbstractScene.h">
-      <Filter>ヘッダー ファイル\System</Filter>
+    <ClInclude Include="scripts\Common\Sound.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Define.h">
-      <Filter>ヘッダー ファイル\System</Filter>
+    <ClInclude Include="scripts\Common\GameObject\BackGround.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="IOnSceneChangedListener.h">
-      <Filter>ヘッダー ファイル\System</Filter>
+    <ClInclude Include="scripts\Common\GameObject\GameObject.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="FpsControl.h">
-      <Filter>ヘッダー ファイル\System</Filter>
+    <ClInclude Include="scripts\Common\GameObject\MusicManager.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Looper.h">
-      <Filter>ヘッダー ファイル\System</Filter>
+    <ClInclude Include="scripts\Common\GameObject\PauseMenu.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SystemMain.h">
-      <Filter>ヘッダー ファイル\System</Filter>
+    <ClInclude Include="scripts\Common\GameObject\Sozai.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Parameter.h">
-      <Filter>ヘッダー ファイル\System</Filter>
+    <ClInclude Include="scripts\Common\GameObject\SozaiManager.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Keyboard.h">
-      <Filter>ヘッダー ファイル\System\Control</Filter>
+    <ClInclude Include="scripts\Scene\Alice\SceneAlice.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Pad.h">
-      <Filter>ヘッダー ファイル\System\Control</Filter>
+    <ClInclude Include="scripts\Scene\Dontaco\SceneDontaco.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="OpeningScene.h">
-      <Filter>ヘッダー ファイル\Scene</Filter>
+    <ClInclude Include="scripts\Scene\Kajioh\SceneKajioh.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Image.h">
-      <Filter>ヘッダー ファイル\Resources</Filter>
+    <ClInclude Include="scripts\Scene\LightPlane\SceneLightPlane.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="eScene.h">
-      <Filter>ヘッダー ファイル\Scene</Filter>
+    <ClInclude Include="scripts\Scene\LoveSong\SceneLoveSong.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sound.h">
-      <Filter>ヘッダー ファイル\Resources</Filter>
+    <ClInclude Include="scripts\Scene\MainMenu\cursor.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Singleton.h">
-      <Filter>ヘッダー ファイル\System</Filter>
+    <ClInclude Include="scripts\Scene\MainMenu\gameIcon.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SceneLoveSong.h">
-      <Filter>ヘッダー ファイル\Scene\SceneLovesong</Filter>
+    <ClInclude Include="scripts\Scene\MainMenu\SceneMainMenu.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SceneAlice.h">
-      <Filter>ヘッダー ファイル\Scene\SceneAlice</Filter>
+    <ClInclude Include="scripts\Scene\Opening\OpeningScene.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SozaiManager.h">
-      <Filter>ヘッダー ファイル\GameObject</Filter>
+    <ClInclude Include="scripts\Scene\Option\SceneOption.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="Sozai.h">
-      <Filter>ヘッダー ファイル\GameObject</Filter>
+    <ClInclude Include="scripts\Scene\RealEdit\RealTimeSequencer.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="GameObject.h">
-      <Filter>ヘッダー ファイル\GameObject</Filter>
+    <ClInclude Include="scripts\Scene\RealEdit\SceneRealEdit.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="MIDI.h">
-      <Filter>ヘッダー ファイル\System\Control</Filter>
+    <ClInclude Include="scripts\Scene\SeikanHikou\SceneSeikanHikou.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SceneLightPlane.h">
-      <Filter>ヘッダー ファイル\Scene</Filter>
+    <ClInclude Include="scripts\Scene\Snippet\BackImage.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="BackGround.h">
-      <Filter>ヘッダー ファイル\GameObject</Filter>
+    <ClInclude Include="scripts\Scene\Snippet\BeatManager.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SceneOption.h">
-      <Filter>ヘッダー ファイル\Scene</Filter>
+    <ClInclude Include="scripts\Scene\Snippet\Character.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="SceneMainMenu.h">
-      <Filter>ヘッダー ファイル\Scene\SceneMainMenu</Filter>
+    <ClInclude Include="scripts\Scene\Snippet\DamageBeat.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="cursor.h">
-      <Filter>ヘッダー ファイル\GameObject</Filter>
+    <ClInclude Include="scripts\Scene\Snippet\DamageCharacter.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Snippet\Enemy.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Snippet\EnemyManager.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Snippet\Instrument.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Snippet\MessageWindow.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Snippet\PlayerCharacter.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Snippet\SceneSnippet.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Snippet\SnippetGameManager.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Snippet\SnippetImage.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Snippet\SnippetSound.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Snippet\StatusWindow.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Sonya\BPMManager.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Sonya\sideBlank.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Sonya\snowBall.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Sonya\VsSonya.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\StarGuitar\SceneStarguitar.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\StarGuitar\StarguitarDrums.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Title\TitleScene.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\System\AbstractScene.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\System\Define.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\System\eScene.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\System\FpsControl.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\System\IOnSceneChangedListener.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\System\Keyboard.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\System\Looper.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\System\MIDI.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\System\Pad.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\System\Parameter.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\System\Singleton.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\System\SystemMain.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Common\Time.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Common\GameObject\NoteManager.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Common\GameObject\Note.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\System\PlayBackThreadPool.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Pizza\ScenePizza.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Common\MovieImageWrapper.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\SecondRemix\SceneSecondRemix.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\SecondRemix\ObjectionManager.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\SecondRemix\DonesiaManager.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\SecondRemix\DontacoManager.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\SecondRemix\SonyaManager.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Common\SozaiBase.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>

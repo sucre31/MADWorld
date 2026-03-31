@@ -18,6 +18,145 @@
       <Platform>x64</Platform>
     </ProjectConfiguration>
   </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="scripts\Scene\SecondRemix\DontacoManager.cpp" />
+    <ClCompile Include="scripts\Scene\SecondRemix\DonesiaManager.cpp" />
+    <ClCompile Include="scripts\Scene\SecondRemix\ObjectionManager.cpp" />
+    <ClCompile Include="scripts\Scene\SecondRemix\SceneSecondRemix.cpp" />
+    <ClCompile Include="scripts\Common\MovieImageWrapper.cpp" />
+    <ClCompile Include="scripts\Scene\Pizza\ScenePizza.cpp" />
+    <ClCompile Include="scripts\System\PlayBackThreadPool.cpp" />
+    <ClCompile Include="scripts\Common\GameObject\Note.cpp" />
+    <ClCompile Include="scripts\Common\GameObject\NoteManager.cpp" />
+    <ClCompile Include="scripts\Common\GameObject\BackGround.cpp" />
+    <ClCompile Include="scripts\Common\GameObject\GameObject.cpp" />
+    <ClCompile Include="scripts\Common\GameObject\MusicManager.cpp" />
+    <ClCompile Include="scripts\Common\GameObject\PauseMenu.cpp" />
+    <ClCompile Include="scripts\Common\GameObject\Sozai.cpp" />
+    <ClCompile Include="scripts\Common\GameObject\SozaiManager.cpp" />
+    <ClCompile Include="scripts\Common\Image.cpp" />
+    <ClCompile Include="scripts\Common\Sound.cpp" />
+    <ClCompile Include="scripts\main.cpp" />
+    <ClCompile Include="scripts\Scene\Alice\SceneAlice.cpp" />
+    <ClCompile Include="scripts\Scene\Dontaco\SceneDontaco.cpp" />
+    <ClCompile Include="scripts\Scene\Kajioh\SceneKajioh.cpp" />
+    <ClCompile Include="scripts\Scene\LightPlane\SceneLightPlane.cpp" />
+    <ClCompile Include="scripts\Scene\LoveSong\SceneLoveSong.cpp" />
+    <ClCompile Include="scripts\Scene\MainMenu\cursor.cpp" />
+    <ClCompile Include="scripts\Scene\MainMenu\gameIcon.cpp" />
+    <ClCompile Include="scripts\Scene\MainMenu\SceneMainMenu.cpp" />
+    <ClCompile Include="scripts\Scene\Opening\OpeningScene.cpp" />
+    <ClCompile Include="scripts\Scene\Option\SceneOption.cpp" />
+    <ClCompile Include="scripts\Scene\RealEdit\RealTimeSequencer.cpp" />
+    <ClCompile Include="scripts\Scene\RealEdit\SceneRealEdit.cpp" />
+    <ClCompile Include="scripts\Scene\SeikanHikou\SceneSeikanHikou.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\BackImage.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\BeatManager.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\Character.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\DamageBeat.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\DamageCharacter.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\Enemy.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\EnemyManager.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\Instrument.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\MessageWindow.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\PlayerCharacter.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\SceneSnippet.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\SnippetGameManager.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\SnippetImage.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\SnippetSound.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\StatusWindow.cpp" />
+    <ClCompile Include="scripts\Scene\Sonya\BPMManager.cpp" />
+    <ClCompile Include="scripts\Scene\Sonya\sideBlank.cpp" />
+    <ClCompile Include="scripts\Scene\Sonya\snowBall.cpp" />
+    <ClCompile Include="scripts\Scene\Sonya\VsSonya.cpp" />
+    <ClCompile Include="scripts\Scene\StarGuitar\SceneStarguitar.cpp" />
+    <ClCompile Include="scripts\Scene\StarGuitar\StarguitarDrums.cpp" />
+    <ClCompile Include="scripts\Scene\Title\TitleScene.cpp" />
+    <ClCompile Include="scripts\System\AbstractScene.cpp" />
+    <ClCompile Include="scripts\System\Define.cpp" />
+    <ClCompile Include="scripts\System\eScene.cpp" />
+    <ClCompile Include="scripts\System\FpsControl.cpp" />
+    <ClCompile Include="scripts\System\IOnSceneChangedListener.cpp" />
+    <ClCompile Include="scripts\System\Keyboard.cpp" />
+    <ClCompile Include="scripts\System\Looper.cpp" />
+    <ClCompile Include="scripts\System\MIDI.cpp" />
+    <ClCompile Include="scripts\System\Pad.cpp" />
+    <ClCompile Include="scripts\System\Parameter.cpp" />
+    <ClCompile Include="scripts\System\Singleton.cpp" />
+    <ClCompile Include="scripts\System\SystemMain.cpp" />
+    <ClCompile Include="scripts\Common\Time.cpp" />
+    <ClCompile Include="scripts\Scene\SecondRemix\SonyaManager.cpp" />
+    <ClCompile Include="scripts\Common\SozaiBase.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="scripts\Scene\SecondRemix\DontacoManager.h" />
+    <ClInclude Include="scripts\Scene\SecondRemix\DonesiaManager.h" />
+    <ClInclude Include="scripts\Scene\SecondRemix\ObjectionManager.h" />
+    <ClInclude Include="scripts\Scene\SecondRemix\SceneSecondRemix.h" />
+    <ClInclude Include="scripts\Common\MovieImageWrapper.h" />
+    <ClInclude Include="scripts\Scene\Pizza\ScenePizza.h" />
+    <ClInclude Include="scripts\System\PlayBackThreadPool.h" />
+    <ClInclude Include="scripts\Common\GameObject\Note.h" />
+    <ClInclude Include="scripts\Common\GameObject\NoteManager.h" />
+    <ClInclude Include="scripts\Common\GameObject\BackGround.h" />
+    <ClInclude Include="scripts\Common\GameObject\GameObject.h" />
+    <ClInclude Include="scripts\Common\GameObject\MusicManager.h" />
+    <ClInclude Include="scripts\Common\GameObject\PauseMenu.h" />
+    <ClInclude Include="scripts\Common\GameObject\Sozai.h" />
+    <ClInclude Include="scripts\Common\GameObject\SozaiManager.h" />
+    <ClInclude Include="scripts\Common\Image.h" />
+    <ClInclude Include="scripts\Common\Sound.h" />
+    <ClInclude Include="scripts\Scene\Alice\SceneAlice.h" />
+    <ClInclude Include="scripts\Scene\Dontaco\SceneDontaco.h" />
+    <ClInclude Include="scripts\Scene\Kajioh\SceneKajioh.h" />
+    <ClInclude Include="scripts\Scene\LightPlane\SceneLightPlane.h" />
+    <ClInclude Include="scripts\Scene\LoveSong\SceneLoveSong.h" />
+    <ClInclude Include="scripts\Scene\MainMenu\cursor.h" />
+    <ClInclude Include="scripts\Scene\MainMenu\gameIcon.h" />
+    <ClInclude Include="scripts\Scene\MainMenu\SceneMainMenu.h" />
+    <ClInclude Include="scripts\Scene\Opening\OpeningScene.h" />
+    <ClInclude Include="scripts\Scene\Option\SceneOption.h" />
+    <ClInclude Include="scripts\Scene\RealEdit\RealTimeSequencer.h" />
+    <ClInclude Include="scripts\Scene\RealEdit\SceneRealEdit.h" />
+    <ClInclude Include="scripts\Scene\SeikanHikou\SceneSeikanHikou.h" />
+    <ClInclude Include="scripts\Scene\Snippet\BackImage.h" />
+    <ClInclude Include="scripts\Scene\Snippet\BeatManager.h" />
+    <ClInclude Include="scripts\Scene\Snippet\Character.h" />
+    <ClInclude Include="scripts\Scene\Snippet\DamageBeat.h" />
+    <ClInclude Include="scripts\Scene\Snippet\DamageCharacter.h" />
+    <ClInclude Include="scripts\Scene\Snippet\Enemy.h" />
+    <ClInclude Include="scripts\Scene\Snippet\EnemyManager.h" />
+    <ClInclude Include="scripts\Scene\Snippet\Instrument.h" />
+    <ClInclude Include="scripts\Scene\Snippet\MessageWindow.h" />
+    <ClInclude Include="scripts\Scene\Snippet\PlayerCharacter.h" />
+    <ClInclude Include="scripts\Scene\Snippet\SceneSnippet.h" />
+    <ClInclude Include="scripts\Scene\Snippet\SnippetGameManager.h" />
+    <ClInclude Include="scripts\Scene\Snippet\SnippetImage.h" />
+    <ClInclude Include="scripts\Scene\Snippet\SnippetSound.h" />
+    <ClInclude Include="scripts\Scene\Snippet\StatusWindow.h" />
+    <ClInclude Include="scripts\Scene\Sonya\BPMManager.h" />
+    <ClInclude Include="scripts\Scene\Sonya\sideBlank.h" />
+    <ClInclude Include="scripts\Scene\Sonya\snowBall.h" />
+    <ClInclude Include="scripts\Scene\Sonya\VsSonya.h" />
+    <ClInclude Include="scripts\Scene\StarGuitar\SceneStarguitar.h" />
+    <ClInclude Include="scripts\Scene\StarGuitar\StarguitarDrums.h" />
+    <ClInclude Include="scripts\Scene\Title\TitleScene.h" />
+    <ClInclude Include="scripts\System\AbstractScene.h" />
+    <ClInclude Include="scripts\System\Define.h" />
+    <ClInclude Include="scripts\System\eScene.h" />
+    <ClInclude Include="scripts\System\FpsControl.h" />
+    <ClInclude Include="scripts\System\IOnSceneChangedListener.h" />
+    <ClInclude Include="scripts\System\Keyboard.h" />
+    <ClInclude Include="scripts\System\Looper.h" />
+    <ClInclude Include="scripts\System\MIDI.h" />
+    <ClInclude Include="scripts\System\Pad.h" />
+    <ClInclude Include="scripts\System\Parameter.h" />
+    <ClInclude Include="scripts\System\Singleton.h" />
+    <ClInclude Include="scripts\System\SystemMain.h" />
+    <ClInclude Include="scripts\Common\Time.h" />
+    <ClInclude Include="scripts\Scene\SecondRemix\SonyaManager.h" />
+    <ClInclude Include="scripts\Common\SozaiBase.h" />
+  </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
     <Keyword>Win32Proj</Keyword>
@@ -70,13 +209,25 @@
     <Import Project="$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props" Condition="exists('$(UserRootDir)\Microsoft.Cpp.$(Platform).user.props')" Label="LocalAppDataPlatform" />
   </ImportGroup>
   <PropertyGroup Label="UserMacros" />
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
+    <IncludePath>C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
+    <IncludePath>C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
+    <IncludePath>C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(IncludePath)</IncludePath>
+  </PropertyGroup>
+  <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
+    <IncludePath>C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;$(IncludePath)</IncludePath>
+  </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
       <WarningLevel>Level3</WarningLevel>
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Program Files\DxLib_VC3_23\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\sucre\OneDrive\デスクトップ\work\MAD\MADHeaven\scripts;C:\Program Files\DxLib_VC3_23\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -93,7 +244,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Program Files\DxLib_VC3_23\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\sucre\OneDrive\デスクトップ\work\MAD\MADHeaven\scripts;C:\Program Files\DxLib_VC3_23\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -110,13 +261,13 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Program Files\DxLib_VC3_23\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\ffmpeg-8.0.1-full_build-shared\include;C:\Users\sucre\Desktop\work\game_develop\MADWorld\scripts;C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files\DxLib_VC3_23\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\ffmpeg-8.0.1-full_build-shared\lib;C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
@@ -127,7 +278,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Program Files\DxLib_VC3_23\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Users\sucre\OneDrive\デスクトップ\work\MAD\MADHeaven\scripts;C:\Program Files\DxLib_VC3_23\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
     </ClCompile>
     <Link>
@@ -138,63 +289,6 @@
       <AdditionalLibraryDirectories>C:\Program Files\DxLib_VC3_23\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
     </Link>
   </ItemDefinitionGroup>
-  <ItemGroup>
-    <ClCompile Include="AbstractScene.cpp" />
-    <ClCompile Include="BackGround.cpp" />
-    <ClCompile Include="cursor.cpp" />
-    <ClCompile Include="Define.cpp" />
-    <ClCompile Include="eScene.cpp" />
-    <ClCompile Include="FpsControl.cpp" />
-    <ClCompile Include="GameObject.cpp" />
-    <ClCompile Include="Image.cpp" />
-    <ClCompile Include="IOnSceneChangedListener.cpp" />
-    <ClCompile Include="Keyboard.cpp" />
-    <ClCompile Include="Looper.cpp" />
-    <ClCompile Include="main.cpp" />
-    <ClCompile Include="MIDI.cpp" />
-    <ClCompile Include="OpeningScene.cpp" />
-    <ClCompile Include="Pad.cpp" />
-    <ClCompile Include="Parameter.cpp" />
-    <ClCompile Include="SceneAlice.cpp" />
-    <ClCompile Include="SceneLightPlane.cpp" />
-    <ClCompile Include="SceneLoveSong.cpp" />
-    <ClCompile Include="SceneMainMenu.cpp" />
-    <ClCompile Include="SceneOption.cpp" />
-    <ClCompile Include="Singleton.cpp" />
-    <ClCompile Include="Sound.cpp" />
-    <ClCompile Include="Sozai.cpp" />
-    <ClCompile Include="SozaiManager.cpp" />
-    <ClCompile Include="SystemMain.cpp" />
-    <ClCompile Include="TitleScene.cpp" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="AbstractScene.h" />
-    <ClInclude Include="BackGround.h" />
-    <ClInclude Include="cursor.h" />
-    <ClInclude Include="Define.h" />
-    <ClInclude Include="eScene.h" />
-    <ClInclude Include="FpsControl.h" />
-    <ClInclude Include="GameObject.h" />
-    <ClInclude Include="Image.h" />
-    <ClInclude Include="IOnSceneChangedListener.h" />
-    <ClInclude Include="Keyboard.h" />
-    <ClInclude Include="Looper.h" />
-    <ClInclude Include="MIDI.h" />
-    <ClInclude Include="OpeningScene.h" />
-    <ClInclude Include="Pad.h" />
-    <ClInclude Include="Parameter.h" />
-    <ClInclude Include="SceneAlice.h" />
-    <ClInclude Include="SceneLightPlane.h" />
-    <ClInclude Include="SceneLoveSong.h" />
-    <ClInclude Include="SceneMainMenu.h" />
-    <ClInclude Include="SceneOption.h" />
-    <ClInclude Include="Singleton.h" />
-    <ClInclude Include="Sound.h" />
-    <ClInclude Include="Sozai.h" />
-    <ClInclude Include="SozaiManager.h" />
-    <ClInclude Include="SystemMain.h" />
-    <ClInclude Include="TitleScene.h" />
-  </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
   </ImportGroup>

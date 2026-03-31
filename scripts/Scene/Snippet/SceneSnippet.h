@@ -1,0 +1,48 @@
+#pragma once
+
+#include <memory>
+#include "System/AbstractScene.h"
+#include "StatusWindow.h"
+#include "BackImage.h"
+#include "Enemy.h"
+#include "BeatManager.h"
+#include "MessageWindow.h"
+#include "EnemyManager.h"
+#include "SnippetGameManager.h"
+#include "SnippetSound.h"
+#include "SnippetImage.h"
+
+class SceneSnippet : public AbstractScene
+{
+public:
+	const static char* ParameterTagStage;
+	const static char* ParameterTagLevel;
+
+	SceneSnippet(IOnSceneChangedListener* impl, const Parameter& parameter);
+	virtual ~SceneSnippet() = default;
+
+	void update() override;
+	void draw() const override;
+
+private:
+	int musicNumber;
+	void initWindow();
+	void setEnemyInstancetToCharacter();
+	void initCharacter();
+	PlayerCharacter* playerA;
+	PlayerCharacter* playerB;
+	PlayerCharacter* playerC;
+	PlayerCharacter* playerD;
+	EnemyManager* enemyManager;
+	std::shared_ptr<StatusWindow> _statusWindowA;
+	std::shared_ptr<StatusWindow> _statusWindowB;
+	std::shared_ptr<StatusWindow> _statusWindowC;
+	std::shared_ptr<StatusWindow> _statusWindowD;
+	std::shared_ptr<BackImage> _backImage;
+	BeatManager* beatManager;
+	MessageWindow* messageWindow;
+	std::shared_ptr<SnippetGameManager> snippetGameManager;
+	std::shared_ptr<SnippetSound> snippetSound;
+	std::shared_ptr<SnippetImage> snippetImage;
+};
+

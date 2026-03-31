@@ -1,0 +1,20 @@
+﻿#pragma once
+
+enum eScene {
+	Opening,
+	Title,
+	Option,
+	MainMenu,
+	LoveSong,
+	Alice,
+	LightPlane,
+	Dontaco,
+	Sonya,
+	Starguitar,
+	Kajioh,
+	Seikan,
+	Snippet,
+	RealEdit,
+	Pizza,
+	SecondRemix
+};
