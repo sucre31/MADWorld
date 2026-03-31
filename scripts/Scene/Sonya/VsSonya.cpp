@@ -37,7 +37,7 @@ VsSonya::VsSonya(IOnSceneChangedListener* impl, const Parameter& parameter) : Ab
 	sozaiManager.addSprite(1, "Assets/Sprites/images/sonya/sonya/sonya0.png");
 	sozaiManager.setReverseFlag(1, false);
 	//sozaiManager.setSozaiKey(1, ePad::A, 0);
-	sozaiManager.setSozaiEx(1, 0.75);
+	sozaiManager.setSozaiEx(1, 1);
 
 	// 背景の設定
 	sideBarR.setPosX(1120);

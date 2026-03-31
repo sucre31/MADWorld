@@ -43,7 +43,7 @@ public:
 	int getTriggerMidiNote(int num) { return triggerMidiNote[num]; };
 	int getTriggerMidiChannel(int index) const { return triggerMidiChannel[index]; }
 
-	int getValidPadNum() { return triggerPad.size(); }
+	int getValidPadNum() { return (int)triggerPad.size(); }
 	int getValidMidiNum() { return validMidiNum; }
 
 	int getPadSoundIndex(int num) { return padSoundIndex[num]; }

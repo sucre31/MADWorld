@@ -35,7 +35,7 @@ public:
 	void drawSozai(int) const;
 	void setGroupId(int sozaiNum, int groupId);
 	int getSoundCount(int sozaiNum) const;
-	int getSozaiCount() const { return sozai.size(); }
+	int getSozaiCount() const { return (int)sozai.size(); }
 private:
 	int validSozaiNum;
 	std::vector<Sozai*> sozai; // shared_ptrにする

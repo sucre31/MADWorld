@@ -1,27 +1,25 @@
-﻿#include "SceneSecondRemix.h"
+﻿#include <algorithm>
+#include "SceneSecondRemix.h"
 
 SceneSecondRemix::SceneSecondRemix(IOnSceneChangedListener* impl, const Parameter& parameter)
 	: AbstractScene(impl, parameter),
 	noteManager(132, 4, &sozaiManager) 
 {
-	int back = sozaiManager.makeSozai("", "Assets/Sprites/images/secondRemix/back.png", (Define::WIN_W / 2.0), (Define::WIN_H / 2.0));
+	int back = sozaiManager.makeSozai("", "Assets/Sprites/images/secondRemix/back.png", (int)(Define::WIN_W / 2.0), (int)(Define::WIN_H / 2.0));
 	sozaiManager.setSozaiLayer(back, 0);
 
-	objectionManager.setSozaiManager(&sozaiManager);
-	objectionManager.initSozai();
-	objectionManager.setActive(true);
+	sozaies = {
+		&objectionManager,
+		&donesiaManager,
+		&dontacoManager,
+		&sonyaManager
+	};
 
-	donesiaManager.setSozaiManager(&sozaiManager);
-	donesiaManager.initSozai();
-	donesiaManager.setActive(false);
-
-	dontacoManager.setSozaiManager(&sozaiManager);
-	dontacoManager.initSozai();
-	dontacoManager.setActive(false);
-
-	sonyaManager.setSozaiManager(&sozaiManager);
-	sonyaManager.initSozai();
-	sonyaManager.setActive(false);
+	for (auto* sozai: sozaies) {
+		sozai->setSozaiManager(&sozaiManager);
+		sozai->initSozai();
+		sozai->setActive(false);
+	}
 
 	musicManager.LoadMusic("tutorial", "Assets/Sounds/dontaco/BGM/tutorialBeat.wav");
 	musicManager.LoadMusic("backBeat", "Assets/Sounds/dontaco/BGM/backBeat.wav");
@@ -30,18 +28,15 @@ SceneSecondRemix::SceneSecondRemix(IOnSceneChangedListener* impl, const Paramete
 	bgmName = "remix2";
 	musicManager.Play(bgmName, true);
 
+	prevMangerIndex = -1;
 	activeManagerIndex = 0;
 }
 
 void SceneSecondRemix::update() {
-	int prevMangerIndex = activeManagerIndex;
-
 
 	if (Pad::getIns()->get(ePad::change) >= 1 && Pad::getIns()->get(ePad::L) == 1) {
 		activeManagerIndex--;
-		if (activeManagerIndex < 0) {
-			activeManagerIndex = 0;
-		}
+		activeManagerIndex = std::clamp(activeManagerIndex, 0, (int)sozaies.size() - 1);
 	}
 
 	if (Pad::getIns()->get(ePad::change) >= 1 && Pad::getIns()->get(ePad::A) == 1) {
@@ -55,9 +50,7 @@ void SceneSecondRemix::update() {
 
 	if (Pad::getIns()->get(ePad::change) >= 1 && Pad::getIns()->get(ePad::R) == 1) {
 		activeManagerIndex++;
-		if (activeManagerIndex >= sozaiManagerCount) {
-			activeManagerIndex = sozaiManagerCount - 1;
-		}
+		activeManagerIndex = std::clamp(activeManagerIndex, 0, (int)sozaies.size() - 1);
 	}
 
 	if (Pad::getIns()->get(ePad::start) >= 1) {
@@ -71,29 +64,20 @@ void SceneSecondRemix::update() {
 		return;
 	}
 
+
 	if (prevMangerIndex != activeManagerIndex) {
-		switch (activeManagerIndex) {
-		case 0:
-			objectionManager.setActive(true);
-			donesiaManager.setActive(false);
-			dontacoManager.setActive(false);
-			break;
-		case 1:
-			objectionManager.setActive(false);
-			donesiaManager.setActive(true);
-			dontacoManager.setActive(false);
-			break;
-		case 2:
-			objectionManager.setActive(false);
-			donesiaManager.setActive(false);
-			dontacoManager.setActive(true);
-			break;
+		if (prevMangerIndex != -1) {
+			sozaies[prevMangerIndex]->setActive(false);
 		}
+		sozaies[activeManagerIndex]->setActive(true);
+
+		prevMangerIndex = activeManagerIndex;
 	}
 
-	objectionManager.update();
-	donesiaManager.update();
-	dontacoManager.update();
+	for (SozaiBase* sozai : sozaies) {
+		sozai->update();
+	}
+
 	sozaiManager.update();
 }
 

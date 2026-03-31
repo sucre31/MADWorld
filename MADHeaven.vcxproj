@@ -19,9 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
-    <ClCompile Include="scripts\Scene\SecondRemix\DontacoManager.cpp" />
-    <ClCompile Include="scripts\Scene\SecondRemix\DonesiaManager.cpp" />
-    <ClCompile Include="scripts\Scene\SecondRemix\ObjectionManager.cpp" />
+    <ClCompile Include="scripts\Scene\SecondRemix\SozaiDontaco.cpp" />
+    <ClCompile Include="scripts\Scene\SecondRemix\SozaiDonesia.cpp" />
+    <ClCompile Include="scripts\Scene\SecondRemix\SozaiObjection.cpp" />
     <ClCompile Include="scripts\Scene\SecondRemix\SceneSecondRemix.cpp" />
     <ClCompile Include="scripts\Common\MovieImageWrapper.cpp" />
     <ClCompile Include="scripts\Scene\Pizza\ScenePizza.cpp" />
@@ -87,11 +87,12 @@
     <ClCompile Include="scripts\Common\Time.cpp" />
     <ClCompile Include="scripts\Scene\SecondRemix\SonyaManager.cpp" />
     <ClCompile Include="scripts\Common\SozaiBase.cpp" />
+    <ClCompile Include="scripts\Scene\SecondRemix\SozaiShuzo.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ClInclude Include="scripts\Scene\SecondRemix\DontacoManager.h" />
-    <ClInclude Include="scripts\Scene\SecondRemix\DonesiaManager.h" />
-    <ClInclude Include="scripts\Scene\SecondRemix\ObjectionManager.h" />
+    <ClInclude Include="scripts\Scene\SecondRemix\SozaiDontaco.h" />
+    <ClInclude Include="scripts\Scene\SecondRemix\SozaiDonesia.h" />
+    <ClInclude Include="scripts\Scene\SecondRemix\SozaiObjection.h" />
     <ClInclude Include="scripts\Scene\SecondRemix\SceneSecondRemix.h" />
     <ClInclude Include="scripts\Common\MovieImageWrapper.h" />
     <ClInclude Include="scripts\Scene\Pizza\ScenePizza.h" />
@@ -156,6 +157,7 @@
     <ClInclude Include="scripts\Common\Time.h" />
     <ClInclude Include="scripts\Scene\SecondRemix\SonyaManager.h" />
     <ClInclude Include="scripts\Common\SozaiBase.h" />
+    <ClInclude Include="scripts\Scene\SecondRemix\SozaiShuzo.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
@@ -263,6 +265,7 @@
       <ConformanceMode>true</ConformanceMode>
       <AdditionalIncludeDirectories>C:\Program Files\ffmpeg-8.0.1-full_build-shared\include;C:\Users\sucre\Desktop\work\game_develop\MADWorld\scripts;C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
+      <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>

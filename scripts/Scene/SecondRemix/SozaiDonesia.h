@@ -5,28 +5,27 @@
 #include "System/Define.h"
 #include "Common/SozaiBase.h"
 
-enum class SonyaSozai
+enum class DonesiaSozai
 {
-	Sonya,
-	Yasuna
+	Kawahara,
+	Goto
 };
 
-enum class SonyaSound
+enum class DonesiaSound
 {
-	Hey,
-	Sukiari,
-	Tto,
-	Hit
+	In,
+	Donesia
 };
 
-class SonyaManager : public SozaiBase
+class SozaiDonesia : public SozaiBase
 {
 public:
-	SonyaManager();
+	SozaiDonesia();
 	void update() override;
 	void draw() const override;
-	~SonyaManager() = default;
+	~SozaiDonesia() = default;
 	void initSozai() override;
 private:
 	void setKey() override;
 };
+

@@ -12,8 +12,8 @@ NoteManager::NoteManager(int bpm, int beatsPerBar, SozaiManager* sozai)
     : bpm(bpm), beatsPerBar(beatsPerBar) , playbackPool(3){
     timeBeginPeriod(1);
     barDurationMs = (60000 * beatsPerBar) / bpm;
-    barWidthPx = Define::WIN_W * 0.4;
-    startX = Define::WIN_W * 0.3;
+    barWidthPx = static_cast<int>(Define::WIN_W * 0.4);
+    startX = static_cast<int>(Define::WIN_W * 0.3);
 
     sozaiManager = sozai;
     BGMHandle = -1;
@@ -72,14 +72,14 @@ bool NoteManager::loadFromFile(const std::string& path) {
 }
 
 bool NoteManager::update() {
-    setCurrentTimeMs(GetSoundCurrentTime(BGMHandle));
+    setCurrentTimeMs((int)GetSoundCurrentTime(BGMHandle));
     updateAutoPlay();
     return true;
 }
 
 void NoteManager::updateAutoPlay() {
     if (useAutoPlay) {
-        int currentMs = GetSoundCurrentTime(BGMHandle);
+        int currentMs = (int)GetSoundCurrentTime(BGMHandle);
 
         for (auto& note : notes) {
             if (note.hit) continue;

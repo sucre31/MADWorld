@@ -17,7 +17,7 @@ protected:
 	SozaiManager* sozaiManager = nullptr;
 	bool isActive = false;
 
-	void setLayerFront();
+	virtual void setLayerFront();
 	void setLayerBack();
 	std::unordered_map<int, int> sozaiHandles;
 	std::unordered_map<int, ePad> sozaiPads;

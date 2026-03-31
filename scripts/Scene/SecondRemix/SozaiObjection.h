@@ -3,6 +3,7 @@
 #include <string>
 #include "Common/GameObject/SozaiManager.h"
 #include "System/Define.h"
+#include "Common/SozaiBase.h"
 
 enum class ObjectionSozai
 {
@@ -29,25 +30,19 @@ enum class ObjectionSound
 };
 
 
-class ObjectionManager
+class SozaiObjection : public SozaiBase
 {
 public :
-	ObjectionManager();
-	void update();
-	void draw() const;
-	~ObjectionManager() = default;
-	void setSozaiManager(SozaiManager* sozai);
-	void initSozai();
-	void setActive(bool flag);
+	SozaiObjection();
+	void update() override;
+	void draw() const override;
+	~SozaiObjection() = default;
+	void initSozai() override;
 private:
-	void setKey();
-	void resetKey();
+	bool isNaruhodoTurn = false;
+	void setKey() override;
+	void setLayerFront() override;
 	void setNaruhodoFront();
 	void setMitsurugiFront();
-	void setLayerBack();
-	bool isActive = false; 
-	SozaiManager* sozaiManager;
-	std::unordered_map<ObjectionSozai, int> sozaiHandles;
-	std::unordered_map<ObjectionSound, ePad> sozaiPads;
 };
 

@@ -6,9 +6,9 @@
 #include "Common/GameObject/NoteManager.h"
 #include "Common/GameObject/MusicManager.h"
 #include "Common/GameObject/BackGround.h"
-#include "ObjectionManager.h"
-#include "DonesiaManager.h"
-#include "DontacoManager.h"
+#include "SozaiObjection.h"
+#include "SozaiDonesia.h"
+#include "SozaiDontaco.h"
 #include "SonyaManager.h"
 
 
@@ -20,9 +20,10 @@ public:
 	void update() override;
 	void draw() const override;
 private:
-	ObjectionManager objectionManager;
-	DonesiaManager donesiaManager;
-	DontacoManager dontacoManager;
+	std::vector<SozaiBase*> sozaies;
+	SozaiObjection objectionManager;
+	SozaiDonesia donesiaManager;
+	SozaiDontaco dontacoManager;
 	SonyaManager sonyaManager;
 	SozaiManager sozaiManager;
 	NoteManager noteManager;
@@ -30,7 +31,7 @@ private:
 	PauseMenu pauseMenu;
 
 	std::string bgmName;
-	const int sozaiManagerCount = 3; // 一時的な確認用
 	int activeManagerIndex;
+	int prevMangerIndex;
 };
 

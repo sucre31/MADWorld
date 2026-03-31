@@ -224,12 +224,11 @@ int SozaiManager::getSoundCount(int sozaiNum) const {
 
 
 bool SozaiManager::update() {
-	// グループ停止の探索をここでしているが、大量の素材を入れた時に重くなる可能性あり。マップで管理？
 	for (int i = 0; i < sozai.size(); i++) {
+		// コントローラの入力確認
 		for (int p = 0; p < (int)ePad::MAX; p++) {
-
-			if (Pad::getIns()->get((ePad)p) != 1) continue;
-			auto it = padToSozai.find((ePad)p);
+			if (Pad::getIns()->get((ePad)p) != 1) continue; // キー入力無し
+			auto it = padToSozai.find((ePad)p); // 素材番号
 			if (it == padToSozai.end()) continue;
 			for (int i : it->second) {
 				for (int j = 0; j < sozai[i]->getValidPadNum(); j++) {
@@ -247,6 +246,8 @@ bool SozaiManager::update() {
 				}
 			}
 		}
+
+		// Midiの入力確認
 		for (int j = 0; j < sozai[i]->getValidMidiNum(); j++) {
 			int note = sozai[i]->getTriggerMidiNote(j);
 			int channel = sozai[i]->getTriggerMidiChannel(j);

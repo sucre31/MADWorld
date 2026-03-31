@@ -173,8 +173,8 @@ void Sozai::draw() const
 		for (int i = 0; i < numOfPlayingSound; i++)
 		{
 			DrawRotaGraph(
-				x + transX * (numOfPlayingSound - 1 - i),
-				y + transY * (numOfPlayingSound - 1 - i),
+				(int)(x + transX * (numOfPlayingSound - 1 - i)),
+				(int)(y + transY * (numOfPlayingSound - 1 - i)),
 				exRate,
 				0,
 				graphHandles[0][0],
@@ -213,8 +213,8 @@ void Sozai::draw() const
 					frame = (int)graphHandles[drawIndex].size() - 1;
 
 				DrawRotaGraph(
-					x,
-					y,
+					static_cast<int>(x),
+					static_cast<int>(y),
 					exRate,
 					0,
 					graphHandles[drawIndex][frame],
@@ -226,8 +226,8 @@ void Sozai::draw() const
 		else if (!graphHandles.empty() && !graphHandles[0].empty())
 		{
 			DrawRotaGraph(
-				x,
-				y,
+				static_cast<int>(x),
+				static_cast<int>(y),
 				exRate,
 				0,
 				graphHandles[0][0],
@@ -263,8 +263,8 @@ void Sozai::draw() const
 					frame = (int)graphHandles[drawIndex].size() - 1;
 
 				DrawRotaGraph(
-					x,
-					y,
+					static_cast<int>(x),
+					static_cast<int>(y),
 					exRate,
 					0,
 					graphHandles[drawIndex][frame],
@@ -276,8 +276,8 @@ void Sozai::draw() const
 		else if (!graphHandles.empty() && !graphHandles[0].empty())
 		{
 			DrawRotaGraph(
-				x,
-				y,
+				static_cast<int>(x),
+				static_cast<int>(y),
 				exRate,
 				0,
 				graphHandles[0][0],

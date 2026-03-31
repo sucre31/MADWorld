@@ -246,19 +246,22 @@
     <ClCompile Include="scripts\Scene\SecondRemix\SceneSecondRemix.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\Scene\SecondRemix\ObjectionManager.cpp">
+    <ClCompile Include="scripts\Scene\SecondRemix\SozaiObjection.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\Scene\SecondRemix\DonesiaManager.cpp">
+    <ClCompile Include="scripts\Scene\SecondRemix\SozaiDonesia.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\Scene\SecondRemix\DontacoManager.cpp">
+    <ClCompile Include="scripts\Scene\SecondRemix\SozaiDontaco.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="scripts\Scene\SecondRemix\SonyaManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="scripts\Common\SozaiBase.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\SecondRemix\SozaiShuzo.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -449,19 +452,22 @@
     <ClInclude Include="scripts\Scene\SecondRemix\SceneSecondRemix.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\Scene\SecondRemix\ObjectionManager.h">
+    <ClInclude Include="scripts\Scene\SecondRemix\SozaiObjection.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\Scene\SecondRemix\DonesiaManager.h">
+    <ClInclude Include="scripts\Scene\SecondRemix\SozaiDonesia.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\Scene\SecondRemix\DontacoManager.h">
+    <ClInclude Include="scripts\Scene\SecondRemix\SozaiDontaco.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="scripts\Scene\SecondRemix\SonyaManager.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="scripts\Common\SozaiBase.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\SecondRemix\SozaiShuzo.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

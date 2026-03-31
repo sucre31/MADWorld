@@ -1,4 +1,5 @@
-﻿#include "SozaiBase.h"
+﻿#include <Dxlib.h>
+#include "SozaiBase.h"
 
 void SozaiBase::setSozaiManager(SozaiManager* manager) {
 	sozaiManager = manager;
@@ -19,14 +20,12 @@ void SozaiBase::setActive(bool flag) {
 void SozaiBase::setLayerFront() {
     for (auto& p : sozaiHandles) {
         sozaiManager->setSozaiLayer(p.second, 1);
-        sozaiManager->setReverseFlag(p.second, false);
     }
 }
 
 void SozaiBase::setLayerBack() {
     for (auto& p : sozaiHandles) {
         sozaiManager->setSozaiLayer(p.second, -1);
-        sozaiManager->setReverseFlag(p.second, false);
     }
 }
 
