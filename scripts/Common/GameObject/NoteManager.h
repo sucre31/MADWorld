@@ -45,4 +45,5 @@ private:
     int baseY = 100;
     int noteImages[8];
     int BGMHandle;      // 再生時間確認用
+    bool useAutoPlay;
 };

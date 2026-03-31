@@ -1,4 +1,5 @@
 ﻿#pragma once
+#include <unordered_map>
 #include "Common/GameObject/GameObject.h"
 #include "Common/GameObject/Sozai.h"
 #include "System/MIDI.h"
@@ -39,5 +40,7 @@ private:
 	int validSozaiNum;
 	std::vector<Sozai*> sozai; // shared_ptrにする
 	std::vector<int> SozaiLayerIndex; // 更新順を保持する
+	std::unordered_map<ePad, std::vector<int>> padToSozai;
+	std::unordered_map<int, std::vector<int>> groupMap;
 };
 

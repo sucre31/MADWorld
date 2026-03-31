@@ -9,6 +9,7 @@
 #include "ObjectionManager.h"
 #include "DonesiaManager.h"
 #include "DontacoManager.h"
+#include "SonyaManager.h"
 
 
 class SceneSecondRemix : public AbstractScene
@@ -22,11 +23,13 @@ private:
 	ObjectionManager objectionManager;
 	DonesiaManager donesiaManager;
 	DontacoManager dontacoManager;
+	SonyaManager sonyaManager;
 	SozaiManager sozaiManager;
 	NoteManager noteManager;
 	MusicManager musicManager;
 	PauseMenu pauseMenu;
 
+	std::string bgmName;
 	const int sozaiManagerCount = 3; // 一時的な確認用
 	int activeManagerIndex;
 };

@@ -18,15 +18,19 @@ NoteManager::NoteManager(int bpm, int beatsPerBar, SozaiManager* sozai)
     sozaiManager = sozai;
     BGMHandle = -1;
 
+    // オートはデフォルトオフ
+    useAutoPlay = true;
+
     // ノート画像読み込み
-    noteImages[0] = Image::getIns()->loadSamples("Assets/Sprites/images/Common/notes/down.png");
-    noteImages[1] = Image::getIns()->loadSamples("Assets/Sprites/images/Common/notes/left.png");
-    noteImages[2] = Image::getIns()->loadSamples("Assets/Sprites/images/Common/notes/up.png");
-    noteImages[3] = Image::getIns()->loadSamples("Assets/Sprites/images/Common/notes/right.png");
-    noteImages[4] = Image::getIns()->loadSamples("Assets/Sprites/images/Common/notes/buttonY.png");
-    noteImages[5] = Image::getIns()->loadSamples("Assets/Sprites/images/Common/notes/buttonB.png");
-    noteImages[6] = Image::getIns()->loadSamples("Assets/Sprites/images/Common/notes/buttonA.png");
-    noteImages[7] = Image::getIns()->loadSamples("Assets/Sprites/images/Common/notes/buttonX.png");
+    std::string notePath = "Assets/Sprites/images/Common/notesGem";
+    noteImages[0] = Image::getIns()->loadSamples((notePath + "/down.png").c_str());
+    noteImages[1] = Image::getIns()->loadSamples((notePath + "/left.png").c_str());
+    noteImages[2] = Image::getIns()->loadSamples((notePath + "/up.png").c_str());
+    noteImages[3] = Image::getIns()->loadSamples((notePath + "/right.png").c_str());
+    noteImages[4] = Image::getIns()->loadSamples((notePath + "/buttonY.png").c_str());
+    noteImages[5] = Image::getIns()->loadSamples((notePath + "/buttonB.png").c_str());
+    noteImages[6] = Image::getIns()->loadSamples((notePath + "/buttonA.png").c_str());
+    noteImages[7] = Image::getIns()->loadSamples((notePath + "/buttonX.png").c_str());
 }
 
 bool NoteManager::loadFromFile(const std::string& path) {
@@ -74,17 +78,19 @@ bool NoteManager::update() {
 }
 
 void NoteManager::updateAutoPlay() {
-    int currentMs = GetSoundCurrentTime(BGMHandle);
+    if (useAutoPlay) {
+        int currentMs = GetSoundCurrentTime(BGMHandle);
 
-    for (auto& note : notes) {
-        if (note.hit) continue;
+        for (auto& note : notes) {
+            if (note.hit) continue;
 
-        int noteTime = note.getTimeMs(bpm, beatsPerBar);
+            int noteTime = note.getTimeMs(bpm, beatsPerBar);
 
-        // ノーツ時刻を過ぎたら即再生
-        if (currentMs >= noteTime) {
-            note.hit = true;
-            sozaiManager->playSozai(note.inputId, 0);
+            // ノーツ時刻を過ぎたら即再生
+            if (currentMs >= noteTime) {
+                note.hit = true;
+                sozaiManager->playSozai(note.inputId, 0);
+            }
         }
     }
 }
@@ -110,7 +116,16 @@ void NoteManager::draw() const {
 
         if (noteY < -64 || noteY > Define::WIN_H * 0.25) continue;    // 画面外は描画しない
 
-        DrawRotaGraph(noteX, noteY, 0.5f, 0.0f, noteImages[note.inputId % 8], TRUE);
+
+        // 星間飛行用の一時的な変換
+        static const int remap[8] = { 0, 5, 1, 4, 2, 7, 3, 6 };
+
+        // 変換してから使う
+        int mappedId = remap[note.inputId % 8];
+
+        DrawRotaGraph(noteX, noteY, 0.5f, 0.0f, noteImages[mappedId], TRUE);
+
+        //DrawRotaGraph(noteX, noteY, 0.5f, 0.0f, noteImages[note.inputId % 8], TRUE);
     }
 
     // マーカー描画

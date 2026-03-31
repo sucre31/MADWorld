@@ -20,11 +20,13 @@ enum class DontacoSound
 	Tacos2,
 	Do,
 	Ta,
-	Drum1,
-	Drum2,
-	Drum3,
-	Drum4,
-	Drum5
+	DrumDon,
+	DrumTacos,
+	DrumTara,
+	DrumDon2,
+	DrumTacos2,
+	DrumDo,
+	DrumTa
 };
 
 class DontacoManager
@@ -43,6 +45,7 @@ private:
 	void setKey();
 	void resetKey();
 	bool isActive;
+	bool useDrum;
 	SozaiManager* sozaiManager;
 	std::unordered_map<DontacoSozai, int> sozaiHandles;
 	std::unordered_map<DontacoSound, ePad> sozaiPads;

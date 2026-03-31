@@ -4,7 +4,7 @@
 #include "System/Singleton.h"
 
 enum ePad {
-	down, left, right, up, A, B, Y, X, L, R, start, change
+	down, left, right, up, A, B, Y, X, L, R, start, change, MAX
 };
 
 class Pad final : public Singleton<Pad> {

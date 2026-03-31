@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 
 #include <stack>
 #include <memory>
@@ -17,7 +17,8 @@ public:
 
 private:
     int screenRate;
-    std::stack<std::shared_ptr<AbstractScene>> _sceneStack; //ƒV[ƒ“‚ÌƒXƒ^ƒbƒN
+    bool useDebug;
+    std::stack<std::shared_ptr<AbstractScene>> _sceneStack; //ã‚·ãƒ¼ãƒ³ã®ã‚¹ã‚¿ãƒƒã‚¯
     //std::shared_ptr<FpsControl> _fps;
     FpsControl* _fps;
 };

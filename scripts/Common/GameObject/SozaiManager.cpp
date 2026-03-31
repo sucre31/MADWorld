@@ -95,6 +95,8 @@ void SozaiManager::stopSozai(int sozaiNum) {
 void SozaiManager::setSozaiKey(int sozaiNum, int padNum, int soundIndex) {
 	if (sozaiNum < sozai.size()) {
 		sozai[sozaiNum]->setTriggerPad(padNum, soundIndex);
+
+		padToSozai[(ePad)padNum].push_back(sozaiNum);
 	}
 }
 
@@ -224,18 +226,25 @@ int SozaiManager::getSoundCount(int sozaiNum) const {
 bool SozaiManager::update() {
 	// グループ停止の探索をここでしているが、大量の素材を入れた時に重くなる可能性あり。マップで管理？
 	for (int i = 0; i < sozai.size(); i++) {
-		for (int j = 0; j < sozai[i]->getValidPadNum(); j++) {
-			if (Pad::getIns()->get(ePad(sozai[i]->getTriggerPad(j))) == 1) {
-				int groupId = sozai[i]->getGroupId();
-				if (groupId != -1) {
-					for (int k = 0; k < sozai.size(); k++) {
-						if (k != i && sozai[k]->getGroupId() == groupId) {
-							sozai[k]->stopSound();
+		for (int p = 0; p < (int)ePad::MAX; p++) {
+
+			if (Pad::getIns()->get((ePad)p) != 1) continue;
+			auto it = padToSozai.find((ePad)p);
+			if (it == padToSozai.end()) continue;
+			for (int i : it->second) {
+				for (int j = 0; j < sozai[i]->getValidPadNum(); j++) {
+					if (sozai[i]->getTriggerPad(j) != p) continue;
+					int groupId = sozai[i]->getGroupId();
+					if (groupId != -1) {
+						for (int k = 0; k < sozai.size(); k++) {
+							if (k != i && sozai[k]->getGroupId() == groupId) {
+								sozai[k]->stopSound();
+							}
 						}
 					}
+					sozai[i]->playSample(j, false);
+					changeTopLayer(i);
 				}
-				sozai[i]->playSample(j, false);
-				changeTopLayer(i);
 			}
 		}
 		for (int j = 0; j < sozai[i]->getValidMidiNum(); j++) {

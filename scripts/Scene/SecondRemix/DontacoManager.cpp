@@ -1,6 +1,6 @@
 ﻿#include "DontacoManager.h"
 
-DontacoManager::DontacoManager() :sozaiManager(nullptr) {
+DontacoManager::DontacoManager() :sozaiManager(nullptr), useDrum(false), isActive(false){
 	sozaiPads[DontacoSound::Don] = ePad::A;
 	sozaiPads[DontacoSound::Tacos] = ePad::left;
 	sozaiPads[DontacoSound::Tara] = ePad::X;
@@ -8,6 +8,13 @@ DontacoManager::DontacoManager() :sozaiManager(nullptr) {
 	sozaiPads[DontacoSound::Tacos2] = ePad::down;
 	sozaiPads[DontacoSound::Ta] = ePad::Y;
 	sozaiPads[DontacoSound::Do] = ePad::right;
+	sozaiPads[DontacoSound::DrumDon] = ePad::A;
+	sozaiPads[DontacoSound::DrumTacos] = ePad::left;
+	sozaiPads[DontacoSound::DrumTara] = ePad::X;
+	sozaiPads[DontacoSound::DrumDon2] = ePad::B;
+	sozaiPads[DontacoSound::DrumTacos2] = ePad::down;
+	sozaiPads[DontacoSound::DrumTa] = ePad::Y;
+	sozaiPads[DontacoSound::DrumDo] = ePad::right;
 }
 
 void DontacoManager::setSozaiManager(SozaiManager* manager) {
@@ -16,7 +23,22 @@ void DontacoManager::setSozaiManager(SozaiManager* manager) {
 
 
 void DontacoManager::update() {
-
+	if (isActive) {
+		if (Pad::getIns()->get(ePad::L) >= 1) {
+			if (useDrum != true) {
+				useDrum = true;
+				resetKey();
+				setKey();
+			}
+		}
+		else {
+			if (useDrum != false) {
+				useDrum = false;
+				resetKey();
+				setKey();
+			}
+		}
+	}
 }
 
 void DontacoManager::draw() const {
@@ -40,9 +62,25 @@ void DontacoManager::initSozai() {
 	sozaiManager->addSprite(sozaiHandles[DontacoSozai::Dontacos], 5, "Assets/Sprites/movie/Dontaco/tacos.mp4");
 	sozaiManager->addSprite(sozaiHandles[DontacoSozai::Dontacos], 6, "Assets/Sprites/movie/Dontaco/don.mp4");
 	sozaiManager->addSprite(sozaiHandles[DontacoSozai::Dontacos], 7, "Assets/Sprites/movie/Dontaco/ta.mp4");
-	//sozaiHandles[DontacoSozai::Drum] =
-	//	sozaiManager->makeSozai("", "Assets/Sprites/movie/kunimeiWakekko/donesia.mp4", (Define::WIN_W / 2.0), (Define::WIN_H / 2.0)));
+
+	sozaiHandles[DontacoSozai::Drum] =
+		sozaiManager->makeSozai("", "Assets/Sprites/images/dontaco/dontacos.png", (Define::WIN_W / 2.0), (Define::WIN_H / 2.0));
+	sozaiManager->addSound(sozaiHandles[DontacoSozai::Drum], "Assets/Sounds/dontaco/Remix2/drumDon.wav");
+	sozaiManager->addSound(sozaiHandles[DontacoSozai::Drum], "Assets/Sounds/dontaco/Remix2/drumTacos.wav");
+	sozaiManager->addSound(sozaiHandles[DontacoSozai::Drum], "Assets/Sounds/dontaco/Remix2/drumTara.wav");
+	sozaiManager->addSound(sozaiHandles[DontacoSozai::Drum], "Assets/Sounds/dontaco/Remix2/drumDon2.wav");
+	sozaiManager->addSound(sozaiHandles[DontacoSozai::Drum], "Assets/Sounds/dontaco/Remix2/drumTacos2.wav");
+	sozaiManager->addSound(sozaiHandles[DontacoSozai::Drum], "Assets/Sounds/dontaco/Remix2/drumDo.wav");
+	sozaiManager->addSound(sozaiHandles[DontacoSozai::Drum], "Assets/Sounds/dontaco/Remix2/drumTa.wav");
+	sozaiManager->addSprite(sozaiHandles[DontacoSozai::Drum], 1, "Assets/Sprites/movie/Dontaco/don.mp4");
+	sozaiManager->addSprite(sozaiHandles[DontacoSozai::Drum], 2, "Assets/Sprites/movie/Dontaco/tacos.mp4");
+	sozaiManager->addSprite(sozaiHandles[DontacoSozai::Drum], 3, "Assets/Sprites/movie/Dontaco/ta.mp4");
+	sozaiManager->addSprite(sozaiHandles[DontacoSozai::Drum], 4, "Assets/Sprites/movie/Dontaco/don.mp4");
+	sozaiManager->addSprite(sozaiHandles[DontacoSozai::Drum], 5, "Assets/Sprites/movie/Dontaco/tacos.mp4");
+	sozaiManager->addSprite(sozaiHandles[DontacoSozai::Drum], 6, "Assets/Sprites/movie/Dontaco/don.mp4");
+	sozaiManager->addSprite(sozaiHandles[DontacoSozai::Drum], 7, "Assets/Sprites/movie/Dontaco/ta.mp4");
 	sozaiManager->setSozaiEx(sozaiHandles[DontacoSozai::Dontacos], 2.0);
+	sozaiManager->setSozaiEx(sozaiHandles[DontacoSozai::Drum], 2.0);
 	setActive(false);
 }
 
@@ -80,18 +118,32 @@ void DontacoManager::setActive(bool flag) {
 }
 
 void DontacoManager::setKey() {
-	sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Dontacos], sozaiPads[DontacoSound::Don], 1);
-	sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Dontacos], sozaiPads[DontacoSound::Tacos], 2);
-	sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Dontacos], sozaiPads[DontacoSound::Tara], 3);
-	sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Dontacos], sozaiPads[DontacoSound::Don2], 4);
-	sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Dontacos], sozaiPads[DontacoSound::Tacos2], 5);
-	sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Dontacos], sozaiPads[DontacoSound::Do], 6);
-	sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Dontacos], sozaiPads[DontacoSound::Ta], 7);
-	sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Dontacos], ePad::up, 7);
+	if (!useDrum) {
+		sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Dontacos], sozaiPads[DontacoSound::Don], 1);
+		sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Dontacos], sozaiPads[DontacoSound::Tacos], 2);
+		sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Dontacos], sozaiPads[DontacoSound::Tara], 3);
+		sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Dontacos], sozaiPads[DontacoSound::Don2], 4);
+		sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Dontacos], sozaiPads[DontacoSound::Tacos2], 5);
+		sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Dontacos], sozaiPads[DontacoSound::Do], 6);
+		sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Dontacos], sozaiPads[DontacoSound::Ta], 7);
+		sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Dontacos], ePad::up, 7);
+	}
+	else {
+		sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Drum], sozaiPads[DontacoSound::DrumDon], 1);
+		sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Drum], sozaiPads[DontacoSound::DrumTacos], 2);
+		sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Drum], sozaiPads[DontacoSound::DrumTara], 3);
+		sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Drum], sozaiPads[DontacoSound::DrumDon2], 4);
+		sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Drum], sozaiPads[DontacoSound::DrumTacos2], 5);
+		sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Drum], sozaiPads[DontacoSound::DrumDo], 6);
+		sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Drum], sozaiPads[DontacoSound::DrumTa], 7);
+		sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Drum], ePad::up, 7);
+	}
 	//sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Drum], sozaiPads[DontacoSound::Drum1], 0);
 }
 
+
+
 void DontacoManager::resetKey() {
 	sozaiManager->resetSozaiKey(sozaiHandles[DontacoSozai::Dontacos]);
-	//sozaiManager->resetSozaiKey(sozaiHandles[DontacoSozai::Drum]);
+	sozaiManager->resetSozaiKey(sozaiHandles[DontacoSozai::Drum]);
 }

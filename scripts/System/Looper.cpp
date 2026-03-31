@@ -30,12 +30,14 @@ Looper::Looper()
     Parameter parameter;
     _sceneStack.push(make_shared<OpeningScene>(this, parameter)); //タイトル画面シーンを作ってpush
     _fps = new FpsControl();
+    useDebug = true;
 }
 /*!
 @brief スタックのトップのシーンの処理をする
 */
 bool Looper::loop() const
 {
+    int start = GetNowCount();
     //SetDrawScreen(Image::getIns()->getScreenHandle());
     ClearDrawScreen();
 
@@ -51,6 +53,14 @@ bool Looper::loop() const
 
     //最後に画面の倍率に合わせて描画
     SetDrawScreen(DX_SCREEN_BACK);
+
+    // デバッグ用表示
+    if (useDebug) {
+        int end = GetNowCount();
+        if (end - start > 5) {
+            printfDx("heavy frame: %d ms\n", end - start);
+        }
+    }
     return true;
 }
 

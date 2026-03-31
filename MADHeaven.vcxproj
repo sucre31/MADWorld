@@ -85,6 +85,8 @@
     <ClCompile Include="scripts\System\Singleton.cpp" />
     <ClCompile Include="scripts\System\SystemMain.cpp" />
     <ClCompile Include="scripts\Common\Time.cpp" />
+    <ClCompile Include="scripts\Scene\SecondRemix\SonyaManager.cpp" />
+    <ClCompile Include="scripts\Common\SozaiBase.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scripts\Scene\SecondRemix\DontacoManager.h" />
@@ -152,6 +154,8 @@
     <ClInclude Include="scripts\System\Singleton.h" />
     <ClInclude Include="scripts\System\SystemMain.h" />
     <ClInclude Include="scripts\Common\Time.h" />
+    <ClInclude Include="scripts\Scene\SecondRemix\SonyaManager.h" />
+    <ClInclude Include="scripts\Common\SozaiBase.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
