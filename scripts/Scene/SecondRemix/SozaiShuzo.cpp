@@ -4,10 +4,29 @@
 SozaiShuzo::SozaiShuzo() {
 	sozaiPads[(int)ShuzoSound::Shizukada] = ePad::A;
 	initializeFont();
+	timer = GetNowCount();
 }
 
 void SozaiShuzo::update() {
 	if (isActive) {
+		http.update();
+
+		if (GetNowCount() - timer > 500) { // 0.5秒ごと
+			timer = GetNowCount();
+
+			http.getAsync("https://madheaven-bd5b7-default-rtdb.asia-southeast1.firebasedatabase.app/votes.json", [this](std::string res) {
+				if (!res.empty()) {
+					int vote = std::stoi(res);
+
+					if (vote >= 40 && prevVote < 40) {
+						printfDx("40超え\n");
+					}
+
+					prevVote = vote;
+				}
+				});
+		}
+
 		if (Pad::getIns()->get(sozaiPads[(int)ShuzoSound::Shizukada]) == 1) {
 			shoutCount++;
 		}
@@ -36,16 +55,6 @@ void SozaiShuzo::initSozai() {
 		sozaiManager->setReverseFlag(handle, false);
 		sozaiManager->setSozaiEx(handle, 2.0);
 	}
-}
-
-int SozaiShuzo::getVoteCount() {
-	std::string res = http.get("http://localhost:3000/count");
-
-	if (!res.empty()) {
-		int voteCount = std::stoi(res);
-	}
-
-	return 0;
 }
 
 void SozaiShuzo::setKey() {

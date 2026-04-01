@@ -1,17 +1,37 @@
 ﻿#pragma once
 #include <string>
-#include <curl/curl.h>
+#include <thread>
+#include <queue>
+#include <mutex>
+#include <functional>
+#include <condition_variable>
 
-class HttpClient
-{
+class HttpClient {
 public:
     HttpClient();
     ~HttpClient();
-    std::string get(const std::string& url);
-    std::string post(const std::string& url, const std::string& body);
+
+    void getAsync(const std::string& url, std::function<void(std::string)> callback);
+
+    void update(); // メインスレッドで呼ぶ
 
 private:
     static size_t writeCallback(void* contents, size_t size, size_t nmemb, void* userp);
 
-    std::string request(const std::string& url, const std::string& method, const std::string& body);
+    struct Request {
+        std::string url;
+        std::function<void(std::string)> callback;
+    };
+
+    std::queue<Request> requestQueue;
+    std::queue<std::pair<std::function<void(std::string)>, std::string>> resultQueue;
+
+    std::mutex mutex;
+    std::condition_variable cv;
+
+    std::thread worker;
+    bool running = true;
+
+    void threadFunc();
+    std::string request(const std::string& url);
 };

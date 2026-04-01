@@ -25,9 +25,11 @@ private:
 	HttpClient http;
 	void setKey() override;
 	void initializeFont();
-	int getVoteCount();
 	int fontHandle;
 	const int shoutMax = 3;
 	int shoutCount = 0;
+
+	int timer;
+	int prevVote = 0;
 };
 
