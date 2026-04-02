@@ -56,8 +56,8 @@ void Pad::merge() {
     _pad[_idArray[ePad::R]] = max(_pad[_idArray[ePad::R]], Keyboard::getIns()->getPressingCount(KEY_INPUT_S));
     _pad[_idArray[ePad::start]] = max(_pad[_idArray[ePad::start]], Keyboard::getIns()->getPressingCount(KEY_INPUT_RETURN));
     _pad[_idArray[ePad::change]] = max(_pad[_idArray[ePad::change]], Keyboard::getIns()->getPressingCount(KEY_INPUT_BACK));
-    _pad[_idArray[ePad::change]] = max(_pad[_idArray[ePad::ZL]], Keyboard::getIns()->getPressingCount(KEY_INPUT_Q));
-    _pad[_idArray[ePad::change]] = max(_pad[_idArray[ePad::ZR]], Keyboard::getIns()->getPressingCount(KEY_INPUT_W));
+    _pad[_idArray[ePad::ZL]] = max(_pad[_idArray[ePad::ZL]], Keyboard::getIns()->getPressingCount(KEY_INPUT_Q));
+    _pad[_idArray[ePad::ZR]] = max(_pad[_idArray[ePad::ZR]], Keyboard::getIns()->getPressingCount(KEY_INPUT_W));
 }
 
 /*!

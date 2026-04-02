@@ -1,7 +1,9 @@
 ﻿#pragma once
 #include "Common/SozaiBase.h";
-#include "Common/Online/HttpClient.h"
+//#include "Common/Online/HttpClient.h"
+#include "Common/Online/WSClient.h"
 #include "System/Define.h";
+
 
 enum class ShuzoSozai
 {
@@ -22,7 +24,7 @@ public:
 	~SozaiShuzo() = default;
 	void initSozai() override;
 private:
-	HttpClient http;
+	WSClient ws;
 	void setKey() override;
 	void initializeFont();
 	int fontHandle;

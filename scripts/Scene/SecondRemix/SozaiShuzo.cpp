@@ -5,27 +5,25 @@ SozaiShuzo::SozaiShuzo() {
 	sozaiPads[(int)ShuzoSound::Shizukada] = ePad::A;
 	initializeFont();
 	timer = GetNowCount();
+
+	std::thread([this]() {
+		ws.connect(L"madheavenwebsocket.onrender.com", L"/");
+		}).detach();
 }
 
 void SozaiShuzo::update() {
 	if (isActive) {
-		http.update();
+		if (Pad::getIns()->get(ePad::X) == 1) {
+			std::string msg;
+			while (ws.pollMessage(msg)) {
+				printfDx("受信: %s\n", msg.c_str());
+			}
 
-		if (GetNowCount() - timer > 500) { // 0.5秒ごと
-			timer = GetNowCount();
-
-			http.getAsync("https://madheaven-bd5b7-default-rtdb.asia-southeast1.firebasedatabase.app/votes.json", [this](std::string res) {
-				if (!res.empty()) {
-					int vote = std::stoi(res);
-
-					if (vote >= 40 && prevVote < 40) {
-						printfDx("40超え\n");
-					}
-
-					prevVote = vote;
-				}
-				});
+			if (ws.isConnected()) {
+				ws.send("1");
+			}
 		}
+
 
 		if (Pad::getIns()->get(sozaiPads[(int)ShuzoSound::Shizukada]) == 1) {
 			shoutCount++;
@@ -46,8 +44,9 @@ void SozaiShuzo::initializeFont() {
 
 void SozaiShuzo::initSozai() {
 	sozaiHandles[(int)ShuzoSozai::Shuzo] =
-		sozaiManager->makeSozai("", "Assets/Sprites/movie/shuzo/shizukada.mp4", (Define::WIN_W / 2.0), (Define::WIN_H / 2.0));
+		sozaiManager->makeSozai("", "Assets/Sprites/images/shuzo/shuzoIdle.png", (Define::WIN_W / 2.0), (Define::WIN_H / 2.0));
 	sozaiManager->addSound(sozaiHandles[(int)ShuzoSozai::Shuzo], "Assets/Sounds/shuzo/shizukada.wav");
+	sozaiManager->addSprite(sozaiHandles[(int)ShuzoSozai::Shuzo], 1, "Assets/Sprites/movie/shuzo/shizukada.mp4");
 
 	for (auto& pair : sozaiHandles)
 	{
