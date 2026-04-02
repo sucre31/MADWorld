@@ -6,6 +6,7 @@
 #include <atomic>
 #include <mutex>
 #include <queue>
+#include <functional>
 
 #pragma comment(lib, "winhttp.lib")
 
@@ -14,10 +15,7 @@ public:
     WSClient();
     ~WSClient();
 
-    // URLで接続（wss://〜）
     bool connectUrl(const std::string& url);
-
-    // 分解版
     bool connect(const std::wstring& host, const std::wstring& path);
 
     void send(const std::string& msg);
@@ -25,8 +23,10 @@ public:
 
     bool isConnected() const;
 
-    // ★ メインスレッドで呼ぶ
-    bool pollMessage(std::string& out);
+    bool pollMessage(std::string& out); // 既存のポーリングも残す
+
+    // 新規: メッセージ変化コールバック登録
+    void setOnMessageChanged(std::function<void(const std::string&)> cb);
 
 private:
     void receiveLoop();
@@ -46,7 +46,13 @@ private:
     // 送信保護
     std::mutex sendMutex;
 
-    // ★ 受信用キュー
+    // 受信メッセージ
     std::queue<std::string> messageQueue;
     std::mutex queueMutex;
+
+    // 前回値保存
+    std::string lastMessage;
+
+    // コールバック
+    std::function<void(const std::string&)> onMessageChanged;
 };

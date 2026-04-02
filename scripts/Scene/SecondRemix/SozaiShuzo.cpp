@@ -9,16 +9,16 @@ SozaiShuzo::SozaiShuzo() {
 	std::thread([this]() {
 		ws.connect(L"madheavenwebsocket.onrender.com", L"/");
 		}).detach();
+
+	ws.setOnMessageChanged([](const std::string& msg) {
+		int vote = std::stoi(msg);
+		printfDx("Vote changed! New value: %d\n", vote);
+		});
 }
 
 void SozaiShuzo::update() {
 	if (isActive) {
 		if (Pad::getIns()->get(ePad::X) == 1) {
-			std::string msg;
-			while (ws.pollMessage(msg)) {
-				printfDx("受信: %s\n", msg.c_str());
-			}
-
 			if (ws.isConnected()) {
 				ws.send("1");
 			}
