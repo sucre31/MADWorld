@@ -8,18 +8,39 @@ SozaiShuzo::SozaiShuzo() {
 
 	std::thread([this]() {
 		ws.connect(L"madheavenwebsocket.onrender.com", L"/");
+		wsConnection = true;
 		}).detach();
+}
 
-	ws.setOnMessageChanged([](const std::string& msg) {
-		int vote = std::stoi(msg);
-		printfDx("Vote changed! New value: %d\n", vote);
-		});
+void SozaiShuzo::shoutPlay() {
+	sozaiManager->playSozai(sozaiHandles[(int)ShuzoSozai::Shuzo], 1);
+	shoutCount++;
 }
 
 void SozaiShuzo::update() {
+	// webSocket接続ログ
+	if (wsConnection) {
+		printfDx("webSocket connected.\n");
+		wsConnection = false; // 一回だけ表示
+	}
+
 	if (isActive) {
+		std::string msg;
+		while (ws.pollMessage(msg)) { // pollMessage 内で onMessageChanged が呼ばれる
+			int vote = std::stoi(msg);
+			int receiveTime = GetNowCount();
+			printfDx("Vote changed! New value: %d\n", vote);
+			printfDx("time lag: %dms\n", receiveTime - tmpLagTimer);
+			shoutPlay();
+		}
+
 		if (Pad::getIns()->get(ePad::X) == 1) {
 			if (ws.isConnected()) {
+				// 現在時刻をミリ秒で取得
+				tmpLagTimer = GetNowCount(); // 既存の関数があるならこれを使う
+				printfDx("send\n");
+
+				// vote とタイムスタンプを文字列化して送信
 				ws.send("1");
 			}
 		}
@@ -30,6 +51,8 @@ void SozaiShuzo::update() {
 		}
 	}
 }
+
+
 
 void SozaiShuzo::draw() const{
 	if (isActive) {

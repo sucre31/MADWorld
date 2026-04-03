@@ -4,6 +4,9 @@
 WSClient::WSClient() {}
 WSClient::~WSClient() { close(); }
 
+/*
+@brief コールバック設定(Dxlib関数はスレッドセーフでないのでここでは登録しない)
+*/
 void WSClient::setOnMessageChanged(std::function<void(const std::string&)> cb) {
     onMessageChanged = cb;
 }
@@ -64,29 +67,17 @@ void WSClient::receiveLoop() {
         WINHTTP_WEB_SOCKET_BUFFER_TYPE type;
 
         HRESULT hr = WinHttpWebSocketReceive(hWebSocket, buffer, sizeof(buffer), &bytesRead, &type);
-        if (FAILED(hr)) {
-            std::cout << "Receive error\n";
-            break;
-        }
+        if (FAILED(hr)) break;
 
-        if (type == WINHTTP_WEB_SOCKET_CLOSE_BUFFER_TYPE) {
-            std::cout << "Server closed\n";
-            break;
-        }
+        if (type == WINHTTP_WEB_SOCKET_CLOSE_BUFFER_TYPE) break;
 
         if (bytesRead > 0) {
             std::string msg(buffer, bytesRead);
 
-            // 既存のポーリング用キュー
+            // 受信スレッドではキューに入れるだけ
             {
                 std::lock_guard<std::mutex> lock(queueMutex);
                 messageQueue.push(msg);
-            }
-
-            // 前回値と変化があればコールバック
-            if (msg != lastMessage && onMessageChanged) {
-                lastMessage = msg;
-                onMessageChanged(msg);
             }
         }
     }
@@ -106,8 +97,15 @@ void WSClient::send(const std::string& msg) {
 bool WSClient::pollMessage(std::string& out) {
     std::lock_guard<std::mutex> lock(queueMutex);
     if (messageQueue.empty()) return false;
+
     out = messageQueue.front();
     messageQueue.pop();
+
+    // onMessageChanged はメインスレッドで呼ぶ
+    if (onMessageChanged) {
+        onMessageChanged(out);
+    }
+
     return true;
 }
 

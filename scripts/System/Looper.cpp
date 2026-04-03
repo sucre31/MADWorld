@@ -29,7 +29,7 @@ Looper::Looper()
     Parameter parameter;
     _sceneStack.push(make_shared<OpeningScene>(this, parameter)); //タイトル画面シーンを作ってpush
     _fps = new FpsControl();
-    useDebug = true;
+    useDebug = false;
 }
 /*!
 @brief スタックのトップのシーンの処理をする

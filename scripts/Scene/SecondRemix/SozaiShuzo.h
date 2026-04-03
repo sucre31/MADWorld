@@ -23,6 +23,7 @@ public:
 	void draw() const override;
 	~SozaiShuzo() = default;
 	void initSozai() override;
+	void shoutPlay();
 private:
 	WSClient ws;
 	void setKey() override;
@@ -33,5 +34,8 @@ private:
 
 	int timer;
 	int prevVote = 0;
+
+	int tmpLagTimer;
+	bool wsConnection = false;
 };
 
