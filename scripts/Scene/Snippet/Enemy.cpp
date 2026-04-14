@@ -1,4 +1,4 @@
-#include <Dxlib.h>
+﻿#include <Dxlib.h>
 #include "Enemy.h"
 #include "Common/Image.h"
 #include "System/Pad.h"
@@ -68,9 +68,8 @@ void Enemy::drawSecond() const {
 }
 
 void Enemy::getSize() {
-	if (false && snippetImage->getEnemyImage()[myID] != -1) {
-		//snippetImage->getEnemyImage()[myID]
-		//GetGraphSize(snippetImage->getEnemyImage()[myID], &enemyImageX, &enemyImageY);
+	if (snippetImage->getEnemyImage()[myID] != -1) {
+		GetGraphSize(snippetImage->getEnemyImage()[myID], &enemyImageX, &enemyImageY);
 	}
 	else {
 		enemyImageX = 1;

@@ -1,4 +1,4 @@
-#include "SceneSnippet.h"
+ï»¿#include "SceneSnippet.h"
 #include "System/AbstractScene.h"
 #include "SnippetGameManager.h"
 #include "Common/Sound.h"
@@ -13,65 +13,65 @@ const char* SceneSnippet::ParameterTagLevel = "ParameterTagLevel";
 SceneSnippet::SceneSnippet(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter) {
 
 	musicNumber = 0;
-	//// ƒTƒEƒ“ƒhAƒCƒ[ƒWAƒQ[ƒ€ƒ}ƒl[ƒWƒƒ[‚ÌƒCƒ“ƒXƒ^ƒ“ƒX‚ğ¶¬
+	//// ã‚µã‚¦ãƒ³ãƒ‰ã€ã‚¤ãƒ¡ãƒ¼ã‚¸ã€ã‚²ãƒ¼ãƒ ãƒãƒãƒ¼ã‚¸ãƒ£ãƒ¼ã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç”Ÿæˆ
 	snippetGameManager = make_shared<SnippetGameManager>();
 	snippetSound = make_shared<SnippetSound>();
 	snippetImage = make_shared<SnippetImage>();
-	// ŠeíƒIƒuƒWƒFƒNƒg‚ÌƒCƒ“ƒXƒ^ƒ“ƒXİ’è
-	//_statusWindowA = make_shared<StatusWindow>();
-	//_statusWindowA->SetGameManager(snippetGameManager);
-	//_statusWindowA->SetImage(snippetImage);
-	//_statusWindowB = make_shared<StatusWindow>();
-	//_statusWindowB->SetGameManager(snippetGameManager);
-	//_statusWindowB->SetImage(snippetImage);
-	//_statusWindowC = make_shared<StatusWindow>();
-	//_statusWindowC->SetGameManager(snippetGameManager);
-	//_statusWindowC->SetImage(snippetImage);
-	//_statusWindowD = make_shared<StatusWindow>();
-	//_statusWindowD->SetGameManager(snippetGameManager);
-	//_statusWindowD->SetImage(snippetImage);
-	//messageWindow = new MessageWindow();
-	//messageWindow->SetGameManager(snippetGameManager);
-	//playerA = new PlayerCharacter();
-	//playerA->SetGameManager(snippetGameManager);
-	//playerA->SetSound(snippetSound);
-	//playerB = new PlayerCharacter();
-	//playerB->SetGameManager(snippetGameManager);
-	//playerB->SetSound(snippetSound);
-	//playerC = new PlayerCharacter();
-	//playerC->SetGameManager(snippetGameManager);
-	//playerC->SetSound(snippetSound);
-	//playerD = new PlayerCharacter();
-	//playerD->SetGameManager(snippetGameManager);
-	//playerD->SetSound(snippetSound);
-	//enemyManager = new EnemyManager();
-	//enemyManager->SetGameManager(snippetGameManager);
-	//enemyManager->SetImage(snippetImage);
-	//enemyManager->SetSound(snippetSound);
+	// å„ç¨®ã‚ªãƒ–ã‚¸ã‚§ã‚¯ãƒˆã®ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹è¨­å®š
+	_statusWindowA = make_shared<StatusWindow>();
+	_statusWindowA->SetGameManager(snippetGameManager);
+	_statusWindowA->SetImage(snippetImage);
+	_statusWindowB = make_shared<StatusWindow>();
+	_statusWindowB->SetGameManager(snippetGameManager);
+	_statusWindowB->SetImage(snippetImage);
+	_statusWindowC = make_shared<StatusWindow>();
+	_statusWindowC->SetGameManager(snippetGameManager);
+	_statusWindowC->SetImage(snippetImage);
+	_statusWindowD = make_shared<StatusWindow>();
+	_statusWindowD->SetGameManager(snippetGameManager);
+	_statusWindowD->SetImage(snippetImage);
+	messageWindow = new MessageWindow();
+	messageWindow->SetGameManager(snippetGameManager);
+	playerA = new PlayerCharacter();
+	playerA->SetGameManager(snippetGameManager);
+	playerA->SetSound(snippetSound);
+	playerB = new PlayerCharacter();
+	playerB->SetGameManager(snippetGameManager);
+	playerB->SetSound(snippetSound);
+	playerC = new PlayerCharacter();
+	playerC->SetGameManager(snippetGameManager);
+	playerC->SetSound(snippetSound);
+	playerD = new PlayerCharacter();
+	playerD->SetGameManager(snippetGameManager);
+	playerD->SetSound(snippetSound);
+	enemyManager = new EnemyManager(snippetImage);
+	enemyManager->SetGameManager(snippetGameManager);
+	enemyManager->SetImage(snippetImage);
+	enemyManager->SetSound(snippetSound);
 	_backImage = make_shared<BackImage>();
 	_backImage->SetGameManager(snippetGameManager);
 	_backImage->SetImage(snippetImage);
-	//beatManager = new BeatManager();
-	//beatManager->SetSound(snippetSound);
-	//initCharacter();
-	//setEnemyInstancetToCharacter();
-	//initWindow();
-	//beatManager->startMusic(musicNumber);
+	beatManager = new BeatManager();
+	beatManager->SetSound(snippetSound);
+	initCharacter();
+	setEnemyInstancetToCharacter();
+	initWindow();
+	beatManager->startMusic(musicNumber);
 }
 
 void SceneSnippet::update() {
-	//beatManager->update();
-	//snippetGameManager->proceedTurn();
-	//playerA->update();
-	//playerB->update();
-	//playerC->update();
-	//playerD->update();
-	//enemyManager->update();
-	//_statusWindowA->update();
-	//_statusWindowB->update();
-	//_statusWindowC->update();
-	//_statusWindowD->update();
-	//messageWindow->update();
+	beatManager->update();
+	snippetGameManager->proceedTurn();
+	playerA->update();
+	playerB->update();
+	playerC->update();
+	playerD->update();
+	enemyManager->update();
+	_statusWindowA->update();
+	_statusWindowB->update();
+	_statusWindowC->update();
+	_statusWindowD->update();
+	messageWindow->update();
 	_backImage->update();
 	if (Pad::getIns()->get(ePad::start) == 1) {
 		Parameter parameter;
@@ -83,23 +83,23 @@ void SceneSnippet::update() {
 }
 
 void SceneSnippet::draw() const {
-	// ˆê“xƒhƒbƒgƒoƒCƒhƒbƒg‚Ì•`‰æ
+	// ä¸€åº¦ãƒ‰ãƒƒãƒˆãƒã‚¤ãƒ‰ãƒƒãƒˆã®æç”»
 	SetDrawScreen(snippetImage->getScreenHandle());
 	_backImage->draw();
-	//beatManager->draw();
-	//enemyManager->draw();
+	beatManager->draw();
+	enemyManager->draw();
 	_backImage->drawSecond();
-	//playerA->draw();
-	//playerB->draw();
-	//playerC->draw();
-	//playerD->draw();
-	//_statusWindowA->draw();
-	//_statusWindowB->draw();
-	//_statusWindowC->draw();
-	//_statusWindowD->draw();
-	//messageWindow->draw();
-	//enemyManager->drawSecond();
-	// ”{—¦‚ğİ’è‚µ‚Ä•`‰æ
+	playerA->draw();
+	playerB->draw();
+	playerC->draw();
+	playerD->draw();
+	_statusWindowA->draw();
+	_statusWindowB->draw();
+	_statusWindowC->draw();
+	_statusWindowD->draw();
+	messageWindow->draw();
+	enemyManager->drawSecond();
+	// å€ç‡ã‚’è¨­å®šã—ã¦æç”»
 	SetDrawScreen(DX_SCREEN_BACK);
 	int screenRate = 4;
 	DrawExtendGraph(0, 0, (Define::WIN_W * screenRate), (Define::WIN_H * screenRate), snippetImage->getScreenHandle(), FALSE);

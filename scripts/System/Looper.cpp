@@ -28,7 +28,6 @@ Looper::Looper()
     screenRate = Define::WIN_EX;
     Parameter parameter;
     _sceneStack.push(make_shared<OpeningScene>(this, parameter)); //タイトル画面シーンを作ってpush
-    _fps = new FpsControl();
     useDebug = false;
 }
 /*!
@@ -43,11 +42,10 @@ bool Looper::loop() const
     Pad::getIns()->update();        //ジョイパッドの更新
     MIDI::getIns()->update();
     Time::getIns()->update();
+    FpsControl::getIns()->Update();
     _sceneStack.top()->update();    //スタックのトップのシーンを更新
     _sceneStack.top()->draw();      //スタックのトップのシーンを描画
-    _fps->Update();
-    _fps->Draw();
-    _fps->Wait();
+    FpsControl::getIns()->Draw();
 
     //最後に画面の倍率に合わせて描画
     SetDrawScreen(DX_SCREEN_BACK);

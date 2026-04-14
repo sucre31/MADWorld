@@ -1,27 +1,27 @@
-#pragma once
+ï»¿#pragma once
 
-#include <math.h>
 #include "DxLib.h"
 #include "System/Singleton.h"
 
 class FpsControl final : public Singleton<FpsControl> {
-	int mStartTime;         //‘ª’èŠJn
-	int mCount;             //ƒJƒEƒ“ƒ^
-	float mFps;             //uŠÔ‚Ìfps
-	int rStartTime;         //‘ª’èŠJn
-	int rCount;             //ƒJƒEƒ“ƒ^
-	float rFps;				//ÀÛ‚Ìfps
-	const int N = 60;//•½‹Ï‚ğæ‚éƒTƒ“ƒvƒ‹”
-	const int FPS = 1500;	//İ’è‚µ‚½FPS
+private:
+    LONGLONG prevTime = 0;
+    double accumulator = 0.0;
+    static constexpr double step = 1000000.0 / 60.0; // 1ãƒ•ãƒ¬ãƒ¼ãƒ ã‚ãŸã‚Šã®ãƒã‚¤ã‚¯ãƒ­ç§’
+
+    LONGLONG fpsTimer = 0;
+    int fpsFrameCount = 0;
+    float rFps = 0.0f;
 
 public:
-	FpsControl() = default;
-	virtual ~FpsControl() = default;
-	void FpsControll_Initialize();
-	bool Update();
-	int getFrameRateNumber();
-	bool isFrameChanged();
-	void Draw();
-	void Wait();
-	int FrameCount;
+    FpsControl();
+    ~FpsControl() = default;
+
+    bool Update();
+    int getFrameRateNumber() const;
+    bool isFrameChanged() const;
+    void Draw();
+
+    int FrameCount = 0;
+    bool FrameChanged = false;
 };

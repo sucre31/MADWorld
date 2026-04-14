@@ -1,11 +1,10 @@
-#include "SnippetGameManager.h"
+﻿#include "SnippetGameManager.h"
 
 SnippetGameManager::SnippetGameManager() {
 	TurnNum = 0;
 	nextTurnFlag = false;
 	returnTurnFlag = false;
 }
-
 
 void SnippetGameManager::proceedTurn() {
 	if (nextTurnFlag) {

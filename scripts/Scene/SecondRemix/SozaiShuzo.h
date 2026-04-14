@@ -1,8 +1,8 @@
 ﻿#pragma once
-#include "Common/SozaiBase.h";
+#include "Common/SozaiBase.h"
 //#include "Common/Online/HttpClient.h"
 #include "Common/Online/WSClient.h"
-#include "System/Define.h";
+#include "System/Define.h"
 
 
 enum class ShuzoSozai

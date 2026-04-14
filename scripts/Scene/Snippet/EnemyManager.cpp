@@ -1,8 +1,9 @@
-#include <Dxlib.h>
+ï»¿#include <Dxlib.h>
 #include "EnemyManager.h"
 
-EnemyManager::EnemyManager() {
+EnemyManager::EnemyManager(std::shared_ptr<SnippetImage> imgIns) {
 	int i;
+	snippetImage = imgIns;
 	for (i = 0; i < NumberOfEnemy; i++) {
 		if (i < 5) {
 			enemy[i] = new Enemy(-120 + 60 * i, 0, snippetImage, snippetGameManager);
@@ -31,7 +32,7 @@ EnemyManager::EnemyManager() {
 bool EnemyManager::update() {
 	for (int i = 0; i < NumberOfEnemy; i++) {
 		if (!enemy[i]->getAlive()) {
-			WaitTimer(100);	//‘ã‘Ö‚·‚×‚«
+			WaitTimer(100);	//ä»£æ›¿ã™ã¹ã
 			enemy[i]->setNewEnemy((enemy[i]->getID() + 1 + GetRand(NumberOfKind - 2)) % NumberOfKind);
 		}
 		enemy[i]->update();
@@ -41,7 +42,9 @@ bool EnemyManager::update() {
 
 void EnemyManager::draw() const {
 	for (int i = 0; i < NumberOfEnemy; i++) {
-		enemy[i]->draw();
+		if (enemy[i] != nullptr) {
+			enemy[i]->draw();
+		}
 	}
 }
 

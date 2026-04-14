@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include "Common/GameObject/GameObject.h"
 #include "Enemy.h"
 #include "SnippetGameManager.h"
@@ -8,7 +8,7 @@
 class EnemyManager : GameObject
 {
 public:
-	EnemyManager();
+	EnemyManager(std::shared_ptr<SnippetImage> imgIns);
 	~EnemyManager() = default;
 	bool update() override;
 	void draw() const override;

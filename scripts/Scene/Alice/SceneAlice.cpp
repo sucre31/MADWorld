@@ -9,18 +9,18 @@
 
 SceneAlice::SceneAlice(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter)
 {
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample0.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample1.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample2.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample3.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample4.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample5.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample6.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample7.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample8.avi", 640, 360);
-	sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample9.avi", 640, 360);
-	//sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample10.avi", 0, 0);
-	//sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample11.avi", 0, 0);
+	sozaiManager.makeSozai("Assets/Sounds/Alice/AliceSample0.wav", "Assets/sprites/movie/Alice/Samples/AliceSample0.avi", 640, 360);
+	sozaiManager.makeSozai("Assets/Sounds/Alice/AliceSample1.wav", "Assets/sprites/movie/Alice/Samples/AliceSample1.avi", 640, 360);
+	sozaiManager.makeSozai("Assets/Sounds/Alice/AliceSample2.wav", "Assets/sprites/movie/Alice/Samples/AliceSample0.avi", 640, 360);
+	sozaiManager.makeSozai("Assets/Sounds/Alice/AliceSample3.wav", "Assets/sprites/movie/Alice/Samples/AliceSample3.avi", 640, 360);
+	sozaiManager.makeSozai("Assets/Sounds/Alice/AliceSample4.wav", "Assets/sprites/movie/Alice/Samples/AliceSample4.avi", 640, 360);
+	sozaiManager.makeSozai("Assets/Sounds/Alice/AliceSample5.wav", "Assets/sprites/movie/Alice/Samples/AliceSample5.avi", 640, 360);
+	sozaiManager.makeSozai("Assets/Sounds/Alice/AliceSample6.wav", "Assets/sprites/movie/Alice/Samples/AliceSample6.avi", 640, 360);
+	sozaiManager.makeSozai("Assets/Sounds/Alice/AliceSample7.wav", "Assets/sprites/movie/Alice/Samples/AliceSample7.avi", 640, 360);
+	sozaiManager.makeSozai("Assets/Sounds/Alice/AliceSample8.wav", "Assets/sprites/movie/Alice/Samples/AliceSample8.avi", 640, 360);
+	sozaiManager.makeSozai("Assets/Sounds/Alice/AliceSample9.wav", "Assets/sprites/movie/Alice/Samples/AliceSample9.avi", 640, 360);
+	sozaiManager.makeSozai("Assets/Sounds/Alice/AliceSample11.wav", "Assets/sprites/movie/Alice/Samples/AliceSample11.avi", 0, 0);
+	sozaiManager.makeSozai("Assets/Sounds/Alice/AliceSample12.wav", "Assets/sprites/movie/Alice/Samples/AliceSample12.avi", 0, 0);
 	//sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample12.avi", 0, 0);
 	//sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample13.avi", 0, 0);
 	//sozaiManager.makeSozai("", "Assets/sprites/movie/Alice/Samples/AliceSample14.avi", 0, 0);
@@ -35,6 +35,8 @@ SceneAlice::SceneAlice(IOnSceneChangedListener* impl, const Parameter& parameter
 	sozaiManager.setSozaiKey(7, ePad::right, 0);
 	sozaiManager.setSozaiKey(8, ePad::B, 0);
 	sozaiManager.setSozaiKey(9, ePad::Y, 0);
+	sozaiManager.setSozaiKey(10, ePad::ZL, 0);
+	sozaiManager.setSozaiKey(11, ePad::ZR, 0);
 	isMusicPlay = false;
 	for (int i = 0; i < 10; i++) {
 		sozaiManager.setSozaiEx(i, 0.25);

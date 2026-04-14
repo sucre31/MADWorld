@@ -12,10 +12,24 @@ SozaiObjection::SozaiObjection(){
 	sozaiPads[(int)ObjectionSound::MitsurugiHoldIt] = ePad::Y;
 	sozaiPads[(int)ObjectionSound::NaruhodoTakeThat] = ePad::up;
 	sozaiPads[(int)ObjectionSound::MitsurugiTakeThat] = ePad::X;
+
+	std::thread([this]() {
+		ws.connect(L"madheavenwebsocket.onrender.com", L"/");
+		wsConnection = true;
+		}).detach();
 }
 
 void SozaiObjection::update() {
 	if (isActive) {
+		std::string msg;
+		while (ws.pollMessage(msg)) { // pollMessage 内で onMessageChanged が呼ばれる
+			int vote = std::stoi(msg);
+			int receiveTime = GetNowCount();
+			printfDx("Vote changed! New value: %d\n", vote);
+			setNaruhodoFront();
+			sozaiManager->playSozai(sozaiHandles[(int)ObjectionSozai::Naruhodo], 2);
+		}
+
 		for (auto& pair : sozaiPads)
 		{
 			ObjectionSound sound = (ObjectionSound)pair.first;

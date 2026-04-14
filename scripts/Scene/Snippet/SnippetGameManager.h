@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <memory>
 #include "System/Singleton.h"
 #include "System/FpsControl.h"
@@ -10,7 +10,7 @@ public:
 	SnippetGameManager();
 	~SnippetGameManager() = default;
 	void nextTurn() { nextTurnFlag = true; }
-	void minusTurn() { returnTurnFlag = true; }		//��{�g��Ȃ�
+	void minusTurn() { returnTurnFlag = true; }		//基本使わない
 	int getTurn() { return TurnNum; };
 	void setFrameChange(bool isChanged) {}
 	void proceedTurn();
@@ -19,8 +19,7 @@ public:
 private:
 	bool nextTurnFlag;
 	bool returnTurnFlag;
-	int TurnNum;
-	FpsControl* fpsIns;
+	int TurnNum;	// リュカ、クマトラ、ダスター、ボニー
 	std::shared_ptr<SnippetGameManager> snippetGameManager;
 };
 
