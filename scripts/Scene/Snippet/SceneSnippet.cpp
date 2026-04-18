@@ -11,43 +11,26 @@ const char* SceneSnippet::ParameterTagStage = "ParameterTagStage";
 const char* SceneSnippet::ParameterTagLevel = "ParameterTagLevel";
 
 SceneSnippet::SceneSnippet(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter) {
-
+	ChangeFont("Mother3Message");
+	SetFontSpace(1);
+	SetFontSize(9);
+	SetFontThickness(1);
 	musicNumber = 0;
 	//// サウンド、イメージ、ゲームマネージャーのインスタンスを生成
 	snippetGameManager = make_shared<SnippetGameManager>();
 	snippetSound = make_shared<SnippetSound>();
 	snippetImage = make_shared<SnippetImage>();
 	// 各種オブジェクトのインスタンス設定
-	_statusWindowA = make_shared<StatusWindow>();
-	_statusWindowA->SetGameManager(snippetGameManager);
-	_statusWindowA->SetImage(snippetImage);
-	_statusWindowB = make_shared<StatusWindow>();
-	_statusWindowB->SetGameManager(snippetGameManager);
-	_statusWindowB->SetImage(snippetImage);
-	_statusWindowC = make_shared<StatusWindow>();
-	_statusWindowC->SetGameManager(snippetGameManager);
-	_statusWindowC->SetImage(snippetImage);
-	_statusWindowD = make_shared<StatusWindow>();
-	_statusWindowD->SetGameManager(snippetGameManager);
-	_statusWindowD->SetImage(snippetImage);
-	messageWindow = new MessageWindow();
-	messageWindow->SetGameManager(snippetGameManager);
-	playerA = new PlayerCharacter();
-	playerA->SetGameManager(snippetGameManager);
-	playerA->SetSound(snippetSound);
-	playerB = new PlayerCharacter();
-	playerB->SetGameManager(snippetGameManager);
-	playerB->SetSound(snippetSound);
-	playerC = new PlayerCharacter();
-	playerC->SetGameManager(snippetGameManager);
-	playerC->SetSound(snippetSound);
-	playerD = new PlayerCharacter();
-	playerD->SetGameManager(snippetGameManager);
-	playerD->SetSound(snippetSound);
-	enemyManager = new EnemyManager(snippetImage);
-	enemyManager->SetGameManager(snippetGameManager);
-	enemyManager->SetImage(snippetImage);
-	enemyManager->SetSound(snippetSound);
+	_statusWindowA = make_shared<StatusWindow>(snippetGameManager, snippetImage);
+	_statusWindowB = make_shared<StatusWindow>(snippetGameManager, snippetImage);
+	_statusWindowC = make_shared<StatusWindow>(snippetGameManager, snippetImage);
+	_statusWindowD = make_shared<StatusWindow>(snippetGameManager, snippetImage);
+	messageWindow = new MessageWindow(snippetGameManager, snippetImage);
+	playerA = new PlayerCharacter(snippetGameManager, snippetSound);
+	playerB = new PlayerCharacter(snippetGameManager, snippetSound);
+	playerC = new PlayerCharacter(snippetGameManager, snippetSound);
+	playerD = new PlayerCharacter(snippetGameManager, snippetSound);
+	enemyManager = new EnemyManager(snippetGameManager, snippetImage, snippetSound);
 	_backImage = make_shared<BackImage>();
 	_backImage->SetGameManager(snippetGameManager);
 	_backImage->SetImage(snippetImage);

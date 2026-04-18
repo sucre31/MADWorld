@@ -8,7 +8,7 @@
 class EnemyManager : GameObject
 {
 public:
-	EnemyManager(std::shared_ptr<SnippetImage> imgIns);
+	EnemyManager(std::shared_ptr<SnippetGameManager> managerIns, std::shared_ptr<SnippetImage> imgIns, std::shared_ptr<SnippetSound> sound);
 	~EnemyManager() = default;
 	bool update() override;
 	void draw() const override;

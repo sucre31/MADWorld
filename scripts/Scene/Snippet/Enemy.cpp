@@ -6,21 +6,30 @@
 #include "Common/Sound.h"
 #include "SnippetGameManager.h"
 
-Enemy::Enemy(int x, int y, std::shared_ptr<SnippetImage> image, std::shared_ptr<SnippetGameManager> gameManager) {
+Enemy::Enemy(
+	int x, int y,
+	std::shared_ptr<SnippetGameManager> gameManager,
+	std::shared_ptr<SnippetImage> image,
+	std::shared_ptr<SnippetSound> sound
+) : myX(x),
+	myY(y),
+	HP(1000),
+	myID(1),
+	alive(true),
+	count(0),
+	BeatedMoveX(0),
+	reverseFlag(false),
+	isBeated(false),
+	damageBeat(std::make_unique<DamageBeat>())
+{
 	SetGameManager(gameManager);
 	SetImage(image);
-	myX = x;
-	myY = y;
-	HP = 1000;
-	myID = 1;
-	alive = true;
-	count = 0;
-	BeatedMoveX = 0;
-	reverseFlag = false;
-	isBeated = false;
-	damageBeat = new DamageBeat();
-	damageBeat->SetGameManager(snippetGameManager);
-	damageBeat->SetImage(snippetImage);
+	SetSound(sound);
+
+	damageBeat->SetGameManager(gameManager);
+	damageBeat->SetImage(image);
+
+
 	getSize();
 	screen = MakeScreen(enemyImageX, enemyImageY, TRUE);
 }

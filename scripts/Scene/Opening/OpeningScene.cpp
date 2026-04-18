@@ -1,4 +1,4 @@
-#include <DxLib.h>
+ï»¿#include <DxLib.h>
 #include "System/Pad.h"
 #include "OpeningScene.h"
 #include "Common/Sound.h"
@@ -7,15 +7,15 @@
 
 OpeningScene::OpeningScene(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter)
 {
-    SetMouseDispFlag(FALSE); // ƒJ[ƒ\ƒ‹”ñ•\Ž¦
-    ChangeFont("AR PƒSƒVƒbƒN‘ÌS");
+    SetMouseDispFlag(FALSE); // ã‚«ãƒ¼ã‚½ãƒ«éžè¡¨ç¤º
+    ChangeFont("AR Pã‚´ã‚·ãƒƒã‚¯ä½“S");
     SetFontSpace(1);
     SetFontSize(50);
     SetFontThickness(1);
     ChangeFontType(DX_FONTTYPE_ANTIALIASING_4X4);
     SetCreateSoundDataType(DX_SOUNDDATATYPE_FILE);
     musicHandle = Sound::getIns()->loadSamples("Assets/Sounds/title/title.wav");
-    ChangeVolumeSoundMem(200 ,musicHandle);     // ‰¹—Ê•ÏX
+    ChangeVolumeSoundMem(200 ,musicHandle);     // éŸ³é‡å¤‰æ›´
     SEHandle = Sound::getIns()->loadSamples("Assets/Sounds/GrandSE/start.wav");
     SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMNOPRESS);
     PlaySoundMem(musicHandle, DX_PLAYTYPE_LOOP, TRUE);
@@ -40,5 +40,5 @@ void OpeningScene::update() {
 void OpeningScene::draw() const{
     DrawGraph(0, 0, titleGraphHandle, FALSE);
 
-    DrawString(500, 540, "Press A", GetColor(0, 0, 0));
+    DrawString(500, 540, "PRESS START", GetColor(0, 0, 0));
 }

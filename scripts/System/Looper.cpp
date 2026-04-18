@@ -36,7 +36,6 @@ Looper::Looper()
 bool Looper::loop() const
 {
     int start = GetNowCount();
-    ClearDrawScreen();
 
     Keyboard::getIns()->update();   //キーボードの更新
     Pad::getIns()->update();        //ジョイパッドの更新
@@ -44,11 +43,19 @@ bool Looper::loop() const
     Time::getIns()->update();
     FpsControl::getIns()->Update();
     _sceneStack.top()->update();    //スタックのトップのシーンを更新
-    _sceneStack.top()->draw();      //スタックのトップのシーンを描画
-    FpsControl::getIns()->Draw();
 
-    //最後に画面の倍率に合わせて描画
-    SetDrawScreen(DX_SCREEN_BACK);
+    if (FpsControl::getIns()->isDrawFrame()) {
+        ClearDrawScreen();
+        _sceneStack.top()->draw();      //スタックのトップのシーンを描画
+        FpsControl::getIns()->Draw();
+        //最後に画面の倍率に合わせて描画
+        SetDrawScreen(DX_SCREEN_BACK);
+        ScreenFlip();
+    }
+
+    
+
+    FpsControl::getIns()->Wait();
 
     // デバッグ用表示
     if (useDebug) {

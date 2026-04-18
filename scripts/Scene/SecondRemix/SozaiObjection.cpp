@@ -1,5 +1,7 @@
 ﻿#include <Dxlib.h>
+#include <nlohmann/json.hpp>
 #include "SozaiObjection.h"
+using json = nlohmann::json;
 
 SozaiObjection::SozaiObjection(){
 	sozaiPads[(int)ObjectionSound::NaruhodoIdle] = ePad::L;
@@ -15,6 +17,7 @@ SozaiObjection::SozaiObjection(){
 
 	std::thread([this]() {
 		ws.connect(L"madheavenwebsocket.onrender.com", L"/");
+		ws.send(R"({"type": "REGISTER", "role": "game"})"); // サーバー側のロールをgameとして通知
 		wsConnection = true;
 		}).detach();
 }
@@ -23,11 +26,31 @@ void SozaiObjection::update() {
 	if (isActive) {
 		std::string msg;
 		while (ws.pollMessage(msg)) { // pollMessage 内で onMessageChanged が呼ばれる
-			int vote = std::stoi(msg);
-			int receiveTime = GetNowCount();
-			printfDx("Vote changed! New value: %d\n", vote);
-			setNaruhodoFront();
-			sozaiManager->playSozai(sozaiHandles[(int)ObjectionSozai::Naruhodo], 2);
+			try {
+				auto data = json::parse(msg);
+
+				std::string type = data["type"];
+
+				if (type == "CONFIG") {
+					this->heatThreshold = data["threshold"];
+					continue;
+				}
+
+				// 基本データの取得
+				float heatRatio = data["heatRatio"];
+				float totalHeat = data["totalHeat"];
+
+				// サーバー側でリセットが発生した（BURST）場合
+				if (type == "BURST" || heatRatio >= heatThreshold) {
+					printfDx("!!! HEAT BURST !!!\n");
+					setNaruhodoFront();
+					sozaiManager->playSozai(sozaiHandles[(int)ObjectionSozai::Naruhodo], 2);
+				}
+
+			}
+			catch (const std::exception& e) {
+				printfDx("JSON Parse Error: %s\n", e.what());
+			}
 		}
 
 		for (auto& pair : sozaiPads)

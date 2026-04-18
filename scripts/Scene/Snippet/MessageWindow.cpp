@@ -1,4 +1,4 @@
-#include <Dxlib.h>
+ï»¿#include <Dxlib.h>
 #include <string>
 #include "MessageWindow.h"
 #include "Common/Image.h"
@@ -6,15 +6,17 @@
 
 using namespace std;
 
-MessageWindow::MessageWindow() {
+MessageWindow::MessageWindow(std::shared_ptr<SnippetGameManager> managerIns, std::shared_ptr<SnippetImage> image) {
 	myX = 47;
 	myY = 2;
 	currentTurn = 0;
 	messageCounter = 32;
 	messageFlag = false;
+	snippetGameManager = managerIns;
+	snippetImage = image;
 	//stringImage = make_shared<StringImage>();
 	//stringImage->setPos(myX + 4, myY + 4);
-	//strBattleMessage[0] = "‚ ‚ ";
+	//strBattleMessage[0] = "ã‚ã‚";
 }
 
 bool MessageWindow::update() {
@@ -48,19 +50,19 @@ void MessageWindow::draw() const {
 		switch (currentMessageID) {
 		case 0:
 			DrawGraph(myX, myY, snippetImage->getMessageWindow(), TRUE);
-			DrawString(myX + 6, myY + 9, "ƒŠƒ…ƒJ‚Ì ‚±‚¤‚°‚«!", GetColor(0, 0, 0));
+			DrawString(myX + 6, myY + 9, "ãƒªãƒ¥ã‚«ã® ã“ã†ã’ã!", GetColor(0, 0, 0));
 			break;
 		case 1:
 			DrawGraph(myX, myY, snippetImage->getMessageWindow(), TRUE);
-			DrawString(myX + 6, myY + 9, "ƒNƒ}ƒgƒ‰‚Ì ‚±‚¤‚°‚«!", GetColor(0, 0, 0));
+			DrawString(myX + 6, myY + 9, "ã‚¯ãƒãƒˆãƒ©ã® ã“ã†ã’ã!", GetColor(0, 0, 0));
 			break;
 		case 2:
 			DrawGraph(myX, myY, snippetImage->getMessageWindow(), TRUE);
-			DrawString(myX + 6, myY + 9, "ƒ_ƒXƒ^[‚Ì ‚±‚¤‚°‚«!", GetColor(0, 0, 0));
+			DrawString(myX + 6, myY + 9, "ãƒ€ã‚¹ã‚¿ãƒ¼ã® ã“ã†ã’ã!", GetColor(0, 0, 0));
 			break;
 		case 3:
 			DrawGraph(myX, myY, snippetImage->getMessageWindow(), TRUE);
-			DrawString(myX + 6, myY + 9, "ƒ{ƒj[‚Ì ‚±‚¤‚°‚«!", GetColor(0, 0, 0));
+			DrawString(myX + 6, myY + 9, "ãƒœãƒ‹ãƒ¼ã® ã“ã†ã’ã!", GetColor(0, 0, 0));
 			break;
 		}
 	}

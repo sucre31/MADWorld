@@ -1,30 +1,31 @@
 ﻿#include <Dxlib.h>
 #include "EnemyManager.h"
 
-EnemyManager::EnemyManager(std::shared_ptr<SnippetImage> imgIns) {
+EnemyManager::EnemyManager(std::shared_ptr<SnippetGameManager> managerIns, std::shared_ptr<SnippetImage> imgIns, std::shared_ptr<SnippetSound> sound) {
 	int i;
+	snippetGameManager = managerIns;
+	snippetSound = sound;
 	snippetImage = imgIns;
 	for (i = 0; i < NumberOfEnemy; i++) {
 		if (i < 5) {
-			enemy[i] = new Enemy(-120 + 60 * i, 0, snippetImage, snippetGameManager);
+			enemy[i] = new Enemy(-120 + 60 * i, 0,snippetGameManager, snippetImage, snippetSound);
 		}
 		else {
 			switch (i) {
 			case 5:
-				enemy[i] = new Enemy(-120, 50, snippetImage, snippetGameManager);
+				enemy[i] = new Enemy(-120, 50, snippetGameManager, snippetImage, snippetSound);
 				enemy[i]->setNewEnemy(0);
 				break;
 			case 6:
-				enemy[i] = new Enemy(0, -50, snippetImage, snippetGameManager);
+				enemy[i] = new Enemy(0, -30, snippetGameManager, snippetImage, snippetSound);
 				enemy[i]->setNewEnemy(0);
 				break;
 			case 7:
-				enemy[i] = new Enemy(120, 50, snippetImage, snippetGameManager);
+				enemy[i] = new Enemy(120, 50, snippetGameManager, snippetImage, snippetSound);
 				enemy[i]->setNewEnemy(0);
 				break;
 			}
 		}
-		enemy[i]->SetSound(snippetSound);
 
 	}
 }
@@ -41,8 +42,9 @@ bool EnemyManager::update() {
 }
 
 void EnemyManager::draw() const {
+	enemy[6]->draw();
 	for (int i = 0; i < NumberOfEnemy; i++) {
-		if (enemy[i] != nullptr) {
+		if (enemy[i] != nullptr && i != 6) {
 			enemy[i]->draw();
 		}
 	}

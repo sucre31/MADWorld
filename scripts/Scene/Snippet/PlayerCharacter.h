@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <memory>
 #include "Character.h"
 #include "Enemy.h"
@@ -12,7 +12,7 @@
 class PlayerCharacter : public Character
 {
 public:
-	PlayerCharacter();
+	PlayerCharacter(std::shared_ptr<SnippetGameManager> gameManager, std::shared_ptr<SnippetSound> ins);
 	~PlayerCharacter() = default;
 	bool update() override;
 	void draw() const override;
@@ -36,7 +36,6 @@ public:
 	bool getIsActive() const { return (isActive || alwaysActive); }
 	bool getReverseFlag() const { return reverseFlag; }
 	void SetGameManager(std::shared_ptr<SnippetGameManager> ins) { snippetGameManager = ins; }
-	void SetSound(std::shared_ptr<SnippetSound> ins) { snippetSound = ins; }
 private:
 	void playMainSoundNumberMem(int numberOfSound);
 	void playSubSoundNumberMem(int numberOfSound);

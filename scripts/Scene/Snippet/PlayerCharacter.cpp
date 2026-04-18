@@ -4,10 +4,12 @@
 #include "System/Pad.h"
 #include "Common/Sound.h"
 
-PlayerCharacter::PlayerCharacter() {
+PlayerCharacter::PlayerCharacter(std::shared_ptr<SnippetGameManager> gameManager, std::shared_ptr<SnippetSound> soundIns) {
 	mainSoundNumber = 0;
 	subSoundNumber = 0;
-	myInstrument = new Instrument();
+	snippetGameManager = gameManager;
+	snippetSound = soundIns;
+	myInstrument = new Instrument(snippetSound);
 	//myInstrument->setBeatManager(beatManager);
 	reverseFlag = FALSE;
 	alwaysActive = false;
@@ -37,80 +39,8 @@ bool PlayerCharacter::update() {
 			myHP--;
 		}
 
-
-		//if (Pad::getIns()->get(ePad::down) == 1) {
-		//	playMainSoundNumberMem(0);
-		//	PlaySoundMem(Sound::getIns()->getBattleSE()[0], DX_PLAYTYPE_BACK);
-		//	reverseCharacter();
-		//	damage = scoreCheck();
-		//	turnDamage += damage;
-		//	if (damage >= 86) PlaySoundMem(Sound::getIns()->getBattleSE()[2], DX_PLAYTYPE_BACK);
-		//	enemyManagerIns->getEnemyIns(2)->getDamage(damage, beatManager->isEarly());
-		//}
-		//if (Pad::getIns()->get(ePad::left) == 1) {
-		//	playMainSoundNumberMem(1);
-		//	PlaySoundMem(Sound::getIns()->getBattleSE()[0], DX_PLAYTYPE_BACK);
-		//	reverseCharacter();
-		//	damage = scoreCheck();
-		//	turnDamage += damage;
-		//	if (damage >= 86) PlaySoundMem(Sound::getIns()->getBattleSE()[2], DX_PLAYTYPE_BACK);
-		//	enemyManagerIns->getEnemyIns(2)->getDamage(damage, beatManager->isEarly());
-		//}
-		//if (Pad::getIns()->get(ePad::up) == 1) {
-		//	playMainSoundNumberMem(2);
-		//	PlaySoundMem(Sound::getIns()->getBattleSE()[0], DX_PLAYTYPE_BACK);
-		//	reverseCharacter();
-		//	damage = scoreCheck();
-		//	turnDamage += damage;
-		//	if (damage >= 86) PlaySoundMem(Sound::getIns()->getBattleSE()[2], DX_PLAYTYPE_BACK);
-		//	enemyManagerIns->getEnemyIns(2)->getDamage(damage, beatManager->isEarly());
-		//}
-		//if (Pad::getIns()->get(ePad::right) == 1) {
-		//	playMainSoundNumberMem(6);
-		//	PlaySoundMem(Sound::getIns()->getBattleSE()[0], DX_PLAYTYPE_BACK);
-		//	reverseCharacter();
-		//	damage = scoreCheck();
-		//	turnDamage += damage;
-		//	if (damage >= 86) PlaySoundMem(Sound::getIns()->getBattleSE()[2], DX_PLAYTYPE_BACK);
-		//	enemyManagerIns->getEnemyIns(2)->getDamage(damage, beatManager->isEarly());
-		//}
-		//if (Pad::getIns()->get(ePad::Y) == 1) {
-		//	playMainSoundNumberMem(7);
-		//	PlaySoundMem(Sound::getIns()->getBattleSE()[0], DX_PLAYTYPE_BACK);
-		//	reverseCharacter();
-		//	damage = scoreCheck();
-		//	turnDamage += damage;
-		//	if (damage >= 86) PlaySoundMem(Sound::getIns()->getBattleSE()[2], DX_PLAYTYPE_BACK);
-		//	enemyManagerIns->getEnemyIns(2)->getDamage(damage, beatManager->isEarly());
-		//}if (Pad::getIns()->get(ePad::B) == 1) {
-		//	playMainSoundNumberMem(8);
-		//	PlaySoundMem(Sound::getIns()->getBattleSE()[0], DX_PLAYTYPE_BACK);
-		//	reverseCharacter();
-		//	damage = scoreCheck();
-		//	turnDamage += damage;
-		//	if (damage >= 86) PlaySoundMem(Sound::getIns()->getBattleSE()[2], DX_PLAYTYPE_BACK);
-		//	enemyManagerIns->getEnemyIns(2)->getDamage(damage, beatManager->isEarly());
-		//}if (Pad::getIns()->get(ePad::A) == 1) {
-		//	playMainSoundNumberMem(9);
-		//	PlaySoundMem(Sound::getIns()->getBattleSE()[0], DX_PLAYTYPE_BACK);
-		//	reverseCharacter();
-		//	damage = scoreCheck();
-		//	turnDamage += damage;
-		//	if (damage >= 86) PlaySoundMem(Sound::getIns()->getBattleSE()[2], DX_PLAYTYPE_BACK);
-		//	enemyManagerIns->getEnemyIns(2)->getDamage(damage, beatManager->isEarly());
-		//}if (Pad::getIns()->get(ePad::X) == 1) {
-		//	playMainSoundNumberMem(11);
-		//	PlaySoundMem(Sound::getIns()->getBattleSE()[0], DX_PLAYTYPE_BACK);
-		//	reverseCharacter();
-		//	damage = scoreCheck();
-		//	turnDamage += damage;
-		//	if (damage >= 86) PlaySoundMem(Sound::getIns()->getBattleSE()[2], DX_PLAYTYPE_BACK);
-		//	enemyManagerIns->getEnemyIns(2)->getDamage(damage, beatManager->isEarly());
-		//}
-
-
 		if (Pad::getIns()->get(ePad::A) == 1) {
-			//playMainSoundNumberMem(mainSoundNumber);
+			playMainSoundNumberMem(mainSoundNumber);
 			setPP(mainSoundNumber);
 			//PlaySoundMem(snippetSound->getBattleSE()[0], DX_PLAYTYPE_BACK);
 			reverseCharacter();
@@ -134,9 +64,10 @@ bool PlayerCharacter::update() {
 			PlaySoundMem(snippetSound->getBattleSE()[1], DX_PLAYTYPE_BACK);
 			isActive = false;
 		}
-		//if (Pad::getIns()->get(ePad::change) == 1) {
-		//	alwaysActive = !alwaysActive;
-		//}
+		if (Pad::getIns()->get(ePad::ZR) == 1) {
+			alwaysActive = !alwaysActive;
+		}
+
 		if (beatManager->isStepChanged() && Pad::getIns()->get(ePad::L) >= 1) {
 			myInstrument->playWithStep(beatManager->getNumberOfStep(), 0);
 			myInstrument->playWithStep(beatManager->getNumberOfStep(), 0);
@@ -146,10 +77,6 @@ bool PlayerCharacter::update() {
 				enemyManagerIns->getEnemyIns(2)->getDamage(damage, beatManager->isEarly());
 			}
 		}
-		//if (Pad::getIns()->get(ePad::L) == 1) {
-		//	GameManager::getIns()->minusTurn();
-		//	isActive = false;
-		//}
 		if (myHP < 0) {
 			myHP = 0;
 		}

@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <memory>
 #include "Common/GameObject/GameObject.h"
 #include "SnippetGameManager.h"
@@ -8,7 +8,7 @@
 class MessageWindow : GameObject
 {
 public:
-	MessageWindow();
+	MessageWindow(std::shared_ptr<SnippetGameManager> managerIns, std::shared_ptr<SnippetImage> image);
 	~MessageWindow() = default;
 	bool update() override;
 	void draw() const override;

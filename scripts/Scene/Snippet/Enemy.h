@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <memory>
 #include "Common/GameObject/GameObject.h"
 #include "DamageBeat.h"
@@ -14,7 +14,12 @@ enum eEnemy
 class Enemy : public GameObject
 {
 public:
-	Enemy(int x, int y, std::shared_ptr<SnippetImage> image, std::shared_ptr<SnippetGameManager> gameManager);
+	Enemy(
+		int x, int y,
+		std::shared_ptr<SnippetGameManager> gameManager,
+		std::shared_ptr<SnippetImage> image,
+		std::shared_ptr<SnippetSound> sound
+		);
 	~Enemy() = default;
 	bool update() override;
 	void draw() const override;
@@ -39,7 +44,7 @@ private:
 	bool isBeated;
 	bool alive;
 	int screen;
-	DamageBeat* damageBeat;
+	std::unique_ptr<DamageBeat> damageBeat;
 	std::shared_ptr<SnippetGameManager> snippetGameManager;
 	std::shared_ptr<SnippetSound> snippetSound;
 	std::shared_ptr<SnippetImage> snippetImage;

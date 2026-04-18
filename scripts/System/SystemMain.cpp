@@ -55,7 +55,7 @@ void SystemMain::finalize() const
 void SystemMain::main() const
 {
 	Looper looper;
-	while (!ScreenFlip() && !ProcessMessage() && !ClearDrawScreen()) {
+	while (!ProcessMessage()) {
 		if (!looper.loop()) {
 			break;
 		}

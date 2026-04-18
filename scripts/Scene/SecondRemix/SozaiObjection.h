@@ -47,6 +47,8 @@ private:
 	void setNaruhodoFront();
 	void setMitsurugiFront();
 
+	float heatThreshold = 0.6;
+
 	bool wsConnection = false;
 };
 

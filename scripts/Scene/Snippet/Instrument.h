@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 #include <memory>
 #include "BeatManager.h"
 #include "SnippetSound.h"
@@ -6,7 +6,7 @@
 class Instrument
 {
 public:
-	Instrument() = default;
+	Instrument(std::shared_ptr<SnippetSound> sound);
 	~Instrument() = default;
 	void playMainInstrument(int NumberOfTone);
 	void playSubInstrument(int NumberOfTone);
