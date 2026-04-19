@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="scripts\Scene\RobotSampler\SceneRobot.cpp" />
     <ClCompile Include="scripts\Common\Online\DataBaseListener.cpp" />
     <ClCompile Include="scripts\Common\Online\HttpClient.cpp" />
     <ClCompile Include="scripts\Scene\SecondRemix\SozaiDontaco.cpp" />
@@ -93,6 +94,7 @@
     <ClCompile Include="scripts\Common\Online\WSClient.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scripts\Scene\RobotSampler\SceneRobot.h" />
     <ClInclude Include="scripts\Common\Online\DataBaseListener.h" />
     <ClInclude Include="scripts\Common\Online\HttpClient.h" />
     <ClInclude Include="scripts\Scene\SecondRemix\SozaiDontaco.h" />

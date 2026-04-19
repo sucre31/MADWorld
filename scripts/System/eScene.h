@@ -16,5 +16,6 @@ enum eScene {
 	Snippet,
 	RealEdit,
 	Pizza,
-	SecondRemix
+	SecondRemix,
+	RobotSampler
 };

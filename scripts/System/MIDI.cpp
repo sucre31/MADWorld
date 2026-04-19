@@ -28,11 +28,19 @@ MIDI::MIDI()
 @param midiIndex 配列に登録する番号
 */
 void MIDI::openMidi(UINT devid, int midiIndex) {
+	for (UINT i = 0; i < midiInGetNumDevs(); i++) {
+		MIDIINCAPS caps;
+		if (midiInGetDevCaps(i, &caps, sizeof(caps)) == MMSYSERR_NOERROR) {
+			//printfDx("ID %d : %s\n", i, caps.szPname);
+		}
+	}
+
 	if (midiIndex < midiDeviceMax) {
 		isGetInfoSucces = false;
 		res = midiInOpen(&midiHandle[midiIndex], devid, (DWORD_PTR)MidiInProc, 0, CALLBACK_FUNCTION);
 		if (res != MMSYSERR_NOERROR) {
 			printfDx("Cannot open MIDI input device %d\n", devid);
+			printfDx("Error code: %d\n", res);
 		}
 		else {
 			// MIDI入力の開始

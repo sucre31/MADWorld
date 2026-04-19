@@ -5,20 +5,20 @@
 #include "Common/GameObject/NoteManager.h"
 #include "Common/GameObject/MusicManager.h"
 
-class ScenePizza : public AbstractScene
+class SceneRobot : public AbstractScene
 {
 public:
-	ScenePizza(IOnSceneChangedListener* impl, const Parameter& parameter);
-	~ScenePizza();
+	SceneRobot(IOnSceneChangedListener* impl, const Parameter& parameter);
+	~SceneRobot() = default;
 	void update() override;
 	void draw() const override;
 private:
-	std::string midiToNoteName(int midi);
 	void setKey();
 	SozaiManager sozaiManager;
 	NoteManager noteManager;
 	MusicManager musicManager;
 	PauseMenu pauseMenu;
-	int SEHandle[2];
+
+	std::unordered_map<int, int> sozaiHandles;
 };
 

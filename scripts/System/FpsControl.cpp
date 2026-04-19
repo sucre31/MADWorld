@@ -69,7 +69,7 @@ int FpsControl::getFrameRateNumber() const {
 }
 
 void FpsControl::Draw() {
-    DrawFormatString(0, 20, GetColor(255, 255, 255), "FPS: %.1f", rFps);
+    //DrawFormatString(0, 20, GetColor(255, 255, 255), "FPS: %.1f", rFps);
 }
 
 // この関数をメインループの最後（ScreenFlipの後など）で呼ぶ

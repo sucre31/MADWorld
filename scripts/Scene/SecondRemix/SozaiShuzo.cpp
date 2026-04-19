@@ -29,7 +29,6 @@ void SozaiShuzo::shoutPlay() {
 void SozaiShuzo::update() {
 	// webSocket接続ログ
 	if (wsConnection) {
-		printfDx("webSocket connected.\n");
 		wsConnection = false; // 一回だけ表示
 	}
 
@@ -44,7 +43,7 @@ void SozaiShuzo::update() {
 
 				if (type == "CONFIG") {
 					this->heatThreshold = data["threshold"];
-					printfDx("setThreshold:%f\n", heatThreshold);
+					//printfDx("setThreshold:%f\n", heatThreshold);
 					continue;
 				}
 
@@ -54,7 +53,7 @@ void SozaiShuzo::update() {
 
 				// サーバー側でリセットが発生した（BURST）場合
 				if (type == "BURST" || heatRatio >= heatThreshold) {
-					printfDx("!!! HEAT BURST !!!\n");
+					//printfDx("!!! HEAT BURST !!!\n");
 					heatRatio = 0;
 					shoutPlay();
 				}
@@ -64,25 +63,14 @@ void SozaiShuzo::update() {
 			}
 		}
 
-		if (Pad::getIns()->get(ePad::X) == 1) {
-			if (ws.isConnected()) {
-				// 現在時刻をミリ秒で取得
-				tmpLagTimer = GetNowCount(); // 既存の関数があるならこれを使う
-				printfDx("send\n");
-
-				// vote とタイムスタンプを文字列化して送信
-				ws.send("1");
-			}
-		}
-
-
 		if (Pad::getIns()->get(sozaiPads[(int)ShuzoSound::Shizukada]) == 1) {
 			shoutCount++;
 		}
 
 		// 熱量に応じてマスクを動かす
-		float targetRatio = 1 - (1.0f - heatRatio) * (1.0f - heatRatio);
-		float speed = 8.0f;
+		float triggerRatio = heatRatio / heatThreshold;
+		float targetRatio = 1 - (1.0f - triggerRatio) * (1.0f - triggerRatio);
+		float speed = 4.0f;
 		float dt = FpsControl::getIns()->getDeltaTime();
 		visualHeatRatio += (targetRatio - visualHeatRatio) * speed * dt;
 		if (visualHeatRatio < 0.001f && targetRatio == 0.0f) {

@@ -107,6 +107,10 @@ ScenePizza::ScenePizza(IOnSceneChangedListener* impl, const Parameter& parameter
 
 }
 
+ScenePizza::~ScenePizza() {
+	MIDI::getIns()->closeMidi(0);
+}
+
 std::string  ScenePizza::midiToNoteName(int midi)
 {
 	static const char* names[12] = {

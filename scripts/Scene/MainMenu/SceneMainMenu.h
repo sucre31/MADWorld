@@ -13,7 +13,7 @@ public:
     void draw() const override;
     int getIconScene(int );
 private:
-    static const int iconNum = 10;
+    static const int iconNum = 11;
     int validIconNum;
     int selectIconNo;               // -1: 選択無し
     cursor cursorIns;
