@@ -41,10 +41,10 @@ SceneSecondRemix::SceneSecondRemix(IOnSceneChangedListener* impl, const Paramete
 	noteManager.loadFromFile("");
 
 	prevMangerIndex = -1;
-	activeManagerIndex = 0;
+	activeManagerIndex = 3;
 
 
-	// とりあえずハードコードで素材管理
+	// オートプレイ読み込み
 	std::ifstream ifs("Assets/Score/remix2.json");
 	json j;
 	ifs >> j;
@@ -54,7 +54,7 @@ SceneSecondRemix::SceneSecondRemix(IOnSceneChangedListener* impl, const Paramete
 
 		// bar + beat → 通しbeatに変換
 		int bar = e["bar"];
-		int beatInBar = e["beat"];
+		double beatInBar = e["beat"];
 		int beatsPerBar = 4; // ← 拍子（あとでBPMManagerから取ってもいい）
 
 		ev.beat = (bar - 1) * beatsPerBar + (beatInBar - 1);
@@ -146,9 +146,10 @@ void SceneSecondRemix::update() {
 	}
 
 	// 素材管理
+	prevBeat = currentBeat;
 	currentBeat = bpmManager->getCurrentBeatNum();
 	for (auto& e : events) {
-		if (!e.triggered && currentBeat >= e.beat) {	// 少し早く切り替え
+		if (!e.triggered && prevBeat < e.beat && currentBeat >= e.beat) {
 			e.triggered = true;
 
 			if (e.actionType == ActionType::SozaiChange) {

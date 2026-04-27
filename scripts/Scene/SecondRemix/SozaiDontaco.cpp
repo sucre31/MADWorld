@@ -111,8 +111,7 @@ void SozaiDontaco::setKey() {
 
 void SozaiDontaco::trigger(int actionId) {
 	sozaiManager->playSozai(
-		useDrum ? sozaiHandles[(int)DontacoSozai::Drum]
-		: sozaiHandles[(int)DontacoSozai::Dontacos],
+		sozaiHandles[(int)DontacoSozai::Drum],
 		actionId
 	);
 }

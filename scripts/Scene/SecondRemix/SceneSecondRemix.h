@@ -37,6 +37,7 @@ private:
 	int activeManagerIndex;
 	int prevMangerIndex;
 
+	double prevBeat = -1;
 	double currentBeat = -1;
 
 	enum ActionType {
@@ -53,7 +54,7 @@ private:
 	};
 
 	struct SozaiEvent {
-		int beat;          // 発火タイミング
+		double beat;          // 発火タイミング
 		ActionType actionType;    // 何するか
 		SozaiType targetSozai;  // どのSozai
 		int actionId = 0;     // 何するか
