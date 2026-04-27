@@ -2,8 +2,8 @@
 #include <Dxlib.h>
 
 SozaiSonya::SozaiSonya() : prevTime(0), prevAvoidTime(0){
-	sozaiPads[(int)SonyaSound::Hey] = ePad::A;
-	sozaiPads[(int)SonyaSound::Tto] = ePad::B;
+	sozaiPads[(int)SonyaSound::Hey] = ePad::MAX;
+	sozaiPads[(int)SonyaSound::Tto] = ePad::A;
 	sozaiPads[(int)SonyaSound::Sukiari] = ePad::MAX;
 	sozaiPads[(int)SonyaSound::Hit] = ePad::MAX;
 
@@ -18,18 +18,6 @@ void SozaiSonya::update(){
 		LONGLONG deltaTime = curTime - prevTime;
 
 		double nowBeat = bpmManager->getCurrentBeatNum();
-
-		if (Pad::getIns()->get(ePad::A) == 1) {
-			makeSnowBall(0);
-		}
-
-		if (Pad::getIns()->get(ePad::X) == 1) {
-			makeSnowBall(1);
-		}
-
-		if (Pad::getIns()->get(ePad::Y) == 1) {
-			makeSnowBall(2);
-		}
 
 		for (int i = 0; i < snowBallPtr.size(); i++) {
 			snowBallPtr[i]->update();
@@ -56,7 +44,7 @@ void SozaiSonya::update(){
 			}
 		}
 
-		if (Pad::getIns()->get(ePad::B) == 1) {
+		if (Pad::getIns()->get(ePad::A) == 1) {
 			if (avoidFlag == false) {
 				prevAvoidTime = curTime;
 				avoidFlag = true;

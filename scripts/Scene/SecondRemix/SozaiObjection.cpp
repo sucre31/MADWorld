@@ -5,15 +5,15 @@ using json = nlohmann::json;
 
 SozaiObjection::SozaiObjection(){
 	sozaiPads[(int)ObjectionSound::NaruhodoIdle] = ePad::L;
-	sozaiPads[(int)ObjectionSound::MitsurugiIdle] = ePad::R;
+	sozaiPads[(int)ObjectionSound::MitsurugiIdle] = ePad::MAX;
 	sozaiPads[(int)ObjectionSound::NaruhodoBass] = ePad::down;
-	sozaiPads[(int)ObjectionSound::MitsurugiBass] = ePad::B;
-	sozaiPads[(int)ObjectionSound::NaruhodoObjection] = ePad::right;
-	sozaiPads[(int)ObjectionSound::MitsurugiObjection] = ePad::A;
-	sozaiPads[(int)ObjectionSound::NaruhodoHoldIt] = ePad::left;
-	sozaiPads[(int)ObjectionSound::MitsurugiHoldIt] = ePad::Y;
-	sozaiPads[(int)ObjectionSound::NaruhodoTakeThat] = ePad::up;
-	sozaiPads[(int)ObjectionSound::MitsurugiTakeThat] = ePad::X;
+	sozaiPads[(int)ObjectionSound::MitsurugiBass] = ePad::MAX;
+	sozaiPads[(int)ObjectionSound::NaruhodoObjection] = ePad::A;
+	sozaiPads[(int)ObjectionSound::MitsurugiObjection] = ePad::MAX;
+	sozaiPads[(int)ObjectionSound::NaruhodoHoldIt] = ePad::X;
+	sozaiPads[(int)ObjectionSound::MitsurugiHoldIt] = ePad::MAX;
+	sozaiPads[(int)ObjectionSound::NaruhodoTakeThat] = ePad::Y;
+	sozaiPads[(int)ObjectionSound::MitsurugiTakeThat] = ePad::MAX;
 
 	std::thread([this]() {
 		ws.connect(L"madheavenwebsocket.onrender.com", L"/");
@@ -215,6 +215,6 @@ void SozaiObjection::setKey() {
 }
 
 void SozaiObjection::trigger(int actionId) {
-	// どっちのキャラかは内部状態で判断
+	setMitsurugiFront();
 	sozaiManager->playSozai(sozaiHandles[(int)ObjectionSozai::Mitsurugi], actionId);
 }

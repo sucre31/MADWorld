@@ -1,8 +1,8 @@
 ﻿#include "SozaiDonesia.h"
 
 SozaiDonesia::SozaiDonesia() {
-	sozaiPads[(int)DonesiaSound::In] = ePad::A;
-	sozaiPads[(int)DonesiaSound::Donesia] = ePad::B;
+	sozaiPads[(int)DonesiaSound::In] = ePad::MAX;
+	sozaiPads[(int)DonesiaSound::Donesia] = ePad::A;
 }
 
 void SozaiDonesia::update() {
@@ -37,13 +37,13 @@ void SozaiDonesia::trigger(int actionId) {
 	if (actionId == 0) {
 		sozaiManager->playSozai(
 			sozaiHandles[(int)DonesiaSozai::Kawahara],
-			1
+			0
 		);
 	}
 	else {
 		sozaiManager->playSozai(
 			sozaiHandles[(int)DonesiaSozai::Goto],
-			1
+			0
 		);
 	}
 }
