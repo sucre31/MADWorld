@@ -137,7 +137,7 @@ VsSonya::VsSonya(IOnSceneChangedListener* impl, const Parameter& parameter) : Ab
 
 	shiwakeMasterHandle = shiwakeMasterHandle = Sound::getIns()->loadBGM("Assets/Sounds/sonya/shiwakeMaster.wav");
 	PlaySoundMem(shiwakeMasterHandle, DX_PLAYTYPE_LOOP, TRUE);
-	bpmManager.setBpm(160);
+	bpmManager.setBPM(160);
 	bpmManager.startMusic();
 }
 

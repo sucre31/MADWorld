@@ -1,7 +1,7 @@
 ﻿#include "SozaiSonya.h"
 #include <Dxlib.h>
 
-SozaiSonya::SozaiSonya() : prevAvoidTime(0){
+SozaiSonya::SozaiSonya() : prevTime(0), prevAvoidTime(0){
 	sozaiPads[(int)SonyaSound::Hey] = ePad::A;
 	sozaiPads[(int)SonyaSound::Tto] = ePad::B;
 	sozaiPads[(int)SonyaSound::Sukiari] = ePad::MAX;
@@ -10,12 +10,6 @@ SozaiSonya::SozaiSonya() : prevAvoidTime(0){
 	sideBarR.setPosX(1120);
 }
 
-void SozaiSonya::startMusic() {
-	bpmManager.setBpm(132);
-	bpmManager.startMusic();
-}
-
-
 
 void SozaiSonya::update(){
 	if (isActive) {
@@ -23,7 +17,7 @@ void SozaiSonya::update(){
 		LONGLONG curTime = GetNowHiPerformanceCount();
 		LONGLONG deltaTime = curTime - prevTime;
 
-		double nowBeat = bpmManager.getCurrentBeatNum();
+		double nowBeat = bpmManager->getCurrentBeatNum();
 
 		if (Pad::getIns()->get(ePad::A) == 1) {
 			makeSnowBall(0);
@@ -69,7 +63,7 @@ void SozaiSonya::update(){
 			}
 		}
 
-		if (curTime - prevAvoidTime > bpmManager.getOneBeatTime() / 2 && avoidFlag == true) {
+		if (curTime - prevAvoidTime > bpmManager->getOneBeatTime() / 2 && avoidFlag == true) {
 			avoidFlag = false;
 		}
 	}

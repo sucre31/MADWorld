@@ -1,4 +1,4 @@
-#include "MusicManager.h"
+ï»¿#include "MusicManager.h"
 #include "Common/Sound.h"
 #include <DxLib.h>
 #include <iostream>
@@ -8,7 +8,7 @@ MusicManager::MusicManager() {}
 MusicManager::~MusicManager() {
     Stop();
     for (const auto& pair : bgmHandles) {
-        DeleteSoundMem(pair.second); // –¾¦“I‚É”jŠüiSound ‘¤‚Æ•ª—£‚µ‚ÄŠÇ—j
+        DeleteSoundMem(pair.second); // æ˜ç¤ºçš„ã«ç ´æ£„ï¼ˆSound å´ã¨åˆ†é›¢ã—ã¦ç®¡ç†ï¼‰
     }
     bgmHandles.clear();
 }
@@ -25,17 +25,17 @@ bool MusicManager::LoadMusic(const std::string& name, const std::string& path) {
 }
 
 bool MusicManager::update() {
-    // Ä¶‚ªI—¹‚µ‚½‚ç currentHandle ‚ğ–³Œø‚É‚·‚é
+    // å†ç”ŸãŒçµ‚äº†ã—ãŸã‚‰ currentHandle ã‚’ç„¡åŠ¹ã«ã™ã‚‹
     if (currentHandle != -1 && CheckSoundMem(currentHandle) == 0) {
         currentHandle = -1;
         currentMusicName.clear();
     }
 
-    return true; // “Á‚ÉI—¹ğŒ‚ª‚È‚¯‚ê‚Î true
+    return true; // ç‰¹ã«çµ‚äº†æ¡ä»¶ãŒãªã‘ã‚Œã° true
 }
 
 void MusicManager::draw() const {
-    // ƒfƒoƒbƒO—p
+    // ãƒ‡ãƒãƒƒã‚°ç”¨
     if (!currentMusicName.empty()) {
         DrawFormatString(10, 10, GetColor(255, 255, 255), "Now Playing: %s", currentMusicName.c_str());
     }
@@ -55,7 +55,7 @@ void MusicManager::Play(const std::string& name, bool loop) {
     currentHandle = it->second;
     currentMusicName = name;
 
-    int playType = loop ? DX_PLAYTYPE_LOOP : DX_PLAYTYPE_NORMAL;
+    int playType = loop ? DX_PLAYTYPE_LOOP : DX_PLAYTYPE_BACK;
     PlaySoundMem(currentHandle, playType);
 }
 
@@ -70,7 +70,7 @@ void MusicManager::Stop() {
 void MusicManager::Pause() {
     if (currentHandle != -1) {
         pausedPosition = GetCurrentPositionSoundMem(currentHandle);
-        StopSoundMem(currentHandle); // ‹­§’â~iÄŠJ—p‚ÉˆÊ’u•Û‘¶j
+        StopSoundMem(currentHandle); // å¼·åˆ¶åœæ­¢ï¼ˆå†é–‹ç”¨ã«ä½ç½®ä¿å­˜ï¼‰
     }
 }
 

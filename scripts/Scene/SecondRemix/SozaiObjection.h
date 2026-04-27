@@ -5,7 +5,6 @@
 #include "System/Define.h"
 #include "Common/SozaiBase.h"
 #include "Common/Online/WSClient.h"
-
 enum class ObjectionSozai
 {
 	Naruhodo,

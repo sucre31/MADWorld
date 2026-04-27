@@ -165,7 +165,7 @@
     <ClCompile Include="scripts\Scene\Snippet\StatusWindow.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\Scene\Sonya\BPMManager.cpp">
+    <ClCompile Include="scripts\Common\BPMManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="scripts\Scene\Sonya\sideBlank.cpp">
@@ -386,7 +386,7 @@
     <ClInclude Include="scripts\Scene\Snippet\StatusWindow.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\Scene\Sonya\BPMManager.h">
+    <ClInclude Include="scripts\Common\BPMManager.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="scripts\Scene\Sonya\sideBlank.h">

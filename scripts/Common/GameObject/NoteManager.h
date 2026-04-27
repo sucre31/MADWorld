@@ -30,6 +30,10 @@ public:
 
     void updateAutoPlay();
 
+    void setCallback(std::function<void(const Note&)> cb);
+
+    std::function<void(const Note&)> eventCallback;
+
 private:
     SozaiManager* sozaiManager = nullptr;
     PlaybackThreadPool playbackPool;

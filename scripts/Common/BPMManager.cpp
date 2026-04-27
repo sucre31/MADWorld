@@ -1,7 +1,8 @@
-#include "BPMManager.h"
+ï»¿#include "BPMManager.h"
 
 BPMManager::BPMManager() {
-	bpm = 1;
+	bpm = 1.0;
+	beatTime = 60000000.0 / bpm;
 	BGMStartTime = GetNowHiPerformanceCount();
 }
 
@@ -11,14 +12,17 @@ void BPMManager::startMusic() {
 
 double BPMManager::getCurrentBeatNum() {
 	LONGLONG nowTime = GetNowHiPerformanceCount();
-	return (nowTime - BGMStartTime) / ((60000000 / bpm));
+	return (nowTime - BGMStartTime) / beatTime;
 }
 
 /*
-@brief ””‚ğ“ü‚ê‚é‚ÆŠÔ‚ğ•Ô‚·
+@brief æ‹æ•°ã‚’å…¥ã‚Œã‚‹ã¨æ™‚é–“ã‚’è¿”ã™
 */
 LONGLONG BPMManager::getTargetBeatTime(double beatNum) {
-	LONGLONG time;
-	time = BGMStartTime + (60000000 / bpm) * beatNum;
-	return time;
+	return BGMStartTime + (LONGLONG)(beatTime * beatNum);
+}
+
+void BPMManager::setBPM(double beatPM) {
+	bpm = beatPM;
+	beatTime = 60000000.0 / bpm;
 }

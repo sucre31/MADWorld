@@ -29,11 +29,28 @@ private:
 	SozaiShuzo shuzo;
 	SozaiManager sozaiManager;
 	NoteManager noteManager;
+	std::shared_ptr<BPMManager> bpmManager;
 	MusicManager musicManager;
 	PauseMenu pauseMenu;
 
 	std::string bgmName;
 	int activeManagerIndex;
 	int prevMangerIndex;
+
+	double currentBeat = -1;
+
+	enum ActionType {
+		SozaiChange,
+		AutoPlay
+	};
+
+	struct SozaiEvent {
+		int beat;          // 発火タイミング
+		ActionType actionType;    // 何するか
+		int param;
+		bool triggered;    // 1回だけ用
+	};
+
+	std::vector<SozaiEvent> events;
 };
 

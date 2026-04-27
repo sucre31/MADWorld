@@ -7,7 +7,6 @@
 #include "Scene/Sonya/snowBall.h"
 #include "System/Define.h"
 #include "Common/SozaiBase.h"
-#include "Scene/Sonya/BPMManager.h"
 #include "Scene/Sonya/sideBlank.h"
 
 enum class SonyaSozai
@@ -39,7 +38,6 @@ public:
 	void draw() const override;
 	~SozaiSonya() = default;
 	void initSozai() override;
-	void startMusic();
 private:
 	enum launchType {
 		NORMAL = 0,
@@ -61,8 +59,6 @@ private:
 	bool avoidFlag = false;
 	LONGLONG prevTime;
 	LONGLONG prevAvoidTime;					// 連続で回避させない
-	BPMManager bpmManager;
-
 	sideBlank sideBarL;
 	sideBlank sideBarR;
 };

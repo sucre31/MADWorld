@@ -68,7 +68,7 @@
     <ClCompile Include="scripts\Scene\Snippet\SnippetImage.cpp" />
     <ClCompile Include="scripts\Scene\Snippet\SnippetSound.cpp" />
     <ClCompile Include="scripts\Scene\Snippet\StatusWindow.cpp" />
-    <ClCompile Include="scripts\Scene\Sonya\BPMManager.cpp" />
+    <ClCompile Include="scripts\Common\BPMManager.cpp" />
     <ClCompile Include="scripts\Scene\Sonya\sideBlank.cpp" />
     <ClCompile Include="scripts\Scene\Sonya\snowBall.cpp" />
     <ClCompile Include="scripts\Scene\Sonya\VsSonya.cpp" />
@@ -142,7 +142,7 @@
     <ClInclude Include="scripts\Scene\Snippet\SnippetImage.h" />
     <ClInclude Include="scripts\Scene\Snippet\SnippetSound.h" />
     <ClInclude Include="scripts\Scene\Snippet\StatusWindow.h" />
-    <ClInclude Include="scripts\Scene\Sonya\BPMManager.h" />
+    <ClInclude Include="scripts\Common\BPMManager.h" />
     <ClInclude Include="scripts\Scene\Sonya\sideBlank.h" />
     <ClInclude Include="scripts\Scene\Sonya\snowBall.h" />
     <ClInclude Include="scripts\Scene\Sonya\VsSonya.h" />

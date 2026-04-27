@@ -6,7 +6,7 @@ class BPMManager
 public:
 	BPMManager();
 	~BPMManager() = default;
-	void setBpm(double beatPM) { bpm = beatPM; }
+	void setBPM(double beatPM);
 	void startMusic();
 	double getCurrentBeatNum();
 	LONGLONG getTargetBeatTime(double);
@@ -14,6 +14,6 @@ public:
 private:
 	double bpm;
 	LONGLONG BGMStartTime;
-
+	double beatTime; // 1拍の時間
 };
 

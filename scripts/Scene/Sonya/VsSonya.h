@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include <Dxlib.h>
 #include <vector>
 #include <memory>
@@ -7,7 +7,7 @@
 #include "Common/GameObject/BackGround.h"
 #include "sideBlank.h"
 #include "snowBall.h"
-#include "BPMManager.h"
+#include "Common/BPMManager.h"
 
 class VsSonya : public AbstractScene
 {
@@ -39,12 +39,12 @@ private:
 	std::vector<std::unique_ptr<snowBall>> snowBallPtr;
 	void makeSnowBall(int);
 	void addSnowLaunch(int, int);
-	int tmp16Beat;						// 1¬ß16beat
+	int tmp16Beat;						// 1å°ç¯€16beat
 	bool beatChanged;
 	std::vector<launch> launchList;
 	int score;
 	const int MaxScore = 73;
-	LONGLONG prevAvoidTime;					// ˜A‘±‚Å‰ñ”ğ‚³‚¹‚È‚¢
+	LONGLONG prevAvoidTime;					// é€£ç¶šã§å›é¿ã•ã›ãªã„
 	bool avoidFlag;
 };
 

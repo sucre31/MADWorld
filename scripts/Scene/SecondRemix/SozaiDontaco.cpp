@@ -20,15 +20,15 @@ SozaiDontaco::SozaiDontaco(){
 void SozaiDontaco::update() {
 	if (isActive) {
 		if (Pad::getIns()->get(ePad::L) >= 1) {
-			if (useDrum != true) {
-				useDrum = true;
+			if (useDrum != false) {
+				useDrum = false;
 				resetKey();
 				setKey();
 			}
 		}
 		else {
-			if (useDrum != false) {
-				useDrum = false;
+			if (useDrum != true) {
+				useDrum = true;
 				resetKey();
 				setKey();
 			}

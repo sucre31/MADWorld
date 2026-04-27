@@ -89,10 +89,17 @@ void NoteManager::updateAutoPlay() {
             // ノーツ時刻を過ぎたら即再生
             if (currentMs >= noteTime) {
                 note.hit = true;
-                sozaiManager->playSozai(note.inputId, 0);
+
+                if (eventCallback) {
+                    eventCallback(note);
+                }
             }
         }
     }
+}
+
+void NoteManager::setCallback(std::function<void(const Note&)> cb) {
+    eventCallback = cb;
 }
 
 void NoteManager::draw() const {

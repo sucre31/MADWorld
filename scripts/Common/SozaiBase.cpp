@@ -5,6 +5,10 @@ void SozaiBase::setSozaiManager(SozaiManager* manager) {
 	sozaiManager = manager;
 }
 
+void SozaiBase::setBPMManager(std::shared_ptr<BPMManager> manager) {
+    bpmManager = manager;
+}
+
 void SozaiBase::setActive(bool flag) {
     isActive = flag;
     if (flag) {
