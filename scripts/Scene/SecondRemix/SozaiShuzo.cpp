@@ -129,3 +129,7 @@ void SozaiShuzo::initSozai() {
 void SozaiShuzo::setKey() {
 	sozaiManager->setSozaiKey(sozaiHandles[(int)ShuzoSozai::Shuzo], sozaiPads[(int)ShuzoSound::Shizukada], 1);
 }
+
+void SozaiShuzo::trigger(int actionId) {
+	if (actionId == 0) shoutPlay();
+}

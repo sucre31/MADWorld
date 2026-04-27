@@ -1,5 +1,9 @@
 ﻿#include <algorithm>
+#include <fstream>
+#include <nlohmann/json.hpp>
 #include "SceneSecondRemix.h"
+
+using json = nlohmann::json;
 
 SceneSecondRemix::SceneSecondRemix(IOnSceneChangedListener* impl, const Parameter& parameter)
 	: AbstractScene(impl, parameter),
@@ -41,26 +45,61 @@ SceneSecondRemix::SceneSecondRemix(IOnSceneChangedListener* impl, const Paramete
 
 
 	// とりあえずハードコードで素材管理
-	events = {
-		{16, ActionType::AutoPlay, 3, false},
-		{24, ActionType::AutoPlay, 2, false},
-		{32, ActionType::AutoPlay, 3, false},
-		{40, ActionType::AutoPlay, 2, false},
-		{48, ActionType::AutoPlay, 3, false},
-		{56, ActionType::AutoPlay, 2, false},
-		{64, ActionType::AutoPlay, 3, false},
-		{72, ActionType::AutoPlay, 2, false},
-		{80, ActionType::AutoPlay, 4, false},
-		{112, ActionType::AutoPlay, 2, false},
-		{136, ActionType::AutoPlay, 1, false},
-		{144, ActionType::AutoPlay, 2, false},
-		{168, ActionType::AutoPlay, 1, false},
-		{176, ActionType::AutoPlay, 0, false},
-		{240, ActionType::AutoPlay, 3, false},
-		{248, ActionType::AutoPlay, 1, false},
-		{256, ActionType::AutoPlay, 4, false},
-		{264, ActionType::AutoPlay, 0, false},
-	};
+	std::ifstream ifs("Assets/Score/remix2.json");
+	json j;
+	ifs >> j;
+
+	for (auto& e : j) {
+		SozaiEvent ev;
+
+		// bar + beat → 通しbeatに変換
+		int bar = e["bar"];
+		int beatInBar = e["beat"];
+		int beatsPerBar = 4; // ← 拍子（あとでBPMManagerから取ってもいい）
+
+		ev.beat = (bar - 1) * beatsPerBar + (beatInBar - 1);
+
+		// type
+		std::string type = e["type"];
+		if (type == "SozaiChange") ev.actionType = ActionType::SozaiChange;
+		else if (type == "AutoPlay") ev.actionType = ActionType::AutoPlay;
+
+		// target
+		std::string target = e["target"];
+		if (target == "Sonya") ev.targetSozai = SozaiType::Sonya;
+		else if (target == "Dontaco") ev.targetSozai = SozaiType::Dontaco;
+		else if (target == "Shuzo") ev.targetSozai = SozaiType::Shuzo;
+		else if (target == "Donesia") ev.targetSozai = SozaiType::Donesia;
+		else if (target == "Objection") ev.targetSozai = SozaiType::Objection;
+
+		// actionId
+		ev.actionId = e.value("actionId", 0);
+
+		ev.triggered = false;
+
+		events.push_back(ev);
+	}
+
+	//events = {
+	//	{16, SozaiChange, Sonya},
+	//	{24, SozaiChange, Dontaco},
+	//	{32, SozaiChange, Sonya},
+	//	{40, SozaiChange, Dontaco},
+	//	{48, SozaiChange, Dontaco},
+	//	{64, SozaiChange, Sonya},
+	//	{72, SozaiChange, Dontaco},
+	//	{80, SozaiChange, Shuzo},
+	//	{112, SozaiChange, Dontaco},
+	//	{136, SozaiChange, Donesia},
+	//	{144, SozaiChange, Dontaco},
+	//	{168, SozaiChange, Donesia},
+	//	{176, SozaiChange, Objection},
+	//	{240, SozaiChange, Sonya},
+	//	{248, SozaiChange, Donesia},
+	//	{256, SozaiChange, Shuzo},
+	//	{264, SozaiChange, Objection},
+	//	{16, AutoPlay, Sonya, 0},
+	//};
 }
 
 void SceneSecondRemix::update() {
@@ -109,30 +148,30 @@ void SceneSecondRemix::update() {
 	// 素材管理
 	currentBeat = bpmManager->getCurrentBeatNum();
 	for (auto& e : events) {
-		if (!e.triggered && currentBeat >= e.beat - 0.5) {	// 少し早く切り替え
+		if (!e.triggered && currentBeat >= e.beat) {	// 少し早く切り替え
 			e.triggered = true;
 
 			if (e.actionType == ActionType::SozaiChange) {
-				switch (e.param) {
-				case 0:
+				switch (e.targetSozai) {
+				case Objection:
 					activeManagerIndex = 0;
 					break;
-				case 1:
+				case Donesia:
 					activeManagerIndex = 1;
 					break;
-				case 2:
+				case Dontaco:
 					activeManagerIndex = 2;
 					break;
-				case 3:
+				case Sonya:
 					activeManagerIndex = 3;
 					break;
-				case 4:
+				case Shuzo:
 					activeManagerIndex = 4;
 					break;
 				}
 			}
 			else if (e.actionType == ActionType::AutoPlay) {
-
+				sozaies[e.targetSozai]->trigger(e.actionId);
 			}
 		}
 	}

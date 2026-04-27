@@ -28,6 +28,7 @@ public:
 	~SozaiShuzo() = default;
 	void initSozai() override;
 	void shoutPlay();
+	void trigger(int actionId) override;
 private:
 	WSClient ws;
 	void setKey() override;

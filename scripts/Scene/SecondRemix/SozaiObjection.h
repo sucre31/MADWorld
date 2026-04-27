@@ -38,6 +38,7 @@ public :
 	void draw() const override;
 	~SozaiObjection() = default;
 	void initSozai() override;
+	void trigger(int actionId) override;
 private:
 	WSClient ws;
 	bool isNaruhodoTurn = false;

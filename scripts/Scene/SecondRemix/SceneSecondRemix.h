@@ -44,11 +44,20 @@ private:
 		AutoPlay
 	};
 
+	enum SozaiType {
+		Objection,
+		Donesia,
+		Dontaco,
+		Sonya,
+		Shuzo
+	};
+
 	struct SozaiEvent {
 		int beat;          // 発火タイミング
 		ActionType actionType;    // 何するか
-		int param;
-		bool triggered;    // 1回だけ用
+		SozaiType targetSozai;  // どのSozai
+		int actionId = 0;     // 何するか
+		bool triggered = false;    // 1回だけ用
 	};
 
 	std::vector<SozaiEvent> events;

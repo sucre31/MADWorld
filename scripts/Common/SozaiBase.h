@@ -17,6 +17,8 @@ public:
 	virtual void setKey() = 0;
 	virtual void resetKey();
 
+	virtual void trigger(int actionId) = 0; // オートプレイで呼ばれる物を設定
+
 protected:
 	SozaiManager* sozaiManager = nullptr;
 	bool isActive = false;

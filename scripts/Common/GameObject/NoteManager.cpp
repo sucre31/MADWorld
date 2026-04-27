@@ -98,10 +98,6 @@ void NoteManager::updateAutoPlay() {
     }
 }
 
-void NoteManager::setCallback(std::function<void(const Note&)> cb) {
-    eventCallback = cb;
-}
-
 void NoteManager::draw() const {
     int elapsedMs = currentTimeMs;
 

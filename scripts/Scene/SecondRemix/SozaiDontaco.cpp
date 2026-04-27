@@ -108,3 +108,11 @@ void SozaiDontaco::setKey() {
 	}
 	//sozaiManager->setSozaiKey(sozaiHandles[DontacoSozai::Drum], sozaiPads[DontacoSound::Drum1], 0);
 }
+
+void SozaiDontaco::trigger(int actionId) {
+	sozaiManager->playSozai(
+		useDrum ? sozaiHandles[(int)DontacoSozai::Drum]
+		: sozaiHandles[(int)DontacoSozai::Dontacos],
+		actionId
+	);
+}

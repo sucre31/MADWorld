@@ -202,3 +202,8 @@ void SozaiSonya::addSnowLaunch(int beat, int type) {
 	tmpLaunchData.launchType = type;
 	launchList.push_back(tmpLaunchData);
 }
+
+void SozaiSonya::trigger(int actionId) {
+	// actionId = 雪玉タイプ
+	makeSnowBall(actionId);
+}

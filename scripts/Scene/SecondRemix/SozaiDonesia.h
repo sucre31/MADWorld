@@ -25,6 +25,7 @@ public:
 	void draw() const override;
 	~SozaiDonesia() = default;
 	void initSozai() override;
+	void trigger(int actionId) override;
 private:
 	void setKey() override;
 };

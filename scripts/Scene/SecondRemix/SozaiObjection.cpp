@@ -214,3 +214,7 @@ void SozaiObjection::setKey() {
 	sozaiManager->setSozaiKey(sozaiHandles[(int)ObjectionSozai::Mitsurugi], sozaiPads[(int)ObjectionSound::MitsurugiTakeThat], 4);
 }
 
+void SozaiObjection::trigger(int actionId) {
+	// どっちのキャラかは内部状態で判断
+	sozaiManager->playSozai(sozaiHandles[(int)ObjectionSozai::Mitsurugi], actionId);
+}

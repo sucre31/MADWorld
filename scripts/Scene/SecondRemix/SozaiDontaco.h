@@ -39,6 +39,7 @@ public:
 	void draw() const override;
 	~SozaiDontaco() = default;
 	void initSozai() override;
+	void trigger(int actionId) override;
 private:
 	void setKey() override;
 	bool useDrum = false;

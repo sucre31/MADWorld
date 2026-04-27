@@ -32,3 +32,18 @@ void SozaiDonesia::setKey() {
 	sozaiManager->setSozaiKey(sozaiHandles[(int)DonesiaSozai::Kawahara], sozaiPads[(int)DonesiaSound::In], 0);
 	sozaiManager->setSozaiKey(sozaiHandles[(int)DonesiaSozai::Goto], sozaiPads[(int)DonesiaSound::Donesia], 0);
 }
+
+void SozaiDonesia::trigger(int actionId) {
+	if (actionId == 0) {
+		sozaiManager->playSozai(
+			sozaiHandles[(int)DonesiaSozai::Kawahara],
+			1
+		);
+	}
+	else {
+		sozaiManager->playSozai(
+			sozaiHandles[(int)DonesiaSozai::Goto],
+			1
+		);
+	}
+}

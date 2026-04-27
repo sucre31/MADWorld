@@ -38,6 +38,7 @@ public:
 	void draw() const override;
 	~SozaiSonya() = default;
 	void initSozai() override;
+	void trigger(int actionId) override;
 private:
 	enum launchType {
 		NORMAL = 0,
