@@ -20,5 +20,7 @@ private:
 	PauseMenu pauseMenu;
 
 	std::unordered_map<int, int> sozaiHandles;
+
+	bool gbFlag = false;
 };
 

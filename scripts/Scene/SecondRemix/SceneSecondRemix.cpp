@@ -28,6 +28,7 @@ SceneSecondRemix::SceneSecondRemix(IOnSceneChangedListener* impl, const Paramete
 
 	bgmName = "remix2";
 	musicManager.Play(bgmName, true);
+	sonya.startMusic();
 
 	noteManager.loadFromFile("");
 

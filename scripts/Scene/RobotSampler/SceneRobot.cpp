@@ -65,25 +65,26 @@ SceneRobot::SceneRobot(IOnSceneChangedListener* impl, const Parameter& parameter
 					posX,
 					posY
 				);
-			sozaiManager.addSprite(sozaiHandles[index], (bassMoviePath + paths[index] + ".avi").c_str());
+			sozaiManager.addSound(sozaiHandles[index], "");
+			sozaiManager.addSprite(sozaiHandles[index], 1, (bassMoviePath + paths[index] + ".avi").c_str());
 
 			sozaiManager.setSozaiMidiKey(
 				index,
 				midiKeys[index],
-				0,
-				1
+				1,
+				0
 			);
 		}
 	}
 
 	// ベースの追加設定
-	sozaiManager.setSozaiMidiKey(4, eMidi::A_S3, 0, 1);
-	sozaiManager.setSozaiMidiKey(5, eMidi::C_4, 0, 2);
-	sozaiManager.setSozaiMidiKey(5, eMidi::D_4, 0, 2);
-	sozaiManager.setSozaiMidiKey(5, eMidi::E_4, 0, 2);
+	sozaiManager.setSozaiMidiKey(4, eMidi::A_S3, 1, 0);
+	sozaiManager.setSozaiMidiKey(5, eMidi::C_4, 1, 1);
+	sozaiManager.setSozaiMidiKey(5, eMidi::D_4, 1, 1);
+	sozaiManager.setSozaiMidiKey(5, eMidi::E_4, 1, 1);
 	
 	for (auto& p : sozaiHandles) {
-		sozaiManager.setSozaiEx(p.second, (1.0 / 4.0));
+		sozaiManager.setSozaiEx(p.second, (1.5 / 4.0));
 		sozaiManager.setSozaiLayer(p.second, 1);
 		sozaiManager.setReverseFlag(p.second, true);
 	}
@@ -91,6 +92,11 @@ SceneRobot::SceneRobot(IOnSceneChangedListener* impl, const Parameter& parameter
 
 void SceneRobot::update() {
 	sozaiManager.update();
+	if (Pad::getIns()->get(ePad::B) == 1) {
+		// 背景色変更
+		gbFlag = !gbFlag;
+	}
+
 	if (Pad::getIns()->get(ePad::start) == 1) {
 		// メニューに戻る
 		Parameter parameter;
@@ -103,14 +109,16 @@ void SceneRobot::update() {
 }
 
 void SceneRobot::draw() const {
-	DrawBox(
-		0,
-		0,
-		Define::WIN_W,
-		Define::WIN_H,
-		GetColor(0, 255, 0),
-		TRUE // 塗りつぶし
-	);
+	if (gbFlag) {
+		DrawBox(
+			0,
+			0,
+			Define::WIN_W,
+			Define::WIN_H,
+			GetColor(0, 255, 0),
+			TRUE // 塗りつぶし
+		);
+	}
 	sozaiManager.draw();
 }
 

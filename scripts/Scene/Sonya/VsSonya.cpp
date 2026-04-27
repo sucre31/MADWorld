@@ -237,7 +237,7 @@ void VsSonya::makeSnowBall(int launchType) {
 		sozaiManager.playSozai(0, -1);
 		break;
 	}
-	snowBallPtr.push_back(std::make_unique<snowBall>());
+	snowBallPtr.push_back(std::make_unique<snowBall>(160, 1.5, throwType::Normal));
 	snowBallPtr[snowBallPtr.size() - 1]->setSEHandle(debugSEHandle);
 }
 

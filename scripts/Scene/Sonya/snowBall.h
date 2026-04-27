@@ -1,5 +1,6 @@
-#pragma once
+ï»¿#pragma once
 #include "Common/GameObject/GameObject.h"
+#include "System/Define.h"
 
 enum stateSnow {
 	FLYING,
@@ -11,16 +12,22 @@ enum stateSnow {
 	KILL
 };
 
+enum throwType {
+	Normal,
+	PARABOLA
+};
+
 class snowBall : public GameObject
 {
 public:
-	snowBall();
+	snowBall(float bpm, float beatNum, throwType type);
 	~snowBall() = default;
 	bool update() override;
 	void draw() const override;
 	void setSEHandle(int handle) { SEHandle = handle; }
 	int getState() { return snowState; }
 	void setState(int stateNum) { snowState = stateNum; }
+	void setBpm(float setBpm, float beatNum);
 private:
 	LONGLONG prevTime;
 	LONGLONG launchTime;
@@ -28,7 +35,17 @@ private:
 	int SEHandle;
 	int snowBallGraph;
 	int snowBallBreakGraph;
-	int snowState;			// 0:‚Æ‚ñ‚Å‚é@1:‹–—eƒ^ƒCƒ~ƒ“ƒO@2:ƒ\[ƒjƒƒƒqƒbƒg 3:‰ñ”ğ¬Œ÷ 4:•Çƒqƒbƒg 5:”j‰óƒAƒjƒ 6:Á–Å
-	const int marginTime = 80000;	// ‹–—eŠÔ
+	int snowState;			// 0:ã¨ã‚“ã§ã‚‹ã€€1:è¨±å®¹ã‚¿ã‚¤ãƒŸãƒ³ã‚°ã€€2:ã‚½ãƒ¼ãƒ‹ãƒ£ãƒ’ãƒƒãƒˆ 3:å›é¿æˆåŠŸ 4:å£ãƒ’ãƒƒãƒˆ 5:ç ´å£Šã‚¢ãƒ‹ãƒ¡ 6:æ¶ˆæ»…
+	int marginTime = 80000;	// è¨±å®¹æ™‚é–“
+	float bpm = 160;
+	float beatTime;
+	float targetTime; //ç€å¼¾ã¾ã§ã®æ™‚é–“
+
+	const float startX = 1000;
+	const float startY = 450;
+	const float targetX = (Define::WIN_W * (1.0 / 4.0) + 70);
+	const float targetY = (Define::WIN_H / 2.0) + 160;
+	const float arcHeight = 300;
+	throwType moveType;
 };
 
