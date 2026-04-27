@@ -23,7 +23,7 @@ void SozaiSonya::update(){
 			snowBallPtr[i]->update();
 			if (snowBallPtr[i]->getState() == stateSnow::CHECK) {
 				// 回避タイミング
-				if (Pad::getIns()->get(ePad::B) == 1 && avoidFlag == false) {
+				if (Pad::getIns()->get(ePad::A) == 1 && avoidFlag == false) {
 					// 回避成功
 					snowBallPtr[i]->setState(stateSnow::AVOID);
 				}

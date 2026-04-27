@@ -12,7 +12,8 @@ enum class ObjectionSozai
 	NaruhodoTable,
 	MitsurugiTable,
 	NaruhodoBack,
-	MitsurugiBack
+	MitsurugiBack,
+	Saibancho
 };
 
 enum class ObjectionSound
@@ -26,7 +27,8 @@ enum class ObjectionSound
 	NaruhodoHoldIt,
 	MitsurugiHoldIt,
 	NaruhodoTakeThat,
-	MitsurugiTakeThat
+	MitsurugiTakeThat,
+	Saibancho
 };
 
 

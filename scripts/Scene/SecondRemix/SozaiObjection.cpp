@@ -6,13 +6,13 @@ using json = nlohmann::json;
 SozaiObjection::SozaiObjection(){
 	sozaiPads[(int)ObjectionSound::NaruhodoIdle] = ePad::L;
 	sozaiPads[(int)ObjectionSound::MitsurugiIdle] = ePad::MAX;
-	sozaiPads[(int)ObjectionSound::NaruhodoBass] = ePad::down;
+	sozaiPads[(int)ObjectionSound::NaruhodoBass] = ePad::B;
 	sozaiPads[(int)ObjectionSound::MitsurugiBass] = ePad::MAX;
 	sozaiPads[(int)ObjectionSound::NaruhodoObjection] = ePad::A;
 	sozaiPads[(int)ObjectionSound::MitsurugiObjection] = ePad::MAX;
-	sozaiPads[(int)ObjectionSound::NaruhodoHoldIt] = ePad::X;
+	sozaiPads[(int)ObjectionSound::NaruhodoHoldIt] = ePad::Y;
 	sozaiPads[(int)ObjectionSound::MitsurugiHoldIt] = ePad::MAX;
-	sozaiPads[(int)ObjectionSound::NaruhodoTakeThat] = ePad::Y;
+	sozaiPads[(int)ObjectionSound::NaruhodoTakeThat] = ePad::X;
 	sozaiPads[(int)ObjectionSound::MitsurugiTakeThat] = ePad::MAX;
 
 	std::thread([this]() {
@@ -140,6 +140,13 @@ void SozaiObjection::initSozai() {
 		sozaiManager->addSprite(mitsurugiHandle, 4, ("Assets/Sprites/images/phoenixWright/mitsurugi/takeThat/takeThat" + std::to_string(i) + ".png").c_str());
 	}
 
+	// サイバンチョ
+	sozaiHandles[(int)ObjectionSozai::Saibancho] =
+		sozaiManager->makeSozai("", "Assets/Sprites/images/phoenixWright/saibancho.png", (Define::WIN_W / 2.0), (Define::WIN_H / 2.0));
+	sozaiManager->addSound(sozaiHandles[(int)ObjectionSozai::Saibancho], "Assets/Sounds/phoenixWright/saibancho.wav");
+	sozaiManager->addSprite(sozaiHandles[(int)ObjectionSozai::Saibancho], 1, "Assets/Sprites/movie/phoenixWright/saibancho.mp4");
+	sozaiManager->setSozaiLayer(sozaiHandles[(int)ObjectionSozai::Saibancho], 0);
+
 	// テーブル
 	int tableOffSet = 64;
 	int naruhodoTable = sozaiManager->makeSozai("", "Assets/Sprites/images/phoenixWright/others/table.png", (Define::WIN_W / 2.0), naruhodoPosY + tableOffSet);
@@ -171,6 +178,8 @@ void SozaiObjection::initSozai() {
 		sozaiManager->setSozaiEx(handle, exRate);
 		sozaiManager->setReverseFlag(handle, false);
 	}
+
+	sozaiManager->setSozaiEx(sozaiHandles[(int)ObjectionSozai::Saibancho], 2.0f);
 
 	setActive(false);
 }
@@ -215,6 +224,10 @@ void SozaiObjection::setKey() {
 }
 
 void SozaiObjection::trigger(int actionId) {
+	if (actionId == 10) {
+		sozaiManager->setSozaiLayer(sozaiHandles[(int)ObjectionSozai::Saibancho], 10);
+		sozaiManager->playSozai(sozaiHandles[(int)ObjectionSozai::Saibancho], 1);
+	}
 	setMitsurugiFront();
 	sozaiManager->playSozai(sozaiHandles[(int)ObjectionSozai::Mitsurugi], actionId);
 }
