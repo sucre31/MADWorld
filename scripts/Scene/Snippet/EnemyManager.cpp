@@ -33,7 +33,7 @@ EnemyManager::EnemyManager(std::shared_ptr<SnippetGameManager> managerIns, std::
 bool EnemyManager::update() {
 	for (int i = 0; i < NumberOfEnemy; i++) {
 		if (!enemy[i]->getAlive()) {
-			WaitTimer(100);	//代替すべき
+			//WaitTimer(100);	//代替すべき
 			enemy[i]->setNewEnemy((enemy[i]->getID() + 1 + GetRand(NumberOfKind - 2)) % NumberOfKind);
 		}
 		enemy[i]->update();

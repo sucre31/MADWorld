@@ -1,5 +1,8 @@
 ﻿#include <Dxlib.h>
 #include "SceneRobot.h"
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
+
 
 SceneRobot::SceneRobot(IOnSceneChangedListener* impl, const Parameter& parameter)
 	:AbstractScene(impl, parameter),
@@ -88,6 +91,18 @@ SceneRobot::SceneRobot(IOnSceneChangedListener* impl, const Parameter& parameter
 		sozaiManager.setSozaiLayer(p.second, 1);
 		sozaiManager.setReverseFlag(p.second, true);
 	}
+
+	std::thread([this]() {
+		if (ws.connect(L"madheavenwebsocket.onrender.com", L"/")) {
+			ws.send(R"({"type": "REGISTER", "role": "game"})"); // サーバー側のロールをgameとして通知
+			wsConnection = true;
+		}
+		else {
+			printfDx("Connection Failed.\n");
+		}
+		}).detach();
+
+	sampleImg = Image::getIns()->loadSamples("Assets/Sprites/images/sonya/snowBall.png");
 }
 
 void SceneRobot::update() {
@@ -95,6 +110,28 @@ void SceneRobot::update() {
 	if (Pad::getIns()->get(ePad::B) == 1) {
 		// 背景色変更
 		gbFlag = !gbFlag;
+	}
+
+	// サーバー処理
+	std::string msg;
+	while (ws.pollMessage(msg)) { // pollMessage 内で onMessageChanged が呼ばれる
+		try {
+			auto data = json::parse(msg);
+
+			if (!data.contains("type")) continue;
+			std::string type = data["type"];
+
+			if (type == "CONFIG") {
+				continue;
+			}
+
+			if (type == "UPDATE") {
+				updatePlayers(data);
+			}
+		}
+		catch (const std::exception& e) {
+			printfDx("JSON Parse Error: %s\n", e.what());
+		}
 	}
 
 	if (Pad::getIns()->get(ePad::start) == 1) {
@@ -105,6 +142,22 @@ void SceneRobot::update() {
 		Sound::getIns()->release();
 		Image::getIns()->release();
 		_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, stackClear);
+		return;
+	}
+}
+
+void SceneRobot::updatePlayers(const json& data) {
+	players.clear();
+
+	for (auto& p : data["details"]) {
+		NetPlayer np;
+		np.id = p["id"];
+		np.x = p["x"];
+		np.y = p["y"];
+		np.accel = p["accel"];
+		np.heat = p["heat"];
+
+		players.push_back(np);
 	}
 }
 
@@ -119,6 +172,14 @@ void SceneRobot::draw() const {
 			TRUE // 塗りつぶし
 		);
 	}
+
+	for (const auto& p : players) {
+		int x = (int)(p.x * Define::WIN_W);
+		int y = (int)(p.y * Define::WIN_H);
+
+		DrawRotaGraph(x, y, 1.0, 0, sampleImg, TRUE);
+	}
+
 	sozaiManager.draw();
 }
 

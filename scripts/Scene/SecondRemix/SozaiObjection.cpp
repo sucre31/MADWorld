@@ -14,45 +14,10 @@ SozaiObjection::SozaiObjection(){
 	sozaiPads[(int)ObjectionSound::MitsurugiHoldIt] = ePad::MAX;
 	sozaiPads[(int)ObjectionSound::NaruhodoTakeThat] = ePad::X;
 	sozaiPads[(int)ObjectionSound::MitsurugiTakeThat] = ePad::MAX;
-
-	std::thread([this]() {
-		ws.connect(L"madheavenwebsocket.onrender.com", L"/");
-		ws.send(R"({"type": "REGISTER", "role": "game"})"); // サーバー側のロールをgameとして通知
-		wsConnection = true;
-		}).detach();
 }
 
 void SozaiObjection::update() {
 	if (isActive) {
-		std::string msg;
-		while (ws.pollMessage(msg)) { // pollMessage 内で onMessageChanged が呼ばれる
-			try {
-				auto data = json::parse(msg);
-
-				std::string type = data["type"];
-
-				if (type == "CONFIG") {
-					this->heatThreshold = data["threshold"];
-					continue;
-				}
-
-				// 基本データの取得
-				float heatRatio = data["heatRatio"];
-				float totalHeat = data["totalHeat"];
-
-				// サーバー側でリセットが発生した（BURST）場合
-				if (type == "BURST" || heatRatio >= heatThreshold) {
-					printfDx("!!! HEAT BURST !!!\n");
-					setNaruhodoFront();
-					sozaiManager->playSozai(sozaiHandles[(int)ObjectionSozai::Naruhodo], 2);
-				}
-
-			}
-			catch (const std::exception& e) {
-				printfDx("JSON Parse Error: %s\n", e.what());
-			}
-		}
-
 		for (auto& pair : sozaiPads)
 		{
 			ObjectionSound sound = (ObjectionSound)pair.first;
@@ -178,8 +143,6 @@ void SozaiObjection::initSozai() {
 		sozaiManager->setSozaiEx(handle, exRate);
 		sozaiManager->setReverseFlag(handle, false);
 	}
-
-	sozaiManager->setSozaiEx(sozaiHandles[(int)ObjectionSozai::Saibancho], 2.0f);
 
 	setActive(false);
 }

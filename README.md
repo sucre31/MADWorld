@@ -1,5 +1,21 @@
 音と映像のリアルタイムな同期
 
+## 潜在的なバグについて
+if (Pad::getIns()->get(ePad::start) == 1) {
+	// メニューに戻る
+	Parameter parameter;
+	const bool stackClear = true;
+	// ここに直接書くんじゃなくて関数用意すべきかな
+	Sound::getIns()->release();
+	Image::getIns()->release();
+	_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, stackClear);
+}
+
+について
+→これをupdateでやってるが、
+_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, stackClear);
+これがよばれたら、そのあとのupdateで諸々触れなくなるのでreturnしないと危険
+return追加、もしくはそもそもの構造を見直すかする
 
 ### サーバー通信について
 - Firebaseを利用したhttp通信
