@@ -120,6 +120,15 @@ void SozaiSonya::initSozai() {
 
 	sozaiManager->setMultiSound(sozaiHandles[(int)SonyaSozai::Yasuna], true);
 
+	// イントロの素材
+	sozaiHandles[(int)SonyaSozai::OP] = 
+		sozaiManager->makeSozai("", "", Define::WIN_W / 2, Define::WIN_H / 2);
+	sozaiManager->addSound(sozaiHandles[(int)SonyaSozai::OP], "");
+	sozaiManager->addSprite(sozaiHandles[(int)SonyaSozai::OP], 1, "Assets/Sprites/movie/sonya/sonyaIntro.mp4");
+	sozaiManager->addSound(sozaiHandles[(int)SonyaSozai::OP], "Assets/Sounds/sonya/sonyachan.wav");
+	sozaiManager->addSprite(sozaiHandles[(int)SonyaSozai::OP], 2, "Assets/Sprites/movie/sonya/sonyachan.mp4");
+	sozaiManager->setSozaiLayer(sozaiHandles[(int)SonyaSozai::OP], 9);
+
 	for (auto& pair : sozaiHandles)
 	{
 		int handle = pair.second;
@@ -156,6 +165,8 @@ void SozaiSonya::setLayerFront() {
 	}
 	sozaiManager->setSozaiLayer(sozaiHandles[(int)SonyaSozai::Back5], 10);
 	sozaiManager->setSozaiLayer(sozaiHandles[(int)SonyaSozai::Back6], 10);
+
+	sozaiManager->setSozaiLayer(sozaiHandles[(int)SonyaSozai::OP], 9);
 }
 
 void SozaiSonya::setKey() {
@@ -192,6 +203,14 @@ void SozaiSonya::addSnowLaunch(int beat, int type) {
 }
 
 void SozaiSonya::trigger(int actionId) {
-	// actionId = 雪玉タイプ
-	makeSnowBall(actionId);
+	if (actionId == 10) {
+		sozaiManager->playSozai(sozaiHandles[(int)SonyaSozai::OP], 1);
+	}
+	else if (actionId == 11) {
+		sozaiManager->playSozai(sozaiHandles[(int)SonyaSozai::OP], 2);
+	}
+	else {
+		// actionId = 雪玉タイプ
+		makeSnowBall(actionId);
+	}
 }

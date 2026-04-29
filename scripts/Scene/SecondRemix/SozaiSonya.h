@@ -19,13 +19,15 @@ enum class SonyaSozai
 	Back3,
 	Back4,
 	Back5,
-	Back6
+	Back6,
+	OP
 };
 
 enum class SonyaSound
 {
 	Hey,
 	Sukiari,
+	SonyaChan,
 	Tto,
 	Hit
 };

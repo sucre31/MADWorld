@@ -92,6 +92,7 @@
     <ClCompile Include="scripts\Common\SozaiBase.cpp" />
     <ClCompile Include="scripts\Scene\SecondRemix\SozaiShuzo.cpp" />
     <ClCompile Include="scripts\Common\Online\WSClient.cpp" />
+    <ClCompile Include="scripts\Common\Online\WSDataHolder.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scripts\Scene\RobotSampler\SceneRobot.h" />
@@ -166,6 +167,7 @@
     <ClInclude Include="scripts\Common\SozaiBase.h" />
     <ClInclude Include="scripts\Scene\SecondRemix\SozaiShuzo.h" />
     <ClInclude Include="scripts\Common\Online\WSClient.h" />
+    <ClInclude Include="scripts\Common\Online\WSDataHolder.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

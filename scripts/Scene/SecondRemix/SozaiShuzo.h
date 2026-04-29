@@ -1,7 +1,6 @@
 ﻿#pragma once
 #include "Common/SozaiBase.h"
-//#include "Common/Online/HttpClient.h"
-#include "Common/Online/WSClient.h"
+#include "Common/Online/WSDataHolder.h"
 #include "System/Define.h"
 
 
@@ -30,7 +29,7 @@ public:
 	void shoutPlay();
 	void trigger(int actionId) override;
 private:
-	WSClient ws;
+	WSDataHolder ws;
 	void setKey() override;
 	void setLayerFront() override;
 	void initializeFont();

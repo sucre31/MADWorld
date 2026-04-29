@@ -1,23 +1,25 @@
 ﻿#pragma once
 #include <vector>
 #include <string>
+#include <unordered_map>
+#include <unordered_set>
 #include "System/AbstractScene.h"
 #include "Common/GameObject/SozaiManager.h"
 #include "Common/GameObject/PauseMenu.h"
 #include "Common/GameObject/NoteManager.h"
 #include "Common/GameObject/MusicManager.h"
 #include "Common/Online/WSClient.h"
-#include <nlohmann/json.hpp>
-using json = nlohmann::json;
+#include "Common/Online/WSDataHolder.h"
 
-struct NetPlayer {
+struct RenderPlayer {
 	std::string id;
 
-	float x = 0.5f;   // 0〜1
-	float y = 0.5f;   // 0〜1
-	float accel = 0.0f;
+	float x, y;          // 表示位置（補間後）
+	float targetX, targetY; // サーバー位置
+	float accel;
+	float targetAccel;
 
-	float heat = 0.0f;
+	float lastSeenTime;
 };
 
 class SceneRobot : public AbstractScene
@@ -28,18 +30,20 @@ public:
 	void update() override;
 	void draw() const override;
 private:
+	float getTimeSec();
 	void setKey();
-	void updatePlayers(const json& data);
 	SozaiManager sozaiManager;
 	NoteManager noteManager;
 	MusicManager musicManager;
 	PauseMenu pauseMenu;
 
-	WSClient ws;
+	WSDataHolder wsHolder;
 	std::atomic<bool> wsConnection = false;
 	std::vector<NetPlayer> players;
+	std::unordered_map<std::string, RenderPlayer> renderPlayers;
 
 	std::unordered_map<int, int> sozaiHandles;
+	std::unordered_set<std::string> aliveIds;
 
 	int sampleImg;
 

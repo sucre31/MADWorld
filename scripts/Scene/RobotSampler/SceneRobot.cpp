@@ -92,46 +92,55 @@ SceneRobot::SceneRobot(IOnSceneChangedListener* impl, const Parameter& parameter
 		sozaiManager.setReverseFlag(p.second, true);
 	}
 
-	std::thread([this]() {
-		if (ws.connect(L"madheavenwebsocket.onrender.com", L"/")) {
-			ws.send(R"({"type": "REGISTER", "role": "game"})"); // サーバー側のロールをgameとして通知
-			wsConnection = true;
-		}
-		else {
-			printfDx("Connection Failed.\n");
-		}
-		}).detach();
+	wsHolder.start();
 
 	sampleImg = Image::getIns()->loadSamples("Assets/Sprites/images/sonya/snowBall.png");
 }
 
 void SceneRobot::update() {
+	wsHolder.update();
+	players = wsHolder.getPlayers();
+
+	float now = getTimeSec();
+
+	aliveIds.clear();
+
+	for (auto& p : players)
+	{
+		aliveIds.insert(p.id);
+
+		auto& r = renderPlayers[p.id];
+		r.id = p.id;
+		r.targetX = p.x;
+		r.targetY = p.y;
+		r.targetAccel = p.accel;
+		r.lastSeenTime = now;
+
+		r.x += (r.targetX - r.x) * 0.2f;
+		r.y += (r.targetY - r.y) * 0.2f;
+		r.accel += (r.targetAccel - r.accel) * 0.3f;
+	}
+
+	const float DEAD_TIME = 2.0f; // 2秒無通信で消す
+
+	for (auto it = renderPlayers.begin(); it != renderPlayers.end(); )
+	{
+		float diff = now - it->second.lastSeenTime;
+
+		if (diff > DEAD_TIME)
+		{
+			it = renderPlayers.erase(it);
+		}
+		else
+		{
+			++it;
+		}
+	}
+
 	sozaiManager.update();
 	if (Pad::getIns()->get(ePad::B) == 1) {
 		// 背景色変更
 		gbFlag = !gbFlag;
-	}
-
-	// サーバー処理
-	std::string msg;
-	while (ws.pollMessage(msg)) { // pollMessage 内で onMessageChanged が呼ばれる
-		try {
-			auto data = json::parse(msg);
-
-			if (!data.contains("type")) continue;
-			std::string type = data["type"];
-
-			if (type == "CONFIG") {
-				continue;
-			}
-
-			if (type == "UPDATE") {
-				updatePlayers(data);
-			}
-		}
-		catch (const std::exception& e) {
-			printfDx("JSON Parse Error: %s\n", e.what());
-		}
 	}
 
 	if (Pad::getIns()->get(ePad::start) == 1) {
@@ -146,19 +155,9 @@ void SceneRobot::update() {
 	}
 }
 
-void SceneRobot::updatePlayers(const json& data) {
-	players.clear();
-
-	for (auto& p : data["details"]) {
-		NetPlayer np;
-		np.id = p["id"];
-		np.x = p["x"];
-		np.y = p["y"];
-		np.accel = p["accel"];
-		np.heat = p["heat"];
-
-		players.push_back(np);
-	}
+float SceneRobot::getTimeSec()
+{
+	return (float)GetNowCount() / 1000.0f;
 }
 
 void SceneRobot::draw() const {
@@ -173,11 +172,14 @@ void SceneRobot::draw() const {
 		);
 	}
 
-	for (const auto& p : players) {
-		int x = (int)(p.x * Define::WIN_W);
-		int y = (int)(p.y * Define::WIN_H);
+	for (const auto& [id, r] : renderPlayers) {
+		int x = (int)(r.x * Define::WIN_W);
+		int y = (int)(r.y * Define::WIN_H);
 
+
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 * r.accel);
 		DrawRotaGraph(x, y, 1.0, 0, sampleImg, TRUE);
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
 	}
 
 	sozaiManager.draw();

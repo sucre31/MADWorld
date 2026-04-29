@@ -10,15 +10,7 @@ SozaiShuzo::SozaiShuzo() {
 	timer = GetNowCount();
 
 
-	std::thread([this]() {
-		if (ws.connect(L"madheavenwebsocket.onrender.com", L"/")) {
-			ws.send(R"({"type": "REGISTER", "role": "game"})"); // サーバー側のロールをgameとして通知
-			wsConnection = true;
-		}
-		else {
-			printfDx("Connection Failed.\n");
-		}
-	}).detach();
+	ws.start();
 }
 
 void SozaiShuzo::shoutPlay() {
@@ -33,34 +25,12 @@ void SozaiShuzo::update() {
 	}
 
 	if (isActive) {
-		std::string msg;
-		while (ws.pollMessage(msg)) { // pollMessage 内で onMessageChanged が呼ばれる
-			try {
-				auto data = json::parse(msg);
+		ws.update();
 
-				if (!data.contains("type")) continue;
-				std::string type = data["type"];
+		heatRatio = ws.getHeatRatio();
 
-				if (type == "CONFIG") {
-					this->heatThreshold = data["threshold"];
-					//printfDx("setThreshold:%f\n", heatThreshold);
-					continue;
-				}
-
-				// 基本データの取得
-				heatRatio = data["heatRatio"];
-				float totalHeat = data["totalHeat"];
-
-				// サーバー側でリセットが発生した（BURST）場合
-				if (type == "BURST" || heatRatio >= heatThreshold) {
-					//printfDx("!!! HEAT BURST !!!\n");
-					heatRatio = 0;
-					shoutPlay();
-				}
-			}
-			catch (const std::exception& e) {
-				printfDx("JSON Parse Error: %s\n", e.what());
-			}
+		if (ws.consumeBurst()) {
+			shoutPlay();
 		}
 
 		if (Pad::getIns()->get(sozaiPads[(int)ShuzoSound::Shizukada]) == 1) {

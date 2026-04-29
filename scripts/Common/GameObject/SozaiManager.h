@@ -4,6 +4,11 @@
 #include "Common/GameObject/Sozai.h"
 #include "System/MIDI.h"
 
+enum ActionType {
+	SozaiChange,
+	AutoPlay
+};
+
 class SozaiManager : GameObject
 {
 public:
