@@ -36,7 +36,7 @@ SceneSecondRemix::SceneSecondRemix(IOnSceneChangedListener* impl, const Paramete
 	bgmName = "remix2";
 	musicManager.Play(bgmName, false);
 	bpmManager->setBPM(132);
-	bpmManager->startMusic();
+	bpmManager->startMusic(musicManager.GetHandle());
 
 	noteManager.loadFromFile("");
 

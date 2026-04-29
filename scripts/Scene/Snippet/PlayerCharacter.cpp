@@ -82,9 +82,18 @@ bool PlayerCharacter::update() {
 		}
 	}
 	else if (alwaysActive) {
-		if (beatManager->isStepChanged()) myInstrument->playWithStep(beatManager->getNumberOfStep(), 0);
+		int step = beatManager->getNumberOfStep();
+
+		if (step != lastPlayedStep) {
+			myInstrument->playWithStep(step, 0);
+			lastPlayedStep = step;
+		}
 	}
 	return true;
+}
+
+void PlayerCharacter::setAlwaysActive(bool flag) {
+	alwaysActive = flag;
 }
 
 void PlayerCharacter::draw() const {

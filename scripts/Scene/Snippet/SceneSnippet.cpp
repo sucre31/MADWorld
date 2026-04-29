@@ -39,7 +39,11 @@ SceneSnippet::SceneSnippet(IOnSceneChangedListener* impl, const Parameter& param
 	initCharacter();
 	setEnemyInstancetToCharacter();
 	initWindow();
+	bpmManager.setBPM(165);
 	beatManager->startMusic(musicNumber);
+	bpmManager.startMusic(snippetSound->getBackgroundMusic()[musicNumber]);;
+
+	initEventSystem();
 }
 
 void SceneSnippet::update() {
@@ -56,12 +60,21 @@ void SceneSnippet::update() {
 	_statusWindowD->update();
 	messageWindow->update();
 	_backImage->update();
+
+
+	double beat = bpmManager.getCurrentBeatNum();
+
+	for (auto& e : events) {
+		e.update(beat);
+	}
+
 	if (Pad::getIns()->get(ePad::start) == 1) {
 		Parameter parameter;
 		const bool stackClear = true;
 		StopSoundMem(snippetSound->getBackgroundMusic()[musicNumber]);
 		snippetGameManager->initBattle();
 		_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, stackClear);
+		return;
 	}
 }
 
@@ -88,6 +101,16 @@ void SceneSnippet::draw() const {
 	DrawExtendGraph(0, 0, (Define::WIN_W * screenRate), (Define::WIN_H * screenRate), snippetImage->getScreenHandle(), FALSE);
 }
 
+PlayerCharacter* SceneSnippet::getPlayerById(int id) {
+	switch (id) {
+	case 0: return playerA;
+	case 1: return playerB;
+	case 2: return playerC;
+	case 3: return playerD;
+	default: return nullptr;
+	}
+}
+
 void SceneSnippet::initWindow() {
 	_statusWindowA->setPlayerCharacterInstance(playerA);
 	_statusWindowB->setPlayerCharacterInstance(playerB);
@@ -109,6 +132,28 @@ void SceneSnippet::initWindow() {
 	_statusWindowB->setName();
 	_statusWindowC->setName();
 	_statusWindowD->setName();
+}
+
+void SceneSnippet::initEventSystem() {
+	registerActions();
+	events = EventLoader::loadFromFile(
+		"Assets/Score/action/snippet.json",
+		registry
+	);
+}
+
+void SceneSnippet::registerActions() {
+
+	registry.registerAction("set_active",
+		[this](const nlohmann::json& j) {
+			int target = j["target"];
+			bool flag = j["flag"];
+
+			PlayerCharacter* p = getPlayerById(target);
+
+			return std::make_unique<SetActiveAction>(p, flag);
+		}
+	);
 }
 
 void SceneSnippet::initCharacter() {

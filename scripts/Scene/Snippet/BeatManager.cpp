@@ -1,4 +1,4 @@
-#include <Dxlib.h>
+ï»¿#include <Dxlib.h>
 #include "BeatManager.h"
 #include "Common/Sound.h"
 
@@ -16,7 +16,8 @@ BeatManager::BeatManager() {
 bool BeatManager::update() {
 	int tmpStep;
 	nowTime = GetNowHiPerformanceCount();
-	tmpStep = (int)(((nowTime - startTime) / 1000.0) / (15000 / bpm));
+	double stepTime = 60000.0 / bpm / 4;
+	tmpStep = (int)(((nowTime - startTime) / 1000.0) / stepTime);
 	if (numberOfStep != tmpStep) {
 		stepChangeFlag = true;
 		numberOfStep = tmpStep;
@@ -44,8 +45,8 @@ void BeatManager::startMusic(int musicNumber) {
 }
 
 /*!
-@brief@–Ú“I‚ÌƒXƒeƒbƒv‚ÆŒ»İ‚ÌŠÔ‚Æ‚Ì·‚©‚ç“_”(ƒ_ƒ[ƒW)‚ğZo
-@param targetStep ”»’è‚·‚éƒXƒeƒbƒv
+@briefã€€ç›®çš„ã®ã‚¹ãƒ†ãƒƒãƒ—ã¨ç¾åœ¨ã®æ™‚é–“ã¨ã®å·®ã‹ã‚‰ç‚¹æ•°(ãƒ€ãƒ¡ãƒ¼ã‚¸)ã‚’ç®—å‡º
+@param targetStep åˆ¤å®šã™ã‚‹ã‚¹ãƒ†ãƒƒãƒ—
 */
 int BeatManager::checkNowScore(int targetStep) {
 	int tmpScore;

@@ -19,6 +19,9 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="scripts\Common\Event\EventLoader.cpp" />
+    <ClCompile Include="scripts\Common\Event\ActionRegistry.cpp" />
+    <ClCompile Include="scripts\Common\Event\IEventAction.cpp" />
     <ClCompile Include="scripts\Scene\RobotSampler\SceneRobot.cpp" />
     <ClCompile Include="scripts\Common\Online\DataBaseListener.cpp" />
     <ClCompile Include="scripts\Common\Online\HttpClient.cpp" />
@@ -93,8 +96,13 @@
     <ClCompile Include="scripts\Scene\SecondRemix\SozaiShuzo.cpp" />
     <ClCompile Include="scripts\Common\Online\WSClient.cpp" />
     <ClCompile Include="scripts\Common\Online\WSDataHolder.cpp" />
+    <ClCompile Include="scripts\Common\Event\TimedEvent.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\SetActiveAction.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scripts\Common\Event\EventLoader.h" />
+    <ClInclude Include="scripts\Common\Event\ActionRegistry.h" />
+    <ClInclude Include="scripts\Common\Event\IEventAction.h" />
     <ClInclude Include="scripts\Scene\RobotSampler\SceneRobot.h" />
     <ClInclude Include="scripts\Common\Online\DataBaseListener.h" />
     <ClInclude Include="scripts\Common\Online\HttpClient.h" />
@@ -168,6 +176,8 @@
     <ClInclude Include="scripts\Scene\SecondRemix\SozaiShuzo.h" />
     <ClInclude Include="scripts\Common\Online\WSClient.h" />
     <ClInclude Include="scripts\Common\Online\WSDataHolder.h" />
+    <ClInclude Include="scripts\Common\Event\TimedEvent.h" />
+    <ClInclude Include="scripts\Scene\Snippet\SetActiveAction.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

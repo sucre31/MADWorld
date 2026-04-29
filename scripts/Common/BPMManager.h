@@ -7,13 +7,13 @@ public:
 	BPMManager();
 	~BPMManager() = default;
 	void setBPM(double beatPM);
-	void startMusic();
+	void startMusic(int handle);
 	double getCurrentBeatNum();
-	LONGLONG getTargetBeatTime(double);
+	double getTargetBeatTime(double);
 	LONGLONG getOneBeatTime() { return (LONGLONG)60000000 / bpm; }
 private:
+	int bgmHandle = -1;
 	double bpm;
-	LONGLONG BGMStartTime;
 	double beatTime; // 1拍の時間
 };
 

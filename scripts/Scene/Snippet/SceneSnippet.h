@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <memory>
 #include "System/AbstractScene.h"
@@ -11,6 +11,11 @@
 #include "SnippetGameManager.h"
 #include "SnippetSound.h"
 #include "SnippetImage.h"
+#include "Common/Event/ActionRegistry.h"
+#include "Common/Event/TimedEvent.h"
+#include "Common/Event/EventLoader.h"
+#include "Common/BPMManager.h"
+#include "SetActiveAction.h"
 
 class SceneSnippet : public AbstractScene
 {
@@ -29,11 +34,20 @@ private:
 	void initWindow();
 	void setEnemyInstancetToCharacter();
 	void initCharacter();
+	PlayerCharacter* getPlayerById(int id);
 	PlayerCharacter* playerA;
 	PlayerCharacter* playerB;
 	PlayerCharacter* playerC;
 	PlayerCharacter* playerD;
 	EnemyManager* enemyManager;
+
+	void initEventSystem();
+	void registerActions();
+	ActionRegistry registry;
+	std::vector<TimedEvent> events;
+
+	BPMManager bpmManager;
+
 	std::shared_ptr<StatusWindow> _statusWindowA;
 	std::shared_ptr<StatusWindow> _statusWindowB;
 	std::shared_ptr<StatusWindow> _statusWindowC;

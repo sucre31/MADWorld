@@ -1,4 +1,4 @@
-#pragma once
+ï»¿#pragma once
 #include "GameObject.h"
 #include <string>
 #include <unordered_map>
@@ -11,17 +11,19 @@ public:
     bool update() override;
     void draw() const override;
 
-    // ‰¹Šyƒtƒ@ƒCƒ‹‚ğƒ[ƒhiname‚Å¯•Êj
+    // éŸ³æ¥½ãƒ•ã‚¡ã‚¤ãƒ«ã‚’ãƒ­ãƒ¼ãƒ‰ï¼ˆnameã§è­˜åˆ¥ï¼‰
     bool LoadMusic(const std::string& name, const std::string& path);
 
-    // Ä¶E§Œä
+    // å†ç”Ÿãƒ»åˆ¶å¾¡
     void Play(const std::string& name, bool loop = true);
     void Stop();
     void Pause();
     void Resume();
     bool IsPlaying() const;
 
-    // ƒtƒF[ƒhƒAƒEƒg•t‚«’â~
+    int GetHandle() { return currentHandle; }
+
+    // ãƒ•ã‚§ãƒ¼ãƒ‰ã‚¢ã‚¦ãƒˆä»˜ãåœæ­¢
     void FadeOut(int fadeTimeMs = 1000);
 
     int GetNowPlayingHandle() const;
@@ -30,5 +32,5 @@ private:
     std::unordered_map<std::string, int> bgmHandles;
     std::string currentMusicName;
     int currentHandle = -1;
-    int pausedPosition = -1; // ÄŠJ—p‚É‹L˜^
+    int pausedPosition = -1; // å†é–‹ç”¨ã«è¨˜éŒ²
 };
