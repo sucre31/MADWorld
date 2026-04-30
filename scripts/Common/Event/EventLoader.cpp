@@ -1,5 +1,6 @@
 ﻿#include "EventLoader.h"
 #include <fstream>
+#include <Dxlib.h>
 
 std::vector<TimedEvent> EventLoader::loadFromFile(
 	const std::string& path,
@@ -7,7 +8,7 @@ std::vector<TimedEvent> EventLoader::loadFromFile(
 ) {
 	std::vector<TimedEvent> events;
 
-	std::ifstream ifs(path);
+	std::ifstream ifs(path, std::ios::binary);
 	if (!ifs.is_open()) {
 		// 読めなかったら空で返す
 		return events;

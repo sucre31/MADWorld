@@ -154,6 +154,14 @@ void SceneSnippet::registerActions() {
 			return std::make_unique<SetActiveAction>(p, flag);
 		}
 	);
+
+	registry.registerAction("set_window",
+		[this](const nlohmann::json& j) {
+			std::string msg = j["message"];
+
+			return std::make_unique<SetWindowAction>(messageWindow, msg, snippetSound);
+		}
+	);
 }
 
 void SceneSnippet::initCharacter() {

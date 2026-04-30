@@ -6,10 +6,11 @@ class SetActiveAction : public IEventAction {
 private:
 	PlayerCharacter* player;
 	bool flag;
+	std::shared_ptr<SnippetSound> snippetSound;
 
 public:
 	SetActiveAction(PlayerCharacter* p, bool f)
-		: player(p), flag(f) {
+		: player(p), flag(f){
 	}
 
 	void execute() override {

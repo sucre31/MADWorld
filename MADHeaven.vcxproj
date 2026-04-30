@@ -98,6 +98,7 @@
     <ClCompile Include="scripts\Common\Online\WSDataHolder.cpp" />
     <ClCompile Include="scripts\Common\Event\TimedEvent.cpp" />
     <ClCompile Include="scripts\Scene\Snippet\SetActiveAction.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\SetWindowAction.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scripts\Common\Event\EventLoader.h" />
@@ -178,6 +179,7 @@
     <ClInclude Include="scripts\Common\Online\WSDataHolder.h" />
     <ClInclude Include="scripts\Common\Event\TimedEvent.h" />
     <ClInclude Include="scripts\Scene\Snippet\SetActiveAction.h" />
+    <ClInclude Include="scripts\Scene\Snippet\SetWindowAction.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

@@ -46,30 +46,41 @@ bool MessageWindow::update() {
 }
 
 void MessageWindow::draw() const {
-	if (messageFlag) {
-		switch (currentMessageID) {
-		case 0:
-			DrawGraph(myX, myY, snippetImage->getMessageWindow(), TRUE);
-			DrawString(myX + 6, myY + 9, "リュカの こうげき!", GetColor(0, 0, 0));
-			break;
-		case 1:
-			DrawGraph(myX, myY, snippetImage->getMessageWindow(), TRUE);
-			DrawString(myX + 6, myY + 9, "クマトラの こうげき!", GetColor(0, 0, 0));
-			break;
-		case 2:
-			DrawGraph(myX, myY, snippetImage->getMessageWindow(), TRUE);
-			DrawString(myX + 6, myY + 9, "ダスターの こうげき!", GetColor(0, 0, 0));
-			break;
-		case 3:
-			DrawGraph(myX, myY, snippetImage->getMessageWindow(), TRUE);
-			DrawString(myX + 6, myY + 9, "ボニーの こうげき!", GetColor(0, 0, 0));
-			break;
-		}
+	if (!messageFlag) return;
+
+	DrawGraph(myX, myY, snippetImage->getMessageWindow(), TRUE);
+
+	if (useCustomMessage) {
+		DrawString(myX + 6, myY + 9, customMessage.c_str(), GetColor(0, 0, 0));
+		return;
 	}
+
+	switch (currentMessageID) {
+	case 0:
+		DrawString(myX + 6, myY + 9, "リュカの こうげき!", GetColor(0, 0, 0));
+		break;
+	case 1:
+		DrawString(myX + 6, myY + 9, "クマトラの こうげき!", GetColor(0, 0, 0));
+		break;
+	case 2:
+		DrawString(myX + 6, myY + 9, "ダスターの こうげき!", GetColor(0, 0, 0));
+		break;
+	case 3:
+		DrawString(myX + 6, myY + 9, "ボニーの こうげき!", GetColor(0, 0, 0));
+		break;
+	}
+}
+
+void MessageWindow::setMessage(const std::string& msg) {
+	customMessage = msg;
+	useCustomMessage = true;
+	messageCounter = 0;
+	messageFlag = true;
 }
 
 void MessageWindow::setMessage(int ID) {
 	currentMessageID = ID;
+	useCustomMessage = false; 
 	messageCounter = 0;
 	messageFlag = true;
 }

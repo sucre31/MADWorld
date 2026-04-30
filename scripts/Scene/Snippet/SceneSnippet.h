@@ -16,6 +16,7 @@
 #include "Common/Event/EventLoader.h"
 #include "Common/BPMManager.h"
 #include "SetActiveAction.h"
+#include "SetWindowAction.h"
 
 class SceneSnippet : public AbstractScene
 {
