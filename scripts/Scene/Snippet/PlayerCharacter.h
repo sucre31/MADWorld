@@ -5,19 +5,22 @@
 #include "Instrument.h"
 #include "BeatManager.h"
 #include "MessageWindow.h"
-#include "EnemyManager.h"
 #include "SnippetGameManager.h"
 #include "SnippetSound.h"
+#include "PopupNumberManager.h"
+
+class EnemyManager;
 
 class PlayerCharacter : public Character
 {
 public:
-	PlayerCharacter(std::shared_ptr<SnippetGameManager> gameManager, std::shared_ptr<SnippetSound> ins);
+	PlayerCharacter(std::shared_ptr<SnippetGameManager> gameManager, std::shared_ptr<SnippetSound> ins, std::shared_ptr<PopupNumberManager> pManager);
 	~PlayerCharacter() = default;
 	bool update() override;
 	void draw() const override;
 	void setHP(int HP);
 	void setPP(int PP);
+	void addHP(int value);
 	void setName(int charNum, int charSpriteNum);
 	void setMyTurn(int Number);
 	void setEnemyManagerInstance(EnemyManager* enemyManagerInstance);
@@ -27,6 +30,7 @@ public:
 	void setInstrumentNumber(int Number);
 	void setAlwaysActive(bool flag);
 	void reverseCharacter();
+	void setPopupNumber(int value, int x, int y);
 	int scoreCheck();
 	int scoreCheckSub();
 	int getName(int charNum) const;
@@ -61,5 +65,6 @@ private:
 	MessageWindow* messageWindow;
 	std::shared_ptr<SnippetGameManager> snippetGameManager;
 	std::shared_ptr<SnippetSound> snippetSound;
+	std::shared_ptr<PopupNumberManager> popupManager;
 };
 

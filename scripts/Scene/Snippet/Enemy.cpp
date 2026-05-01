@@ -5,12 +5,17 @@
 #include "System/Define.h"
 #include "Common/Sound.h"
 #include "SnippetGameManager.h"
+#include "PlayerCharacterManager.h"
+#include "StatusWindowManager.h"
+#include "StatusWindow.h"
 
 Enemy::Enemy(
 	int x, int y,
 	std::shared_ptr<SnippetGameManager> gameManager,
 	std::shared_ptr<SnippetImage> image,
-	std::shared_ptr<SnippetSound> sound
+	std::shared_ptr<SnippetSound> sound,
+	std::shared_ptr<PlayerCharacterManager> player,
+	std::shared_ptr<StatusWindowManager> window
 ) : myX(x),
 	myY(y),
 	HP(1000),
@@ -20,11 +25,15 @@ Enemy::Enemy(
 	BeatedMoveX(0),
 	reverseFlag(false),
 	isBeated(false),
-	damageBeat(std::make_unique<DamageBeat>())
+	damageBeat(std::make_unique<DamageBeat>()),
+	playerManager(player),
+	statusManager(window)
 {
 	SetGameManager(gameManager);
 	SetImage(image);
 	SetSound(sound);
+
+	attackFlash = false;
 
 	damageBeat->SetGameManager(gameManager);
 	damageBeat->SetImage(image);
@@ -35,6 +44,25 @@ Enemy::Enemy(
 }
 
 bool Enemy::update() {
+
+	double dt = snippetGameManager->getFpsIns()->getDeltaTime();
+
+	if (attackFlash) {
+		attackFlashTime += dt;
+
+		if (attackFlashTime >= attackFlashDuration) {
+			attackFlash = false;
+			attackFlashTime = 0.0;
+		}
+	}
+
+	if (!alive) {
+		deadTime += dt;
+	}
+	else {
+		deadTime = 0.0; // 復活時リセット（念のため）
+	}
+
 	if (isBeated) {
 		if (snippetGameManager->getFpsIns()->isFrameChanged()) {
 			BeatedMoveX = (int)(5 * sin(Define::PI * (frameFromBeatTime / 4.0)));
@@ -50,25 +78,90 @@ bool Enemy::update() {
 		}
 	}
 
-	if (HP < 0 && alive) {
-		alive = false;
-		PlaySoundMem(snippetSound->getBattleSE()[3], DX_PLAYTYPE_BACK);
-	}
+	// 一旦HPは無視(EnemyDefeatActionで管理)
+	//if (HP < 0 && alive) {
+	//	alive = false;
+	//	PlaySoundMem(snippetSound->getBattleSE()[3], DX_PLAYTYPE_BACK);
+	//}
 	damageBeat->update();
 	return true;
 }
 
+void Enemy::setDeathType(DeathType type) {
+	deathType = type;
+
+	switch (deathType) {
+	case DeathType::Normal:
+		deadDuration = 0.4;
+		break;
+
+	case DeathType::Boss:
+		deadDuration = 1.5;
+		break;
+	}
+}
+
+void Enemy::setAttackFlash(bool attack) {
+	PlaySoundMem(snippetSound->getBattleSE()[6], DX_PLAYTYPE_BACK);
+	attackFlashTime = 0;
+	attackFlash = attack;
+}
+
+void Enemy::attack(int targetId, int damage) {
+	if (damage < 0) {
+		PlaySoundMem(snippetSound->getBattleSE()[4], DX_PLAYTYPE_BACK);
+	}
+	PlaySoundMem(snippetSound->getEnemySE()[attackSoundHandleIndex], DX_PLAYTYPE_BACK);
+	statusManager->getWindowById(targetId)->addPlayerHP(damage);
+}
+
 void Enemy::draw() const {
+	if (!alive && deadTime >= deadDuration) {
+		return; // 何も描かない
+	}
+
 	if (!alive) {
+		double t = deadTime / deadDuration; // 0〜1
+
 		SetDrawScreen(screen);
 		ClearDrawScreen;
 		DrawGraph(0, 0, snippetImage->getEnemyImage()[myID], TRUE);
-		GraphFilter(screen, DX_GRAPH_FILTER_HSB, 0, 0, 0, 255);
+
+		double eased = t * t;
+
+		int value = (int)(eased * 255);
+
+		GraphFilter(screen, DX_GRAPH_FILTER_HSB, 0, 0, value, 255);
+
 		SetDrawScreen(snippetImage->getScreenHandle());
 		DrawRotaGraph(160 + myX + BeatedMoveX, 90 + myY, 1.0, 0, screen, TRUE, reverseFlag);
 	}
 	else {
-		DrawRotaGraph(160 + myX + BeatedMoveX, 90 + myY, 1.0, 0, snippetImage->getEnemyImage()[myID], TRUE, reverseFlag);
+		SetDrawScreen(screen);
+		ClearDrawScreen();
+
+		DrawGraph(0, 0, snippetImage->getEnemyImage()[myID], TRUE);
+
+		// フラッシュ
+		if (attackFlash) {
+			double t = attackFlashTime / attackFlashDuration;
+
+			double cycle = 2.0;
+			double wave = fabs(sin(t * cycle * Define::PI)); // 0〜1
+
+			int alpha = (int)(wave * 180);
+
+			SetDrawBlendMode(DX_BLENDMODE_ADD, alpha);
+
+			DrawGraph(0, 0, snippetImage->getEnemyImage()[myID], TRUE);
+
+			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+		}
+
+		SetDrawScreen(snippetImage->getScreenHandle());
+
+		DrawRotaGraph(160 + myX + BeatedMoveX, 90 + myY,
+			1.0, 0, screen, TRUE, reverseFlag);
 	}
 }
 
@@ -84,6 +177,14 @@ void Enemy::getSize() {
 		enemyImageX = 1;
 		enemyImageY = 1;
 	}
+}
+
+void Enemy::setEnemySoundIndex(int soundIndex) {
+	attackSoundHandleIndex = soundIndex;
+}
+
+void Enemy::setAlive(bool flag) {
+	alive = flag;
 }
 
 void Enemy::setNewEnemy(int EnemyID) {

@@ -15,8 +15,11 @@
 #include "Common/Event/TimedEvent.h"
 #include "Common/Event/EventLoader.h"
 #include "Common/BPMManager.h"
-#include "SetActiveAction.h"
-#include "SetWindowAction.h"
+#include "PlayerCharacterManager.h"
+#include "PopupNumberManager.h"
+
+class StatusWindowManager;
+
 
 class SceneSnippet : public AbstractScene
 {
@@ -35,11 +38,8 @@ private:
 	void initWindow();
 	void setEnemyInstancetToCharacter();
 	void initCharacter();
-	PlayerCharacter* getPlayerById(int id);
-	PlayerCharacter* playerA;
-	PlayerCharacter* playerB;
-	PlayerCharacter* playerC;
-	PlayerCharacter* playerD;
+	std::shared_ptr<PlayerCharacterManager> playerManager;
+	std::shared_ptr<StatusWindowManager> statusManager;
 	EnemyManager* enemyManager;
 
 	void initEventSystem();
@@ -59,5 +59,6 @@ private:
 	std::shared_ptr<SnippetGameManager> snippetGameManager;
 	std::shared_ptr<SnippetSound> snippetSound;
 	std::shared_ptr<SnippetImage> snippetImage;
+	std::shared_ptr<PopupNumberManager> popUpManager;
 };
 

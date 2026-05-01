@@ -3,12 +3,14 @@
 #include "PlayerCharacter.h"
 #include "System/Pad.h"
 #include "Common/Sound.h"
+#include "EnemyManager.h"
 
-PlayerCharacter::PlayerCharacter(std::shared_ptr<SnippetGameManager> gameManager, std::shared_ptr<SnippetSound> soundIns) {
+PlayerCharacter::PlayerCharacter(std::shared_ptr<SnippetGameManager> gameManager, std::shared_ptr<SnippetSound> soundIns, std::shared_ptr<PopupNumberManager> pManager) {
 	mainSoundNumber = 0;
 	subSoundNumber = 0;
 	snippetGameManager = gameManager;
 	snippetSound = soundIns;
+	popupManager = pManager;
 	myInstrument = new Instrument(snippetSound);
 	//myInstrument->setBeatManager(beatManager);
 	reverseFlag = FALSE;
@@ -17,18 +19,6 @@ PlayerCharacter::PlayerCharacter(std::shared_ptr<SnippetGameManager> gameManager
 }
 
 bool PlayerCharacter::update() {
-	if (!enemyManagerIns->getEnemyIns(1)->getAlive() && characterID == 1 && !alwaysActive) {
-		alwaysActive = true;
-		messageWindow->setMessage(1);
-	}
-	if (!enemyManagerIns->getEnemyIns(2)->getAlive() && characterID == 2 && !alwaysActive) {
-		alwaysActive = true;
-		messageWindow->setMessage(2);
-	}
-	if (!enemyManagerIns->getEnemyIns(3)->getAlive() && characterID == 3 && !alwaysActive) {
-		alwaysActive = true;
-		messageWindow->setMessage(3);
-	}
 	if (snippetGameManager->getTurn() % 4 == myTurn) {
 		isActive = true;
 		scoreCheck();
@@ -158,6 +148,23 @@ int PlayerCharacter::scoreCheckSub() {
 void PlayerCharacter::setHP(int HP) {
 	myHP = HP;
 }
+
+/*!
+@brief キャラクターのHPの増減
+*/
+void PlayerCharacter::addHP(int value) {
+	myHP += value;
+	if (myHP < 0) {
+		myHP = 0;
+	}
+}
+
+void PlayerCharacter::setPopupNumber(int value, int x, int y) {
+	if (value < 0) {
+		popupManager->add(-value, x, y);
+	}
+}
+
 
 /*
 @brief キャラクターのPPを設定

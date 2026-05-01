@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <vector>
 #include "System/Singleton.h"
@@ -15,6 +15,7 @@ public:
 	const int* getBoneyBattleSounds() { return boneyBattleSounds; }
 	const int* getKumatoraBattleSounds() { return kumatoraBattleSounds; }
 	const int* getBattleSE() { return BattleSE; }
+	const int* getEnemySE() { return EnemySE; }
 	const int* getBackgroundMusic() { return BackgroundMusic; }
 
 private:
@@ -26,6 +27,7 @@ private:
 	int boneyBattleSounds[8];
 	int kumatoraBattleSounds[14];
 	int BackgroundMusic[2];
-	int BattleSE[4];
+	int BattleSE[10];
+	int EnemySE[15];
 };
 

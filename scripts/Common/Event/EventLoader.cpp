@@ -29,7 +29,7 @@ std::vector<TimedEvent> EventLoader::loadFromFile(
 		}
 
 		int bar = item["bar"];
-		int beat = item["beat"];
+		double beat = item["beat"];
 
 		TimedEvent e;
 		e.beat = convertToBeat(bar, beat);
@@ -46,6 +46,6 @@ std::vector<TimedEvent> EventLoader::loadFromFile(
 }
 
 // 4/4前提
-double EventLoader::convertToBeat(int bar, int beat, int beatsPerBar) {
-	return (bar - 1) * beatsPerBar + (beat - 1);
+double EventLoader::convertToBeat(int bar, double beat, int beatsPerBar) {
+	return (bar - 1) * beatsPerBar + (beat - 1.0);
 }

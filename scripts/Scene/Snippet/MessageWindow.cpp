@@ -41,7 +41,7 @@ bool MessageWindow::update() {
 			break;
 		}
 	}
-	if (messageCounter > 30) messageFlag = false;
+	if (messageCounter > 64) messageFlag = false;
 	return true;
 }
 

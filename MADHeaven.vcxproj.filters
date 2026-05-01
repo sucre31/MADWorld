@@ -288,13 +288,28 @@
     <ClCompile Include="scripts\Common\Event\ActionRegistry.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\Scene\Snippet\SetActiveAction.cpp">
+    <ClCompile Include="scripts\Scene\Snippet\Action\SetActiveAction.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
     <ClCompile Include="scripts\Common\Event\EventLoader.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
-    <ClCompile Include="scripts\Scene\Snippet\SetWindowAction.cpp">
+    <ClCompile Include="scripts\Scene\Snippet\Action\SetWindowAction.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Snippet\Action\EnemyAttackAction.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Snippet\PlayerCharacterManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Snippet\Action\EnemyDefeatAction.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Snippet\popupNumberManager.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
+    <ClCompile Include="scripts\Scene\Snippet\StatusWindowManager.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
   </ItemGroup>
@@ -527,13 +542,28 @@
     <ClInclude Include="scripts\Common\Event\ActionRegistry.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\Scene\Snippet\SetActiveAction.h">
+    <ClInclude Include="scripts\Scene\Snippet\Action\SetActiveAction.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="scripts\Common\Event\EventLoader.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
-    <ClInclude Include="scripts\Scene\Snippet\SetWindowAction.h">
+    <ClInclude Include="scripts\Scene\Snippet\Action\SetWindowAction.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Snippet\Action\EnemyAttackAction.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Snippet\PlayerCharacterManager.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Snippet\Action\EnemyDefeatAction.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Snippet\popupNumberManager.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Snippet\StatusWindowManager.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>

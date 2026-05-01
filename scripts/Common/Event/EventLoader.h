@@ -16,5 +16,5 @@ public:
 
 private:
 	// bar / beat → 実数beat変換
-	static double convertToBeat(int bar, int beat, int beatsPerBar = 4);
+	static double convertToBeat(int bar, double beat, int beatsPerBar = 4);
 };

@@ -1,4 +1,4 @@
-#include <Dxlib.h>
+ï»¿#include <Dxlib.h>
 #include "SnippetSound.h"
 
 SnippetSound::SnippetSound() {
@@ -68,11 +68,32 @@ SnippetSound::SnippetSound() {
     BattleSE[1] = myLoadSoundMem("Assets/Sounds/Snippet/Battle/AllyTurn.wav");
     BattleSE[2] = myLoadSoundMem("Assets/Sounds/Snippet/Battle/Smaash.wav");
     BattleSE[3] = myLoadSoundMem("Assets/Sounds/Snippet/Battle/Defeated.wav");
+    BattleSE[4] = myLoadSoundMem("Assets/Sounds/Snippet/Battle/AllyDamage.wav");
+    BattleSE[5] = myLoadSoundMem("Assets/Sounds/Snippet/Battle/BossDefeated.wav");
+    BattleSE[6] = myLoadSoundMem("Assets/Sounds/Snippet/Battle/enemyActive.wav");
+    BattleSE[7] = myLoadSoundMem("Assets/Sounds/Snippet/Battle/enemyPsi.wav");
+    BattleSE[8] = myLoadSoundMem("Assets/Sounds/Snippet/Battle/Inflicted.wav");
+    BattleSE[9] = myLoadSoundMem("Assets/Sounds/Snippet/Battle/MortalDamage.wav");
+    EnemySE[0] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/MrBatty.wav");
+    EnemySE[1] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/RockinGhost.wav");
+    EnemySE[2] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/Rhinocerocket0.wav");
+    EnemySE[3] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/Rhinocerocket1.wav");
+    EnemySE[4] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/Rhinocerocket2.wav");
+    EnemySE[5] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/Rhinocerocket3.wav");
+    EnemySE[6] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/pigMaskCaptain.wav");
+    EnemySE[7] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/spider.wav");
+    EnemySE[8] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/steelMechorilla.wav");
+    EnemySE[9] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/BarrelMan.wav");
+    EnemySE[10] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/ReconMech.wav");
+    EnemySE[11] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/ReconstructedCaribou.wav");
+    EnemySE[12] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/JealousBass.wav");
+    EnemySE[13] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/BeatenDrum.wav");
+    EnemySE[14] = myLoadSoundMem("Assets/Sounds/Snippet/Battle/hypnosis.wav");
 }
 
 
 /*!
-@brief ¡‚Ü‚Åƒ[ƒh‚µ‚½‰¹º‚ğ‰ğ•ú‚·‚é
+@brief ä»Šã¾ã§ãƒ­ãƒ¼ãƒ‰ã—ãŸéŸ³å£°ã‚’è§£æ”¾ã™ã‚‹
 */
 void SnippetSound::release()
 {
@@ -84,7 +105,7 @@ void SnippetSound::release()
 }
 
 /*!
-@brief LoadSoundMem‚ğ‚µ‚ÄA‚©‚Â‚»‚Ìƒnƒ“ƒhƒ‹‚ğƒƒ“ƒo•Ï”‚É’Ç‰Á‚·‚é
+@brief LoadSoundMemã‚’ã—ã¦ã€ã‹ã¤ãã®ãƒãƒ³ãƒ‰ãƒ«ã‚’ãƒ¡ãƒ³ãƒå¤‰æ•°ã«è¿½åŠ ã™ã‚‹
 */
 int SnippetSound::myLoadSoundMem(char* fileName)
 {
@@ -94,7 +115,7 @@ int SnippetSound::myLoadSoundMem(char* fileName)
 }
 
 /*!
-@brief LoadSoundMem‚ğ‚µ‚ÄA‚©‚Â‚»‚Ìƒnƒ“ƒhƒ‹‚ğƒƒ“ƒo•Ï”‚É’Ç‰Á‚·‚é
+@brief LoadSoundMemã‚’ã—ã¦ã€ã‹ã¤ãã®ãƒãƒ³ãƒ‰ãƒ«ã‚’ãƒ¡ãƒ³ãƒå¤‰æ•°ã«è¿½åŠ ã™ã‚‹
 */
 int SnippetSound::myLoadSoundMem(const char* fileName)
 {

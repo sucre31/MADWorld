@@ -19,6 +19,10 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="scripts\Scene\Snippet\popupNumberManager.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\Action\EnemyDefeatAction.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\PlayerCharacterManager.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\Action\EnemyAttackAction.cpp" />
     <ClCompile Include="scripts\Common\Event\EventLoader.cpp" />
     <ClCompile Include="scripts\Common\Event\ActionRegistry.cpp" />
     <ClCompile Include="scripts\Common\Event\IEventAction.cpp" />
@@ -97,10 +101,15 @@
     <ClCompile Include="scripts\Common\Online\WSClient.cpp" />
     <ClCompile Include="scripts\Common\Online\WSDataHolder.cpp" />
     <ClCompile Include="scripts\Common\Event\TimedEvent.cpp" />
-    <ClCompile Include="scripts\Scene\Snippet\SetActiveAction.cpp" />
-    <ClCompile Include="scripts\Scene\Snippet\SetWindowAction.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\Action\SetActiveAction.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\Action\SetWindowAction.cpp" />
+    <ClCompile Include="scripts\Scene\Snippet\StatusWindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scripts\Scene\Snippet\popupNumberManager.h" />
+    <ClInclude Include="scripts\Scene\Snippet\Action\EnemyDefeatAction.h" />
+    <ClInclude Include="scripts\Scene\Snippet\PlayerCharacterManager.h" />
+    <ClInclude Include="scripts\Scene\Snippet\Action\EnemyAttackAction.h" />
     <ClInclude Include="scripts\Common\Event\EventLoader.h" />
     <ClInclude Include="scripts\Common\Event\ActionRegistry.h" />
     <ClInclude Include="scripts\Common\Event\IEventAction.h" />
@@ -178,8 +187,9 @@
     <ClInclude Include="scripts\Common\Online\WSClient.h" />
     <ClInclude Include="scripts\Common\Online\WSDataHolder.h" />
     <ClInclude Include="scripts\Common\Event\TimedEvent.h" />
-    <ClInclude Include="scripts\Scene\Snippet\SetActiveAction.h" />
-    <ClInclude Include="scripts\Scene\Snippet\SetWindowAction.h" />
+    <ClInclude Include="scripts\Scene\Snippet\Action\SetActiveAction.h" />
+    <ClInclude Include="scripts\Scene\Snippet\Action\SetWindowAction.h" />
+    <ClInclude Include="scripts\Scene\Snippet\StatusWindowManager.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>
