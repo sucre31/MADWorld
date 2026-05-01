@@ -31,8 +31,6 @@ bool PlayerCharacter::update() {
 
 		if (Pad::getIns()->get(ePad::A) == 1) {
 			playMainSoundNumberMem(mainSoundNumber);
-			setPP(mainSoundNumber);
-			//PlaySoundMem(snippetSound->getBattleSE()[0], DX_PLAYTYPE_BACK);
 			reverseCharacter();
 			damage = scoreCheck();
 			turnDamage += damage;
