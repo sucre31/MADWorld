@@ -11,6 +11,7 @@
 #include "SozaiDontaco.h"
 #include "SozaiShuzo.h"
 #include "SozaiSonya.h"
+#include "Common/Camera/CameraStream.h"
 
 
 class SceneSecondRemix : public AbstractScene
@@ -32,6 +33,8 @@ private:
 	std::shared_ptr<BPMManager> bpmManager;
 	MusicManager musicManager;
 	PauseMenu pauseMenu;
+
+	CameraStream camera;
 
 	std::string bgmName;
 	int activeManagerIndex;

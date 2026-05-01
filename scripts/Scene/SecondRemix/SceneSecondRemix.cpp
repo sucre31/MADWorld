@@ -80,29 +80,11 @@ SceneSecondRemix::SceneSecondRemix(IOnSceneChangedListener* impl, const Paramete
 		events.push_back(ev);
 	}
 
-	//events = {
-	//	{16, SozaiChange, Sonya},
-	//	{24, SozaiChange, Dontaco},
-	//	{32, SozaiChange, Sonya},
-	//	{40, SozaiChange, Dontaco},
-	//	{48, SozaiChange, Dontaco},
-	//	{64, SozaiChange, Sonya},
-	//	{72, SozaiChange, Dontaco},
-	//	{80, SozaiChange, Shuzo},
-	//	{112, SozaiChange, Dontaco},
-	//	{136, SozaiChange, Donesia},
-	//	{144, SozaiChange, Dontaco},
-	//	{168, SozaiChange, Donesia},
-	//	{176, SozaiChange, Objection},
-	//	{240, SozaiChange, Sonya},
-	//	{248, SozaiChange, Donesia},
-	//	{256, SozaiChange, Shuzo},
-	//	{264, SozaiChange, Objection},
-	//	{16, AutoPlay, Sonya, 0},
-	//};
+	camera.start(0, 1280, 720);
 }
 
 void SceneSecondRemix::update() {
+	camera.update();
 
 	if (Pad::getIns()->get(ePad::ZL) == 1) {
 		activeManagerIndex--;
@@ -189,5 +171,11 @@ void SceneSecondRemix::draw() const{
 	sozaiManager.draw();
 	for (SozaiBase* sozai : sozaies) {
 		sozai->draw();
+	}
+
+	int h = camera.getGraphHandle();
+	if (h != -1)
+	{
+		DrawRotaGraph((Define::WIN_W * (1.0 / 8.0) + 160), (Define::WIN_H * (1.0 / 8.0)), 0.25, 0.0, h, FALSE);
 	}
 }

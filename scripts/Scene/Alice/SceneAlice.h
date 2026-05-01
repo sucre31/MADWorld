@@ -1,17 +1,49 @@
-#pragma once
+ï»¿#pragma once
+#include <vector>
+#include <string>
+#include <unordered_map>
+#include <unordered_set>
+#include <memory>
 #include "System/AbstractScene.h"
 #include "Common/GameObject/SozaiManager.h"
+#include "Common/Camera/CameraStream.h"
+#include "Common/Online/WSClient.h"
+#include "Common/Online/WSDataHolder.h"
+#include "Common/Particle.h"
+
 class SceneAlice : public AbstractScene
 {
 public:
     SceneAlice(IOnSceneChangedListener* impl, const Parameter& parameter);
-    virtual ~SceneAlice() = default; // ƒfƒXƒgƒ‰ƒNƒ^‘½•ª‘å– Œã‚Å’²®
+    virtual ~SceneAlice();
     void update() override;
     void draw() const override;
 private:
-    // ƒV[ƒ“‚ÍƒCƒ“ƒXƒ^ƒ“ƒX‚ğŠÇ—‚·‚é‚¾‚¯
+    struct RenderPlayer {
+        std::string id;
+
+        float x, y;          // è¡¨ç¤ºä½ç½®ï¼ˆè£œé–“å¾Œï¼‰
+        float targetX, targetY; // ã‚µãƒ¼ãƒãƒ¼ä½ç½®
+        float accel;
+        float targetAccel;
+
+        float lastSeenTime;
+    };
+
+    int imgSmall;
+    int imgMiddle;
+    int imgBig;
+
+    void updateParticles(float dt);
+    // ã‚·ãƒ¼ãƒ³ã¯ã‚¤ãƒ³ã‚¹ã‚¿ãƒ³ã‚¹ã‚’ç®¡ç†ã™ã‚‹ã ã‘
     SozaiManager sozaiManager;
-    int aliceDrumHandle; // ƒNƒ‰ƒX‚©‚·‚é
+    int aliceDrumHandle; // ã‚¯ãƒ©ã‚¹ã‹ã™ã‚‹
     bool isMusicPlay;
+    CameraStream camera;
+    WSDataHolder wsHolder;
+    std::vector<NetPlayer> players;
+    std::unordered_map<std::string, RenderPlayer> renderPlayers;
+    std::unordered_map<std::string, ParticleEmitter> emitters;
+    std::unordered_set<std::string> aliveIds;
 };
 
