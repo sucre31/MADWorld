@@ -1,4 +1,4 @@
-#include <DxLib.h>
+ï»¿#include <DxLib.h>
 #include "SnippetImage.h"
 #include "System/Define.h"
 
@@ -17,6 +17,14 @@ SnippetImage::SnippetImage()
     EnemyImage[2] = myLoadGraph("Assets/Sprites/images/Snippet/Enemy/Spider!.png");
     EnemyImage[3] = myLoadGraph("Assets/Sprites/images/Snippet/Enemy/SaiRocket.png");
     EnemyImage[4] = myLoadGraph("Assets/Sprites/images/Snippet/Enemy/Titanian.png");
+    EnemyImage[5] = myLoadGraph("Assets/Sprites/images/Snippet/Enemy/BarrelMan.png");
+    EnemyImage[6] = myLoadGraph("Assets/Sprites/images/Snippet/Enemy/ReconMech.png");
+    EnemyImage[7] = myLoadGraph("Assets/Sprites/images/Snippet/Enemy/BeatenDrum.png");
+    EnemyImage[8] = myLoadGraph("Assets/Sprites/images/Snippet/Enemy/ViolentRoach.png");
+    EnemyImage[9] = myLoadGraph("Assets/Sprites/images/Snippet/Enemy/RockinGhost.png");
+    EnemyImage[10] = myLoadGraph("Assets/Sprites/images/Snippet/Enemy/ReconstructedCaribou.png");
+    EnemyImage[11] = myLoadGraph("Assets/Sprites/images/Snippet/Enemy/SteelMechorilla.png");
+    EnemyImage[12] = myLoadGraph("Assets/Sprites/images/Snippet/Enemy/JealousBass.png");
     LucasBattleImage = myLoadGraph("Assets/Sprites/images/Snippet/Lucas/LucasBattle.png");
     BoneyBattleImage = myLoadGraph("Assets/Sprites/images/Snippet/Boney/BoneyBattle.png");
     KumatoraBattleImage = myLoadGraph("Assets/Sprites/images/Snippet/Kumatora/KumatoraBattle.png");
@@ -47,7 +55,7 @@ int SnippetImage::getCharacterBattleImage(int characterNumber) const {
 }
 
 /*!
-@brief ¡‚Ü‚Åƒ[ƒh‚µ‚½‰æ‘œ‚ğ‰ğ•ú‚·‚é
+@brief ä»Šã¾ã§ãƒ­ãƒ¼ãƒ‰ã—ãŸç”»åƒã‚’è§£æ”¾ã™ã‚‹
 */
 void SnippetImage::release()
 {
@@ -60,7 +68,7 @@ void SnippetImage::release()
 
 
 /*!
-@brief LoadGraph‚ğ‚µ‚ÄA‚©‚Â‚»‚Ìƒnƒ“ƒhƒ‹‚ğƒƒ“ƒo•Ï”‚É’Ç‰Á‚·‚é
+@brief LoadGraphã‚’ã—ã¦ã€ã‹ã¤ãã®ãƒãƒ³ãƒ‰ãƒ«ã‚’ãƒ¡ãƒ³ãƒå¤‰æ•°ã«è¿½åŠ ã™ã‚‹
 */
 int SnippetImage::myLoadGraph(char* fileName)
 {
@@ -70,7 +78,7 @@ int SnippetImage::myLoadGraph(char* fileName)
 }
 
 /*!
-@brief LoadGraph‚ğ‚µ‚ÄA‚©‚Â‚»‚Ìƒnƒ“ƒhƒ‹‚ğƒƒ“ƒo•Ï”‚É’Ç‰Á‚·‚é
+@brief LoadGraphã‚’ã—ã¦ã€ã‹ã¤ãã®ãƒãƒ³ãƒ‰ãƒ«ã‚’ãƒ¡ãƒ³ãƒå¤‰æ•°ã«è¿½åŠ ã™ã‚‹
 */
 int SnippetImage::myLoadGraph(const char* fileName)
 {
@@ -80,7 +88,7 @@ int SnippetImage::myLoadGraph(const char* fileName)
 }
 
 /*!
-@brief LoadDivGraph‚ğ‚µ‚ÄA‚©‚Â‚»‚Ìƒnƒ“ƒhƒ‹‚ğƒƒ“ƒo•Ï”‚É’Ç‰Á‚·‚é
+@brief LoadDivGraphã‚’ã—ã¦ã€ã‹ã¤ãã®ãƒãƒ³ãƒ‰ãƒ«ã‚’ãƒ¡ãƒ³ãƒå¤‰æ•°ã«è¿½åŠ ã™ã‚‹
 */
 int SnippetImage::myLoadDivGraph(char* fileName, int n, int xn, int yn, int w, int h, int* buf)
 {

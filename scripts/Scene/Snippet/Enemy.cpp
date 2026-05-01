@@ -124,17 +124,45 @@ void Enemy::draw() const {
 		double t = deadTime / deadDuration; // 0〜1
 
 		SetDrawScreen(screen);
-		ClearDrawScreen;
+		ClearDrawScreen();
+
 		DrawGraph(0, 0, snippetImage->getEnemyImage()[myID], TRUE);
 
-		double eased = t * t;
+		if (t < 0.5) {
+			// 白飛び
+			double phase = t / 0.5;
 
-		int value = (int)(eased * 255);
+			double wave = sin(phase * Define::PI);
+			double eased = wave * wave;
 
-		GraphFilter(screen, DX_GRAPH_FILTER_HSB, 0, 0, value, 255);
+			int alpha = (int)(eased * 255);
+
+			SetDrawBlendMode(DX_BLENDMODE_ADD, alpha);
+			DrawGraph(0, 0, snippetImage->getEnemyImage()[myID], TRUE);
+			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+		}
+		else {
+			// 暗くする
+			double phase = (t - 0.5) / 0.5;
+
+			int alpha = (int)(phase * 255);
+
+			SetDrawBlendMode(DX_BLENDMODE_SUB, alpha);
+			DrawGraph(0, 0, snippetImage->getEnemyImage()[myID], TRUE);
+			SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+		}
 
 		SetDrawScreen(snippetImage->getScreenHandle());
-		DrawRotaGraph(160 + myX + BeatedMoveX, 90 + myY, 1.0, 0, screen, TRUE, reverseFlag);
+
+		DrawRotaGraph(
+			160 + myX + BeatedMoveX,
+			90 + myY,
+			1.0,
+			0,
+			screen,
+			TRUE,
+			reverseFlag
+		);
 	}
 	else {
 		SetDrawScreen(screen);

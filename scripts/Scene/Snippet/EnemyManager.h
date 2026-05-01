@@ -30,7 +30,7 @@ public:
 	void SetImage(std::shared_ptr<SnippetImage> ins) { snippetImage = ins; }
 private:
 	static const int NumberOfEnemy = 8;
-	static const int NumberOfKind = 5;
+	static const int NumberOfKind = 13;
 	Enemy* enemy[NumberOfEnemy];
 	std::shared_ptr<SnippetGameManager> snippetGameManager;
 	std::shared_ptr<SnippetSound> snippetSound;

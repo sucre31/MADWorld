@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include <vector>
 #include "System/Singleton.h"
@@ -45,7 +45,7 @@ private:
 	int characterAlphaA[90];
 	int battleCharacter[30];
 	int backgroundsA[14];
-	int EnemyImage[10];
+	int EnemyImage[13];
 	int LucasBattleImage;
 	int BoneyBattleImage;
 	int KumatoraBattleImage;
