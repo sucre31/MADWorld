@@ -41,7 +41,6 @@ bool PlayerCharacter::update() {
 		}
 		if (Pad::getIns()->get(ePad::left) == 1) {
 			playSubSoundNumberMem(subSoundNumber);
-			setPP(subSoundNumber);
 			reverseCharacter();
 			damage = scoreCheckSub();
 			reverseSub();
