@@ -21,6 +21,8 @@ public:
 	void setHP(int hpChara);
 	void setPP(int ppChara);
 	void setName();
+	void setSleep(bool flag) { sleep = flag; }
+	void setSleepShake(bool flag) { sleepShake = flag; }
 	void addPlayerHP(int value);
 	int getNameToSprite(int charNum) const;
 	int getDumrollNum(int drumNum) const;
@@ -33,14 +35,23 @@ private:
 	int myName[6];
 	int myNameLength;
 	int frameCount;
+
 	bool damageShake;
 	double shakeTime = 0.0;
 	double shakeDuration = 0.5;   // 揺れる時間（秒）
 	double shakeAmplitude = 9.0;  // 揺れ幅
 	double shakeOffsetX = 0.0;
+
+	bool sleepShake = false;
+	double sleepShakeTime = 0.0;
+	double sleepShakeDuration = 1.2;
+	double sleepShakeAmplitude = 4.0;
+	double sleepShakeOffsetY = 0.0;
+
 	void calcPoint();
-	void drawHP(int drawX) const;
-	void drawName(int drawX) const;
+	void drawHP(int drawX, int drawY) const;
+	void drawName(int drawX, int drawY) const;
+	bool sleep = false;
 	//std::shared_ptr<PlayerCharacter> playerCharacter;
 	PlayerCharacter* playerCharacter;
 	std::shared_ptr<SnippetGameManager> snippetGameManager;

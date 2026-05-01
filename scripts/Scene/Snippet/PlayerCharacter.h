@@ -28,6 +28,7 @@ public:
 	void setMessageWindow(MessageWindow* messageInstance) { messageWindow = messageInstance; }
 	void setCharacterId(int Number);
 	void setInstrumentNumber(int Number);
+	void setTargetEnemy(int target);
 	void setAlwaysActive(bool flag);
 	void reverseCharacter();
 	void setPopupNumber(int value, int x, int y);
@@ -58,6 +59,7 @@ private:
 	int damage;
 	int turnDamage;
 	int lastPlayedStep = -1;
+	int targetEnemy;
 	bool reverseFlag;
 	EnemyManager* enemyManagerIns;
 	Instrument* myInstrument;

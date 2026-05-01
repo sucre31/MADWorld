@@ -78,6 +78,43 @@ bool Enemy::update() {
 		}
 	}
 
+	if (moveAnimActive) {
+
+		double dt = snippetGameManager->getFpsIns()->getDeltaTime();
+		moveAnimTime += dt;
+
+		double t = moveAnimTime / moveAnimDuration;
+
+		if (t >= 1.0) {
+			moveAnimActive = false;
+			moveOffsetX = 0;
+			moveOffsetY = 0;
+		}
+		else {
+			double ease = 1.0 - (1.0 - t) * (1.0 - t);
+
+			float distance = 80.0f * (1.0f - ease);
+
+			switch (moveDir) {
+			case MoveInDir::Left:
+				moveOffsetX = -distance;
+				break;
+
+			case MoveInDir::Right:
+				moveOffsetX = distance;
+				break;
+
+			case MoveInDir::Up:
+				moveOffsetY = -distance;
+				break;
+
+			case MoveInDir::Down:
+				moveOffsetY = distance;
+				break;
+			}
+		}
+	}
+
 	// 一旦HPは無視(EnemyDefeatActionで管理)
 	//if (HP < 0 && alive) {
 	//	alive = false;
@@ -108,6 +145,21 @@ void Enemy::setAttackFlash(bool attack) {
 }
 
 void Enemy::attack(int targetId, int damage) {
+	if (damage == 10) {
+		// とりあえずダメージ10 = sleep であつかう(よくないけど)
+		statusManager->getWindowById(targetId)->setSleep(true);
+		return;
+	}
+	else if (damage == 9) {
+		// ダメージ9 = 揺れにする(よくない)
+		statusManager->getWindowById(0)->setSleepShake(true);
+		statusManager->getWindowById(1)->setSleepShake(true);
+		statusManager->getWindowById(2)->setSleepShake(true);
+		statusManager->getWindowById(3)->setSleepShake(true);
+		PlaySoundMem(snippetSound->getEnemySE()[attackSoundHandleIndex], DX_PLAYTYPE_BACK);
+		return;
+	}
+
 	if (damage < 0) {
 		PlaySoundMem(snippetSound->getBattleSE()[4], DX_PLAYTYPE_BACK);
 	}
@@ -116,7 +168,7 @@ void Enemy::attack(int targetId, int damage) {
 }
 
 void Enemy::draw() const {
-	if (!alive && deadTime >= deadDuration) {
+	if ((!alive && deadTime >= deadDuration )|| wait) {
 		return; // 何も描かない
 	}
 
@@ -188,8 +240,15 @@ void Enemy::draw() const {
 
 		SetDrawScreen(snippetImage->getScreenHandle());
 
-		DrawRotaGraph(160 + myX + BeatedMoveX, 90 + myY,
-			1.0, 0, screen, TRUE, reverseFlag);
+		DrawRotaGraph(
+			160 + myX + BeatedMoveX + (int)moveOffsetX,
+			90 + myY + (int)moveOffsetY,
+			1.0,
+			0,
+			screen,
+			TRUE,
+			reverseFlag
+		);
 	}
 }
 
@@ -213,6 +272,16 @@ void Enemy::setEnemySoundIndex(int soundIndex) {
 
 void Enemy::setAlive(bool flag) {
 	alive = flag;
+}
+
+void Enemy::playMoveIn(MoveInDir dir)
+{
+	moveDir = dir;
+	moveAnimActive = true;
+	moveAnimTime = 0.0;
+
+	moveOffsetX = 0.0f;
+	moveOffsetY = 0.0f;
 }
 
 void Enemy::setNewEnemy(int EnemyID) {

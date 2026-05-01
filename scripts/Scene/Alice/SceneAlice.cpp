@@ -49,9 +49,9 @@ SceneAlice::SceneAlice(IOnSceneChangedListener* impl, const Parameter& parameter
 	wsHolder.start();
 
 
-	imgSmall = Image::getIns()->loadSamples("Assets/Sprites/images/particle/lightBig.png");
-	imgMiddle = Image::getIns()->loadSamples("Assets/Sprites/images/particle/lightMiddle.png");
-	imgBig = Image::getIns()->loadSamples("Assets/Sprites/images/particle/lightSmall.png");
+	imgSmall = Image::getIns()->loadSamples("Assets/Sprites/images/particle/circleMiddle.png");
+	imgMiddle = Image::getIns()->loadSamples("Assets/Sprites/images/particle/circleBig.png");
+	imgBig = Image::getIns()->loadSamples("Assets/Sprites/images/particle/circleSmall.png");
 }
 
 SceneAlice::~SceneAlice() {

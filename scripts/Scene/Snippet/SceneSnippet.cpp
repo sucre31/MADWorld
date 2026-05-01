@@ -8,6 +8,7 @@
 #include "Action/SetWindowAction.h"
 #include "Action/EnemyAttackAction.h"
 #include "Action/EnemyDefeatAction.h"
+#include "Action/EnemyInAction.h"
 #include "Action/EndingAction.h"
 #include "StatusWindowManager.h"
 
@@ -213,6 +214,22 @@ void SceneSnippet::registerActions() {
 		}
 	);
 
+	registry.registerAction("set_enemy_in",
+		[this](const nlohmann::json& j) {
+			int enemyIndex = j["enemy"];
+
+			int v = j.value("dir", 0);
+
+			if (v < 0 || v > 3) v = 0;
+
+			MoveInDir dir = static_cast<MoveInDir>(v);
+
+			Enemy* e = enemyManager->getEnemyIns(enemyIndex);
+
+			return std::make_unique<EnemyInAction>(e, dir);
+		}
+	);
+
 	registry.registerAction("set_music",
 		[this](const nlohmann::json& j) {
 			int musicIndex = j["music"];
@@ -233,6 +250,7 @@ void SceneSnippet::initCharacter() {
 	playerManager->getPlayerById(0)->setMyTurn(0);
 	playerManager->getPlayerById(0)->setCharacterId(0);
 	playerManager->getPlayerById(0)->setMessageWindow(messageWindow);
+	playerManager->getPlayerById(0)->setTargetEnemy(2);
 	playerManager->getPlayerById(1)->setHP(160);
 	playerManager->getPlayerById(1)->setPP(0);
 	playerManager->getPlayerById(1)->setName(0, 7);
@@ -243,6 +261,7 @@ void SceneSnippet::initCharacter() {
 	playerManager->getPlayerById(1)->setInstrumentNumber(1);
 	playerManager->getPlayerById(1)->setCharacterId(1);
 	playerManager->getPlayerById(1)->setMessageWindow(messageWindow);
+	playerManager->getPlayerById(1)->setTargetEnemy(5);
 	playerManager->getPlayerById(2)->setHP(250);
 	playerManager->getPlayerById(2)->setPP(0);
 	playerManager->getPlayerById(2)->setName(0, 60);
@@ -253,6 +272,7 @@ void SceneSnippet::initCharacter() {
 	playerManager->getPlayerById(2)->setInstrumentNumber(2);
 	playerManager->getPlayerById(2)->setCharacterId(2);
 	playerManager->getPlayerById(2)->setMessageWindow(messageWindow);
+	playerManager->getPlayerById(2)->setTargetEnemy(6);
 	playerManager->getPlayerById(3)->setHP(150);
 	playerManager->getPlayerById(3)->setPP(0);
 	playerManager->getPlayerById(3)->setName(0, 69);
@@ -262,6 +282,7 @@ void SceneSnippet::initCharacter() {
 	playerManager->getPlayerById(3)->setInstrumentNumber(3);
 	playerManager->getPlayerById(3)->setCharacterId(3);
 	playerManager->getPlayerById(3)->setMessageWindow(messageWindow);
+	playerManager->getPlayerById(3)->setTargetEnemy(7);
 }
 
 void SceneSnippet::setEnemyInstancetToCharacter() {

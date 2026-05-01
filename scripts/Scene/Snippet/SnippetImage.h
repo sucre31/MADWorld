@@ -15,6 +15,7 @@ public:
 	int getBeltImage() const { return beltImage; }
 	int getBeltImage2() const { return beltImage2; }
 	int getScreenHandle() const { return screenHandle; }
+	int getBattleIcon() const { return battleIcon; }
 	const int* getEnemyImage() const { return EnemyImage; }
 	int getCharacterBattleImage(int characterNumber) const;
 	int getMessageWindow() const { return MessageWindow; }
@@ -46,6 +47,7 @@ private:
 	int battleCharacter[30];
 	int backgroundsA[14];
 	int EnemyImage[13];
+	int battleIcon;
 	int LucasBattleImage;
 	int BoneyBattleImage;
 	int KumatoraBattleImage;

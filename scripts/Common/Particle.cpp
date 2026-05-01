@@ -74,13 +74,27 @@ void ParticleEmitter::update(float dt, float accel) {
 
     currentAccel = accel;
 
-    float interval = 0.05f; // 基準
-    interval /= (1.0f + accel); // accelで高速化
+    float emitScale = 0.0f;
 
-    while (spawnTimer >= interval) {
-        spawnTimer -= interval;
+    if (accel > 0.2f)
+    {
+        emitScale = (accel - 0.2f) / (1.0f - 0.2f);
+    }
+    emitScale = std::clamp(emitScale, 0.0f, 1.0f);
 
-        spawn(1, accel);
+    if (emitScale <= 0.01f)
+    {
+        spawnTimer = 0.0f;
+    }
+    else {
+        float interval = 0.05f;
+        interval /= (1.0f + accel * emitScale);
+
+        while (spawnTimer >= interval)
+        {
+            spawnTimer -= interval;
+            spawn(1, accel);
+        }
     }
 
     for (auto& p : particles) {

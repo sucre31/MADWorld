@@ -27,6 +27,10 @@ bool StatusWindow::update() {
 
 	calcPoint();
 
+	if (playerCharacter->getIsActive()) {
+		sleep = false;
+	}
+
 	// シェイク
 	if (damageShake) {
 		shakeTime += dt;
@@ -47,18 +51,42 @@ bool StatusWindow::update() {
 		shakeOffsetX = 0.0;
 	}
 
+	if (sleepShake) {
+		sleepShakeTime += dt;
+
+		double t = sleepShakeTime / sleepShakeDuration;
+
+		if (t >= 1.0) {
+			sleepShake = false;
+			sleepShakeOffsetY = 0.0;
+		}
+		else {
+			double damping = 1.0 - t;
+			double freq = 2.0 * 2.0 * 3.141592653589793 / sleepShakeDuration;
+			sleepShakeOffsetY = sin(sleepShakeTime * freq) * sleepShakeAmplitude * damping;
+		}
+	}
+	else {
+		sleepShakeOffsetY = 0.0;
+	}
+
 	return true;
 }
 
 void StatusWindow::draw() const {
 	int drawX = myX + (int)shakeOffsetX;
+	int drawY = myY + (int)sleepShakeOffsetY;
 
 	if (playerCharacter->getIsActive()) {
-		DrawRotaGraph(29 + drawX, 117 + myY, 1.0, 0.0, snippetImage->getCharacterBattleImage(playerCharacter->getCharacterID()), TRUE, playerCharacter->getReverseFlag());		//キャラクターの描画
+		DrawRotaGraph(29 + drawX, 117 + drawY, 1.0, 0.0, snippetImage->getCharacterBattleImage(playerCharacter->getCharacterID()), TRUE, playerCharacter->getReverseFlag());		//キャラクターの描画
 	}
-	DrawGraph(0 + drawX, 125 + myY, snippetImage->getWindowImage(), TRUE);
-	drawHP(drawX);
-	drawName(drawX);
+	DrawGraph(0 + drawX, 125 + drawY, snippetImage->getWindowImage(), TRUE);
+	drawHP(drawX, drawY);
+	drawName(drawX, drawY);
+
+	if (sleep) {
+		DrawGraph(27 + drawX, 106 + drawY, snippetImage->getBattleIcon(), TRUE);
+	}
 }
 
 /*!
@@ -240,49 +268,49 @@ int StatusWindow::getDumrollNum(int drumNum) const {
 	return 0;
 }
 
-void StatusWindow::drawHP(int drawX) const {
-	if (hp >= 800) DrawGraph(29 + drawX, 137 + myY, snippetImage->getDrumroll()[getDumrollNum(0)], TRUE);
-	if (hp >= 80) DrawGraph(37 + drawX, 137 + myY, snippetImage->getDrumroll()[getDumrollNum(1)], TRUE);
-	DrawGraph(45 + drawX, 137 + myY, snippetImage->getDrumroll()[getDumrollNum(2)], TRUE);
-	if (pp >= 800) DrawGraph(29 + drawX, 147 + myY, snippetImage->getDrumroll()[getDumrollNum(3)], TRUE);
-	if (pp >= 80) DrawGraph(37 + drawX, 147 + myY, snippetImage->getDrumroll()[getDumrollNum(4)], TRUE);
-	DrawGraph(45 + drawX, 147 + myY, snippetImage->getDrumroll()[getDumrollNum(5)], TRUE);
+void StatusWindow::drawHP(int drawX, int drawY) const {
+	if (hp >= 800) DrawGraph(29 + drawX, 137 + drawY, snippetImage->getDrumroll()[getDumrollNum(0)], TRUE);
+	if (hp >= 80) DrawGraph(37 + drawX, 137 + drawY, snippetImage->getDrumroll()[getDumrollNum(1)], TRUE);
+	DrawGraph(45 + drawX, 137 + drawY, snippetImage->getDrumroll()[getDumrollNum(2)], TRUE);
+	if (pp >= 800) DrawGraph(29 + drawX, 147 + drawY, snippetImage->getDrumroll()[getDumrollNum(3)], TRUE);
+	if (pp >= 80) DrawGraph(37 + drawX, 147 + drawY, snippetImage->getDrumroll()[getDumrollNum(4)], TRUE);
+	DrawGraph(45 + drawX, 147 + drawY, snippetImage->getDrumroll()[getDumrollNum(5)], TRUE);
 }
 
-void StatusWindow::drawName(int drawX) const {
+void StatusWindow::drawName(int drawX, int drawY) const {
 	//DrawFormatString(0, 0, GetColor(255, 255, 255), "%d", myName[0]);
 	switch (myNameLength) {
 	case 1:
-		DrawGraph(28 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[0]], TRUE);
+		DrawGraph(28 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[0]], TRUE);
 		break;
 	case 2:
-		DrawGraph(24 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[0]], TRUE);
-		DrawGraph(31 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[1]], TRUE);
+		DrawGraph(24 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[0]], TRUE);
+		DrawGraph(31 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[1]], TRUE);
 		break;
 	case 3:
-		DrawGraph(21 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[0]], TRUE);
-		DrawGraph(28 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[1]], TRUE);
-		DrawGraph(35 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[2]], TRUE);
+		DrawGraph(21 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[0]], TRUE);
+		DrawGraph(28 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[1]], TRUE);
+		DrawGraph(35 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[2]], TRUE);
 		break;
 	case 4:
-		DrawGraph(17 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[0]], TRUE);
-		DrawGraph(24 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[1]], TRUE);
-		DrawGraph(31 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[2]], TRUE);
-		DrawGraph(38 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[3]], TRUE);
+		DrawGraph(17 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[0]], TRUE);
+		DrawGraph(24 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[1]], TRUE);
+		DrawGraph(31 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[2]], TRUE);
+		DrawGraph(38 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[3]], TRUE);
 		break;
 	case 5:
-		DrawGraph(14 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[0]], TRUE);
-		DrawGraph(21 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[1]], TRUE);
-		DrawGraph(28 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[2]], TRUE);
-		DrawGraph(35 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[3]], TRUE);
-		DrawGraph(42 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[4]], TRUE);
+		DrawGraph(14 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[0]], TRUE);
+		DrawGraph(21 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[1]], TRUE);
+		DrawGraph(28 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[2]], TRUE);
+		DrawGraph(35 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[3]], TRUE);
+		DrawGraph(42 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[4]], TRUE);
 		break;
 	case 6:
-		DrawGraph(10 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[0]], TRUE);
-		DrawGraph(17 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[1]], TRUE);
-		DrawGraph(24 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[2]], TRUE);
-		DrawGraph(31 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[3]], TRUE);
-		DrawGraph(38 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[4]], TRUE);
-		DrawGraph(45 + drawX, 129 + myY, snippetImage->getCharacterKatakana()[myName[5]], TRUE);
+		DrawGraph(10 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[0]], TRUE);
+		DrawGraph(17 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[1]], TRUE);
+		DrawGraph(24 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[2]], TRUE);
+		DrawGraph(31 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[3]], TRUE);
+		DrawGraph(38 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[4]], TRUE);
+		DrawGraph(45 + drawX, 129 + drawY, snippetImage->getCharacterKatakana()[myName[5]], TRUE);
 	}
 }

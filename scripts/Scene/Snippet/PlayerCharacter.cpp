@@ -75,7 +75,9 @@ bool PlayerCharacter::update() {
 		int step = beatManager->getNumberOfStep();
 
 		if (step != lastPlayedStep) {
-			myInstrument->playWithStep(step, 0);
+			if (myInstrument->playWithStep(step, 0)) {
+				enemyManagerIns->getEnemyIns(targetEnemy)->getDamage(damage, beatManager->isEarly());
+			}
 			lastPlayedStep = step;
 		}
 	}
@@ -84,6 +86,10 @@ bool PlayerCharacter::update() {
 
 void PlayerCharacter::setAlwaysActive(bool flag) {
 	alwaysActive = flag;
+}
+
+void PlayerCharacter::setTargetEnemy(int target) {
+	targetEnemy = target;
 }
 
 void PlayerCharacter::draw() const {

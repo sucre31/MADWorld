@@ -312,6 +312,7 @@ bool Instrument::playWithStep(int StepNumber, int checkMode) {
 	StepNumber = StepNumber % 128;
 	int mainNum = -1;
 	int subNum = -1;
+	bool beat = false;
 	switch (myInstrumentNumber) {
 	case 0:
 		switch (StepNumber) {
@@ -422,84 +423,123 @@ bool Instrument::playWithStep(int StepNumber, int checkMode) {
 			subNum = 27;
 			break;
 		}
-		if (mainNum != -1 && checkMode == 0) playMainInstrument(mainNum);
+		if (mainNum != -1 && checkMode == 0) {
+			playMainInstrument(mainNum);
+			return beat;
+		}
 		if (subNum != -1 && checkMode == 0) playSubInstrument(subNum);
 		break;
 	case 1:
 		switch (StepNumber % 16) {
 		case 0:
 			mainNum = 0 + StepNumber / 16 * 6;
+			beat = true;
 			break;
 		case 3:
 			mainNum = 1 + StepNumber / 16 * 6;
+			beat = true;
 			break;
 		case 6:
 			mainNum = 2 + StepNumber / 16 * 6;
+			beat = true;
 			break;
 		case 9:
 			mainNum = 3 + StepNumber / 16 * 6;
+			beat = true;
 			break;
 		case 12:
 			mainNum = 4 + StepNumber / 16 * 6;
+			beat = true;
 			break;
 		case 15:
 			mainNum = 5 + StepNumber / 16 * 6;
+			beat = true;
 			break;
 		}
-		if (mainNum != -1 && checkMode == 0) playMainInstrument(mainNum);
+		if (mainNum != -1 && checkMode == 0) {
+			playMainInstrument(mainNum);
+			return beat;
+		}
 		if (subNum != -1 && checkMode == 0) playSubInstrument(subNum);
 		break;
 	case 2:
 		if (StepNumber % 2 == 0) mainNum = StepNumber / 2;
-		if (StepNumber == 125) mainNum = 63;
-		if (StepNumber == 126) mainNum = 64;
-		if (StepNumber == 127) mainNum = 65;
-		if (mainNum != -1 && checkMode == 0) playMainInstrument(mainNum);
+		if (StepNumber % 4 == 0) beat = true;;
+		if (StepNumber == 125) {
+			mainNum = 63;
+		}
+		if (StepNumber == 126) {
+			mainNum = 64;
+			beat = true;
+		}
+		if (StepNumber == 127) {
+			mainNum = 65;
+		}
+		if (mainNum != -1 && checkMode == 0) {
+			playMainInstrument(mainNum);
+			return beat;
+		}
 		if (subNum != -1 && checkMode == 0) playSubInstrument(subNum);
 		break;
 	case 3:
 		switch (StepNumber) {
 		case 0:
 			mainNum = 0;
+			beat = true;
 			break;
 		case 16:
 			mainNum = 1;
+			beat = true;
 			break;
 		case 18:
 			mainNum = 2;
+			beat = true;
 			break;
 		case 32:
 			mainNum = 3;
+			beat = true;
 			break;
 		case 36:
 			mainNum = 4;
+			beat = true;
 			break;
 		case 40:
 			mainNum = 5;
+			beat = true;
 			break;
 		case 44:
 			mainNum = 6;
+			beat = true;
 			break;
 		case 48:
 			mainNum = 7;
+			beat = true;
 			break;
 		case 64:
 			mainNum = 8;
+			beat = true;
 			break;
 		case 80:
 			mainNum = 9;
+			beat = true;
 			break;
 		case 88:
 			mainNum = 10;
+			beat = true;
 			break;
 		case 92:
 			mainNum = 11;
+			beat = true;
 			break;
 		case 96:
 			mainNum = 12;
+			beat = true;
 			break;
 		}
-		if (mainNum != -1 && checkMode == 0) playMainInstrument(mainNum);
+		if (mainNum != -1 && checkMode == 0) {
+			playMainInstrument(mainNum);
+			return beat;
+		}
 		if (subNum != -1 && checkMode == 0) playSubInstrument(subNum);
 		break;
 	}

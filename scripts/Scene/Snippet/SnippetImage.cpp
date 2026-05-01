@@ -25,6 +25,7 @@ SnippetImage::SnippetImage()
     EnemyImage[10] = myLoadGraph("Assets/Sprites/images/Snippet/Enemy/ReconstructedCaribou.png");
     EnemyImage[11] = myLoadGraph("Assets/Sprites/images/Snippet/Enemy/SteelMechorilla.png");
     EnemyImage[12] = myLoadGraph("Assets/Sprites/images/Snippet/Enemy/JealousBass.png");
+    battleIcon = myLoadGraph("Assets/Sprites/images/Snippet/Battle/sleep.png");
     LucasBattleImage = myLoadGraph("Assets/Sprites/images/Snippet/Lucas/LucasBattle.png");
     BoneyBattleImage = myLoadGraph("Assets/Sprites/images/Snippet/Boney/BoneyBattle.png");
     KumatoraBattleImage = myLoadGraph("Assets/Sprites/images/Snippet/Kumatora/KumatoraBattle.png");

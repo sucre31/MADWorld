@@ -49,21 +49,23 @@ void DamageBeat::draw() const {
 */
 void DamageBeat::addDamage(int valueOfDamage, bool isFast, int EnemyPosX, int EnemyPosY) {
 	DamageCharacter* tmpDamage = new DamageCharacter();
-	if (valueOfDamage < 0) valueOfDamage = 0;
-	tmpDamage->damage = valueOfDamage;
-	tmpDamage->x = EnemyPosX;
-	tmpDamage->y = EnemyPosY + 80;
-	tmpDamage->velY = -2.5 + (GetRand(20) - 10) / 30.0;
-	if (isFast) {
-		tmpDamage->velX = -(GetRand(5)) / 10.0 - (90 - valueOfDamage) / 180.0;
-		tmpDamage->velX = -(90 - valueOfDamage) / 180.0;
+	if (valueOfDamage > 0) {
+		tmpDamage->damage = valueOfDamage;
+		tmpDamage->x = EnemyPosX;
+		tmpDamage->y = EnemyPosY + 80;
+		tmpDamage->velY = -2.5 + (GetRand(20) - 10) / 30.0;
+		if (isFast) {
+			tmpDamage->velX = -(GetRand(5)) / 10.0 - (90 - valueOfDamage) / 180.0;
+			tmpDamage->velX = -(90 - valueOfDamage) / 180.0;
+		}
+		else {
+			tmpDamage->velX = GetRand(5) / 10.0 + (90 - valueOfDamage) / 180.0;
+			tmpDamage->velX = (90 - valueOfDamage) / 180.0;
+		}
+		damageNumber.push_back(tmpDamage);
+		numberOfDamage++;
 	}
-	else {
-		tmpDamage->velX = GetRand(5) / 10.0 + (90 - valueOfDamage) / 180.0;
-		tmpDamage->velX = (90 - valueOfDamage) / 180.0;
-	}
-	damageNumber.push_back(tmpDamage);
-	numberOfDamage++;
+
 	ShowDamageHit = 1;						//ヒットエフェクトの設定
 	DamageHitPosX = EnemyPosX + (GetRand(20) - 10) + 151;
 	DamageHitPosY = EnemyPosY + (GetRand(20) - 10) + 80;

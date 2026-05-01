@@ -20,6 +20,13 @@ enum class DeathType {
 	Boss
 };
 
+enum class MoveInDir {
+	Left,
+	Right,
+	Up,
+	Down
+};
+
 class Enemy : public GameObject
 {
 public:
@@ -39,6 +46,7 @@ public:
 	void setNewEnemy(int EnemyID);
 	void setNextEnemyId(int id) { nextEnemyId = id; }
 	void setDeathType(DeathType type);
+	void setWait(bool flag) { wait = flag; }
 	int getNextEnemyId() { return nextEnemyId; }
 	void setEnemySoundIndex(int soundHandle);
 	void setAlive(bool alive);
@@ -52,6 +60,7 @@ public:
 	void SetSound(std::shared_ptr<SnippetSound> ins) { snippetSound = ins; }
 	void SetImage(std::shared_ptr<SnippetImage> ins) { snippetImage = ins; }
 	void setPlayerManager(std::shared_ptr<PlayerCharacterManager> ins) { playerManager = ins; };
+	void playMoveIn(MoveInDir dir);
 private:
 	int myID;
 	int HP;
@@ -65,6 +74,13 @@ private:
 	bool isBeated;
 	bool alive;
 
+	MoveInDir moveDir = MoveInDir::Left;
+	double moveAnimTime = 0.0;
+	double moveAnimDuration = 1.25;
+	bool moveAnimActive = false;
+	float moveOffsetX = 0.0f;
+	float moveOffsetY = 0.0f;
+
 	DeathType deathType = DeathType::Normal;
 	double deadTime = 0.0;
 	double deadDuration = 0.5; // 表示しておく時間（秒）
@@ -72,6 +88,9 @@ private:
 	bool attackFlash = false;
 	double attackFlashTime = 0.0;
 	double attackFlashDuration = 0.4; // 0.3秒とか
+
+	// 表示しない
+	bool wait = false;
 
 	int screen;
 	int nextEnemyId = -1;

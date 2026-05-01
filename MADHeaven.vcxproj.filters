@@ -321,6 +321,9 @@
     <ClCompile Include="scripts\Common\Camera\CameraStream.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\Scene\Snippet\Action\EnemyInAction.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scripts\Common\Image.h">
@@ -582,6 +585,9 @@
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="scripts\Common\Camera\CameraStream.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Scene\Snippet\Action\EnemyInAction.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
