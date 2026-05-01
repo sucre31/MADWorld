@@ -4,6 +4,7 @@
 SnippetSound::SnippetSound() {
     BackgroundMusic[0] = myLoadSoundMem("Assets/Sounds/Snippet/Music/Original.wav");
     BackgroundMusic[1] = myLoadSoundMem("Assets/Sounds/Snippet/Music/Drum.wav");
+    BackgroundMusic[2] = myLoadSoundMem("Assets/Sounds/Snippet/Music/Victorious.wav");
     lucasBattleSounds[0] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/Snippet1.wav");
     lucasBattleSounds[1] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/Snippet2.wav");
     lucasBattleSounds[2] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/Snippet3.wav");
@@ -86,9 +87,10 @@ SnippetSound::SnippetSound() {
     EnemySE[9] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/BarrelMan.wav");
     EnemySE[10] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/ReconMech.wav");
     EnemySE[11] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/ReconstructedCaribou.wav");
-    EnemySE[12] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/JealousBass.wav");
-    EnemySE[13] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/BeatenDrum.wav");
-    EnemySE[14] = myLoadSoundMem("Assets/Sounds/Snippet/Battle/hypnosis.wav");
+    EnemySE[12] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/ViolentRoach.wav");
+    EnemySE[13] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/JealousBass.wav");
+    EnemySE[14] = myLoadSoundMem("Assets/Sounds/Snippet/Enemy/BeatenDrum.wav");
+    EnemySE[15] = myLoadSoundMem("Assets/Sounds/Snippet/Battle/hypnosis.wav");
 }
 
 

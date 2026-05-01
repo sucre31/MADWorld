@@ -54,7 +54,7 @@ private:
 	std::shared_ptr<StatusWindow> _statusWindowC;
 	std::shared_ptr<StatusWindow> _statusWindowD;
 	std::shared_ptr<BackImage> _backImage;
-	BeatManager* beatManager;
+	std::shared_ptr<BeatManager> beatManager;
 	MessageWindow* messageWindow;
 	std::shared_ptr<SnippetGameManager> snippetGameManager;
 	std::shared_ptr<SnippetSound> snippetSound;

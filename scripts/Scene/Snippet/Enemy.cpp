@@ -19,7 +19,7 @@ Enemy::Enemy(
 ) : myX(x),
 	myY(y),
 	HP(1000),
-	myID(1),
+	myID(0),
 	alive(true),
 	count(0),
 	BeatedMoveX(0),
@@ -96,7 +96,7 @@ void Enemy::setDeathType(DeathType type) {
 		break;
 
 	case DeathType::Boss:
-		deadDuration = 1.5;
+		deadDuration = 2.5;
 		break;
 	}
 }

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="scripts\Scene\Snippet\Action\EndingAction.cpp" />
     <ClCompile Include="scripts\Scene\Snippet\popupNumberManager.cpp" />
     <ClCompile Include="scripts\Scene\Snippet\Action\EnemyDefeatAction.cpp" />
     <ClCompile Include="scripts\Scene\Snippet\PlayerCharacterManager.cpp" />
@@ -106,6 +107,7 @@
     <ClCompile Include="scripts\Scene\Snippet\StatusWindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scripts\Scene\Snippet\Action\EndingAction.h" />
     <ClInclude Include="scripts\Scene\Snippet\popupNumberManager.h" />
     <ClInclude Include="scripts\Scene\Snippet\Action\EnemyDefeatAction.h" />
     <ClInclude Include="scripts\Scene\Snippet\PlayerCharacterManager.h" />

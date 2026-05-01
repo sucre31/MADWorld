@@ -8,6 +8,7 @@
 #include "Action/SetWindowAction.h"
 #include "Action/EnemyAttackAction.h"
 #include "Action/EnemyDefeatAction.h"
+#include "Action/EndingAction.h"
 #include "StatusWindowManager.h"
 
 using namespace std;
@@ -52,7 +53,7 @@ SceneSnippet::SceneSnippet(IOnSceneChangedListener* impl, const Parameter& param
 	_backImage = make_shared<BackImage>();
 	_backImage->SetGameManager(snippetGameManager);
 	_backImage->SetImage(snippetImage);
-	beatManager = new BeatManager();
+	beatManager = make_shared<BeatManager>();
 	beatManager->SetSound(snippetSound);
 	initCharacter();
 	setEnemyInstancetToCharacter();
@@ -208,6 +209,14 @@ void SceneSnippet::registerActions() {
 			Enemy* e = enemyManager->getEnemyIns(enemyIndex);
 
 			return std::make_unique<EnemyDefeatAction>(e, finalBossflag, nextEnemyId, snippetSound);
+		}
+	);
+
+	registry.registerAction("set_music",
+		[this](const nlohmann::json& j) {
+			int musicIndex = j["music"];
+
+			return std::make_unique<EndingAction>(musicIndex, beatManager);
 		}
 	);
 }

@@ -40,8 +40,10 @@ void BeatManager::draw() const {
 }
 
 void BeatManager::startMusic(int musicNumber) {
-	if (musicNumber < 2) PlaySoundMem(snippetSound->getBackgroundMusic()[musicNumber], DX_PLAYTYPE_BACK);
-	startTime = GetNowHiPerformanceCount();
+	if (musicNumber < 3) {
+		PlaySoundMem(snippetSound->getBackgroundMusic()[musicNumber], DX_PLAYTYPE_BACK);
+		startTime = GetNowHiPerformanceCount();
+	}
 }
 
 /*!

@@ -22,16 +22,16 @@ EnemyManager::EnemyManager(
 		else {
 			switch (i) {
 			case 5:
-				enemy[i] = new Enemy(-120, 50, snippetGameManager, snippetImage, snippetSound, playerManager, statusManager);
-				enemy[i]->setNewEnemy(0);
+				enemy[i] = new Enemy(-140, 40, snippetGameManager, snippetImage, snippetSound, playerManager, statusManager);
+				enemy[i]->setNewEnemy(2);
 				break;
 			case 6:
-				enemy[i] = new Enemy(0, -30, snippetGameManager, snippetImage, snippetSound, playerManager, statusManager);
-				enemy[i]->setNewEnemy(0);
+				enemy[i] = new Enemy(0, -45, snippetGameManager, snippetImage, snippetSound, playerManager, statusManager);
+				enemy[i]->setNewEnemy(5);
 				break;
 			case 7:
-				enemy[i] = new Enemy(120, 50, snippetGameManager, snippetImage, snippetSound, playerManager, statusManager);
-				enemy[i]->setNewEnemy(0);
+				enemy[i] = new Enemy(140, 40, snippetGameManager, snippetImage, snippetSound, playerManager, statusManager);
+				enemy[i]->setNewEnemy(4);
 				break;
 			}
 		}

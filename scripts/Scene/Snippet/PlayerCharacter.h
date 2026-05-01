@@ -24,7 +24,7 @@ public:
 	void setName(int charNum, int charSpriteNum);
 	void setMyTurn(int Number);
 	void setEnemyManagerInstance(EnemyManager* enemyManagerInstance);
-	void setBeatManager(BeatManager* beatManagerInstance) { beatManager = beatManagerInstance; }
+	void setBeatManager(std::shared_ptr<BeatManager >beatManagerInstance) { beatManager = beatManagerInstance; }
 	void setMessageWindow(MessageWindow* messageInstance) { messageWindow = messageInstance; }
 	void setCharacterId(int Number);
 	void setInstrumentNumber(int Number);
@@ -61,7 +61,7 @@ private:
 	bool reverseFlag;
 	EnemyManager* enemyManagerIns;
 	Instrument* myInstrument;
-	BeatManager* beatManager;
+	std::shared_ptr<BeatManager> beatManager;
 	MessageWindow* messageWindow;
 	std::shared_ptr<SnippetGameManager> snippetGameManager;
 	std::shared_ptr<SnippetSound> snippetSound;

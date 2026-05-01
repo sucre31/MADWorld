@@ -26,8 +26,8 @@ private:
 	int dusterBattleSounds[14];
 	int boneyBattleSounds[8];
 	int kumatoraBattleSounds[14];
-	int BackgroundMusic[2];
+	int BackgroundMusic[3];
 	int BattleSE[10];
-	int EnemySE[15];
+	int EnemySE[16];
 };
 
