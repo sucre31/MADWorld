@@ -12,6 +12,7 @@
 */
 bool SystemMain::initialize() const
 {
+
 	SetAlwaysRunFlag(TRUE);						//ウィンドウがノンアクティブでも実行
 	SetWindowSizeChangeEnableFlag(FALSE);		//ウィンドウサイズを自由に変更できるようにする
 	SetOutApplicationLogValidFlag(FALSE);		//ログ出力しない

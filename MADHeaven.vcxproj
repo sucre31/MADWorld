@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="scripts\Common\Particle.cpp" />
     <ClCompile Include="scripts\Scene\Snippet\Action\EndingAction.cpp" />
     <ClCompile Include="scripts\Scene\Snippet\popupNumberManager.cpp" />
     <ClCompile Include="scripts\Scene\Snippet\Action\EnemyDefeatAction.cpp" />
@@ -107,6 +108,7 @@
     <ClCompile Include="scripts\Scene\Snippet\StatusWindowManager.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scripts\Common\Particle.h" />
     <ClInclude Include="scripts\Scene\Snippet\Action\EndingAction.h" />
     <ClInclude Include="scripts\Scene\Snippet\popupNumberManager.h" />
     <ClInclude Include="scripts\Scene\Snippet\Action\EnemyDefeatAction.h" />
@@ -305,15 +307,15 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>_DEBUG;_WINDOWS;_CRT_SECURE_NO_WARNINGS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Program Files\ffmpeg-8.0.1-full_build-shared\include;C:\Users\sucre\Desktop\work\game_develop\MADWorld\scripts;C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\opencv\build\include;C:\Program Files\ffmpeg-8.0.1-full_build-shared\include;C:\Users\sucre\Desktop\work\game_develop\MADWorld\scripts;C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreadedDebug</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
     <Link>
       <SubSystem>Windows</SubSystem>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files\ffmpeg-8.0.1-full_build-shared\lib;C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
-      <AdditionalDependencies>$(CoreLibraryDependencies);%(AdditionalDependencies)</AdditionalDependencies>
+      <AdditionalLibraryDirectories>C:\Program Files\opencv\build\x64\vc16\lib;C:\Program Files\ffmpeg-8.0.1-full_build-shared\lib;C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>$(CoreLibraryDependencies);opencv_world4120d.lib;%(AdditionalDependencies)</AdditionalDependencies>
       <IgnoreSpecificDefaultLibraries>%(IgnoreSpecificDefaultLibraries)</IgnoreSpecificDefaultLibraries>
     </Link>
   </ItemDefinitionGroup>
@@ -325,7 +327,7 @@
       <SDLCheck>true</SDLCheck>
       <PreprocessorDefinitions>NDEBUG;_WINDOWS;%(PreprocessorDefinitions)</PreprocessorDefinitions>
       <ConformanceMode>true</ConformanceMode>
-      <AdditionalIncludeDirectories>C:\Program Files\ffmpeg-8.0.1-full_build-shared\include;C:\Users\sucre\Desktop\work\game_develop\MADWorld\scripts;C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>C:\Program Files\opencv\build\include;C:\Program Files\ffmpeg-8.0.1-full_build-shared\include;C:\Users\sucre\Desktop\work\game_develop\MADWorld\scripts;C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalIncludeDirectories)</AdditionalIncludeDirectories>
       <RuntimeLibrary>MultiThreaded</RuntimeLibrary>
       <LanguageStandard>stdcpp17</LanguageStandard>
     </ClCompile>
@@ -334,7 +336,8 @@
       <EnableCOMDATFolding>true</EnableCOMDATFolding>
       <OptimizeReferences>true</OptimizeReferences>
       <GenerateDebugInformation>true</GenerateDebugInformation>
-      <AdditionalLibraryDirectories>C:\Program Files\ffmpeg-8.0.1-full_build-shared\lib;C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalLibraryDirectories>C:\Program Files\opencv\build\x64\vc16\lib;C:\Program Files\ffmpeg-8.0.1-full_build-shared\lib;C:\Program Files %28x86%29\DxLib_VC\プロジェクトに追加すべきファイル_VC用;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
+      <AdditionalDependencies>opencv_world4120.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
   </ItemDefinitionGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />

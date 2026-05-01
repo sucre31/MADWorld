@@ -92,6 +92,7 @@ void SceneSnippet::update() {
 		Parameter parameter;
 		const bool stackClear = true;
 		StopSoundMem(snippetSound->getBackgroundMusic()[musicNumber]);
+		StopSoundMem(snippetSound->getBackgroundMusic()[2]);
 		snippetGameManager->initBattle();
 		_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, stackClear);
 		SetUseCharCodeFormat(DX_CHARCODEFORMAT_SHIFTJIS);

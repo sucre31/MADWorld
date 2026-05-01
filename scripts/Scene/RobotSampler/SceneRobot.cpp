@@ -1,5 +1,6 @@
 ﻿#include <Dxlib.h>
 #include "SceneRobot.h"
+#include "System/FpsControl.h"
 #include <nlohmann/json.hpp>
 using json = nlohmann::json;
 
@@ -80,6 +81,41 @@ SceneRobot::SceneRobot(IOnSceneChangedListener* impl, const Parameter& parameter
 		}
 	}
 
+	// OpenCVカメラ初期化テスト
+	cap.open(0, cv::CAP_DSHOW);
+
+
+	if (!cap.isOpened())
+	{
+		printfDx("OpenCV CAMERA OPEN FAILED\n");
+	}
+	else
+	{
+		printfDx("OpenCV CAMERA OPEN OK\n");
+	}
+
+	cv::Mat tmp;
+
+	// サイズ固定（重要）
+	cap.set(cv::CAP_PROP_FRAME_WIDTH, 1280);
+	cap.set(cv::CAP_PROP_FRAME_HEIGHT, 720);
+
+	// DxLib用バッファ確保
+	cvBuffer = new unsigned char[1280 * 720 * 3];
+
+	memset(&cvBaseImage, 0, sizeof(BASEIMAGE));
+	CreateFullColorData(&cvBaseImage.ColorData);
+
+
+	cvBaseImage.GraphData = cvBuffer;
+	cvBaseImage.Width = 1280;
+	cvBaseImage.Height = 720;
+	cvBaseImage.Pitch = 1280 * 3;
+	cvBaseImage.MipMapCount = 0;
+
+	runThread = true;
+	captureThread = std::thread(&SceneRobot::captureLoop, this);
+
 	// ベースの追加設定
 	sozaiManager.setSozaiMidiKey(4, eMidi::A_S3, 1, 0);
 	sozaiManager.setSozaiMidiKey(5, eMidi::C_4, 1, 1);
@@ -94,16 +130,62 @@ SceneRobot::SceneRobot(IOnSceneChangedListener* impl, const Parameter& parameter
 
 	wsHolder.start();
 
-	sampleImg = Image::getIns()->loadSamples("Assets/Sprites/images/sonya/snowBall.png");
+	imgSmall = Image::getIns()->loadSamples("Assets/Sprites/images/particle/lightBig.png");
+	imgMiddle = Image::getIns()->loadSamples("Assets/Sprites/images/particle/lightMiddle.png");
+	imgBig = Image::getIns()->loadSamples("Assets/Sprites/images/particle/lightSmall.png");
+}
+
+SceneRobot::~SceneRobot() {
+	if (cvBuffer)
+	{
+		delete[] cvBuffer;
+		cvBuffer = nullptr;
+	}
+
+	runThread = false;
+	if (captureThread.joinable())
+	{
+		captureThread.join();
+	}
+
+	cap.release();
 }
 
 void SceneRobot::update() {
 	wsHolder.update();
 	players = wsHolder.getPlayers();
 
+
+	if (gbFlag && hasNewFrame.exchange(false))
+	{
+		cv::Mat local;
+
+		{
+			std::lock_guard<std::mutex> lock(frameMutex);
+			local = threadFrame.clone();
+		}
+
+		if (!local.empty())
+		{
+			memcpy(cvBuffer, local.data, 1280 * 720 * 3);
+
+			if (cvGraph == -1)
+			{
+				cvGraph = CreateGraphFromBaseImage(&cvBaseImage);
+			}
+			else
+			{
+				ReCreateGraphFromBaseImage(&cvBaseImage, cvGraph);
+			}
+		}
+	}
+
+
 	float now = getTimeSec();
 
 	aliveIds.clear();
+
+	float dt = FpsControl::getIns()->getDeltaTime();
 
 	for (auto& p : players)
 	{
@@ -119,6 +201,10 @@ void SceneRobot::update() {
 		r.x += (r.targetX - r.x) * 0.2f;
 		r.y += (r.targetY - r.y) * 0.2f;
 		r.accel += (r.targetAccel - r.accel) * 0.3f;
+
+		if (emitters.find(p.id) == emitters.end()) {
+			emitters[p.id] = ParticleEmitter();
+		}
 	}
 
 	const float DEAD_TIME = 2.0f; // 2秒無通信で消す
@@ -136,6 +222,8 @@ void SceneRobot::update() {
 			++it;
 		}
 	}
+
+	updateParticles(dt);
 
 	sozaiManager.update();
 	if (Pad::getIns()->get(ePad::B) == 1) {
@@ -155,33 +243,67 @@ void SceneRobot::update() {
 	}
 }
 
+void SceneRobot::updateParticles(float dt)
+{
+	for (auto& [id, r] : renderPlayers)
+	{
+		auto it = emitters.find(id);
+		if (it == emitters.end()) continue;
+
+		float accel = r.accel;
+
+		auto& emitter = it->second;
+		emitter.setPosition(r.x * Define::WIN_W,
+			r.y * Define::WIN_H);
+		emitter.update(dt, accel);
+	}
+}
+
 float SceneRobot::getTimeSec()
 {
 	return (float)GetNowCount() / 1000.0f;
 }
 
+void SceneRobot::captureLoop()
+{
+	while (runThread)
+	{
+		cv::Mat frameLocal;
+
+		cap >> frameLocal;
+		if (frameLocal.empty()) continue;
+
+		cv::flip(frameLocal, frameLocal, 1);
+		//cv::cvtColor(frameLocal, frameLocal, cv::COLOR_BGR2RGB);
+
+		{
+			std::lock_guard<std::mutex> lock(frameMutex);
+			threadFrame = frameLocal.clone();
+		}
+
+		hasNewFrame = true;
+	}
+}
+
 void SceneRobot::draw() const {
-	if (gbFlag) {
-		DrawBox(
-			0,
-			0,
-			Define::WIN_W,
-			Define::WIN_H,
-			GetColor(0, 255, 0),
-			TRUE // 塗りつぶし
-		);
+	if (gbFlag)
+	{
+		if (cvGraph != -1)
+		{
+			DrawGraph(0, 0, cvGraph, FALSE);
+		}
 	}
 
-	for (const auto& [id, r] : renderPlayers) {
+	for (const auto& [id, r] : renderPlayers)
+	{
 		int x = (int)(r.x * Define::WIN_W);
 		int y = (int)(r.y * Define::WIN_H);
 
+		auto it = emitters.find(id);
+		if (it == emitters.end()) continue;
 
-		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255 * r.accel);
-		DrawRotaGraph(x, y, 1.0, 0, sampleImg, TRUE);
-		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+		it->second.draw(imgSmall, imgMiddle, imgBig);
 	}
-
 	sozaiManager.draw();
 }
 

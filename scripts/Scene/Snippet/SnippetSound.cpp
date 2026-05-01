@@ -2,7 +2,7 @@
 #include "SnippetSound.h"
 
 SnippetSound::SnippetSound() {
-    BackgroundMusic[0] = myLoadSoundMem("Assets/Sounds/Snippet/Music/Original.wav");
+    BackgroundMusic[0] = myLoadSoundMem("Assets/Sounds/Snippet/Music/snippetFix.wav");
     BackgroundMusic[1] = myLoadSoundMem("Assets/Sounds/Snippet/Music/Drum.wav");
     BackgroundMusic[2] = myLoadSoundMem("Assets/Sounds/Snippet/Music/Victorious.wav");
     lucasBattleSounds[0] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/Snippet1.wav");

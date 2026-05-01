@@ -315,6 +315,9 @@
     <ClCompile Include="scripts\Scene\Snippet\Action\EndingAction.cpp">
       <Filter>ソース ファイル</Filter>
     </ClCompile>
+    <ClCompile Include="scripts\Common\Particle.cpp">
+      <Filter>ソース ファイル</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scripts\Common\Image.h">
@@ -570,6 +573,9 @@
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
     <ClInclude Include="scripts\Scene\Snippet\Action\EndingAction.h">
+      <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
+    </ClInclude>
+    <ClInclude Include="scripts\Common\Particle.h">
       <Filter>ソース ファイル\リソース ファイル\ヘッダー ファイル</Filter>
     </ClInclude>
   </ItemGroup>
