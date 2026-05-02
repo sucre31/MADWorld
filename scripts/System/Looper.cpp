@@ -29,7 +29,7 @@ Looper::Looper()
 {
     screenRate = Define::WIN_EX;
     Parameter parameter;
-    _sceneStack.push(make_shared<OpeningScene>(this, parameter)); //タイトル画面シーンを作ってpush
+    _sceneStack.push(make_shared<TitleForLive>(this, parameter)); //タイトル画面シーンを作ってpush
     useDebug = false;
 }
 /*!

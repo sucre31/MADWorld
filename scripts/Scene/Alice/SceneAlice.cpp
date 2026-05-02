@@ -127,7 +127,7 @@ void SceneAlice::update() {
 		// ここに直接書くんじゃなくて関数用意すべきかな
 		Sound::getIns()->release();
 		Image::getIns()->release();
-		_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, stackClear);
+		_implSceneChanged->onSceneChanged(eScene::TitleLive, parameter, stackClear);
 		return;
 	}
 }
