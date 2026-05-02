@@ -3,6 +3,7 @@
 enum eScene {
 	Opening,
 	Title,
+	TitleLive,
 	Option,
 	MainMenu,
 	LoveSong,

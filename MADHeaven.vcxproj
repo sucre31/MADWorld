@@ -109,6 +109,7 @@
     <ClCompile Include="scripts\Scene\Snippet\Action\SetWindowAction.cpp" />
     <ClCompile Include="scripts\Scene\Snippet\StatusWindowManager.cpp" />
     <ClCompile Include="scripts\Scene\Snippet\Action\SetSoundAction.cpp" />
+    <ClCompile Include="scripts\Scene\Title\TitleForLive.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="scripts\Scene\Snippet\Action\EnemyInAction.h" />
@@ -200,6 +201,7 @@
     <ClInclude Include="scripts\Scene\Snippet\Action\SetWindowAction.h" />
     <ClInclude Include="scripts\Scene\Snippet\StatusWindowManager.h" />
     <ClInclude Include="scripts\Scene\Snippet\Action\SetSoundAction.h" />
+    <ClInclude Include="scripts\Scene\Title\TitleForLive.h" />
   </ItemGroup>
   <PropertyGroup Label="Globals">
     <VCProjectVersion>17.0</VCProjectVersion>

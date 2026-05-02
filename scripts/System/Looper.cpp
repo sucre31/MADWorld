@@ -1,6 +1,7 @@
 ﻿#include "System/Looper.h"
 #include "Scene/Opening/OpeningScene.h"
 #include "Scene/Title/TitleScene.h"
+#include "Scene/Title/TitleForLive.h"
 #include "Scene/Option/SceneOption.h"
 #include "Scene/LoveSong/SceneLoveSong.h"
 #include "Scene/Alice/SceneAlice.h"
@@ -133,6 +134,9 @@ void Looper::onSceneChanged(const eScene scene, const Parameter& parameter, cons
         break;
     case RobotSampler:
         _sceneStack.push(make_shared<SceneRobot>(this, parameter));
+        break;
+    case TitleLive:
+        _sceneStack.push(make_shared<TitleForLive>(this, parameter));
         break;
     //default:
     //    ERR("存在しないシーン");

@@ -32,7 +32,7 @@ void OpeningScene::update() {
         StopSoundMem(musicHandle);
         Parameter parameter;
         const bool stackClear = true;
-        _implSceneChanged->onSceneChanged(eScene::Title, parameter, stackClear);
+        _implSceneChanged->onSceneChanged(eScene::TitleLive, parameter, stackClear);
         return;
     }
 }
