@@ -55,6 +55,11 @@ void MessageWindow::draw() const {
 		return;
 	}
 
+	if (winFlag) {
+		DrawGraph(myX + 74, myY + 11, snippetImage->getYouWinImage(), TRUE);
+		return;
+	}
+
 	switch (currentMessageID) {
 	case 0:
 		DrawString(myX + 6, myY + 9, "リュカの こうげき!", GetColor(0, 0, 0));
@@ -75,6 +80,13 @@ void MessageWindow::setMessage(const std::string& msg) {
 	customMessage = msg;
 	useCustomMessage = true;
 	messageCounter = 0;
+	messageFlag = true;
+}
+
+void MessageWindow::setYOUWIN() {
+	messageCounter = -99999;
+	useCustomMessage = false;
+	winFlag = true;
 	messageFlag = true;
 }
 

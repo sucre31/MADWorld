@@ -20,6 +20,12 @@ void SetWindowAction::execute() {
 		// 状態異常
 		PlaySoundMem(snippetSound->getBattleSE()[8], DX_PLAYTYPE_BACK);
 		break;
+	case 4:
+		// YOUWIN
+		//PlaySoundMem(snippetSound->getBattleSE()[8], DX_PLAYTYPE_BACK);
+		window->setYOUWIN();
+		return;
+		break;
 	}
 	window->setMessage(msg);
 }

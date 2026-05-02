@@ -12,6 +12,7 @@ public:
 	void release();
 	int getBackImage() const { return backImage; }
 	int getWindowImage() const { return windowImage; }
+	int getYouWinImage() const { return youWin; }
 	int getBeltImage() const { return beltImage; }
 	int getBeltImage2() const { return beltImage2; }
 	int getScreenHandle() const { return screenHandle; }
@@ -37,6 +38,7 @@ private:
 	int screenHandle;
 	int backImage;
 	int windowImage;
+	int youWin;
 	int beltImage;
 	int beltImage2;
 	int hitImage[2];

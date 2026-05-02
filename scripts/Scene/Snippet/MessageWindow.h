@@ -15,6 +15,7 @@ public:
 	void setMessage(int ID);
 	void SetGameManager(std::shared_ptr<SnippetGameManager> ins) { snippetGameManager = ins; }
 	void SetImage(std::shared_ptr<SnippetImage> ins) { snippetImage = ins; }
+	void setYOUWIN();
 
 	void setMessage(const std::string& msg);
 private:
@@ -26,6 +27,7 @@ private:
 	int myX, myY;
 	int currentMessageID;
 	bool messageFlag;
+	bool winFlag;
 	std::shared_ptr<SnippetGameManager> snippetGameManager;
 	std::shared_ptr<SnippetImage> snippetImage;
 

@@ -8,6 +8,7 @@ SnippetImage::SnippetImage()
     SetTransColor(50, 78, 91);
     backImage = myLoadGraph("Assets/Sprites/images/Snippet/backImage.png");
     windowImage = myLoadGraph("Assets/Sprites/images/Snippet/window.png");
+    youWin = myLoadGraph("Assets/Sprites/images/Snippet/Battle/YouWin.png");
     beltImage = myLoadGraph("Assets/Sprites/images/Snippet/belt.png");
     beltImage2 = myLoadGraph("Assets/Sprites/images/Snippet/belt2.png");
     hitImage[0] = myLoadGraph("Assets/Sprites/images/Snippet/Battle/hit.png");
