@@ -10,6 +10,7 @@
 #include "Action/EnemyDefeatAction.h"
 #include "Action/EnemyInAction.h"
 #include "Action/EndingAction.h"
+#include "Action/SetSoundAction.h"
 #include "StatusWindowManager.h"
 
 using namespace std;
@@ -237,6 +238,19 @@ void SceneSnippet::registerActions() {
 			return std::make_unique<EndingAction>(musicIndex, beatManager);
 		}
 	);
+
+	registry.registerAction("set_sound",
+		[this](const nlohmann::json& j) {
+			int target = j["target"];
+			int soundSet = j["sound"];
+
+			PlayerCharacter* p = playerManager->getPlayerById(target);
+
+
+			return std::make_unique<SetSoundAction>(p, soundSet);
+		}
+	);
+
 }
 
 void SceneSnippet::initCharacter() {

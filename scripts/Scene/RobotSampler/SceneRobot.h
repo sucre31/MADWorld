@@ -37,7 +37,7 @@ public:
 	void draw() const override;
 	void updateParticles(float dt);
 private:
-
+	void setMidiKey(int mode);
 	float getTimeSec();
 	void setKey();
 	void captureLoop();
@@ -56,6 +56,8 @@ private:
 
 	std::unordered_map<std::string, ParticleEmitter> emitters;
 
+	std::vector<eMidi> switchMidi;
+
 	int imgSmall;
 	int imgMiddle;
 	int imgBig;
@@ -66,6 +68,8 @@ private:
 	cv::Mat frame;
 	unsigned char* cvBuffer = nullptr;
 	int cvGraph = -1;
+
+	
 
 	std::thread captureThread;
 	std::atomic<bool> runThread;

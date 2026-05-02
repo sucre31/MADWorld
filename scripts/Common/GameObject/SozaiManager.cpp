@@ -106,6 +106,13 @@ void SozaiManager::resetSozaiKey(int sozaiNum) {
 	}
 }
 
+void SozaiManager::resetMidiKey(int sozaiNum) {
+	if (sozaiNum < sozai.size()) {
+		sozai[sozaiNum]->resetTriggerMidi();
+	}
+}
+
+
 /*
 @brief 素材番号を受け取りMIDIキーをバインド
 */

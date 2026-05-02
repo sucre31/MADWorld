@@ -11,9 +11,9 @@ SceneRobot::SceneRobot(IOnSceneChangedListener* impl, const Parameter& parameter
 {
 	std::vector<std::string> paths = {
 	"humanBass",
-	"daFunkSnea",
-	"steamHihat",
 	"makeLoveSnea",
+	"steamHihat",
+	"daFunkSnea",
 	"workIt",
 	"harderBass",
 	"oneMoreLoop",
@@ -22,21 +22,26 @@ SceneRobot::SceneRobot(IOnSceneChangedListener* impl, const Parameter& parameter
 	"technologic",
 	"all",
 	"human",
-	"OnOff",
 	"superHero",
+	"OnOff",
 	"aroundTheWorld",
 	"contact",
+	"humanSnea"
 	};
 
 	// Midi設定
 	MIDI::getIns()->openMidi(0, 0);
 
 	std::vector<eMidi> midiKeys = {
-	eMidi::C_0, eMidi::D_0, eMidi::E_0, eMidi::F_0,
+	eMidi::C_0, eMidi::F_0, eMidi::E_0, eMidi::D_0,
 	eMidi::C_4, eMidi::C_8, eMidi::E_1, eMidi::F_1,
 	eMidi::G_0, eMidi::D_S1, eMidi::A_S0, eMidi::F_S0,
-	eMidi::F_S0, eMidi::C_S1, eMidi::F_S1, eMidi::C_S1
+	eMidi::C_S1, eMidi::F_S0, eMidi::F_S1, eMidi::A_S0
 	};
+
+	switchMidi.push_back(eMidi::A_7);
+	switchMidi.push_back(eMidi::A_S7);
+	switchMidi.push_back(eMidi::B_7);
 
 	int gridW = 4;
 	int gridH = 4;
@@ -81,17 +86,41 @@ SceneRobot::SceneRobot(IOnSceneChangedListener* impl, const Parameter& parameter
 		}
 	}
 
+	// humanSnea用の設定
+	double posX = leftOffset + cellW * (1 + 0.5);
+	double posY = topOffset + cellH * ((gridH - 1) + 0.5);
+
+
+	sozaiHandles[16] =
+		sozaiManager.makeSozai(
+			"",
+			(bassPngPath + paths[16] + ".png").c_str(),
+			posX,
+			posY
+		);
+	sozaiManager.addSound(sozaiHandles[16], "");
+	sozaiManager.addSprite(sozaiHandles[16], 1, (bassMoviePath + paths[16] + ".avi").c_str());
+
+	sozaiManager.setSozaiMidiKey(
+		16,
+		midiKeys[3],
+		1,
+		0
+	);
+
+
+
 	// OpenCVカメラ初期化テスト
 	cap.open(0, cv::CAP_DSHOW);
 
 
 	if (!cap.isOpened())
 	{
-		printfDx("OpenCV CAMERA OPEN FAILED\n");
+		//printfDx("OpenCV CAMERA OPEN FAILED\n");
 	}
 	else
 	{
-		printfDx("OpenCV CAMERA OPEN OK\n");
+		//printfDx("OpenCV CAMERA OPEN OK\n");
 	}
 
 	cv::Mat tmp;
@@ -128,6 +157,8 @@ SceneRobot::SceneRobot(IOnSceneChangedListener* impl, const Parameter& parameter
 		sozaiManager.setReverseFlag(p.second, true);
 	}
 
+	setMidiKey(0);
+
 	wsHolder.start();
 
 	imgSmall = Image::getIns()->loadSamples("Assets/Sprites/images/particle/lightBig.png");
@@ -149,6 +180,98 @@ SceneRobot::~SceneRobot() {
 	}
 
 	cap.release();
+}
+
+
+// ESX-1に合わせて素材の設定
+void SceneRobot::setMidiKey(int mode) {
+	std::vector<eMidi> midiKeys = {
+	eMidi::C_0, eMidi::F_0, eMidi::E_0, eMidi::D_0,
+	eMidi::C_4, eMidi::C_8, eMidi::E_1, eMidi::F_1,
+	eMidi::G_0, eMidi::D_S1, eMidi::A_S0, eMidi::F_S0,
+	eMidi::C_S1, eMidi::F_S0, eMidi::F_S1, eMidi::A_S0
+	};
+
+	int gridW = 4;
+	int gridH = 4;
+
+	switch (mode) {
+	case 0:
+		// 最初
+		sozaiManager.setSozaiLayer(16, 1);
+		for (int y = 0; y < gridH; y++) {
+			for (int x = 0; x < gridW; x++) {
+				int index = y * gridW + x;
+
+				sozaiManager.resetMidiKey(index);
+
+				if (index == 3) {
+					continue;
+				}
+
+				sozaiManager.setSozaiMidiKey(
+					index,
+					midiKeys[index],
+					1,
+					0
+				);
+			}
+		}
+		break;
+
+	case 1:
+		sozaiManager.setSozaiLayer(16, -1);
+		// OnOffなど有効化
+		for (int y = 0; y < gridH; y++) {
+			for (int x = 0; x < gridW; x++) {
+
+				int index = y * gridW + x;
+				sozaiManager.resetMidiKey(index);
+
+				if (index == 10 || index == 11) {
+					continue;
+				}
+
+				sozaiManager.setSozaiMidiKey(
+					index,
+					midiKeys[index],
+					1,
+					0
+				);
+			}
+		}
+		break;
+
+	case 2:
+		// human after all有効化
+		sozaiManager.setSozaiLayer(16, -1);
+		for (int y = 0; y < gridH; y++) {
+			for (int x = 0; x < gridW; x++) {
+
+				int index = y * gridW + x;
+
+				sozaiManager.resetMidiKey(index);
+
+				if (index == 12 || index == 15) {
+					continue;
+				}
+
+				sozaiManager.setSozaiMidiKey(
+					index,
+					midiKeys[index],
+					1,
+					0
+				);
+			}
+		}
+		break;
+	}
+
+	// ベースの追加設定
+	sozaiManager.setSozaiMidiKey(4, eMidi::A_S3, 1, 0);
+	sozaiManager.setSozaiMidiKey(5, eMidi::C_4, 1, 1);
+	sozaiManager.setSozaiMidiKey(5, eMidi::D_4, 1, 1);
+	sozaiManager.setSozaiMidiKey(5, eMidi::E_4, 1, 1);
 }
 
 void SceneRobot::update() {
@@ -230,6 +353,20 @@ void SceneRobot::update() {
 		// 背景色変更
 		gbFlag = !gbFlag;
 	}
+
+	// 素材の切り替え
+	if (MIDI::getIns()->get(switchMidi[0]) == 1 || MIDI::getIns()->get(switchMidi[0], 1) == 1) {
+		setMidiKey(0);
+	}
+
+	if (MIDI::getIns()->get(switchMidi[1]) == 1 || MIDI::getIns()->get(switchMidi[1], 1) == 1) {
+		setMidiKey(1);
+	}
+
+	if (MIDI::getIns()->get(switchMidi[2]) == 1 || MIDI::getIns()->get(switchMidi[2], 1) == 1) {
+		setMidiKey(2);
+	}
+
 
 	if (Pad::getIns()->get(ePad::start) == 1) {
 		// メニューに戻る

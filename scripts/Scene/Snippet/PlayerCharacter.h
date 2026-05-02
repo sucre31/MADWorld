@@ -30,6 +30,7 @@ public:
 	void setInstrumentNumber(int Number);
 	void setTargetEnemy(int target);
 	void setAlwaysActive(bool flag);
+	void setSoundSet(int soundSet);
 	void reverseCharacter();
 	void setPopupNumber(int value, int x, int y);
 	int scoreCheck();
@@ -61,6 +62,7 @@ private:
 	int lastPlayedStep = -1;
 	int targetEnemy;
 	bool reverseFlag;
+	int soundSet = 0;
 	EnemyManager* enemyManagerIns;
 	Instrument* myInstrument;
 	std::shared_ptr<BeatManager> beatManager;

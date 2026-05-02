@@ -29,6 +29,17 @@ SnippetSound::SnippetSound() {
     lucasBattleSounds[21] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/SnippetB4.wav");
     lucasBattleSounds[22] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/SnippetC4.wav");
     lucasBattleSounds[23] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/SnippetD4.wav");
+    lucasBattleSounds[24] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/LucasExtra1.wav");
+    lucasBattleSounds[25] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/LucasExtra2.wav");
+    lucasBattleSounds[26] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/LucasExtra3.wav");
+    lucasBattleSounds[27] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/LucasExtraA.wav");
+    lucasBattleSounds[28] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/LucasExtraB.wav");
+    lucasBattleSounds[29] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/LucasExtraC.wav");
+    lucasBattleSounds[30] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/LucasExtraD.wav");
+    lucasBattleSounds[31] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/LucasExtraLast0.wav");
+    lucasBattleSounds[32] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/LucasExtraLast1.wav");
+    lucasBattleSounds[33] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/LucasExtraLast2.wav");
+    lucasBattleSounds[34] = myLoadSoundMem("Assets/Sounds/Snippet/Lucas/LucasExtraLast3.wav");
     kumatoraBattleSounds[0] = myLoadSoundMem("Assets/Sounds/Snippet/Kumatora/Guitar0.wav");
     kumatoraBattleSounds[1] = myLoadSoundMem("Assets/Sounds/Snippet/Kumatora/Guitar1.wav");
     kumatoraBattleSounds[2] = myLoadSoundMem("Assets/Sounds/Snippet/Kumatora/Guitar2.wav");

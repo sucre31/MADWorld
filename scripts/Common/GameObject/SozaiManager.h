@@ -23,6 +23,7 @@ public:
 	void stopSozai(int);
 	void setSozaiKey(int sozaiNum, int padNum, int soundIndex);
 	void resetSozaiKey(int sozaiNum);
+	void resetMidiKey(int sozaiNum);
 	void setSozaiMidiKey(int sozaiNum, int midiNum, int soundIndex, int channel = 0);
 	void setSozaiEx(int sozaiNum, double val);
 	void setSozaiPos(int sozaiNum, int valX, int valY);

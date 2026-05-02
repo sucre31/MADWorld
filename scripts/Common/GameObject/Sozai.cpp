@@ -324,6 +324,16 @@ void Sozai::resetTriggerPad()
 	padSoundIndex.clear();
 }
 
+void Sozai::resetTriggerMidi()
+{
+	for (int i = 0; i < validMidiNum; i++) {
+		triggerMidiNote[i] = 0;
+		triggerMidiChannel[i] = 0;
+		midiSoundIndex[i] = 0;
+	}
+	validMidiNum = 0;
+}
+
 void Sozai::setTriggerMidi(int midiEnum, int soundIndexNum)
 {
 	if (validMidiNum < maxMidiSozai)

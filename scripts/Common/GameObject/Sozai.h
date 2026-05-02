@@ -38,6 +38,7 @@ public:
 	void setTriggerMidi(int midiEnum, int midiChannel, int soundIndexNum);
 
 	void resetTriggerPad();
+	void resetTriggerMidi();
 
 	int getTriggerPad(int num) { return triggerPad[num]; };
 	int getTriggerMidiNote(int num) { return triggerMidiNote[num]; };
@@ -112,7 +113,7 @@ private:
 
 	bool isMidiSoundPlay[maxMidiSozai];
 
-	int validMidiNum;
+	int validMidiNum = 0;
 
 	bool enableMultiSound;
 	bool enableMultiGraph;

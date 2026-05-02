@@ -31,17 +31,17 @@ bool PlayerCharacter::update() {
 
 		if (Pad::getIns()->get(ePad::A) == 1) {
 			playMainSoundNumberMem(mainSoundNumber);
-			reverseCharacter();
+			//reverseCharacter();
 			damage = scoreCheck();
 			turnDamage += damage;
 			if (damage >= 86) PlaySoundMem(snippetSound->getBattleSE()[2], DX_PLAYTYPE_BACK);
 			enemyManagerIns->getEnemyIns(2)->getDamage(damage, beatManager->isEarly());
 			mainSoundNumber++;
-			if (mainSoundNumber % 12 == 6 && characterID == 0) mainSoundNumber = 8;
+			if (mainSoundNumber % 12 == 6 && characterID == 0 && soundSet == 0) mainSoundNumber = 8;
 		}
 		if (Pad::getIns()->get(ePad::left) == 1) {
 			playSubSoundNumberMem(subSoundNumber);
-			reverseCharacter();
+			//reverseCharacter();
 			damage = scoreCheckSub();
 			reverseSub();
 			subSoundNumber++;
@@ -83,6 +83,12 @@ bool PlayerCharacter::update() {
 
 void PlayerCharacter::setAlwaysActive(bool flag) {
 	alwaysActive = flag;
+}
+
+void PlayerCharacter::setSoundSet(int soundSet) {
+	this->soundSet = soundSet;
+	mainSoundNumber = 0;
+	subSoundNumber = 0;
 }
 
 void PlayerCharacter::setTargetEnemy(int target) {
@@ -250,11 +256,57 @@ int PlayerCharacter::getPP() const {
 @brief メインの音を順番に並べる
 */
 void PlayerCharacter::playMainSoundNumberMem(int numberOfSound) {
-	myInstrument->playMainInstrument(numberOfSound);
+	switch (soundSet) {
+	case 0:
+		// ノーマル
+		myInstrument->playMainInstrument(numberOfSound);
+		break;
+	case 1: {
+		// 最初
+		std::vector<int> instrumentIndex = { 0, 1, 2, 0, 1, 2, 3, 4, 5, 6, 0, 7};
+		int idx = numberOfSound % instrumentIndex.size();
+		int soundIndex = instrumentIndex[idx];
+		PlaySoundMem(snippetSound->getLucasBattleSounds()[soundIndex], DX_PLAYTYPE_BACK);
+		break;
+	}
+
+	case 2:
+	{
+		// 最後前
+		static const std::vector<int> instrumentIndex = { 0, 1, 2, 0, 1, 2, 5, 6, 0, 7, 26};
+		int idx = numberOfSound % instrumentIndex.size();
+		int soundIndex = instrumentIndex[idx];
+		PlaySoundMem(snippetSound->getLucasBattleSounds()[soundIndex], DX_PLAYTYPE_BACK);
+		break;
+	}
+	case 3:
+	{
+		static const std::vector<int> instrumentIndex = { 31, 32, 33, 34 };
+		int idx = numberOfSound % instrumentIndex.size();
+		int soundIndex = instrumentIndex[idx];
+		PlaySoundMem(snippetSound->getLucasBattleSounds()[soundIndex], DX_PLAYTYPE_BACK);
+		break;
+	}
+	}
 }
 
 void PlayerCharacter::playSubSoundNumberMem(int numberOfSound) {
-	myInstrument->playSubInstrument(numberOfSound);
+	switch (soundSet) {
+	case 0:
+	case 1:
+	case 3:
+	{
+		myInstrument->playSubInstrument(numberOfSound);
+		break;
+	}
+	case 2:
+		// 最後前
+		std::vector<int> instrumentIndex = { 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 8, 9, 10, 11, 12, 13, 14, 15, 27, 28, 29, 30 };
+		int idx = numberOfSound % instrumentIndex.size();
+		int soundIndex = instrumentIndex[idx];
+		PlaySoundMem(snippetSound->getLucasBattleSounds()[soundIndex], DX_PLAYTYPE_BACK);
+		break;
+	}
 }
 
 void PlayerCharacter::reverseSub() {
