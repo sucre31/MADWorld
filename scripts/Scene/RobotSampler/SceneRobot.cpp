@@ -290,7 +290,7 @@ void SceneRobot::draw() const {
 	{
 		if (cvGraph != -1)
 		{
-			DrawGraph(0, 0, cvGraph, FALSE);
+			DrawRotaGraph(Define::WIN_W / 2, Define::WIN_H / 2, 1.0, 0, cvGraph, FALSE, TRUE);
 		}
 	}
 

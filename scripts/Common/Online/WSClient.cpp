@@ -1,6 +1,16 @@
 ﻿#include "WSClient.h"
 #include <iostream>
 
+#ifndef WINHTTP_WEB_SOCKET_UTF8_FRAGMENT_MESSAGE
+typedef enum _WINHTTP_WEB_SOCKET_BUFFER_TYPE_FIX {
+    WINHTTP_WEB_SOCKET_BINARY_MESSAGE = 0,
+    WINHTTP_WEB_SOCKET_BINARY_FRAGMENT_MESSAGE = 1,
+    WINHTTP_WEB_SOCKET_UTF8_MESSAGE = 2,
+    WINHTTP_WEB_SOCKET_UTF8_FRAGMENT_MESSAGE = 3,
+    WINHTTP_WEB_SOCKET_CLOSE_MESSAGE = 4
+} WINHTTP_WEB_SOCKET_BUFFER_TYPE_FIX;
+#endif
+
 WSClient::WSClient() {}
 WSClient::~WSClient() { close(); }
 
@@ -59,31 +69,59 @@ bool WSClient::connect(const std::wstring& host, const std::wstring& path) {
     return true;
 }
 
+// WSClient.cpp 内の受信ループのイメージ修正
 void WSClient::receiveLoop() {
-    char buffer[1024];
+    std::vector<char> messageBuffer; // データを蓄積するための動的バッファ
+    const DWORD tempBufferSize = 4096;
+    std::vector<char> tempBuffer(tempBufferSize);
 
     while (running) {
         DWORD bytesRead = 0;
-        WINHTTP_WEB_SOCKET_BUFFER_TYPE type;
+        WINHTTP_WEB_SOCKET_BUFFER_TYPE bufferType;
 
-        HRESULT hr = WinHttpWebSocketReceive(hWebSocket, buffer, sizeof(buffer), &bytesRead, &type);
-        if (FAILED(hr)) break;
+        // 受信
+        DWORD dwError = WinHttpWebSocketReceive(
+            hWebSocket,
+            tempBuffer.data(),
+            (DWORD)tempBuffer.size(),
+            &bytesRead,
+            &bufferType
+        );
 
-        if (type == WINHTTP_WEB_SOCKET_CLOSE_BUFFER_TYPE) break;
+        if (dwError != ERROR_SUCCESS) {
+            connected = false;
+            break;
+        }
 
-        if (bytesRead > 0) {
-            std::string msg(buffer, bytesRead);
+        // 読み取った分を蓄積バッファに追加
+        messageBuffer.insert(messageBuffer.end(), tempBuffer.begin(), tempBuffer.begin() + bytesRead);
 
-            // 受信スレッドではキューに入れるだけ
+        // メッセージの終了判定
+        if (bufferType == WINHTTP_WEB_SOCKET_UTF8_MESSAGE ||
+            bufferType == WINHTTP_WEB_SOCKET_BINARY_MESSAGE) {
+
+            // 完了メッセージ（フラグメントの最後、または一括受信）
+            std::string fullMsg(messageBuffer.begin(), messageBuffer.end());
+
             {
                 std::lock_guard<std::mutex> lock(queueMutex);
-                messageQueue.push(msg);
+                messageQueue.push(fullMsg);
             }
+
+            // 次のメッセージのためにバッファをクリア
+            messageBuffer.clear();
+        }
+        else if (bufferType == WINHTTP_WEB_SOCKET_UTF8_FRAGMENT_MESSAGE ||
+            bufferType == WINHTTP_WEB_SOCKET_BINARY_FRAGMENT_MESSAGE) {
+            // まだ続きがある（フラグメント）
+            // 何もしない（messageBufferに蓄積され、次のループで続きを読み込む）
+            continue;
+        }
+        else if (bufferType == WINHTTP_WEB_SOCKET_CLOSE_MESSAGE) {
+            connected = false;
+            break;
         }
     }
-
-    connected = false;
-    running = false;
 }
 
 void WSClient::send(const std::string& msg) {

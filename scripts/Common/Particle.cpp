@@ -22,6 +22,10 @@ static void HSVtoRGB(float h, float s, float v, int& r, int& g, int& b)
     }
 }
 
+ParticleEmitter::ParticleEmitter() {
+    //setRandomColor();
+}
+
 void ParticleEmitter::setPosition(float px, float py)
 {
     x = px;
@@ -69,7 +73,6 @@ void ParticleEmitter::update(float dt, float accel) {
     if (globalHue > 1.0f) globalHue -= 1.0f;
 
     // 発生制御（暴走防止）
-    static float spawnTimer = 0.0f;
     spawnTimer += dt;
 
     currentAccel = accel;
@@ -155,4 +158,10 @@ void ParticleEmitter::draw(int imgSmall, int imgMiddle, int imgBig) const {
 
     SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
     SetDrawBright(255, 255, 255);
+}
+
+void ParticleEmitter::setRandomColor()
+{
+    // 0.0f ～ 1.0f の範囲でランダム
+    globalHue = static_cast<float>(GetRand(100)) /100.0f;
 }

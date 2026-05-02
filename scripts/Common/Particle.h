@@ -19,12 +19,17 @@ struct SimpleParticle {
 
 class ParticleEmitter {
 public:
+    ParticleEmitter();
+
     void setPosition(float px, float py);
 
     void update(float dt, float accel);
     void draw(int imgSmall, int imgMiddle, int imgBig) const;
 
+    void setRandomColor();
 private:
+    float spawnTimer = 0.0f;
+
     float currentAccel = 0.0f;
     float globalHue = 0.0f;   // 全体時間で変化する色
     bool syncColor = true;    // trueなら全員同色、falseなら個別
@@ -33,10 +38,9 @@ private:
 
     std::vector<SimpleParticle> particles;
 
-    float spawnTimer = 0.0f;
+    void spawn(int count, float accel);
 
     float x = 0;
     float y = 0;
 
-    void spawn(int count, float accel);
 };
