@@ -18,6 +18,10 @@ void SozaiShuzo::shoutPlay() {
 	shoutCount++;
 }
 
+void SozaiShuzo::shoutMiss() {
+	sozaiManager->playSozai(sozaiHandles[(int)ShuzoSozai::Shuzo], 2);
+}
+
 void SozaiShuzo::update() {
 	// webSocket接続ログ
 	if (wsConnection) {
@@ -30,7 +34,12 @@ void SozaiShuzo::update() {
 		heatRatio = ws.getHeatRatio();
 
 		if (ws.consumeBurst()) {
-			shoutPlay();
+			if (shoutMax - shoutCount > 0) {
+				shoutPlay();
+			}
+			else {
+				shoutMiss();
+			}
 		}
 
 		if (Pad::getIns()->get(sozaiPads[(int)ShuzoSound::Shizukada]) == 1) {
@@ -77,7 +86,9 @@ void SozaiShuzo::initSozai() {
 	sozaiHandles[(int)ShuzoSozai::Shuzo] =
 		sozaiManager->makeSozai("", "Assets/Sprites/images/shuzo/shuzoIdle.png", (Define::WIN_W / 2.0), (Define::WIN_H / 2.0));
 	sozaiManager->addSound(sozaiHandles[(int)ShuzoSozai::Shuzo], "Assets/Sounds/shuzo/shizukada.wav");
+	sozaiManager->addSound(sozaiHandles[(int)ShuzoSozai::Shuzo], "Assets/Sounds/shuzo/shuzoMiss.wav");
 	sozaiManager->addSprite(sozaiHandles[(int)ShuzoSozai::Shuzo], 1, "Assets/Sprites/movie/shuzo/shizukada.mp4");
+	sozaiManager->addSprite(sozaiHandles[(int)ShuzoSozai::Shuzo], 2, "Assets/Sprites/movie/shuzo/shuzoMiss.mp4");
 	sozaiManager->setSozaiEx(sozaiHandles[(int)ShuzoSozai::Shuzo], 2.0);
 
 	sozaiHandles[(int)ShuzoSozai::ShuzoHeatL] = 

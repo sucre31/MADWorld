@@ -176,6 +176,6 @@ void SceneSecondRemix::draw() const{
 	int h = camera.getGraphHandle();
 	if (h != -1)
 	{
-		DrawRotaGraph((Define::WIN_W * (1.0 / 8.0) + 160), (Define::WIN_H * (1.0 / 8.0)), 0.25, 0.0, h, FALSE);
+		DrawRotaGraph((Define::WIN_W * (1.0 / 8.0)), (Define::WIN_H * (1.0 / 8.0)), 0.25, 0.0, h, FALSE);
 	}
 }

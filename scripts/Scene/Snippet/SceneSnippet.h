@@ -42,6 +42,8 @@ private:
 	std::shared_ptr<StatusWindowManager> statusManager;
 	EnemyManager* enemyManager;
 
+	bool bgmStart;
+
 	void initEventSystem();
 	void registerActions();
 	ActionRegistry registry;

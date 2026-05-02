@@ -61,10 +61,10 @@ SceneSnippet::SceneSnippet(IOnSceneChangedListener* impl, const Parameter& param
 	setEnemyInstancetToCharacter();
 	initWindow();
 	bpmManager.setBPM(165);
-	beatManager->startMusic(musicNumber);
-	bpmManager.startMusic(snippetSound->getBackgroundMusic()[musicNumber]);;
 
 	initEventSystem();
+
+	bgmStart = false;
 }
 
 
@@ -89,6 +89,12 @@ void SceneSnippet::update() {
 	_statusWindowD->update();
 	messageWindow->update();
 	_backImage->update();
+
+	if(!bgmStart && Pad::getIns()->get(ePad::A) == 1){
+		bgmStart = true;
+		beatManager->startMusic(musicNumber);
+		bpmManager.startMusic(snippetSound->getBackgroundMusic()[musicNumber]);;
+	}
 
 	if (Pad::getIns()->get(ePad::start) == 1) {
 		Parameter parameter;

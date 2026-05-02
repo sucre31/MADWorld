@@ -15,7 +15,8 @@ enum class ShuzoSozai
 
 enum class ShuzoSound
 {
-	Shizukada
+	Shizukada,
+	Miss
 };
 
 class SozaiShuzo : public SozaiBase
@@ -27,6 +28,7 @@ public:
 	~SozaiShuzo() = default;
 	void initSozai() override;
 	void shoutPlay();
+	void shoutMiss();
 	void trigger(int actionId) override;
 private:
 	WSDataHolder ws;
