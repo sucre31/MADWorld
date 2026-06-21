@@ -292,8 +292,20 @@ void PlayerCharacter::playMainSoundNumberMem(int numberOfSound) {
 
 void PlayerCharacter::playSubSoundNumberMem(int numberOfSound) {
 	switch (soundSet) {
-	case 0:
+	case 0: {
+		// 普通
+		myInstrument->playSubInstrument(numberOfSound);
+		break;
+	}
 	case 1:
+	{
+		// 最初
+		std::vector<int> instrumentIndex = { 8, 12, 16, 20, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18 ,19 };
+		int idx = numberOfSound % instrumentIndex.size();
+		int soundIndex = instrumentIndex[idx];
+		PlaySoundMem(snippetSound->getLucasBattleSounds()[soundIndex], DX_PLAYTYPE_BACK);
+		break;
+	}
 	case 3:
 	{
 		myInstrument->playSubInstrument(numberOfSound);

@@ -252,7 +252,7 @@ void SceneRobot::setMidiKey(int mode) {
 
 				sozaiManager.resetMidiKey(index);
 
-				if (index == 12 || index == 15) {
+				if (index == 13 || index == 15) {
 					continue;
 				}
 
