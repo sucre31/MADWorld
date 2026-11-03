@@ -9,4 +9,6 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		system.main();
 	}
 	system.finalize();
+
+	return 0;
 }

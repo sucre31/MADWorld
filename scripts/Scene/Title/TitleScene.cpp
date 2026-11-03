@@ -1,4 +1,4 @@
-#include <DxLib.h>
+ï»¿#include <DxLib.h>
 #include "TitleScene.h"
 #include "System/Define.h"
 #include "System/Keyboard.h"
@@ -8,7 +8,7 @@
 
 TitleScene::TitleScene(IOnSceneChangedListener* impl, const Parameter& parameter) : AbstractScene(impl, parameter)
 {
-    ChangeFont("AR PƒSƒVƒbƒN‘ÌS");
+    ChangeFont("AR Pã‚´ã‚·ãƒƒã‚¯ä½“S");
     SetFontSpace(1);
     SetFontSize(50);
     SetFontThickness(1);
@@ -74,7 +74,7 @@ void TitleScene::update()
             PlaySoundMem(SEHandle[1], DX_PLAYTYPE_BACK, TRUE);
             StopSoundMem(musicHandle);
             const bool stackClear = true;
-            _implSceneChanged->onSceneChanged(eScene::Dontaco, parameter, stackClear);
+            _implSceneChanged->onSceneChanged(eScene::Keyconfig, parameter, stackClear);
         }
         else if (selectNum == 2) {
             PlaySoundMem(SEHandle[1], DX_PLAYTYPE_BACK, TRUE);
@@ -122,16 +122,16 @@ void TitleScene::draw() const
     }
     switch (selectNum) {
     case 0:
-        DrawString(50, 400, "Šî–{‚Æ‚È‚éƒQ[ƒ€ƒ‚[ƒh!", GetColor(0, 0, 0));
+        DrawString(50, 400, "åŸºæœ¬ã¨ãªã‚‹ã‚²ãƒ¼ãƒ ãƒ¢ãƒ¼ãƒ‰!", GetColor(0, 0, 0));
         break;
     case 1:
-        DrawString(50, 400, "‚¨‚Ü‚¯ƒRƒ“ƒeƒ“ƒc‚Å‚·", GetColor(0, 0, 0));
+        DrawString(50, 400, "ãŠã¾ã‘ã‚³ãƒ³ãƒ†ãƒ³ãƒ„ã§ã™", GetColor(0, 0, 0));
         break;
     case 2:
-        DrawString(50, 400, "MIDIƒfƒoƒCƒX‚È‚Ç\nŠeíİ’è‚ğs‚¢‚Ü‚·", GetColor(0, 0, 0));
+        DrawString(50, 400, "MIDIãƒ‡ãƒã‚¤ã‚¹ãªã©\nå„ç¨®è¨­å®šã‚’è¡Œã„ã¾ã™", GetColor(0, 0, 0));
         break;
     case 3:
-        DrawString(50, 400, "ƒQ[ƒ€‚ğI—¹‚µ‚Ü‚·", GetColor(0, 0, 0));
+        DrawString(50, 400, "ã‚²ãƒ¼ãƒ ã‚’çµ‚äº†ã—ã¾ã™", GetColor(0, 0, 0));
         break;
     }
 }

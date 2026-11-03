@@ -14,10 +14,10 @@ Pad::Pad()
     _idArray[ePad::left] = 1;
     _idArray[ePad::right] = 2;
     _idArray[ePad::up] = 3;
-    _idArray[ePad::A] = 5;
-    _idArray[ePad::B] = 4;
+    _idArray[ePad::A] = 6;
+    _idArray[ePad::B] = 5;
     _idArray[ePad::X] = 7;
-    _idArray[ePad::Y] = 6;
+    _idArray[ePad::Y] = 4;
     _idArray[ePad::L] = 8;
     _idArray[ePad::R] = 9;
     _idArray[ePad::ZL] = 10;
@@ -38,6 +38,18 @@ void Pad::update() {
         }
     }
     merge();
+}
+
+void Pad::SetPadJoint(ePad padId, int num) {
+    // 指定のePadに、ゲームパッドの番号を紐づける
+    _idArray[padId] = num;
+}
+
+int Pad::GetPadJoint(ePad padId) {
+	if (padId < 0 || padId >= ePad::MAX) {
+		return -1; // 無効なePadの場合は-1を返す
+	}
+	return _idArray[padId];
 }
 
 /*!

@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="scripts\Scene\Keyconfig\SceneKeyconfig.cpp" />
     <ClCompile Include="scripts\Scene\Snippet\Action\EnemyInAction.cpp" />
     <ClCompile Include="scripts\Common\Camera\CameraStream.cpp" />
     <ClCompile Include="scripts\Common\Particle.cpp" />
@@ -111,6 +112,7 @@
     <ClCompile Include="scripts\Scene\Snippet\Action\SetSoundAction.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scripts\Scene\Keyconfig\SceneKeyconfig.h" />
     <ClInclude Include="scripts\Scene\Snippet\Action\EnemyInAction.h" />
     <ClInclude Include="scripts\Common\Camera\CameraStream.h" />
     <ClInclude Include="scripts\Common\Particle.h" />

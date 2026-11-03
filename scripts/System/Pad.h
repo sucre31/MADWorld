@@ -15,6 +15,9 @@ public:
 	void update();
 	int get(ePad eID) const;  //eIDのボタンの入力状態を取得
 
+	void SetPadJoint(ePad padId, int num); // ゲーム側の入力番号とpadのキー番号を対応させる
+	int GetPadJoint(ePad padId);
+
 private:
 	void merge();
 

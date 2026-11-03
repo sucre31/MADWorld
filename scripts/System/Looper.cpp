@@ -16,6 +16,7 @@
 #include "Scene/Pizza/ScenePizza.h"
 #include "Scene/SecondRemix/SceneSecondRemix.h"
 #include "Scene/RobotSampler/SceneRobot.h"
+#include "Scene/Keyconfig/SceneKeyconfig.h"
 #include "System/Pad.h"
 #include "System/MIDI.h"
 #include "Common/Image.h"
@@ -134,6 +135,9 @@ void Looper::onSceneChanged(const eScene scene, const Parameter& parameter, cons
     case RobotSampler:
         _sceneStack.push(make_shared<SceneRobot>(this, parameter));
         break;
+	case Keyconfig:
+		_sceneStack.push(make_shared<SceneKeyconfig>(this, parameter));
+		break;
     //default:
     //    ERR("存在しないシーン");
     //    break;
