@@ -15,7 +15,7 @@ bool SystemMain::initialize() const
 
 	SetAlwaysRunFlag(TRUE);						//ウィンドウがノンアクティブでも実行
 	SetWindowSizeChangeEnableFlag(FALSE);		//ウィンドウサイズを自由に変更できるようにする
-	SetOutApplicationLogValidFlag(FALSE);		//ログ出力しない
+	SetOutApplicationLogValidFlag(TRUE);		//ログ出力しない
 	SetFullScreenResolutionMode(DX_FSRESOLUTIONMODE_DESKTOP);	//フルスクリーン時に縦横比を維持する
 	SetWindowText("MAD Heaven");				//ウィンドウタイトルを付ける
 	ChangeWindowMode(TRUE);					//ウィンドウモードに変更

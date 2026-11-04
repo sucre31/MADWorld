@@ -1,10 +1,16 @@
 ﻿#include <DxLib.h>
+#include <fstream>
+#include <filesystem>
+#include <nlohmann/json.hpp>
 #include "SceneMainMenu.h"
 #include "Common/Sound.h"
 #include "Common/Image.h"
 #include "Common/Time.h"
 #include "System/Pad.h"
 #include "System/FpsControl.h"
+
+namespace fs = std::filesystem;
+using json = nlohmann::json;
 
 SceneMainMenu::SceneMainMenu(IOnSceneChangedListener* impl, const Parameter& parameter) : validIconNum(0) , selectIconNo(-1), AbstractScene(impl, parameter)
 {
@@ -31,6 +37,8 @@ SceneMainMenu::SceneMainMenu(IOnSceneChangedListener* impl, const Parameter& par
 		icon[i].enableIconFunc(true);
 		validIconNum++;
 	}
+	LoadDynamicStages();
+
 	SetMouseDispFlag(FALSE);	// カーソル非表示
 }
 
@@ -44,10 +52,27 @@ void SceneMainMenu::update()
 	selectIconNo = -1;
 	bool isHit;
 
-	for (int i = 0; i < validIconNum; i++) {
-		isHit = icon[i].checkCursorHit(cursorX, cursorY);
-		if (isHit) {
-			selectIconNo = i;
+	if (Pad::getIns()->get(ePad::R) == 1) {
+		if (currentState == MenuState::MainMenu) {
+			currentState = MenuState::ExtraMenu;
+		}
+		else {
+			currentState = MenuState::MainMenu;
+		}
+	}
+
+	if (currentState == MenuState::MainMenu) {
+		for (int i = 0; i < dynamicStageCount; i++) {
+			if (dynamicIcons[i]->checkCursorHit(cursorX, cursorY)) {
+				selectIconNo = i;
+			}
+		}
+	}
+	else {
+		for (int i = 0; i < validIconNum; i++) {
+			if (icon[i].checkCursorHit(cursorX, cursorY)) {
+				selectIconNo = i;
+			}
 		}
 	}
 
@@ -55,17 +80,23 @@ void SceneMainMenu::update()
 	if (Pad::getIns()->get(ePad::Y) >= 1) {
 		speedRate = 500.0;
 	}
-	if (Pad::getIns()->get(ePad::A) >= 1) {
+	if (Pad::getIns()->get(ePad::A) >= 1 && selectIconNo != -1) {
 		// アイコンあればシーンチェンジ
-		int sceneNum = getIconScene(selectIconNo);
-		if (sceneNum != -1) {
-			//SetMouseDispFlag(TRUE);
-			Parameter parameter;
-			StopSoundMem(musicHandle);
-			const bool stackClear = true;
-			_implSceneChanged->onSceneChanged(eScene(sceneNum), parameter, stackClear);
+		Parameter parameter;
+		StopSoundMem(musicHandle);
+		const bool stackClear = true;
+		if (currentState == MenuState::MainMenu) {
+			parameter.SetString("jsonFilePath", jsonPaths[selectIconNo]);
+			_implSceneChanged->onSceneChanged(eScene::JudgeGame, parameter, stackClear);
+		}
+		else {
+			int sceneNum = getIconScene(selectIconNo);
+			if (sceneNum != -1) {
+				_implSceneChanged->onSceneChanged(eScene(sceneNum), parameter, stackClear);
+			}
 		}
 	}
+
 	if (Pad::getIns()->get(ePad::B) == 1) {
 		StopSoundMem(musicHandle);
 		//SetMouseDispFlag(TRUE);
@@ -90,10 +121,55 @@ void SceneMainMenu::update()
 void SceneMainMenu::draw() const
 {
 	backGround.draw();
-	for (int i = 0; i < iconNum; i++) {
-		icon[i].draw();
+
+	if (currentState == MenuState::MainMenu) {
+		for (int i = 0; i < dynamicStageCount; i++) {
+			dynamicIcons[i]->draw();
+		}
+	}
+	else {
+		for (int i = 0; i < validIconNum; i++) {
+			icon[i].draw();
+		}
+		DrawString(10, 10, "EXTRA STAGES", GetColor(255, 255, 255));
 	}
 	cursorIns.draw();
+}
+
+void SceneMainMenu::LoadDynamicStages() {
+	// JSONファイルのパスを取得する処理を実装する
+	std::string targetDir = "Assets/Stages/";
+
+	if (!fs::exists(targetDir)) return;
+
+	for (const auto& entry : fs::directory_iterator(targetDir)) {
+		if (entry.path().extension() == ".json") {
+			std::string jsonPath = entry.path().string();
+			jsonPaths.push_back(jsonPath);
+
+			std::ifstream file(jsonPath);
+			if (file.is_open()) {
+				try {
+					json j;
+					file >> j;
+
+					std::string thumbPath = j["meta"].value("thumbnail", "Assets/Sprites/images/default_thumb.png");
+
+					auto newIcon = std::make_unique<gameIcon>();
+					newIcon->loadThumbnail(thumbPath.c_str());
+					newIcon->setPos(130 + 240 * (dynamicStageCount / 4), 160 + (dynamicStageCount % 4) * 133);
+					newIcon->enableIconFunc(true);
+
+					dynamicIcons.push_back(std::move(newIcon));
+					dynamicStageCount++;
+				}
+				catch (const std::exception& e) {
+					// JSONのパースエラーが発生した場合の処理
+					printfDx("JSON Parse Error: %s\n", jsonPath.c_str());
+				}
+			}
+		}
+	}
 }
 
 /*

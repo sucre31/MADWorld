@@ -1,18 +1,38 @@
-#include "System/Parameter.h"
+﻿#include "System/Parameter.h"
 /*
-@brief �p�����[�^�̃Z�b�g
+@brief パラメータのセット
 */
-void Parameter::set(std::string key, int val) {
-	_map[key] = val;
+void Parameter::SetInt(std::string& key, int val) {
+	_intMap[key] = val;
 }
 
 /*
-@brief �p�����[�^�̎擾
+@brief パラメータの取得
 */
-int Parameter::get(std::string key) const {
-	auto it = _map.find(key);
-	if (_map.end() == it) {
+int Parameter::GetInt(std::string& key) const {
+	auto it = _intMap.find(key);
+	if (_intMap.end() == it) {
 		return Error;
+	}
+	else {
+		return it->second;
+	}
+}
+
+/*
+@brief パラメータのセット
+*/
+void Parameter::SetString(const std::string& key, const std::string& val) {
+	_stringMap[key] = val;
+}
+
+/*
+@brief パラメータの取得
+*/
+std::string Parameter::GetString(const std::string& key) const {
+	auto it = _stringMap.find(key);
+	if (_stringMap.end() == it) {
+		return "";
 	}
 	else {
 		return it->second;

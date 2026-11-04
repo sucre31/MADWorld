@@ -1,4 +1,4 @@
-#pragma once
+﻿#pragma once
 
 #include<string>
 #include <map>
@@ -10,9 +10,13 @@ public:
     Parameter() = default;
     virtual ~Parameter() = default;
 
-    void set(std::string key, int val);
-    int get(std::string key) const;
+    void SetInt(std::string& key, int val);
+    int GetInt(std::string& key) const;
+
+	void SetString(const std::string& key, const std::string& val);
+	std::string GetString(const std::string& key) const;
 
 private:
-    std::map<std::string, int> _map;
+    std::map<std::string, int> _intMap;
+	std::map<std::string, std::string> _stringMap;
 };

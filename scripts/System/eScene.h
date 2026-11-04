@@ -5,6 +5,7 @@ enum eScene {
 	Title,
 	Option,
 	MainMenu,
+	JudgeGame,
 	LoveSong,
 	Alice,
 	LightPlane,
