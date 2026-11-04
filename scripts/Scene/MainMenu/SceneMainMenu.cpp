@@ -131,7 +131,7 @@ void SceneMainMenu::draw() const
 		for (int i = 0; i < validIconNum; i++) {
 			icon[i].draw();
 		}
-		DrawString(10, 10, "EXTRA STAGES", GetColor(255, 255, 255));
+		DrawString(10, 10, "EXTRA STAGES", GetColor(0, 0, 0));
 	}
 	cursorIns.draw();
 }

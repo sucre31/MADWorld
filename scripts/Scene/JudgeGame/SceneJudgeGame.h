@@ -1,5 +1,10 @@
 ﻿#pragma once
 #include "System/AbstractScene.h"
+#include "Common/Event/ActionRegistry.h"
+#include "Common/Event/TimedEvent.h"
+#include "Common/BPMManager.h"
+#include "Common/GameObject/SozaiManager.h"
+#include "Common/GameObject/NoteManager.h"
 
 class SceneJudgeGame : public AbstractScene
 {
@@ -13,6 +18,16 @@ public:
 	void update() override;
 	void draw() const override;
 private:
+	SozaiManager sozaiManager;
+	std::unique_ptr<NoteManager> noteManager;
+	
+	ActionRegistry actionRegistry;
+	std::vector<TimedEvent> events;
+	BPMManager bpmManager;
 
+	int bgmHandle = -1;
+
+	void registerActions();
+	void loadFromJson(const std::string& path);
 };
 

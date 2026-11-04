@@ -165,6 +165,7 @@ bool Sozai::update()
 
 void Sozai::draw() const
 {
+	SetDrawBlendMode(DX_BLENDMODE_ALPHA, 255);
 	if (enableMultiGraph)
 	{
 		if (graphHandles.empty() || graphHandles[0].empty())
@@ -471,7 +472,7 @@ void Sozai::addSprite(int soundIndex, const char* fileName)
 			c = tolower(c);
 	}
 
-	if (ext == "mp4" || ext == "avi")
+	if (ext == "mp4" || ext == "avi" || ext == "webm")
 	{
 		MovieData movie = MovieImageWrapper::load(path);
 
@@ -486,9 +487,71 @@ void Sozai::addSprite(int soundIndex, const char* fileName)
 	}
 	else
 	{
-		graphHandles[soundIndex].push_back(
-			Image::getIns()->loadSamples(fileName)
-		);
+		// 静止画・連番画像処理
+		std::string baseStr = fileName;
+		size_t extPos = baseStr.find_last_of('.');
+
+		bool isSequential = false;
+		std::string prefix = "";
+		std::string extStr = "";
+		int startNum = 0;
+		int digitCount = 0;
+
+		if (extPos != std::string::npos)
+		{
+			size_t numEnd = extPos;
+			size_t numStart = numEnd;
+
+			// 拡張子の直前から数字をカウント
+			while (numStart > 0 && std::isdigit(static_cast<unsigned char>(baseStr[numStart - 1])))
+			{
+				numStart--;
+			}
+
+			// 数字が見つかった場合
+			if (numStart < numEnd)
+			{
+				std::string numStr = baseStr.substr(numStart, numEnd - numStart);
+				isSequential = true;
+				prefix = baseStr.substr(0, numStart); // 例: ".../kick"
+				extStr = baseStr.substr(extPos);      // 例: ".png"
+				startNum = std::stoi(numStr);
+				digitCount = numStr.length();
+			}
+		}
+
+		if (isSequential)
+		{
+			// 連番画像の自動ロードループ
+			int currentNum = startNum;
+			while (true)
+			{
+				char numBuf[16];
+				snprintf(numBuf, sizeof(numBuf), "%0*d", digitCount, currentNum);
+				std::string targetFile = prefix + numBuf + extStr;
+
+				int handle = LoadGraph(targetFile.c_str());
+				if (handle == -1)
+				{
+					break; // ファイルが見つからなくなったら終了
+				}
+
+				graphHandles[soundIndex].push_back(handle);
+				currentNum++;
+			}
+
+			if (!graphHandles[soundIndex].empty())
+			{
+				playRate = 33; // デフォルトは30fps
+			}
+		}
+		else
+		{
+			// 単一画像読み込みフォールバック
+			graphHandles[soundIndex].push_back(
+				Image::getIns()->loadSamples(fileName)
+			);
+		}
 	}
 }
 

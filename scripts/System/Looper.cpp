@@ -16,6 +16,7 @@
 #include "Scene/Pizza/ScenePizza.h"
 #include "Scene/SecondRemix/SceneSecondRemix.h"
 #include "Scene/RobotSampler/SceneRobot.h"
+#include "Scene/JudgeGame/SceneJudgeGame.h"
 #include "Scene/Keyconfig/SceneKeyconfig.h"
 #include "System/Pad.h"
 #include "System/MIDI.h"
@@ -95,6 +96,9 @@ void Looper::onSceneChanged(const eScene scene, const Parameter& parameter, cons
         break;
     case MainMenu:
         _sceneStack.push(make_shared<SceneMainMenu>(this, parameter));
+        break;
+    case JudgeGame:
+        _sceneStack.push(make_shared<SceneJudgeGame>(this, parameter));
         break;
     case LoveSong:
         _sceneStack.push(make_shared<SceneLoveSong>(this, parameter));

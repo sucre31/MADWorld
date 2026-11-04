@@ -1,0 +1,11 @@
+=== WebM Alpha Debug Log ===
+File: Assets/Sprites/movie/pizza/bass0.mp4
+1. Codec Context Format: yuv420p
+2. Decoded Frame Format: yuv420p
+   -> FAILURE! Frame does NOT have Alpha (Expected YUVA420P, got yuv420p)
+3. Sws_Scale BGRA Alpha Stats:
+   A=255 (Opaque): 1555200 pixels
+   A=0 (Transparent): 0 pixels
+   A=1~254 (Semi): 0 pixels
+   -> FAILURE! All pixels are 100% opaque. Alpha was lost during conversion.
+============================

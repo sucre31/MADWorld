@@ -7,6 +7,8 @@
 #include "Common/Time.h"
 #include "System/Define.h"
 #include "Common/Image.h"
+#include <nlohmann/json.hpp>
+using json = nlohmann::json;
 
 NoteManager::NoteManager(int bpm, int beatsPerBar, SozaiManager* sozai)
     : bpm(bpm), beatsPerBar(beatsPerBar) , playbackPool(3){
@@ -34,7 +36,6 @@ NoteManager::NoteManager(int bpm, int beatsPerBar, SozaiManager* sozai)
 }
 
 bool NoteManager::loadFromFile(const std::string& path) {
-    // 適当だから実装しなおす
 
     std::ifstream file(path);
     if (!file.is_open()) {
@@ -44,27 +45,29 @@ bool NoteManager::loadFromFile(const std::string& path) {
 
     notes.clear();
 
-    std::string line;
-    while (std::getline(file, line)) {
-        if (line.empty() || line[0] == '#') continue; // コメント行
+    try {
+        json j;
+        file >> j;
 
-        std::istringstream ss(line);
-        Note note;
+        // "chart" 配列があるか確認
+        if (j.contains("chart") && j["chart"].is_array()) {
+            for (const auto& noteJson : j["chart"]) {
+                Note note;
 
-        // 仮フォーマット: bar,beat,subdivision,subdivisionCount,inputId
-        char delim;
-        ss >> note.bar >> delim
-            >> note.beat >> delim
-            >> note.subdivision >> delim
-            >> note.subdivisionCountPerBeat >> delim
-            >> note.inputId;
+                // JSONから値を読み込む（見つからない場合はデフォルト値を設定）
+                note.bar = noteJson.value("bar", 1);
+                note.beat = noteJson.value("beat", 1);
+                note.subdivision = noteJson.value("sub", 1);
+                note.subdivisionCountPerBeat = noteJson.value("subCount", 4);
+                note.inputId = noteJson.value("id", 0);
 
-        if (ss.fail()) {
-            std::cerr << "Invalid line in note file: " << line << std::endl;
-            continue;
+                notes.push_back(note);
+            }
         }
-
-        notes.push_back(note);
+    }
+    catch (const std::exception& e) {
+        std::cerr << "JSON Parse Error in NoteManager: " << e.what() << std::endl;
+        return false;
     }
 
     std::cout << "Loaded " << notes.size() << " notes from " << path << std::endl;
