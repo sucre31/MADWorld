@@ -5,6 +5,7 @@
 #include "Common/BPMManager.h"
 #include "Common/GameObject/SozaiManager.h"
 #include "Common/GameObject/NoteManager.h"
+#include "Common/GameObject/NoteUIManager.h"
 
 class SceneJudgeGame : public AbstractScene
 {
@@ -20,6 +21,7 @@ public:
 private:
 	SozaiManager sozaiManager;
 	std::unique_ptr<NoteManager> noteManager;
+	std::unique_ptr<NoteUIManager> noteUIManager;
 	
 	ActionRegistry actionRegistry;
 	std::vector<TimedEvent> events;

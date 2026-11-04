@@ -1,9 +1,12 @@
 ﻿#pragma once
+#include <DxLib.h>
 #include "GameObject.h"
 #include "SozaiManager.h"
 #include "System/PlayBackThreadPool.h"
 #include "Note.h"
 #include <vector>
+
+
 
 class NoteManager : public GameObject {
 public:
@@ -30,7 +33,24 @@ public:
 
     void updateAutoPlay();
 
+    void setUseAutoPlay(bool flag) { useAutoPlay = flag; }
+
+    int getCurrentTimeMs() const {
+        if (isPlaying) return GetNowCount() - playStartTimeMs;
+        return 0;
+    }
+    int getBpm() const { return bpm; }
+    int getBeatsPerBar() const { return beatsPerBar; }
+
+    eJudge judgeInput(ePad pressedPad);
+
     std::function<void(const Note&)> eventCallback;
+
+    int getPerfectCount() const { return perfectCount; }
+    int getGreatCount()   const { return greatCount; }
+    int getGoodCount()    const { return goodCount; }
+    int getMissCount()    const { return missCount; }
+    int getCombo()        const { return combo; }
 
 private:
     SozaiManager* sozaiManager = nullptr;
@@ -40,12 +60,14 @@ private:
     int beatsPerBar;
     int currentTimeMs = 0;
     int barDurationMs = 0;
-    // 表示設定
-    int barWidthPx = 700;   // 横幅（1小節）
-    int barHeightPx = 70;  // 縦段の高さ（1小節）
-    int startX = 100;
-    int baseY = 100;
-    int noteImages[8];
     int BGMHandle;      // 再生時間確認用
     bool useAutoPlay;
+    int playStartTimeMs = 0;
+    bool isPlaying = false;
+
+    int perfectCount = 0;
+    int greatCount = 0;
+    int goodCount = 0;
+    int missCount = 0;
+    int combo = 0;
 };

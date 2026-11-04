@@ -229,6 +229,27 @@ int SozaiManager::getSoundCount(int sozaiNum) const {
 	return 0;
 }
 
+double SozaiManager::getSozaiPosX(int sozaiNum) {
+	if (sozaiNum < sozai.size()) {
+		return sozai[sozaiNum]->getPosX();
+	}
+	return 0;
+}
+
+double SozaiManager::getSozaiPosY(int sozaiNum) {
+	if (sozaiNum < sozai.size()) {
+		return sozai[sozaiNum]->getPosY();
+	}
+	return 0;
+}
+
+ePad SozaiManager::getMappedPad(int sozaiNum, int soundIndex) const {
+	if (sozaiNum >= 0 && sozaiNum < sozai.size()) {
+		// Sozaiの指定キー番号を取得
+		return static_cast<ePad>(sozai[sozaiNum]->getTriggerPad(soundIndex));
+	}
+	return ePad::MAX;
+}
 
 bool SozaiManager::update() {
 	for (int i = 0; i < sozai.size(); i++) {

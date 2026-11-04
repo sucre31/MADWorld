@@ -40,13 +40,18 @@ SceneJudgeGame::SceneJudgeGame(IOnSceneChangedListener* impl, const Parameter& p
 		}
 	}
 	noteManager = std::make_unique<NoteManager>(bpm, beatsPerBar, &sozaiManager);
+	noteUIManager = std::make_unique<NoteUIManager>(*noteManager, sozaiManager);
 
 	// アセットの読み込み処理
 	loadFromJson(jsonFilePath);
 
 	noteManager->loadFromFile(jsonFilePath);
 
+	noteManager->eventCallback = [this](const Note& note) {
+		sozaiManager.playSozai(note.inputId, note.soundIndex);
+	};
 
+	noteManager->setUseAutoPlay(false);
 
 	registerActions();
 	events = EventLoader::loadFromFile(jsonFilePath, actionRegistry);
@@ -54,6 +59,7 @@ SceneJudgeGame::SceneJudgeGame(IOnSceneChangedListener* impl, const Parameter& p
 	// BGMを再生し、BPMManagerに時間を監視させる
 	if (bgmHandle != -1) {
 		PlaySoundMem(bgmHandle, DX_PLAYTYPE_BACK, TRUE);
+		noteManager->startPlay();
 		bpmManager.startMusic(bgmHandle);
 	}
 }
@@ -75,6 +81,7 @@ void SceneJudgeGame::loadFromJson(const std::string& path) {
 			if (!bgmPath.empty()) {
 				bgmHandle = Sound::getIns()->loadSamples(bgmPath.c_str());
 			}
+			noteManager->setBGMHandle(bgmHandle);
 		}
 
 		// 各種アセットの読み込み
@@ -163,6 +170,13 @@ void SceneJudgeGame::update() {
 	double currentBeat = bpmManager.getCurrentBeatNum();
 
 	sozaiManager.update();
+	noteManager->update();
+
+	for (int p = 0; p < (int)ePad::MAX; p++) {
+		if (Pad::getIns()->get(static_cast<ePad>(p)) == 1) { // キーを押した瞬間
+			noteManager->judgeInput(static_cast<ePad>(p));
+		}
+	}
 
 	if (Pad::getIns()->get(ePad::start) == 1) {
 		StopSoundMem(bgmHandle);
@@ -172,8 +186,18 @@ void SceneJudgeGame::update() {
 }
 
 void SceneJudgeGame::draw() const {
-	DrawBox(0, 0, 1280, 720, GetColor(255, 0, 0), TRUE);
+	DrawBox(0, 0, 1280, 720, GetColor(0, 0, 255), TRUE);
 	sozaiManager.draw();
+	noteManager->draw();
+	noteUIManager->draw();
+
+	if (noteManager) {
+		DrawFormatString(20, 20, GetColor(255, 255, 255), "COMBO: %d", noteManager->getCombo());
+		DrawFormatString(20, 70, GetColor(255, 255, 255), "PERFECT: %d", noteManager->getPerfectCount());
+		DrawFormatString(20, 120, GetColor(255, 255, 255), "GREAT:   %d", noteManager->getGreatCount());
+		DrawFormatString(20, 170, GetColor(255, 255, 255), "GOOD:    %d", noteManager->getGoodCount());
+		DrawFormatString(20, 220, GetColor(255, 255, 255), "MISS:    %d", noteManager->getMissCount());
+	}
 }
 
 void SceneJudgeGame::registerActions() {

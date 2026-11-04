@@ -42,6 +42,9 @@ public:
 	void setGroupId(int sozaiNum, int groupId);
 	int getSoundCount(int sozaiNum) const;
 	int getSozaiCount() const { return (int)sozai.size(); }
+	double getSozaiPosX(int sozaiNum);
+	double getSozaiPosY(int sozaiNum);
+	ePad getMappedPad(int sozaiNum, int soundIndex) const;
 private:
 	int validSozaiNum;
 	std::vector<Sozai*> sozai; // shared_ptrにする

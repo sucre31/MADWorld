@@ -19,6 +19,7 @@
     </ProjectConfiguration>
   </ItemGroup>
   <ItemGroup>
+    <ClCompile Include="scripts\Common\GameObject\NoteUIManager.cpp" />
     <ClCompile Include="scripts\Scene\JudgeGame\SceneJudgeGame.cpp" />
     <ClCompile Include="scripts\Scene\Keyconfig\SceneKeyconfig.cpp" />
     <ClCompile Include="scripts\Scene\Snippet\Action\EnemyInAction.cpp" />
@@ -113,6 +114,7 @@
     <ClCompile Include="scripts\Scene\Snippet\Action\SetSoundAction.cpp" />
   </ItemGroup>
   <ItemGroup>
+    <ClInclude Include="scripts\Common\GameObject\NoteUIManager.h" />
     <ClInclude Include="scripts\Scene\JudgeGame\SceneJudgeGame.h" />
     <ClInclude Include="scripts\Scene\Keyconfig\SceneKeyconfig.h" />
     <ClInclude Include="scripts\Scene\Snippet\Action\EnemyInAction.h" />
