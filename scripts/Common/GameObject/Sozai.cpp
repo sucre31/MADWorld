@@ -509,12 +509,13 @@ void Sozai::addSprite(int soundIndex, const char* fileName)
 			}
 
 			// 数字が見つかった場合
-			if (numStart < numEnd)
+			if (numStart < numEnd && numStart > 0 && baseStr[numStart - 1] == '_')
 			{
 				std::string numStr = baseStr.substr(numStart, numEnd - numStart);
 				isSequential = true;
-				prefix = baseStr.substr(0, numStart); // 例: ".../kick"
-				extStr = baseStr.substr(extPos);      // 例: ".png"
+				// アンダーバーも含めてprefixにする
+				prefix = baseStr.substr(0, numStart);
+				extStr = baseStr.substr(extPos);
 				startNum = std::stoi(numStr);
 				digitCount = numStr.length();
 			}
