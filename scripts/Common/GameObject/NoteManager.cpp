@@ -64,7 +64,12 @@ bool NoteManager::loadFromFile(const std::string& path) {
 
 bool NoteManager::update() {
     setCurrentTimeMs((int)GetSoundCurrentTime(BGMHandle));
-    updateAutoPlay();
+    if (useAutoPlay) {
+        updateAutoPlay();
+    }
+    else {
+        checkMissedNotes();
+    }
     return true;
 }
 
@@ -143,6 +148,28 @@ eJudge NoteManager::judgeInput(ePad pressedPad) {
         return closestNote->judge;
     }
     return eJudge::NONE;
+}
+
+void NoteManager::checkMissedNotes() {
+    if (!isPlaying) return;
+
+    int currentMs = getCurrentTimeMs();
+    const int JUDGE_MISS = 130; // この時間を過ぎたらMiss
+
+    for (auto& note : notes) {
+        if (note.hit || note.missed) continue;
+
+        int noteTime = note.getTimeMs(bpm, beatsPerBar);
+        int diff = currentMs - noteTime; // ノーツまでの時間 
+
+        // JUDGE_MISSを過ぎていたら見逃し判定にする
+        if (diff > JUDGE_MISS) {
+            note.missed = true;
+            note.judge = eJudge::MISS;
+            missCount++;
+            combo = 0;
+        }
+    }
 }
 
 void NoteManager::addNote(const Note& note) {

@@ -22,7 +22,29 @@ bool NoteUIManager::update() {
 }
 
 void NoteUIManager::draw() const {
-    int currentMs = noteManager.getCurrentTimeMs(); // GetNowCount() - playStartTimeMs;
+    int currentMs = noteManager.getCurrentTimeMs();
+
+    bool drawnTargetIds[100] = { false };
+
+    for (const auto& note : noteManager.getNotes()) {
+        int id = note.inputId;
+        // まだ判定枠を描画していないアセットIDなら描画
+        if (id >= 0 && id < 100 && !drawnTargetIds[id]) {
+            double targetX = sozaiManager.getSozaiPosX(id);
+            double targetY = sozaiManager.getSozaiPosY(id);
+
+            // ジャストタイミング (progress == 0) の時の到達座標
+            int hitX = static_cast<int>(targetX);
+            int hitY = static_cast<int>(targetY - 200);
+
+            // 半透明の白い円枠を描画(仮)
+            SetDrawBlendMode(DX_BLENDMODE_ALPHA, 120);
+            DrawCircle(hitX, hitY, 35, GetColor(255, 255, 255), FALSE, 3);
+
+            SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+            drawnTargetIds[id] = true;
+        }
+    }
 
     for (const auto& note : noteManager.getNotes()) {
         if (note.hit || note.missed) continue;
@@ -30,8 +52,6 @@ void NoteUIManager::draw() const {
         int noteTime = note.getTimeMs(noteManager.getBpm(), noteManager.getBeatsPerBar());
         int timeUntilHit = noteTime - currentMs;
 
-        // 判定時間を過ぎて一定時間経ったらMiss扱いにするなどの処理もここで可能
-        // (本来はNoteManagerのupdateでやるのが綺麗ですが)
 
         // まだ出現時間になっていない、または既に通り過ぎたノーツは描画しない
         if (timeUntilHit > appearDurationMs || timeUntilHit < -100) continue;
@@ -40,22 +60,16 @@ void NoteUIManager::draw() const {
         double targetX = sozaiManager.getSozaiPosX(note.inputId);
         double targetY = sozaiManager.getSozaiPosY(note.inputId);
 
-        // 進行度 (1.0: 出現時 -> 0.0: 判定ドンピシャ)
+        // 進行度
         float progress = static_cast<float>(timeUntilHit) / appearDurationMs;
         if (progress < 0.0f) progress = 0.0f;
 
-        // --- 描画の演出例 ---
-        // 例1：頭上に上から降ってくる
+        // 頭上に上から降ってくる(仮)
          int drawX = targetX;
-         int drawY = (targetY - 200) - (progress * 200); // 300px上から落ちてくる
+         int drawY = (targetY - 200) - (progress * 200);
          float scale = 0.75;
          int alpha = 155;
 
-        // 例2：その場で徐々に拡大して実体化する（osu!のアプローチサークルのようなイメージ）
-        //int drawX = targetX;
-        //int drawY = targetY;
-        //float scale = 0.5f + (progress * 1.5f); // 大きく出現して適切なサイズに縮む
-        //int alpha = 255 - (progress * 255);     // 透明からフェードイン
 
         ePad pad = sozaiManager.getMappedPad(note.inputId, note.soundIndex);
 
@@ -74,7 +88,6 @@ void NoteUIManager::draw() const {
 
         SetDrawBlendMode(DX_BLENDMODE_ALPHA, alpha);
 
-        // imgIdx を使って正しいボタン画像を描画する
         DrawRotaGraph(static_cast<int>(drawX), static_cast<int>(drawY), scale, 0.0, noteImages[imgIdx], TRUE);
 
         SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);

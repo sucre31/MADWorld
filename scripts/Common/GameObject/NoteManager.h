@@ -46,6 +46,8 @@ public:
 
     std::function<void(const Note&)> eventCallback;
 
+    void checkMissedNotes();
+
     int getPerfectCount() const { return perfectCount; }
     int getGreatCount()   const { return greatCount; }
     int getGoodCount()    const { return goodCount; }

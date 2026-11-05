@@ -13,7 +13,7 @@ class SozaiManager : GameObject
 {
 public:
 	SozaiManager();
-	~SozaiManager() = default;
+	~SozaiManager();
 	bool update() override;
 	void draw() const override;
 	int makeSozai(const char * soundFileName, const char * imageFileName);
@@ -40,6 +40,7 @@ public:
 	void changePos(int , double valX, double valY);
 	void drawSozai(int) const;
 	void setGroupId(int sozaiNum, int groupId);
+	void clearAll();
 	int getSoundCount(int sozaiNum) const;
 	int getSozaiCount() const { return (int)sozai.size(); }
 	double getSozaiPosX(int sozaiNum);

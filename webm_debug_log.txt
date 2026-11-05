@@ -1,8 +1,8 @@
 === WebM Alpha Debug Log ===
-File: Assets/sprites/movie/LoveMovieSmall0.avi
-1. Codec Context Format: bgr24
-2. Decoded Frame Format: bgr24
-   -> FAILURE! Frame does NOT have Alpha (Expected YUVA420P, got bgr24)
+File: Assets/Sprites/movie/robotSampler/humanBass.mp4
+1. Codec Context Format: yuv420p
+2. Decoded Frame Format: yuv420p
+   -> FAILURE! Frame does NOT have Alpha (Expected YUVA420P, got yuv420p)
 3. Sws_Scale BGRA Alpha Stats:
    A=255 (Opaque): 129600 pixels
    A=0 (Transparent): 0 pixels

@@ -5,15 +5,24 @@
 SozaiManager::SozaiManager() {
 }
 
+SozaiManager::~SozaiManager() {
+	for (auto* s : sozai) {
+		delete s;
+	}
+	sozai.clear();
+}
+
 /*
 @brief 素材のインスタンス生成
 */
 int SozaiManager::makeSozai(const char* soundFileName, const char* imageFileName) {
+	AppLogAdd("makeSozai: Start (Sound: %s, Image/Movie: %s)\n", soundFileName, imageFileName);
 	sozai.push_back(new Sozai());
 	sozai.back()->setSampleSound(soundFileName);
 	sozai.back()->addSprite(imageFileName);
 	sozai.back()->setMyId(sozai.size() - 1);
 	SozaiLayerIndex.push_back(sozai.size() - 1);
+	AppLogAdd("makeSozai: End\n");
 	return static_cast<int>(sozai.size()) - 1;
 }
 
@@ -25,6 +34,7 @@ int SozaiManager::makeSozai(const char* soundFileName, const char* imageFileName
 @param y 素材のy位置
 */
 int SozaiManager::makeSozai(const char* soundFileName, const char* imageFileName, int x, int y) {
+	AppLogAdd("makeSozai: Start (Sound: %s, Image/Movie: %s)\n", soundFileName, imageFileName);
 	sozai.push_back(new Sozai());
 	sozai.back()->setSampleSound(soundFileName);
 	sozai.back()->addSprite(imageFileName);
@@ -32,6 +42,7 @@ int SozaiManager::makeSozai(const char* soundFileName, const char* imageFileName
 	sozai.back()->setPosY(y);
 	sozai.back()->setMyId(sozai.size() - 1);
 	SozaiLayerIndex.push_back(sozai.size() - 1);
+	AppLogAdd("makeSozai: End\n");
 	return static_cast<int>(sozai.size()) - 1;
 }
 
@@ -220,6 +231,20 @@ void SozaiManager::setGroupId(int sozaiNum, int groupId) {
 	if (sozaiNum < sozai.size()) {
 		sozai[sozaiNum]->setGroupId(groupId);
 	}
+}
+
+void SozaiManager::clearAll()
+{
+	// Sozaiを消去
+	for (Sozai* s : sozai) {
+		delete s;
+	}
+	sozai.clear();
+
+	SozaiLayerIndex.clear();
+	padToSozai.clear();
+	groupMap.clear();
+	validSozaiNum = 0;
 }
 
 int SozaiManager::getSoundCount(int sozaiNum) const {

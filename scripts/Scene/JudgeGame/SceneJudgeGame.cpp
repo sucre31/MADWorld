@@ -24,6 +24,7 @@ ePad stringToPad(const std::string& keyStr) {
 SceneJudgeGame::SceneJudgeGame(IOnSceneChangedListener* impl, const Parameter& parameter)
 	: AbstractScene(impl, parameter)
 {
+	AppLogAdd("SceneJudgeGame::Constructor: Start\n");
 	std::string jsonFilePath = parameter.GetString("jsonFilePath");
 
 
@@ -43,7 +44,9 @@ SceneJudgeGame::SceneJudgeGame(IOnSceneChangedListener* impl, const Parameter& p
 	noteUIManager = std::make_unique<NoteUIManager>(*noteManager, sozaiManager);
 
 	// アセットの読み込み処理
+	AppLogAdd("SceneJudgeGame::Constructor: loadFromJson start\n");
 	loadFromJson(jsonFilePath);
+	AppLogAdd("SceneJudgeGame::Constructor: loadFromJson end\n");
 
 	noteManager->loadFromFile(jsonFilePath);
 
@@ -56,23 +59,29 @@ SceneJudgeGame::SceneJudgeGame(IOnSceneChangedListener* impl, const Parameter& p
 	registerActions();
 	events = EventLoader::loadFromFile(jsonFilePath, actionRegistry);
 
+	AppLogAdd("SceneJudgeGame::Constructor: Playing BGM\n");
 	// BGMを再生し、BPMManagerに時間を監視させる
 	if (bgmHandle != -1) {
 		PlaySoundMem(bgmHandle, DX_PLAYTYPE_BACK, TRUE);
 		noteManager->startPlay();
 		bpmManager.startMusic(bgmHandle);
 	}
+	AppLogAdd("SceneJudgeGame::Constructor: End\n");
 }
 
 void SceneJudgeGame::loadFromJson(const std::string& path) {
 	std::ifstream file(path);
-	if (!file.is_open()) return;
+	if (!file.is_open()) {
+		AppLogAdd("loadFromJson: Failed to open file\n");
+		return;
+	}
 
 	try {
 		json j;
 		file >> j;
 
 		// BGMの読み込み
+		AppLogAdd("loadFromJson: Loading BGM\n");
 		if (j.contains("meta")) {
 			double bpm = j["meta"].value("bpm", 120.0);
 			bpmManager.setBPM(bpm);
@@ -85,6 +94,7 @@ void SceneJudgeGame::loadFromJson(const std::string& path) {
 		}
 
 		// 各種アセットの読み込み
+		AppLogAdd("loadFromJson: Loading Assets\n");
 		if (j.contains("assets") && j["assets"].is_array()) {
 			for (const auto& asset : j["assets"]) {
 				// typeが設定されていない場合は "single" として扱う
@@ -163,6 +173,7 @@ void SceneJudgeGame::loadFromJson(const std::string& path) {
 	}
 	catch (const std::exception& e) {
 		// JSONのパースエラーやファイル読み込みエラーを処理
+		AppLogAdd("loadFromJson: Exception caught: %s\n", e.what());
 		printfDx("JSON Parse Error: %s\n", e.what());
 	}
 }
@@ -180,6 +191,7 @@ void SceneJudgeGame::update() {
 
 	if (Pad::getIns()->get(ePad::start) == 1) {
 		StopSoundMem(bgmHandle);
+		sozaiManager.clearAll();
 		Parameter parameter;
 		_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, true);
 	}
@@ -192,7 +204,7 @@ void SceneJudgeGame::draw() const {
 	noteUIManager->draw();
 
 	if (noteManager) {
-		DrawFormatString(20, 20, GetColor(255, 255, 255), "COMBO: %d", noteManager->getCombo());
+		DrawFormatString(520, 600, GetColor(255, 255, 255), "COMBO: %d", noteManager->getCombo());
 		DrawFormatString(20, 70, GetColor(255, 255, 255), "PERFECT: %d", noteManager->getPerfectCount());
 		DrawFormatString(20, 120, GetColor(255, 255, 255), "GREAT:   %d", noteManager->getGreatCount());
 		DrawFormatString(20, 170, GetColor(255, 255, 255), "GOOD:    %d", noteManager->getGoodCount());
