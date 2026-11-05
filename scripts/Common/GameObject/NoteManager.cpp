@@ -11,7 +11,7 @@
 using json = nlohmann::json;
 
 NoteManager::NoteManager(int bpm, int beatsPerBar, SozaiManager* sozai)
-    : bpm(bpm), beatsPerBar(beatsPerBar) , playbackPool(3){
+    : bpm(bpm), beatsPerBar(beatsPerBar) , playbackPool(3), isPlaying(false){
     timeBeginPeriod(1);
     barDurationMs = (60000 * beatsPerBar) / bpm;
 
@@ -63,7 +63,9 @@ bool NoteManager::loadFromFile(const std::string& path) {
 }
 
 bool NoteManager::update() {
-    setCurrentTimeMs((int)GetSoundCurrentTime(BGMHandle));
+    if (isPlaying) {
+        setCurrentTimeMs((int)GetSoundCurrentTime(BGMHandle));
+    }
     if (useAutoPlay) {
         updateAutoPlay();
     }

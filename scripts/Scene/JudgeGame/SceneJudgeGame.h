@@ -7,6 +7,12 @@
 #include "Common/GameObject/NoteManager.h"
 #include "Common/GameObject/NoteUIManager.h"
 
+enum class eGameState {
+	Ready,   // 開始前の待機
+	Playing, // プレイ中
+	Result   // リザルト画面
+};
+
 class SceneJudgeGame : public AbstractScene
 {
 	// jsonベースで譜面・画面配置などの情報を読み込み、
@@ -19,6 +25,10 @@ public:
 	void update() override;
 	void draw() const override;
 private:
+	eGameState currentState;
+	int stateStartTime;
+	int resultTimeCounter = 0;
+
 	SozaiManager sozaiManager;
 	std::unique_ptr<NoteManager> noteManager;
 	std::unique_ptr<NoteUIManager> noteUIManager;
@@ -31,5 +41,8 @@ private:
 
 	void registerActions();
 	void loadFromJson(const std::string& path);
+
+	double beatDurationMs;  // 1拍の長さ
+	int countdownDurationMs;// 4拍分の長さ
 };
 

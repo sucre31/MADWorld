@@ -96,9 +96,10 @@ MovieData MovieImageWrapper::load(const std::string& filePath) {
     int width = pCodecCtx->width;
     int height = pCodecCtx->height;
 
-    int numBytes = av_image_get_buffer_size(AV_PIX_FMT_BGRA, width, height, 1);
-    uint8_t* buffer = (uint8_t*)av_malloc(numBytes);
-    av_image_fill_arrays(pFrameRGB->data, pFrameRGB->linesize, buffer, AV_PIX_FMT_BGRA, width, height, 1);
+    pFrameRGB->format = AV_PIX_FMT_BGRA;
+    pFrameRGB->width = width;
+    pFrameRGB->height = height;
+    av_frame_get_buffer(pFrameRGB, 32);
 
     struct SwsContext* swsCtx = nullptr;
     int64_t nb_frames = pFormatCtx->streams[videoStreamIdx]->nb_frames;
@@ -211,8 +212,9 @@ MovieData MovieImageWrapper::load(const std::string& filePath) {
     // 6. リソース解放
     av_packet_free(&packet);
     if (swsCtx) sws_freeContext(swsCtx);
-    av_free(buffer);
-    AppLogAdd("MovieImageWrapper::load: buffer freed\n");
+    av_frame_free(&pFrameRGB); // ここで中のバッファも自動解放される
+    av_frame_free(&pFrame);
+    AppLogAdd("MovieImageWrapper::load: frames freed\n");
 
     av_frame_free(&pFrameRGB);
     av_frame_free(&pFrame);

@@ -36,8 +36,7 @@ public:
     void setUseAutoPlay(bool flag) { useAutoPlay = flag; }
 
     int getCurrentTimeMs() const {
-        if (isPlaying) return GetNowCount() - playStartTimeMs;
-        return 0;
+        return currentTimeMs;
     }
     int getBpm() const { return bpm; }
     int getBeatsPerBar() const { return beatsPerBar; }

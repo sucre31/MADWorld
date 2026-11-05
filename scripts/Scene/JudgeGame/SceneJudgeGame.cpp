@@ -59,13 +59,11 @@ SceneJudgeGame::SceneJudgeGame(IOnSceneChangedListener* impl, const Parameter& p
 	registerActions();
 	events = EventLoader::loadFromFile(jsonFilePath, actionRegistry);
 
-	AppLogAdd("SceneJudgeGame::Constructor: Playing BGM\n");
-	// BGMを再生し、BPMManagerに時間を監視させる
-	if (bgmHandle != -1) {
-		PlaySoundMem(bgmHandle, DX_PLAYTYPE_BACK, TRUE);
-		noteManager->startPlay();
-		bpmManager.startMusic(bgmHandle);
-	}
+	beatDurationMs = 60000.0 / bpm;
+	countdownDurationMs = static_cast<int>(beatDurationMs * 4.0); // 4拍分待機する
+
+	currentState = eGameState::Ready;
+	stateStartTime = GetNowCount();
 	AppLogAdd("SceneJudgeGame::Constructor: End\n");
 }
 
@@ -178,41 +176,118 @@ void SceneJudgeGame::loadFromJson(const std::string& path) {
 	}
 }
 void SceneJudgeGame::update() {
-	double currentBeat = bpmManager.getCurrentBeatNum();
+	int now = GetNowCount();
 
-	sozaiManager.update();
-	noteManager->update();
+	if (currentState == eGameState::Ready) {
+		int elapsed = now - stateStartTime;
+		int remainMs = countdownDurationMs - elapsed;
 
-	for (int p = 0; p < (int)ePad::MAX; p++) {
-		if (Pad::getIns()->get(static_cast<ePad>(p)) == 1) { // キーを押した瞬間
-			noteManager->judgeInput(static_cast<ePad>(p));
+		// マイナスの時間を手動でNoteManagerに教える
+		noteManager->setCurrentTimeMs(-remainMs);
+
+		sozaiManager.update();
+		noteManager->update();
+
+		if (remainMs <= 0) {
+			currentState = eGameState::Playing;
+			if (bgmHandle != -1) {
+				PlaySoundMem(bgmHandle, DX_PLAYTYPE_BACK, TRUE);
+				noteManager->startPlay();
+				bpmManager.startMusic(bgmHandle);
+			}
 		}
 	}
+	else if (currentState == eGameState::Playing) {
+		double currentBeat = bpmManager.getCurrentBeatNum();
 
-	if (Pad::getIns()->get(ePad::start) == 1) {
-		StopSoundMem(bgmHandle);
-		sozaiManager.clearAll();
-		Parameter parameter;
-		_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, true);
+		sozaiManager.update();
+		noteManager->update();
+
+		for (int p = 0; p < (int)ePad::MAX; p++) {
+			if (Pad::getIns()->get(static_cast<ePad>(p)) == 1) {
+				noteManager->judgeInput(static_cast<ePad>(p));
+			}
+		}
+
+		// 途中退出 (STARTボタン)
+		if (Pad::getIns()->get(ePad::start) == 1) {
+			StopSoundMem(bgmHandle);
+			sozaiManager.clearAll();
+			Parameter parameter;
+			_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, true);
+			return;
+		}
+
+		// BGMの再生が終了したかチェックし、リザルトへ移行
+		if (bgmHandle != -1 && CheckSoundMem(bgmHandle) == 0) {
+			resultTimeCounter = now;
+			currentState = eGameState::Result;
+		}
+	}
+	else if (currentState == eGameState::Result) {
+		if (GetNowCount() - resultTimeCounter < 1000) {
+			// 1秒は表示するようにする
+			return;
+		}
+		else if (Pad::getIns()->get(ePad::A) == 1 || Pad::getIns()->get(ePad::start) == 1) {
+			// AボタンまたはSTARTでメニューに戻る
+			sozaiManager.clearAll();
+			Parameter parameter;
+			_implSceneChanged->onSceneChanged(eScene::MainMenu, parameter, true);
+		}
 	}
 }
 
 void SceneJudgeGame::draw() const {
 	DrawBox(0, 0, 1280, 720, GetColor(0, 0, 255), TRUE);
-	sozaiManager.draw();
-	noteManager->draw();
-	noteUIManager->draw();
 
-	if (noteManager) {
-		DrawFormatString(520, 600, GetColor(255, 255, 255), "COMBO: %d", noteManager->getCombo());
-		DrawFormatString(20, 70, GetColor(255, 255, 255), "PERFECT: %d", noteManager->getPerfectCount());
-		DrawFormatString(20, 120, GetColor(255, 255, 255), "GREAT:   %d", noteManager->getGreatCount());
-		DrawFormatString(20, 170, GetColor(255, 255, 255), "GOOD:    %d", noteManager->getGoodCount());
-		DrawFormatString(20, 220, GetColor(255, 255, 255), "MISS:    %d", noteManager->getMissCount());
+	// ノーツと素材を描画する
+	if (currentState == eGameState::Ready || currentState == eGameState::Playing) {
+		sozaiManager.draw();
+		noteManager->draw();
+		noteUIManager->draw();
+	}
+
+	if (currentState == eGameState::Ready) {
+		// カウントダウンテキスト
+		int elapsed = GetNowCount() - stateStartTime;
+
+		// 現在の拍を計算
+		int currentBeatIndex = static_cast<int>(elapsed / beatDurationMs);
+		int displayCount = 4 - currentBeatIndex; // 4, 3, 2, 1 に変換
+
+		if (displayCount > 0 && displayCount <= 4) {
+			DrawFormatString(600, 340, GetColor(255, 255, 255), "%d", displayCount);
+		}
+	}
+	else if (currentState == eGameState::Playing) {
+		// スコア描画
+		if (noteManager) {
+			DrawFormatString(520, 600, GetColor(255, 255, 255), "COMBO: %d", noteManager->getCombo());
+			DrawFormatString(20, 70, GetColor(255, 255, 255), "PERFECT: %d", noteManager->getPerfectCount());
+			DrawFormatString(20, 120, GetColor(255, 255, 255), "GREAT:   %d", noteManager->getGreatCount());
+			DrawFormatString(20, 170, GetColor(255, 255, 255), "GOOD:    %d", noteManager->getGoodCount());
+			DrawFormatString(20, 220, GetColor(255, 255, 255), "MISS:    %d", noteManager->getMissCount());
+		}
+	}
+	else if (currentState == eGameState::Result) {
+		// リザルト画面
+		SetDrawBlendMode(DX_BLENDMODE_ALPHA, 180);
+		DrawBox(0, 0, 1280, 720, GetColor(0, 0, 0), TRUE);
+		SetDrawBlendMode(DX_BLENDMODE_NOBLEND, 0);
+
+		DrawFormatString(500, 150, GetColor(255, 255, 0), "RESULT");
+		DrawFormatString(500, 250, GetColor(255, 255, 255), "PERFECT : %d", noteManager->getPerfectCount());
+		DrawFormatString(500, 300, GetColor(255, 255, 255), "GREAT   : %d", noteManager->getGreatCount());
+		DrawFormatString(500, 350, GetColor(255, 255, 255), "GOOD    : %d", noteManager->getGoodCount());
+		DrawFormatString(500, 400, GetColor(255, 255, 255), "MISS    : %d", noteManager->getMissCount());
+
+		if (GetNowCount() % 1000 < 500) {
+			DrawFormatString(420, 550, GetColor(200, 200, 200), "Press A Button to Return");
+		}
 	}
 }
 
 void SceneJudgeGame::registerActions() {
-	// ここで譜面のアクションを登録する
-	// 例: actionRegistry.registerAction("playSound", [](const TimedEvent& event) { ... });
+	// ここで譜面のアクションを登録する(リズムに合わせた素材の切り替えとか、背景変化とか)
 }

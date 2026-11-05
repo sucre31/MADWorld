@@ -17,7 +17,7 @@ SceneMainMenu::SceneMainMenu(IOnSceneChangedListener* impl, const Parameter& par
 	cursorIns.loadCursorImage("Assets/Sprites/images/MainMenu/cursor.png");
 	backGround.loadBackImage("Assets/Sprites/images/MainMenu/UISample.png");
 	SetCreateSoundDataType(DX_SOUNDDATATYPE_FILE);
-	musicHandle = Sound::getIns()->loadSamples("Assets/Sounds/Menu/Menu2.wav");
+	musicHandle = Sound::getIns()->loadSamples("Assets/Sounds/Menu/MusMus020.mp3");
 	SetCreateSoundDataType(DX_SOUNDDATATYPE_MEMNOPRESS);
 	PlaySoundMem(musicHandle, DX_PLAYTYPE_LOOP, TRUE);
 
